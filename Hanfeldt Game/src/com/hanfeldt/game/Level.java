@@ -16,6 +16,7 @@ public class Level {
 	private int[][] tiles;
 	private int sizeX;
 	private Sprite block;
+	private int level = 1;
 	
 	public Level(String path, Sprite block) {
 		this.block = block;
@@ -45,7 +46,7 @@ public class Level {
 	}
 	
 	public void tick(){
-		
+		//TODO: Level number can possibly update here, calling the level change in main.
 	}
 	
 	public void draw(Graphics g, int posX) {
@@ -58,6 +59,10 @@ public class Level {
 				}
 			}
 		}
+	}
+	
+	public int getLevel(){
+		return level;
 	}
 	
 }
