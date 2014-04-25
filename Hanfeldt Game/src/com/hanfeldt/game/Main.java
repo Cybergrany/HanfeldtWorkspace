@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
-// Test to see if this lands in yer arse
+//HEY IT LANDED IN MAH ARSE
 public class Main implements Runnable {
 
 	
