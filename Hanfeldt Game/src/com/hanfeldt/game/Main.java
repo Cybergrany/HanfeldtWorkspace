@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 //But did this one land in yer arsehole?
 public class Main implements Runnable {
-
 	
 	public static int sizeX = 256, sizeY = 144;
 	public static int fps;
