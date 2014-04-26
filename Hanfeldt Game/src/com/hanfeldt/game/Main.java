@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
-//But did this one land in yer arsehole?
+//YES IT DID
 public class Main implements Runnable {
 	
 	public static int sizeX = 256, sizeY = 144;
