@@ -13,13 +13,9 @@ public class Listener implements MouseListener, KeyListener{
 		
 		switch(key){
 		
-		case(KeyEvent.VK_P):
-			if(!Main.isPaused){
-				Main.isPaused = true;
-				System.err.println("Paused");
-			}else{
-				Main.isPaused = false;
-			}
+		case(KeyEvent.VK_ESCAPE): // I think most games use escape? Maybe
+			Main.isPaused = !Main.isPaused;
+			if(Main.isPaused) System.err.println("Paused");
 			break;
 			
 		case(KeyEvent.VK_D):

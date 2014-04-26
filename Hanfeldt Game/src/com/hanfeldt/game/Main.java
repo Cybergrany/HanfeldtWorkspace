@@ -73,16 +73,13 @@ public class Main implements Runnable {
 		
 		//Start "GameLoop"
 		running = true;
-		isPaused = false;
 		debug = false;
 	}
 	
 	
-//	int totalTicks = 0; //Unused
+
 	
 	public void run() {
-		// TODO Improve on this method
-		
 		long lastTick = System.nanoTime();
 		long lastFrame = System.nanoTime();
 		long nsPerTick = (long) 1000000000 / ticksPs;
@@ -100,28 +97,28 @@ public class Main implements Runnable {
 				ticks = frames = 0;
 			}
 			
-//			if(!isPaused) {
+
+			if(!isPaused) {
 				if(System.nanoTime() > lastTick + nsPerTick) {
 					tick();
 					ticks++;
-//					totalTicks++;//Unused
+					lastTick += nsPerTick;
 					
-					lastTick = lastTick + nsPerTick;
-//				}
-				if(System.nanoTime() >= lastFrame + nsPerFrame) {
-					render();
-					frames++;
-					
-					lastFrame = System.nanoTime();
-				}
-				
-				if((lastTick + nsPerTick) - System.nanoTime() > 3000000) {
-					try {
-						Thread.sleep(2);
-					}catch(Exception e) {
-						e.printStackTrace();
+					if((lastTick + nsPerTick) - System.nanoTime() > 3000000) {
+						try {
+							Thread.sleep(2);
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
+			}
+			
+			if(System.nanoTime() > lastFrame + nsPerFrame) {
+				render();
+				frames++;
+				
+				lastFrame = System.nanoTime();
 			}
 		}
 		
