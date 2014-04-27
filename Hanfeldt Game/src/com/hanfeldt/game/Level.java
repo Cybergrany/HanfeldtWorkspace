@@ -18,7 +18,7 @@ public class Level {
 	private Sprite block;
 	private int level = 1;
 	
-	public Level(String path, Sprite block) {
+	public Level(String path, Sprite block, Player p) {
 		this.block = block;
 		BufferedImage temp = null;
 		
@@ -43,10 +43,18 @@ public class Level {
 				}
 			}
 		}
+		
+		player = p;
 	}
 	
 	public void tick(){
 		//TODO: Level number can possibly update here, calling the level change in main.
+		player.tick();
+	}
+	
+	public void render(Graphics g) {
+		draw(g, player.getX());
+		player.draw(g);
 	}
 	
 	public void draw(Graphics g, int posX) {
@@ -54,7 +62,7 @@ public class Level {
 			for(int j=0; j<tiles.length; j++) {
 				switch(tiles[j][i]) {
 				case 1:
-					block.draw(g, (j * 16) - posX, i * 16);
+					block.draw(g, (j * Main.tileSize) - posX, i * Main.tileSize);
 					break;
 				}
 			}

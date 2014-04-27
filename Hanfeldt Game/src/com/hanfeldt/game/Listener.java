@@ -14,16 +14,15 @@ public class Listener implements MouseListener, KeyListener{
 		switch(key){
 		
 		case(KeyEvent.VK_ESCAPE): // I think most games use escape? Maybe
-			Main.isPaused = !Main.isPaused;
-			if(Main.isPaused) System.err.println("Paused");
+			Main.escDown = true;
 			break;
 			
 		case(KeyEvent.VK_D):
-			Player.movement++;
+			Main.dDown = true;
 			break;
 		
 		case(KeyEvent.VK_A):
-			Player.movement--;
+			Main.aDown = true;
 			break;
 		
 		}
@@ -31,8 +30,22 @@ public class Listener implements MouseListener, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
 		
+		switch(key){
 		
+		case(KeyEvent.VK_ESCAPE): // I think most games use escape? Maybe
+			Main.escDown = false;
+		case(KeyEvent.VK_D):
+			Main.dDown = false;
+			break;
+		case(KeyEvent.VK_A):
+			Main.aDown = false;
+			break;
+		case(KeyEvent.VK_SPACE): // Space or W for jump?
+			Main.spaceDown = false;
+			break;
+		}
 	}
 
 	@Override

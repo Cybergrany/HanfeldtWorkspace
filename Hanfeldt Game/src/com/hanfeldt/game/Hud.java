@@ -20,6 +20,7 @@ public class Hud {
 		if(Main.isPaused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);
 			g.drawString("If shit is still happening, then something is wrong", Main.sizeX / 8, Main.sizeY / 2 + 20);
+			g.drawString("I feex.", Main.sizeX / 8, Main.sizeY / 2 + 40);
 		}
 	}
 }
