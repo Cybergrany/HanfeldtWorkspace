@@ -29,7 +29,7 @@ public class Hud {
 		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.sizeY - 15);
-			heartx += 19;
+			heartx += 15;
 		}
 		
 		heartx = 19;
