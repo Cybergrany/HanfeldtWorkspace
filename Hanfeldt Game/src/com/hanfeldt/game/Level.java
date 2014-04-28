@@ -62,7 +62,7 @@ public class Level {
 			for(int j=0; j<tiles.length; j++) {
 				switch(tiles[j][i]) {
 				case 1:
-					block.draw(g, (j * Main.tileSize) - posX, i * Main.tileSize);
+					block.draw(g, (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2), i * Main.tileSize);
 					break;
 				}
 			}

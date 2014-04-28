@@ -158,11 +158,11 @@ public class Main implements Runnable {
 
 		sun.draw(g, 190, 10);
 		levels[level].render(g);
-
+		
 		hud.draw(g);
 
 		gamePanel.repaint();
 		g.dispose();
 	}
-
+	
 }

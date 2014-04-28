@@ -5,6 +5,7 @@ import java.awt.Graphics;
 public class Entity {
 	private int health;
 	private int x, y;
+	private boolean direction = true; // Right = true, Left = false
 	Sprite sprite;
 	
 	public Entity(Sprite s, int h, int x, int y) {

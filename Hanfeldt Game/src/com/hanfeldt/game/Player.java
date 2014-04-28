@@ -18,11 +18,10 @@ public class Player extends Entity {
 			changeX(speed);
 		}
 		
-		//System.out.println(getX());
+		System.out.println(getX());
 	}
 	
 	public void draw(Graphics g) {
-		sprite.draw(g, (Main.sizeX /2) - Main.tileSize, getY());
-		//sprite.draw(g, getX(), getY());
+		sprite.draw(g, (Main.sizeX /2) - (Main.tileSize /2), getY());
 	}
 }
