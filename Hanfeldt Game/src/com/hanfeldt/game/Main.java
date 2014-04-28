@@ -72,12 +72,13 @@ public class Main implements Runnable {
 		spriteSheet = new SpriteSheet("res/spritesheet.png");
 		block = new Sprite(spriteSheet, 0, 0, 1, 1);
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
-		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2);
+		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * 3);
 
 		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
+		
 		hud = new Hud();
-
+		
 		// TODO: Not sure where levels should be called
 		levels = new Level[1];
 		levels[0] = new Level("res/level1.png", block, player);
@@ -148,7 +149,6 @@ public class Main implements Runnable {
 
 		sun.draw(g, 190, 10);
 		levels[level].render(g);
-		
 		hud.draw(g);
 
 		gamePanel.repaint();
