@@ -6,7 +6,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class SpriteSheet {
-	private static final int tileHeight = 16;
 	private final BufferedImage sheet;
 	
 	public SpriteSheet(String filePath) {
@@ -22,7 +21,7 @@ public class SpriteSheet {
 	}
 	
 	public BufferedImage getImage(int row, int col, int width, int height) {
-		return sheet.getSubimage(row * tileHeight, col * tileHeight, width * tileHeight, height * tileHeight);
+		return sheet.getSubimage(row * Main.tileSize, col * Main.tileSize, width * Main.tileSize, height * Main.tileSize);
 	}
 	
 }

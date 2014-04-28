@@ -5,9 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class Hud {
+	private Player player;
 	
-	public void tick(){
-		
+	public Hud(Player player){
+		this.player = player;
 	}
 	
 	public void draw(Graphics g){
