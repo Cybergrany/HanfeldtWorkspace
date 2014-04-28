@@ -29,7 +29,7 @@ public class Hud {
 		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.sizeY - 15);
-			heartx += 19;
+			heartx += 15;
 		}
 		
 		heartx = 19;
@@ -44,7 +44,11 @@ public class Hud {
 			g.drawString("Debug Mode", 10, 10);
 			g.drawString("Fps: " + Integer.toString(Main.fps), 10, 20);
 			g.drawString("CHARACTER ENTITIY:", 10, 40);
+<<<<<<< HEAD
 			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50);
+=======
+			g.drawString(String.format("X: %d Y: %d", Player.x, Player.y), 10, 50);//Well Dayum, it can
+>>>>>>> 172a041243e7678ca88e9845d2bcc649b00f7ef1
 		}
 	}
 }
