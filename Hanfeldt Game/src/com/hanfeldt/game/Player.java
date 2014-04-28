@@ -10,12 +10,12 @@ public class Player extends Entity {
 	}
 	
 	public void tick(){
-		if(Main.aDown) {
+		if(Main.aDown && getX() >= 0) {
 			changeX(-speed);
 			direction = false;
 		}
 		
-		if(Main.dDown) {
+		if(Main.dDown && getX() < Main.getLevels()[0].getSizeX()) {
 			changeX(speed);
 			direction = true;
 		}
@@ -24,7 +24,7 @@ public class Player extends Entity {
 	}
 	
 	public void draw(Graphics g) {
-		if(!Main.aDown && ! Main.dDown) {
+		if( (!Main.aDown && !Main.dDown) || Main.isPaused) {
 			sprite.draw(g, (Main.sizeX /2) - (Main.tileSize /2), getY(), direction);
 			cycleTicks = 0;
 			currentCycle = 0;

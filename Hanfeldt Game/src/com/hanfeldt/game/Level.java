@@ -16,7 +16,6 @@ public class Level {
 	private int[][] tiles;
 	private int sizeX;
 	private Sprite block;
-	private int level = 1;
 	
 	public Level(String path, Sprite block, Player p) {
 		this.block = block;
@@ -69,8 +68,8 @@ public class Level {
 		}
 	}
 	
-	public int getLevel(){
-		return level;
+	public int getSizeX() {
+		return sizeX * Main.tileSize;
 	}
 	
 }

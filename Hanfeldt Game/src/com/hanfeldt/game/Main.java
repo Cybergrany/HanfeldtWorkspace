@@ -27,7 +27,7 @@ public class Main implements Runnable {
 	private BufferedImage screenImage;
 	private Sprite block, cloud, sun;
 	private Player player;
-	private Level[] levels;
+	private static Level[] levels;
 	private int level = 0;
 	private Hud hud;
 
@@ -152,6 +152,10 @@ public class Main implements Runnable {
 
 		gamePanel.repaint();
 		g.dispose();
+	}
+	
+	public static Level[] getLevels() {
+		return levels;
 	}
 	
 }
