@@ -19,13 +19,10 @@ public class Sprite {
 		image = sheet.getImage(x, y, w, h);
 		width = w;
 		height = h;
-		
-		if(numWalkingAnims > 0) {
-			walkingAnims = new BufferedImage[numWalkingAnims];
-		}
+		walkingAnims = new BufferedImage[numWalkingAnims];
 		
 		for(int i=0; i<numWalkingAnims; i++) {
-			walkingAnims[i] = sheet.getImage(x + i, y, w, h);
+			walkingAnims[i] = sheet.getImage(x + i +1, y, w, h);
 		}
 	}
 	
@@ -49,4 +46,7 @@ public class Sprite {
 		}
 	}
 	
+	public int getWalkingAnimsLength() {
+		return walkingAnims.length;
+	}
 }

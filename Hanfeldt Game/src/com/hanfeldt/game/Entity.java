@@ -3,10 +3,14 @@ package com.hanfeldt.game;
 import java.awt.Graphics;
 
 public class Entity {
+	public static final int ticksPerAnimChange = 5; // A shorter name for this would be nice but I can't think of one.jpg
 	private int health;
 	private int x, y;
 	boolean direction = true; // Right = true, Left = false
 	Sprite sprite;
+	int cycleTicks = 0;
+	int currentCycle = 0;
+	boolean cycleGoingUp = true;
 	
 	public Entity(Sprite s, int h, int x, int y) {
 		sprite = s;

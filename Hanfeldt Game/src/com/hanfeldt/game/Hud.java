@@ -5,19 +5,19 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class Hud {
-	
-	private Sprite heart, character;
-	
-	public static boolean paused = false, debug = true;
+	public static boolean paused = false, debug = false;
 	private static int hearts, heartx = 0;
+	private Sprite heart, character;
+	private Player player;
 	
-	public Hud(){
+	public Hud(Player player){
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
-		character = new Sprite(Main.spriteSheet, 2, 1, 1 , 1);
+		character = new Sprite(Main.spriteSheet, 2, 1, 1, 1);
+		this.player = player;
 	}
 	
 	public void tick(){
-		hearts = Player.health / 20;//Max 5 hearts
+		hearts = player.getHealth() / 20;//Max 5 hearts
 	}
 	
 	public void draw(Graphics g){
@@ -25,7 +25,7 @@ public class Hud {
 		g.setFont(font);
 		g.setColor(new Color(255 , 255, 255));
 		
-		character.draw(g, 5, Main.sizeY - Main.tileSize, 5, 5);
+		character.draw(g, 5, Main.sizeY - Main.tileSize);
 		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.sizeY - 15);
@@ -44,7 +44,7 @@ public class Hud {
 			g.drawString("Debug Mode", 10, 10);
 			g.drawString("Fps: " + Integer.toString(Main.fps), 10, 20);
 			g.drawString("CHARACTER ENTITIY:", 10, 40);
-			g.drawString(String.format("X: %d Y: %d", Player.x, Player.y), 10, 50);//Sorry, this is a bit messy, not sure if formatting similar to printf can be used in drawString.
+			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50);
 		}
 	}
 }

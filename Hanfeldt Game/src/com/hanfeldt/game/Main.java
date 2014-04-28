@@ -77,7 +77,7 @@ public class Main implements Runnable {
 
 		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
 		
-		hud = new Hud();
+		hud = new Hud(player);
 		
 		// TODO: Not sure where levels should be called
 		levels = new Level[1];
