@@ -69,7 +69,7 @@ public class Main implements Runnable {
 	public void init() {
 		gamePanel.requestFocus();
 
-		spriteSheet = new SpriteSheet("res/spritesheet.png");
+		spriteSheet = new SpriteSheet("res/images/spritesheet.png");
 		block = new Sprite(spriteSheet, 0, 0, 1, 1);
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
@@ -81,7 +81,7 @@ public class Main implements Runnable {
 		
 		// TODO: Not sure where levels should be called
 		levels = new Level[1];
-		levels[0] = new Level("res/level1.png", block, player);
+		levels[0] = new Level("res/images/level1.png", block, player);
 
 		// Start "GameLoop"
 		running = true;
@@ -94,7 +94,7 @@ public class Main implements Runnable {
 		long nsPerTick = (long) 1000000000 / ticksPs;
 		long nsPerFrame = (long) 1000000000 / frameLimit;
 		long lastTimer = System.currentTimeMillis();
-		int frames = 0;
+		int frames = 0, ticks = 0;
 		running = true;
 		isPaused = false;
 
