@@ -8,7 +8,7 @@ public class Hud {
 	
 	private Sprite heart, character;
 	
-	public static boolean paused = false, debug = false;
+	public static boolean paused = false, debug = true;
 	private static int hearts, heartx = 0;
 	
 	public Hud(){
@@ -25,7 +25,7 @@ public class Hud {
 		g.setFont(font);
 		g.setColor(new Color(255 , 255, 255));
 		
-		character.draw(g, 5, Main.sizeY - 15);
+		character.draw(g, 5, Main.sizeY - Main.tileSize, 5, 5);
 		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.sizeY - 15);
@@ -44,7 +44,7 @@ public class Hud {
 			g.drawString("Debug Mode", 10, 10);
 			g.drawString("Fps: " + Integer.toString(Main.fps), 10, 20);
 			g.drawString("CHARACTER ENTITIY:", 10, 40);
-			g.drawString("X: " + Player.x + "Y: " + Player.y, 10, 50);//Sorry, this is a bit messy, not sure if formatting similar to printf can be used in drawString.
+			g.drawString(String.format("X: %d Y: %d", Player.x, Player.y), 10, 50);//Sorry, this is a bit messy, not sure if formatting similar to printf can be used in drawString.
 		}
 	}
 }
