@@ -7,15 +7,17 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-// Hippity hoppity skilly humliya secret message jack tit. Grapes?
+//Fucking love grapes man
 public class Main implements Runnable {
 
 	public static int sizeX = 256, sizeY = 144;
 	public static int tileSize = 16;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
-	public static boolean running, isPaused, debug;
+	public static boolean running, isPaused, debug, muted;
 	public static boolean aDown, dDown, spaceDown, escDown;
+	
+	public static SpriteSheet spriteSheet;//Changed so it can be accessed in different classes, like HUD - Saves on creating many spritesheet objects
 
 	private int scale = 3;
 	private int ticksPs = 60;
@@ -23,7 +25,6 @@ public class Main implements Runnable {
 
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
-	private SpriteSheet spriteSheet;
 	private Sprite block, cloud, sun;
 	private Player player;
 	private Level[] levels;
@@ -87,7 +88,6 @@ public class Main implements Runnable {
 	}
 
 	public void run() {
-		boolean escReleasedLastTick = false;
 		long lastTick = System.nanoTime();
 		long lastFrame = System.nanoTime();
 		long nsPerTick = (long) 1000000000 / ticksPs;
@@ -127,22 +127,12 @@ public class Main implements Runnable {
 
 				lastFrame = System.nanoTime();
 			}
-			
-			// Pausing took a ridiculous amount of time >_>
-			if(escDown) {
-				if(escReleasedLastTick) {
-					isPaused = !isPaused;
-				}
-				
-				escReleasedLastTick = false;
-			}else{
-				escReleasedLastTick = true;
-			}
 		}
 	}
 
 	public void tick() {
 		levels[level].tick();
+		hud.tick();
 	}
 
 	public void render() {

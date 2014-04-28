@@ -6,16 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Listener implements MouseListener, KeyListener{
+	
+	static boolean pausePressed, debugPressed;
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
 		switch(key){
-		
-		case(KeyEvent.VK_ESCAPE): // I think most games use escape? Maybe
-			Main.escDown = true;
-			break;
 			
 		case(KeyEvent.VK_D):
 			Main.dDown = true;
@@ -34,8 +32,32 @@ public class Listener implements MouseListener, KeyListener{
 		
 		switch(key){
 		
-		case(KeyEvent.VK_ESCAPE): // I think most games use escape? Maybe
-			Main.escDown = false;
+		//Enter Debug Screen
+		case(KeyEvent.VK_F3)://Cuz Minecraft, amirite?
+			if(debugPressed){
+				Main.debug = false;
+				debugPressed = false;
+				Hud.debug = false;
+			}else{
+				Main.debug = true;
+				debugPressed = true;
+				Hud.debug = true;
+			}
+			break;
+		
+		//Pausing
+		case(KeyEvent.VK_ESCAPE):
+			if(pausePressed){
+				Main.isPaused = false;
+				pausePressed = false;
+				Hud.paused = false;
+			}else{
+				Main.isPaused = true;
+				pausePressed = true;
+				Hud.paused = true;
+			}
+			break;
+		
 		case(KeyEvent.VK_D):
 			Main.dDown = false;
 			break;
@@ -43,7 +65,7 @@ public class Listener implements MouseListener, KeyListener{
 			Main.aDown = false;
 			break;
 		case(KeyEvent.VK_SPACE): // Space or W for jump?
-			Main.spaceDown = false;
+			Main.spaceDown = false;//W might be more intuitive, but depends on the kind of platformer we want
 			break;
 		}
 	}
