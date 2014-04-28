@@ -94,14 +94,13 @@ public class Main implements Runnable {
 		long nsPerTick = (long) 1000000000 / ticksPs;
 		long nsPerFrame = (long) 1000000000 / frameLimit;
 		long lastTimer = System.currentTimeMillis();
-		int frames = 0, ticks = 0;
+		int frames = 0;
 		running = true;
 		isPaused = false;
 
 		while (running) {
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
 				fps = frames;
-				System.out.printf("%d ticks, %d fps\n", ticks, frames);
 				lastTimer = System.currentTimeMillis();
 				ticks = frames = 0;
 			}
