@@ -15,7 +15,7 @@ public class Player extends Entity {
 			direction = false;
 		}
 		
-		if(Main.dDown && getX() < Main.getLevels()[0].getSizeX()) {
+		if(Main.dDown && getX() < (Main.getLevels()[0].getSizeX() - 1) *Main.tileSize) { // need to clean this up later...
 			changeX(speed);
 			direction = true;
 		}

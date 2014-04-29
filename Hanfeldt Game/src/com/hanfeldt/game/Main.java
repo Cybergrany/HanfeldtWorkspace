@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-//Fucking love grapes man
 public class Main implements Runnable {
 
 	public static int sizeX = 256, sizeY = 144;
@@ -17,7 +16,7 @@ public class Main implements Runnable {
 	public static boolean running, isPaused, debug, muted;
 	public static boolean aDown, dDown, spaceDown, escDown;
 	
-	public static SpriteSheet spriteSheet;//Changed so it can be accessed in different classes, like HUD - Saves on creating many spritesheet objects
+	public static SpriteSheet spriteSheet;
 
 	private int scale = 3;
 	private int ticksPs = 60;
@@ -25,7 +24,7 @@ public class Main implements Runnable {
 
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
-	private Sprite block, cloud, sun;
+	private Sprite cloud, sun;
 	private Player player;
 	private static Level[] levels;
 	private int level = 0;
@@ -70,7 +69,6 @@ public class Main implements Runnable {
 		gamePanel.requestFocus();
 
 		spriteSheet = new SpriteSheet("res/images/spritesheet.png");
-		block = new Sprite(spriteSheet, 0, 0, 1, 1);
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * 3);
@@ -81,7 +79,7 @@ public class Main implements Runnable {
 		
 		// TODO: Not sure where levels should be called
 		levels = new Level[1];
-		levels[0] = new Level("res/images/level1.png", block, player);
+		levels[0] = new Level("res/images/level1.png", player);
 
 		// Start "GameLoop"
 		running = true;

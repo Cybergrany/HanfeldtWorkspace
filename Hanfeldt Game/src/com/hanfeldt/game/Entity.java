@@ -58,4 +58,5 @@ public class Entity {
 	public void draw(Graphics g) {
 		sprite.draw(g, x, y);
 	}
+	
 }

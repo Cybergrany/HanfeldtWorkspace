@@ -6,6 +6,10 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import com.hanfeldt.game.tile.Air;
+import com.hanfeldt.game.tile.Block;
+import com.hanfeldt.game.tile.Tile;
+
 public class Level {
 	/*
 	 * NOTE: 0 = air, 1 = block
@@ -13,12 +17,10 @@ public class Level {
 	
 	private final BufferedImage levelImage;
 	private Player player;
-	private int[][] tiles;
+	private Tile[][] tiles;
 	private int sizeX;
-	private Sprite block;
 	
-	public Level(String path, Sprite block, Player p) {
-		this.block = block;
+	public Level(String path, Player p) {
 		BufferedImage temp = null;
 		
 		try {
@@ -31,14 +33,16 @@ public class Level {
 		
 		int sizeY = Main.sizeY / 16;
 		sizeX = levelImage.getWidth();
-		tiles = new int[sizeX][sizeY];
+		tiles = new Tile[sizeX][sizeY];
 		
 		for(int i=0; i<sizeY; i++) {
 			for(int j=0; j<sizeX; j++) {
 				switch(levelImage.getRGB(j, i)) {
 				case 0xFF000000:
-					tiles[j][i] = 1;
+					tiles[j][i] = new Block(j, i);
 					break;
+				default:
+					tiles[j][i] = new Air(j, i);
 				}
 			}
 		}
@@ -59,17 +63,13 @@ public class Level {
 	public void draw(Graphics g, int posX) {
 		for(int i=0; i<tiles[0].length; i++) {
 			for(int j=0; j<tiles.length; j++) {
-				switch(tiles[j][i]) {
-				case 1:
-					block.draw(g, (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2), i * Main.tileSize);
-					break;
-				}
+				tiles[j][i].getSprite().draw(g, (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2), i * Main.tileSize);
 			}
 		}
 	}
 	
 	public int getSizeX() {
-		return sizeX * Main.tileSize;
+		return sizeX;
 	}
 	
 }

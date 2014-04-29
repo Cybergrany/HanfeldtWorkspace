@@ -12,7 +12,7 @@ public class Hud {
 	
 	public Hud(Player player){
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
-		character = new Sprite(Main.spriteSheet, 2, 1, 1, 1);
+		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
 		this.player = player;
 	}
 	
