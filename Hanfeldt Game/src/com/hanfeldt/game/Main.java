@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+
+import com.hanfeldt.game.npc.Npc;
 
 public class Main implements Runnable {
 
@@ -22,7 +25,9 @@ public class Main implements Runnable {
 	private int scale = 3;
 	private int ticksPs = 60;
 	private int frameLimit = 120;
-
+	
+	public static ArrayList<Npc> npc;
+	
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
 	private Sprite cloud, sun;
@@ -70,15 +75,19 @@ public class Main implements Runnable {
 		gamePanel.requestFocus();
 
 		spriteSheet = new SpriteSheet("res/images/spritesheet.png");
+		
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
+		
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
+		
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * 3);
 
 		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
 		
 		hud = new Hud(player);
 		
-		// TODO: Not sure where levels should be called
+		npc = new ArrayList<Npc>();
+		
 		levels = new Level[1];
 		levels[0] = new Level("res/images/level1.png", player);
 
@@ -104,7 +113,7 @@ public class Main implements Runnable {
 				ticks = frames = 0;
 			}
 
-			if (!isPaused) {
+			if (!isPaused) {//Should game automatically pause on loss of focus? (... &&gamePanel.hasFocus()){...
 				if (System.nanoTime() > lastTick + nsPerTick) {
 					tick();
 					ticks++;
@@ -132,6 +141,10 @@ public class Main implements Runnable {
 	public void tick() {
 		levels[level].tick();
 		hud.tick();
+		
+		for(int i = 0; i < npc.toArray().length; i++){
+			npc.get(i).tick();
+		}
 	}
 
 	public void render() {
@@ -144,7 +157,11 @@ public class Main implements Runnable {
 		for (int i = 0; i < 5; i++) {
 			cloud.draw(g, (i * 30) + 20, ((i % 2 == 0) ? 10 : 20));
 		}
-
+		
+		for(int i = 0; i < npc.toArray().length; i++){
+			npc.get(i).draw(g);
+		}
+		
 		sun.draw(g, 190, 10);
 		levels[level].render(g);
 		hud.draw(g);

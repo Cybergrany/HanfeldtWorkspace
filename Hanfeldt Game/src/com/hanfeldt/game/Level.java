@@ -71,5 +71,4 @@ public class Level {
 	public int getSizeX() {
 		return sizeX;
 	}
-	
 }
