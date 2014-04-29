@@ -1,6 +1,9 @@
 package com.hanfeldt.game.npc;
 
+import java.awt.Graphics;
+
 import com.hanfeldt.game.Entity;
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 
 /**
@@ -11,19 +14,28 @@ import com.hanfeldt.game.Sprite;
  */
 public class Npc extends Entity{
 	
-	boolean isMovingLeft, isMovingRight;
+	public boolean isMovingLeft, isMovingRight;
+	int temp = (Main.sizeX /2) - (Main.tileSize /2);
 	
 	public Npc(Sprite s, int x, int y){
 		super(s, 75, x, y);
-		
 		isMovingLeft = false; isMovingRight = false;
 	}
 	
 	public void tick(){
+		//TODO:This probably doesn't need overriding
 		
 	}
 	
-	public void draw(){
-		
+	public void tickNpc(){
+		temp++;
+	}
+	
+	public void draw(Graphics g){
+		sprite.draw(g, temp, getY());
+	}
+	
+	public static int getMaxNpc(){
+		return 5;//Default max
 	}
 }

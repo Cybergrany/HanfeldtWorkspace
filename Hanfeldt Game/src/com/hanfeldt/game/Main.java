@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import com.hanfeldt.game.npc.Npc;
+import com.hanfeldt.game.npc.Spawner;
 
 public class Main implements Runnable {
 
@@ -35,6 +36,7 @@ public class Main implements Runnable {
 	private static Level[] levels;
 	private int level = 0;
 	private Hud hud;
+	private Spawner spawner;
 
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
@@ -87,6 +89,7 @@ public class Main implements Runnable {
 		hud = new Hud(player);
 		
 		npc = new ArrayList<Npc>();
+		spawner = new Spawner();
 		
 		levels = new Level[1];
 		levels[0] = new Level("res/images/level1.png", player);
@@ -143,7 +146,7 @@ public class Main implements Runnable {
 		hud.tick();
 		
 		for(int i = 0; i < npc.toArray().length; i++){
-			npc.get(i).tick();
+			npc.get(i).tickNpc();
 		}
 	}
 
