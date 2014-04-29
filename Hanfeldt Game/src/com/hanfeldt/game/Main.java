@@ -15,6 +15,7 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, isPaused, debug, muted;
 	public static boolean aDown, dDown, spaceDown, escDown;
+	public static float gravity = 9.8f;
 	
 	public static SpriteSheet spriteSheet;
 
