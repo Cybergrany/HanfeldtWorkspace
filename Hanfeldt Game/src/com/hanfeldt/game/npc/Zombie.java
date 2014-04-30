@@ -10,7 +10,7 @@ public class Zombie extends Npc{
 	public static int maxHealth = 75;
 
 	public Zombie(int x, int y) {
-		super(s, x, y);
+		super(s, maxHealth, x, y);
 		
 	}
 	
@@ -24,10 +24,6 @@ public class Zombie extends Npc{
 	
 	public static int getMaxNpc(){
 		return 3;
-	}
-	
-	public static int getEntityMaxHealth() {
-		return maxHealth;//This should work, shouldn't it?
 	}
 	
 	private void detectPlayer(){//Zombie see, zombie kill

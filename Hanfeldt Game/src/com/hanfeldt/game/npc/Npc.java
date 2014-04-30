@@ -17,8 +17,10 @@ public class Npc extends Entity{
 	public boolean isMovingLeft, isMovingRight;
 	int temp = (Main.sizeX /2) - (Main.tileSize /2);
 	
-	public Npc(Sprite s, int x, int y){
-		super(s, getEntityMaxHealth(), x, y);
+	int health = 0;
+	
+	public Npc(Sprite s,int h, int x, int y){
+		super(s, h, x, y);
 		isMovingLeft = false; isMovingRight = false;
 	}
 
@@ -42,9 +44,5 @@ public class Npc extends Entity{
 	 */
 	public static int getMaxNpc(){
 		return 5;//Default max
-	}
-	
-	public static int getEntityMaxHealth() {
-		return 100;
 	}
 }

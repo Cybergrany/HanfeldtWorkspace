@@ -6,9 +6,15 @@ public class Tile {
 	private Sprite sprite;
 	private int x, y;
 	
-	public Tile(int x, int y) {
+	public int id = -1;
+	
+	public static final int air = 0;
+	public static final int block = 1;
+	
+	public Tile(int x, int y, int id) {
 		this.x = x;
 		this.y = y;
+		this.id = id;
 	}
 	
 	public boolean isSolid() {

@@ -17,7 +17,7 @@ public class Level {
 	
 	private final BufferedImage levelImage;
 	private Player player;
-	private Tile[][] tiles;
+	public static Tile[][] tiles;//Making this public static just to test things
 	private int sizeX;
 	
 	public Level(String path, Player p) {
@@ -51,7 +51,6 @@ public class Level {
 	}
 	
 	public void tick(){
-		//TODO: Level number can possibly update here, calling the level change in main.
 		player.tick();
 	}
 	

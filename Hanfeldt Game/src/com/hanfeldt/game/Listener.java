@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class Listener implements MouseListener, KeyListener{
 	
-	static boolean pausePressed, debugPressed;
+	static boolean pausePressed, debugPressed, mutePressed, soundPlayed;
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -25,7 +25,10 @@ public class Listener implements MouseListener, KeyListener{
 			
 		case(KeyEvent.VK_W): //Going for W yolo
 			Main.wDown = true;//W might be more intuitive, but depends on the kind of platformer we want
-			Sound.playSound("Jump.wav");//Better place and way to call this, I know. Just making sure it works and being lazy.
+			if(!soundPlayed){
+				Sound.playSound("Jump.wav");//Better place and way to call this, I know. Just making sure it works and being lazy.
+			}
+			soundPlayed = true;
 			break;
 		
 		}
@@ -62,6 +65,18 @@ public class Listener implements MouseListener, KeyListener{
 				Hud.paused = true;
 			}
 			break;
+			
+		//Muting
+		case(KeyEvent.VK_M):
+			if(mutePressed){
+				Main.muted = false;
+				mutePressed = false;
+				Hud.muted = false;
+			}else{
+				Main.muted = true;
+				mutePressed = true;
+				Hud.muted = true;
+			}
 		
 		case(KeyEvent.VK_D):
 			Main.dDown = false;
@@ -71,6 +86,7 @@ public class Listener implements MouseListener, KeyListener{
 			break;
 		case(KeyEvent.VK_W): // Space or W for jump?
 			Main.wDown = false;//W might be more intuitive, but depends on the kind of platformer we want
+			soundPlayed = false;
 			break;
 		}
 	}

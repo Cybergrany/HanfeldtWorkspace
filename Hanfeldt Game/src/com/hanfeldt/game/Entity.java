@@ -27,6 +27,7 @@ public class Entity {
 	
 	public void tick(){
 		changeX(velX);
+		changeY(velY);
 		cycleTicks++;
 	}
 	

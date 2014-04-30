@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Player extends Entity {
 	
 	static int maxHealth = 100;
-	int jumpHeight = 32; float jumpSpeed = 1f;
+	int jumpHeight = 7; float jumpSpeed = 1f; boolean jumped;
 	
 	public Player(Sprite s, int x, int y){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
@@ -38,6 +38,7 @@ public class Player extends Entity {
 	}
 	
 	public void tick() {
+		
 		if((!Main.dDown && !Main.aDown) || (Main.dDown && Main.aDown)) {
 			velX *= 0.9f;
 			
@@ -67,23 +68,34 @@ public class Player extends Entity {
 			}
 			
 		}
-		
-		int y = 0 + getY();//I know, this can be done better.. But I can't for the life of me figure out how velY is used..
 		if(Main.wDown){
-			if(jumpCount >= jumpHeight && y < 96){
-				y++;
-			}else{
-				y--;
+			if(jumpCount >= jumpHeight && getY() < 96){
+				velY+=jumpSpeed;
+				jumped = true;
+			}else if(!jumped){
+				velY-=jumpSpeed;
 				jumpCount++;
 			}
-		}else{
-			if(y < 96){
-				y++;
-			}else{
+			if(getY() >= 96){
+				setY(96);
 				jumpCount = 0;
 			}
+		}else if(getY() < 96){
+			velY+=jumpSpeed;
+		}else{
+			jumpCount = 0;
+			velY = 0;
+			jumped = false;
+			setY(96);
 		}
-		setY(y);
+		
+		if(velY < -velYMax){
+			velY = -velYMax;
+		}
+		
+		if(velY > velYMax){
+			velY = velYMax;
+		}
 		
 		if(velX < -velXMax) {
 			velX = -velXMax;

@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class Hud {
-	public static boolean paused = false, debug = false;
+	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, heartx = 0;
 	private Sprite heart, character;
 	private Player player;
@@ -36,7 +36,7 @@ public class Hud {
 		
 		if(paused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);
-			g.drawString("If shit is still happening, then something is wrong", Main.sizeX / 8, Main.sizeY / 2 + 20);
+			g.drawString("Press 'M' to mute.", Main.sizeX / 8, Main.sizeY / 2 + 20);
 			g.drawString("I feex.", Main.sizeX / 8, Main.sizeY / 2 + 40);
 		}
 		
@@ -49,6 +49,10 @@ public class Hud {
 			
 			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50); //Well Dayum, it can
 			
+		}
+		
+		if(muted){
+			g.drawString("Muted", Main.sizeX - 27, Main.sizeY - 5);
 		}
 	}
 }

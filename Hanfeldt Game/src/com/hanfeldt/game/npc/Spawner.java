@@ -19,7 +19,7 @@ public class Spawner implements Runnable{//Give it it's own thread, why not?
 		while(isRunning){
 			if(Main.npc.toArray().length < Npc.getMaxNpc()){
 //				spawnNpc(new Zombie(Main.sizeX / 2, Main.sizeY - Main.tileSize * 3));
-				spawnNpc(new Zombie(50, 50));
+				spawnNpc(new Zombie(50, 96));
 			
 			}
 			
