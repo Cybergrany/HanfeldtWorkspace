@@ -4,8 +4,11 @@ import java.awt.Graphics;
 
 public class Player extends Entity {
 	
+	static int maxHealth = 100;
+	int jumpHeight = 32; float jumpSpeed = 1f;
+	
 	public Player(Sprite s, int x, int y){
-		super(s, 100, x, y); // Health is already set here in le constructor for Entity
+		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
 		velXMax = 1f;
 	}
 	
@@ -64,6 +67,23 @@ public class Player extends Entity {
 			}
 			
 		}
+		
+		int y = 0 + getY();//I know, this can be done better.. But I can't for the life of me figure out how velY is used..
+		if(Main.wDown){
+			if(jumpCount >= jumpHeight && y < 96){
+				y++;
+			}else{
+				y--;
+				jumpCount++;
+			}
+		}else{
+			if(y < 96){
+				y++;
+			}else{
+				jumpCount = 0;
+			}
+		}
+		setY(y);
 		
 		if(velX < -velXMax) {
 			velX = -velXMax;

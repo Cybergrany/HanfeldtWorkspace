@@ -6,6 +6,8 @@ import com.hanfeldt.game.Sprite;
 public class Zombie extends Npc{
 	
 	private static Sprite s = new Sprite(Main.spriteSheet, 2, 1, 1, 2, 3);//Same as player for testing
+	
+	public static int maxHealth = 75;
 
 	public Zombie(int x, int y) {
 		super(s, x, y);
@@ -24,7 +26,11 @@ public class Zombie extends Npc{
 		return 3;
 	}
 	
-	private void detectPlayer(){
+	public static int getEntityMaxHealth() {
+		return maxHealth;//This should work, shouldn't it?
+	}
+	
+	private void detectPlayer(){//Zombie see, zombie kill
 		
 	}
 

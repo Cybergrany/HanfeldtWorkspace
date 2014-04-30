@@ -10,6 +10,7 @@ public class Entity {
 	float velXMax, velYMax = 3f;
 	private int sizeX, sizeY;
 	boolean direction = true; // Right = true, Left = false
+	int jumpCount = 0;
 	protected Sprite sprite;
 	int cycleTicks = 0;
 	int currentCycle = 0;

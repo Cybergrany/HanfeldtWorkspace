@@ -22,6 +22,11 @@ public class Listener implements MouseListener, KeyListener{
 		case(KeyEvent.VK_A):
 			Main.aDown = true;
 			break;
+			
+		case(KeyEvent.VK_W): //Going for W yolo
+			Main.wDown = true;//W might be more intuitive, but depends on the kind of platformer we want
+			Sound.playSound("Jump.wav");//Better place and way to call this, I know. Just making sure it works and being lazy.
+			break;
 		
 		}
 	}
@@ -64,8 +69,8 @@ public class Listener implements MouseListener, KeyListener{
 		case(KeyEvent.VK_A):
 			Main.aDown = false;
 			break;
-		case(KeyEvent.VK_SPACE): // Space or W for jump?
-			Main.spaceDown = false;//W might be more intuitive, but depends on the kind of platformer we want
+		case(KeyEvent.VK_W): // Space or W for jump?
+			Main.wDown = false;//W might be more intuitive, but depends on the kind of platformer we want
 			break;
 		}
 	}
@@ -78,7 +83,6 @@ public class Listener implements MouseListener, KeyListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 		
 	}
 

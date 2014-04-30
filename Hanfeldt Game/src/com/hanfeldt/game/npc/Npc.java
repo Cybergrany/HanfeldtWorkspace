@@ -18,10 +18,10 @@ public class Npc extends Entity{
 	int temp = (Main.sizeX /2) - (Main.tileSize /2);
 	
 	public Npc(Sprite s, int x, int y){
-		super(s, 75, x, y);
+		super(s, getEntityMaxHealth(), x, y);
 		isMovingLeft = false; isMovingRight = false;
 	}
-	
+
 	public void tick(){
 		//TODO:This probably doesn't need overriding
 		
@@ -35,7 +35,16 @@ public class Npc extends Entity{
 		sprite.draw(g, temp, getY());
 	}
 	
+	/**
+	 * Max amount of NPC's allowed.
+	 * Can be overridden etc(I believe)
+	 * @return A default of 5.
+	 */
 	public static int getMaxNpc(){
 		return 5;//Default max
+	}
+	
+	public static int getEntityMaxHealth() {
+		return 100;
 	}
 }
