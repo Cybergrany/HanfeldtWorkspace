@@ -10,11 +10,13 @@ public class Entity {
 	float velXMax, velYMax = 3f;
 	private int sizeX, sizeY;
 	boolean direction = true; // Right = true, Left = false
+	boolean falling = false;
 	int jumpCount = 0;
 	protected Sprite sprite;
 	int cycleTicks = 0;
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
+	boolean isMovingLeft = false, isMovingRight = false;
 	
 	public Entity(Sprite s, int h, int x, int y) {
 		sprite = s;
@@ -26,6 +28,27 @@ public class Entity {
 	}
 	
 	public void tick(){
+		checkCollisions();
+		
+		if(falling) {
+			velY += Main.gravity;
+		}else{
+			if(velY > 0.0f) {
+				velY = 0;
+			}
+		}
+		if(velX < -velXMax) {
+			velX = -velXMax;
+		}else if(velX > velXMax) {
+			velX = velXMax;
+		}
+		
+		if(velY < -Main.terminalVelocity) {
+			velY = -Main.terminalVelocity;
+		}else if(velY > Main.terminalVelocity) {
+			velY = Main.terminalVelocity;
+		}
+		
 		changeX(velX);
 		changeY(velY);
 		cycleTicks++;
@@ -77,6 +100,57 @@ public class Entity {
 	
 	public int getSizeY() {
 		return sizeY;
+	}
+	
+	public void checkCollisions() {
+		//tile(s) to the right
+		try {
+			outerLoop:
+			for(int i=0; i<getSizeY(); i++) {
+				if(Main.getLevels()[0].getTile(getTileX() +1, getTileY() +i).isSolid()
+					&& isMovingRight) {
+					velX = 0;
+					break outerLoop;
+				}
+			}
+		}catch(Exception e) {}
+		
+		//tile(s) to the left
+		try {
+			outerLoop:
+				for(int i=0; i<getSizeY(); i++) {
+					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
+						&& isMovingLeft) {
+						velX = 0;
+						break outerLoop;
+					}
+				}
+		}catch(Exception e) {}
+		
+		//Below code not quiiite working yet
+		//tile(s) below
+		try {
+		outerLoop:
+			for(int i=0; i<getSizeX(); i++) {
+				if(Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getSizeY()).isSolid()) {
+					falling = false;
+					break outerLoop;
+				}
+				
+				if(i == getSizeX() -1) {
+					falling = true;
+				}
+			}
+		}catch(Exception e) {}
+		
+	}
+	
+	public int getTileX() {
+		return ((int) x) /Main.tileSize;
+	}
+	
+	public int getTileY() {
+		return ((int) y) /Main.tileSize;
 	}
 	
 }

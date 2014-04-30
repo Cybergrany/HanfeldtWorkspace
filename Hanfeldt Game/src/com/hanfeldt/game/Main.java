@@ -19,7 +19,8 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, isPaused, debug, muted;
 	public static boolean aDown, dDown, wDown, escDown;
-	public static float gravity = 9.8f;
+	public static float gravity = 0.2f;
+	public static float terminalVelocity = 3;
 	
 	public static SpriteSheet spriteSheet;
 
@@ -82,7 +83,7 @@ public class Main implements Runnable {
 		
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		
-		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * 3);
+		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()));
 
 		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
 		

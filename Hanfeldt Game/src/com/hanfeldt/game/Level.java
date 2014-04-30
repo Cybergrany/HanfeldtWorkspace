@@ -70,4 +70,9 @@ public class Level {
 	public int getSizeX() {
 		return sizeX;
 	}
+	
+	public Tile getTile(int x, int y) {
+		return tiles[x][y];
+	}
+	
 }

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Player extends Entity {
 	
 	static int maxHealth = 100;
-	int jumpHeight = 7; float jumpSpeed = 1f; boolean jumped;
+	int jumpHeight = 4; float jumpSpeed = 1f; boolean jumped;
 	
 	public Player(Sprite s, int x, int y){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
@@ -38,8 +38,10 @@ public class Player extends Entity {
 	}
 	
 	public void tick() {
-		
-		if((!Main.dDown && !Main.aDown) || (Main.dDown && Main.aDown)) {
+		isMovingLeft = Main.aDown;
+		isMovingRight = Main.dDown;
+		// Walk acceleration/slide is below
+		if((!isMovingLeft && !isMovingRight) || (isMovingLeft && isMovingRight)) {
 			velX *= 0.9f;
 			
 			if(velX > 0 && velX < 0.2f) {
@@ -49,15 +51,15 @@ public class Player extends Entity {
 				velX = 0;
 			}
 		}else{
-			if(Main.aDown) {
+			if(isMovingLeft) {
 				if(velX >= 0) {
-					velX = -0.2f;
+					velX = -0.25f;
 				}else{
 					velX *= 1.1f;
 				}
 				direction = false;
 			}else{
-				if(Main.dDown) {
+				if(isMovingRight) {
 					if(velX <= 0) {
 						velX = 0.25f;
 					}else{
@@ -68,6 +70,13 @@ public class Player extends Entity {
 			}
 			
 		}
+		
+		if(Main.wDown && !falling) {
+			velY = -Main.terminalVelocity;
+			falling = true;
+		}
+		
+		/* Daithís jump code
 		if(Main.wDown){
 			if(jumpCount >= jumpHeight && getY() < 96){
 				velY+=jumpSpeed;
@@ -88,21 +97,8 @@ public class Player extends Entity {
 			jumped = false;
 			setY(96);
 		}
+		*/
 		
-		if(velY < -velYMax){
-			velY = -velYMax;
-		}
-		
-		if(velY > velYMax){
-			velY = velYMax;
-		}
-		
-		if(velX < -velXMax) {
-			velX = -velXMax;
-		}
-		if(velX > velXMax) {
-			velX = velXMax;
-		}
 		super.tick();
 		
 		if(getX() >= (Main.getLevels()[0].getSizeX() - 1) *Main.tileSize) {

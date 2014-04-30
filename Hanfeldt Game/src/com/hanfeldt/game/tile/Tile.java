@@ -28,4 +28,12 @@ public class Tile {
 	protected void setSprite(Sprite sprite) {
 		this.sprite = sprite;
 	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
 }
