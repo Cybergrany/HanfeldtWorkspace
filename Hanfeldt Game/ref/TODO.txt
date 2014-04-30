@@ -1,3 +1,0 @@
-Minecraft.make(Tree, Axe, Block, Mine);
-Minecraft.compile();
-System.display(minecraft);
