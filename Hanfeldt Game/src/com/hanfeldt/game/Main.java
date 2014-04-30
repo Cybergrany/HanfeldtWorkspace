@@ -17,7 +17,7 @@ public class Main implements Runnable {
 	public static int tileSize = 16;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
-	public static boolean running, isPaused, debug, muted;
+	public static boolean running, isPaused, debug, muted, gameOver;
 	public static boolean aDown, dDown, wDown, escDown;
 	public static float gravity = 0.2f;
 	public static float terminalVelocity = 3;
@@ -98,6 +98,7 @@ public class Main implements Runnable {
 		// Start "GameLoop"
 		running = true;
 		debug = false;
+		gameOver = false;
 	}
 
 	public void run() {

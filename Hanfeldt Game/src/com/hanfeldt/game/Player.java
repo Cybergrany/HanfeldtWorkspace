@@ -76,28 +76,15 @@ public class Player extends Entity {
 			falling = true;
 		}
 		
-		/* Daithís jump code
-		if(Main.wDown){
-			if(jumpCount >= jumpHeight && getY() < 96){
-				velY+=jumpSpeed;
-				jumped = true;
-			}else if(!jumped){
-				velY-=jumpSpeed;
-				jumpCount++;
-			}
-			if(getY() >= 96){
-				setY(96);
-				jumpCount = 0;
-			}
-		}else if(getY() < 96){
-			velY+=jumpSpeed;
-		}else{
-			jumpCount = 0;
-			velY = 0;
-			jumped = false;
-			setY(96);
+		if(getY() > Main.sizeY){
+			setHealth(0);
 		}
-		*/
+		
+		//A moment of silence for my jumping code. May it be buried eternally inside those commits
+		
+		if(getHealth() == 0){
+			Main.gameOver = true;
+		}
 		
 		super.tick();
 		

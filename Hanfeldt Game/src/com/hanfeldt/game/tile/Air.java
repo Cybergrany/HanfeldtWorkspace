@@ -5,10 +5,8 @@ import com.hanfeldt.game.Sprite;
 
 public class Air extends Tile {
 	
-	private static int id = air;
-	
 	public Air(int x, int y) {
-		super(x, y, id);
+		super(x, y);
 		setSprite(new Sprite(Main.spriteSheet, 0, 3, 1, 1));
 	}
 	
