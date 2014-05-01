@@ -6,14 +6,17 @@ import com.hanfeldt.game.events.PlayerEvents;
 
 public class Player extends Entity{
 	
+	private PlayerEvents events;
+	
 	static int maxHealth = 100;
 	int jumpHeight = 4; float jumpSpeed = 1f; boolean jumped;
 	
-	public static boolean alive = true;
+	public boolean alive = true;
 	
 	public Player(Sprite s, int x, int y){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
 		velXMax = 1f;
+		events = new PlayerEvents(this);
 	}
 	
 	public void draw(Graphics g) {
@@ -80,8 +83,8 @@ public class Player extends Entity{
 			falling = true;
 		}
 		
-		if(getY() > Main.sizeY){
-			setHealth(0);
+		if(getY() > Main.sizeY && alive){
+			events.damagePlayer(getHealth(), events.fallDamage);
 		}
 		
 		//A moment of silence for my jumping code. May it be buried eternally inside those commits
@@ -94,9 +97,6 @@ public class Player extends Entity{
 			setX(0);
 		}
 		
-		if(getHealth() == 0){
-			//TODO: PlayerEvents.playerDeath(1);
-			alive = false;
-		}
+		events.tick();
 	}
 }

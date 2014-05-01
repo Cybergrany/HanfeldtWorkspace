@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
+import com.hanfeldt.game.events.PlayerEvents;
 import com.hanfeldt.game.npc.Npc;
 import com.hanfeldt.game.npc.Spawner;
 

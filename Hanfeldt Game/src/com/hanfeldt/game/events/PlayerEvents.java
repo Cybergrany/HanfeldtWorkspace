@@ -11,7 +11,10 @@ import com.hanfeldt.game.Sprite;
  * @author David Ofeldt
  *
  */
-public class PlayerEvents extends Player{
+public class PlayerEvents{
+	
+	private Player player;
+	private boolean ticking;
 	
 	public int fallDamage = 1;//Not sure if this is best way to do this.
 	public int zombieDamage = 2;
@@ -19,15 +22,30 @@ public class PlayerEvents extends Player{
 	public int fallDeath = 1;
 	public int zombieDeath = 2;
 
-	public PlayerEvents(Sprite s, int x, int y) {
-		super(s, x, y);
+	public PlayerEvents(Player player) {
+		this.player = player;
+		ticking = true;
 	}
 	
-	public synchronized void damagePlayer(int damage){
-		changeHealth(-damage);
+	public void tick(){
+		if(player.getHealth() == 0){
+			player.alive = false;
+		}
+	}
+	
+	public synchronized void damagePlayer(int damage, int id){//Should this be used for player damage events? Or Entity.changeHealth
+		player.changeHealth(-damage);
+		playerDamage(id);
 	}
 	
 	public void playerDamage(int id){
+		if(id == 1){
+			
+		}
+		while(ticking){
+			playerDeath(id);
+			ticking = false;
+		}
 	}
 	
 	public void playerDeath(int id){
@@ -35,6 +53,7 @@ public class PlayerEvents extends Player{
 		Main.gameOver = true;
 		if(id == 1){//Falling out of map
 			Sound.playSound("FallDeath.wav");
+			
 		}
 	}
 	
