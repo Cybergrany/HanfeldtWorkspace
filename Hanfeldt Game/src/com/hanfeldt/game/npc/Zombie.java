@@ -19,7 +19,9 @@ public class Zombie extends Npc{
 	}
 	
 	public void tick(){
-		
+		setX(15);
+		System.out.println("Ticked");
+		setY(15);
 	}
 	
 	public static int getMaxNpc(){

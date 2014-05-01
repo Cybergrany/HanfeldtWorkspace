@@ -2,6 +2,8 @@ package com.hanfeldt.game;
 
 import java.awt.Graphics;
 
+import com.hanfeldt.game.npc.Npc;
+
 public class Entity {
 	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one
 	private int health;

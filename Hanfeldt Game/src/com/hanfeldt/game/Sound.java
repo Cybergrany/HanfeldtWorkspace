@@ -16,6 +16,23 @@ import javax.sound.sampled.Clip;
  */
 public class Sound {
 	
+	public static synchronized void playSound(final String sound, boolean playOnce){//For sound, call Sound.playSound("SoundName");
+		if(!Main.muted && playOnce){
+				try{
+					Clip clip = AudioSystem.getClip();
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("res/sounds/" + sound));
+					clip.open(inputStream);
+					clip.start();
+				}catch(Exception e){
+					System.err.println("Error while playing sound");
+					e.printStackTrace();
+			}
+				playOnce = false;
+		}else{
+			playSound(sound);
+		}
+	}
+	
 	public static synchronized void playSound(final String sound){//For sound, call Sound.playSound("SoundName");
 		if(!Main.muted){
 				try{
