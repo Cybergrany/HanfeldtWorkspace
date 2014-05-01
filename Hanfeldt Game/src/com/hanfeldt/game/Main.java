@@ -4,12 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 
 import com.hanfeldt.game.npc.Npc;
 import com.hanfeldt.game.npc.Spawner;
+
+import de.quippy.javamod.mixer.Mixer;
+import de.quippy.javamod.multimedia.MultimediaContainer;
+import de.quippy.javamod.multimedia.MultimediaContainerManager;
+import de.quippy.javamod.multimedia.mod.ModContainer;
+import de.quippy.javamod.system.Helpers;
 
 public class Main implements Runnable {
 
@@ -35,6 +44,7 @@ public class Main implements Runnable {
 	private Sprite cloud, sun;
 	private Player player;
 	private static Level[] levels;
+	private static String xmMusicPath = "res/sounds/ARPYSUNDAY.xm";
 	private int level = 0;
 	private Hud hud;
 	private Spawner spawner;
@@ -76,17 +86,11 @@ public class Main implements Runnable {
 
 	public void init() {
 		gamePanel.requestFocus();
-
 		spriteSheet = new SpriteSheet("res/images/spritesheet.png");
-		
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
-		
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
-		
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()));
-
 		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
-		
 		hud = new Hud(player);
 		
 		npc = new ArrayList<Npc>();
@@ -94,7 +98,38 @@ public class Main implements Runnable {
 		
 		levels = new Level[1];
 		levels[0] = new Level("res/images/level1.png", player);
-
+		
+		//XM player
+		// TODO When muted stop playing song...
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					Helpers.registerAllClasses();
+					File music = new File(xmMusicPath);
+					Properties props = new Properties();
+					props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
+					props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
+					props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "FALSE");
+					props.setProperty(ModContainer.PROPERTY_PLAYER_NOISEREDUCTION, "FALSE");
+					props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "TRUE");
+					props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
+					props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
+					MultimediaContainerManager.configureContainer(props);
+					URL modUrl = music.toURI().toURL();
+					MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
+					Mixer mixer = multimediaContainer.createNewMixer();
+					mixer.startPlayback();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+					System.exit(3);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				run();
+			}
+		}).start();
+		
 		// Start "GameLoop"
 		running = true;
 		debug = false;
