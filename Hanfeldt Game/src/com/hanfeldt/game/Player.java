@@ -44,9 +44,9 @@ public class Player extends Entity{
 			}
 		}
 		
-		//Bounding box, only temporary!
+		//Bounding box, only temporary! Helps test collision detection
 		g.setColor(Color.RED);
-		g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), getSizeX() *Main.tileSize, getSizeY() *Main.tileSize);
+		g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), (getSizeX() *Main.tileSize) -1, (getSizeY() *Main.tileSize) -1);
 	}
 	
 	public void tick() {

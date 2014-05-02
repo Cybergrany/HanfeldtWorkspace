@@ -113,6 +113,7 @@ public class Entity {
 			for(int i=0; i<getSizeY(); i++) {
 				if(Main.getLevels()[0].getTile(getTileX() +1, getTileY() +i).isSolid()
 					&& isMovingRight) {
+					velX = 0;
 					setTileX(Main.getLevels()[0].getTile(getTileX() +1, getTileY()).getX() -1);
 					break outerLoop;
 				}
@@ -125,6 +126,7 @@ public class Entity {
 				for(int i=0; i<getSizeY(); i++) {
 					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
+						velX = 0;
 						setTileX(Main.getLevels()[0].getTile(getTileX() -1, getTileY()).getX() +2);
 						break outerLoop;
 					}
