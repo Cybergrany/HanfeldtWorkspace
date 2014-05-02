@@ -1,5 +1,6 @@
 package com.hanfeldt.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.events.PlayerEvents;
@@ -42,11 +43,21 @@ public class Player extends Entity{
 				cycleTicks = 0;
 			}
 		}
+		
+		//Bounding box, only temporary!
+		g.setColor(Color.RED);
+		g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), getSizeX() *Main.tileSize, getSizeY() *Main.tileSize);
 	}
 	
 	public void tick() {
 		isMovingLeft = Main.aDown;
 		isMovingRight = Main.dDown;
+
+		if(Main.wDown && !falling) {
+			velY = -Main.terminalVelocity;
+			falling = true;
+		}
+		
 		// Walk acceleration/slide is below
 		if((!isMovingLeft && !isMovingRight) || (isMovingLeft && isMovingRight)) {
 			velX *= 0.9f;
@@ -76,11 +87,6 @@ public class Player extends Entity{
 				}
 			}
 			
-		}
-		
-		if(Main.wDown && !falling) {
-			velY = -Main.terminalVelocity;
-			falling = true;
 		}
 		
 		if(getY() > Main.sizeY && alive){

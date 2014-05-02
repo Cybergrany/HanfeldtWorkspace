@@ -29,7 +29,7 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, isPaused, debug, muted, gameOver;
 	public static boolean aDown, dDown, wDown, escDown;
-	public static float gravity = 0.2f;
+	public static float gravity = 0.16f;
 	public static float terminalVelocity = 3;
 	
 	public static SpriteSheet spriteSheet;

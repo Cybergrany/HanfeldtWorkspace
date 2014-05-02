@@ -105,7 +105,7 @@ public class Entity {
 	}
 	
 	public void checkCollisions() {
-		// Most of these aren't working properly TODO feex 
+		// Most of these aren't working properly. TODO feex
 		
 		//tile(s) to the right
 		try {
@@ -113,7 +113,7 @@ public class Entity {
 			for(int i=0; i<getSizeY(); i++) {
 				if(Main.getLevels()[0].getTile(getTileX() +1, getTileY() +i).isSolid()
 					&& isMovingRight) {
-					velX = 0;
+					setTileX(Main.getLevels()[0].getTile(getTileX() +1, getTileY()).getX() -1);
 					break outerLoop;
 				}
 			}
@@ -125,7 +125,7 @@ public class Entity {
 				for(int i=0; i<getSizeY(); i++) {
 					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
-						velX = 0;
+						setTileX(Main.getLevels()[0].getTile(getTileX() -1, getTileY()).getX() +2);
 						break outerLoop;
 					}
 				}
@@ -135,8 +135,10 @@ public class Entity {
 		try {
 		outerLoop:
 			for(int i=0; i<getSizeX(); i++) {
-				if(Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getSizeY()).isSolid()) {
+				if(Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getSizeY()).isSolid()
+					|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY() + getSizeY()).isSolid()) {
 					falling = false;
+					setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY() + getSizeY()).getY() - getSizeY());
 					break outerLoop;
 				}
 				
@@ -147,15 +149,17 @@ public class Entity {
 		}catch(Exception e) {}
 		
 		//tile(s) above
-				try {
-					outerLoop:
-						for(int i=0; i<getSizeX(); i++) {
-							if(Main.getLevels()[0].getTile(getTileX() + i, getTileY()).isSolid()) {
-								velY = 0;
-								break outerLoop;
-							}
-						}
-				}catch(Exception e) {}
+		try {
+			outerLoop:
+				for(int i=0; i<getSizeX(); i++) {
+					if(Main.getLevels()[0].getTile(getTileX() +i, getTileY()).isSolid()
+						|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY()).isSolid()) {
+						setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY()).getY() +1);
+						velY = 0;
+						break outerLoop;
+					}
+				}
+		}catch(Exception e) {}
 		
 	}
 	
@@ -165,6 +169,14 @@ public class Entity {
 	
 	public int getTileY() {
 		return ((int) y) /Main.tileSize;
+	}
+	
+	public void setTileX(int x) {
+		setX(x *Main.tileSize);
+	}
+	
+	public void setTileY(int y) {
+		setY(y *Main.tileSize);
 	}
 	
 }
