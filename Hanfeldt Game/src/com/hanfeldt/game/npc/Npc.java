@@ -25,13 +25,7 @@ public class Npc extends Entity{
 	}
 
 	public void tick(){
-		//TODO:This probably doesn't need overriding
-		
-		System.out.println("Ticked");
-	}
-	
-	public void tickNpc(){
-		
+		super.tick();
 	}
 	
 	public void draw(Graphics g){

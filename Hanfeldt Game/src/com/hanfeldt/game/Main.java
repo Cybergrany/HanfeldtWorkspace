@@ -11,9 +11,9 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
-import com.hanfeldt.game.events.PlayerEvents;
 import com.hanfeldt.game.npc.Npc;
 import com.hanfeldt.game.npc.Spawner;
+import com.hanfeldt.game.npc.Zombie;
 
 import de.quippy.javamod.mixer.Mixer;
 import de.quippy.javamod.multimedia.MultimediaContainer;
@@ -96,6 +96,7 @@ public class Main implements Runnable {
 		
 		npc = new ArrayList<Npc>();
 		spawner = new Spawner();
+		spawner.spawnNpc(new Zombie(10, 10));
 		
 		levels = new Level[1];
 		levels[0] = new Level("res/images/level1.png", player);
@@ -182,10 +183,7 @@ public class Main implements Runnable {
 	public void tick() {
 		levels[level].tick();
 		hud.tick();
-		
-		for(int i = 0; i < npc.toArray().length; i++){
-			npc.get(i).tickNpc();
-		}
+		// Moved NPC ticking to Level, I think it's more appropriate
 	}
 
 	public void render() {

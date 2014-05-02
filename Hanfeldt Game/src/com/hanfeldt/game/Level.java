@@ -3,9 +3,11 @@ package com.hanfeldt.game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.hanfeldt.game.npc.Npc;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Block;
 import com.hanfeldt.game.tile.Tile;
@@ -52,11 +54,19 @@ public class Level {
 	
 	public void tick(){
 		player.tick();
+		
+		for(int i=0; i<Main.npc.size(); i++) {
+			Main.npc.get(i).tick();
+		}
 	}
 	
 	public void render(Graphics g) {
 		draw(g, player.getX());
 		player.draw(g);
+		
+		for(int i=0; i<Main.npc.size(); i++) {
+			Main.npc.get(i).draw(g);
+		}
 	}
 	
 	public void draw(Graphics g, int posX) {

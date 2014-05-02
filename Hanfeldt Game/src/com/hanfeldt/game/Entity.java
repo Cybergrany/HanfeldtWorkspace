@@ -181,4 +181,24 @@ public class Entity {
 		setY(y *Main.tileSize);
 	}
 	
+	public void setVelX(float vx) {
+		velX = vx;
+	}
+	
+	public void setVelY(float vy) {
+		velY = vy;
+	}
+	
+	public float getVelX() {
+		return velX;
+	}
+	
+	public float getVelY() {
+		return velY;
+	}
+	
+	public void setVelXMax(float vxm) {
+		velXMax = vxm;
+	}
+	
 }

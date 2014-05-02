@@ -5,23 +5,18 @@ import com.hanfeldt.game.Sprite;
 
 public class Zombie extends Npc{
 	
-	private static Sprite s = new Sprite(Main.spriteSheet, 2, 1, 1, 2, 3);//Same as player for testing
+	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);//Same as player for testing
 	
 	public static int maxHealth = 75;
 
 	public Zombie(int x, int y) {
 		super(s, maxHealth, x, y);
-		
+		setVelXMax(0.25f);
+		setVelX(0.5f);
 	}
 	
-	public void draw(){
-		
-	}
-	
-	public void tick(){
-		setX(15);
-		System.out.println("Ticked");
-		setY(15);
+	public void tick() {
+		super.tick();
 	}
 	
 	public static int getMaxNpc(){
