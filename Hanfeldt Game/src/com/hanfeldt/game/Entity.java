@@ -1,5 +1,6 @@
 package com.hanfeldt.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.npc.Npc;
@@ -54,6 +55,8 @@ public class Entity {
 		changeX(velX);
 		changeY(velY);
 		cycleTicks++;
+		isMovingLeft = velX < 0;
+		isMovingRight = velY > 0;
 	}
 	
 	public void setX(float x) {
@@ -93,7 +96,8 @@ public class Entity {
 	}
 	
 	public void draw(Graphics g) {
-		sprite.draw(g, getX(), getY());
+		sprite.draw(g, getX() - Main.getGame().getPlayer().getX() 
+					+ (Main.sizeX /2) - (Main.tileSize /2), getY());
 	}
 	
 	public int getSizeX() {

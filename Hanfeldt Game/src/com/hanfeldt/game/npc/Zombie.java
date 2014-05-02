@@ -12,19 +12,11 @@ public class Zombie extends Npc{
 	public Zombie(int x, int y) {
 		super(s, maxHealth, x, y);
 		setVelXMax(0.25f);
-		setVelX(0.5f);
-	}
-	
-	public void tick() {
-		super.tick();
+		setVelX(0.25f);
 	}
 	
 	public static int getMaxNpc(){
 		return 3;
-	}
-	
-	private void detectPlayer(){//Zombie see, zombie kill
-		
 	}
 
 }

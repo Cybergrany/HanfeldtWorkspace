@@ -14,23 +14,17 @@ import com.hanfeldt.game.Sprite;
  */
 public class Npc extends Entity{
 	
-	public boolean isMovingLeft, isMovingRight;
-	int temp = (Main.sizeX /2) - (Main.tileSize /2);
-	
 	int health = 0;
 	
 	public Npc(Sprite s,int h, int x, int y){
 		super(s, h, x, y);
-		isMovingLeft = false; isMovingRight = false;
 	}
 
 	public void tick(){
 		super.tick();
 	}
 	
-	public void draw(Graphics g){
-		sprite.draw(g, getX(), getY());
-	}
+	// The same draw method is in Entity so I removed it
 	
 	/**
 	 * Max amount of NPC's allowed.
@@ -40,4 +34,9 @@ public class Npc extends Entity{
 	public static int getMaxNpc(){
 		return 5;//Default max
 	}
+	
+	private void detectPlayer(){// NPC see, npc do something to player
+		
+	}
+	
 }

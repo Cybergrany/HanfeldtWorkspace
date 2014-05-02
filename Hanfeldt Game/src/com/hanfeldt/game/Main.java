@@ -24,7 +24,7 @@ import de.quippy.javamod.system.Helpers;
 public class Main implements Runnable {
 
 	public static int sizeX = 256, sizeY = 144;
-	public static int tileSize = 16;
+	public static int tileSize = 16; //Only works with 16 for the moment
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
 	public static boolean running, isPaused, debug, muted, gameOver;
@@ -40,6 +40,7 @@ public class Main implements Runnable {
 	
 	public static ArrayList<Npc> npc;
 	
+	private static Main game;
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
 	private Sprite cloud, sun;
@@ -53,7 +54,7 @@ public class Main implements Runnable {
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
 	public static void main(String[] args) {
-		Main game = new Main();
+		game = new Main();
 		Thread gameThread = new Thread(game);
 		game.init();
 		gameThread.start();
@@ -197,11 +198,12 @@ public class Main implements Runnable {
 			cloud.draw(g, (i * 30) + 20, ((i % 2 == 0) ? 10 : 20));
 		}
 		
+		//Moved NPC draw to levels (Where player is also rendered)
+		
+		sun.draw(g, 190, 10);
 		for(int i = 0; i < npc.toArray().length; i++){
 			npc.get(i).draw(g);
 		}
-		
-		sun.draw(g, 190, 10);
 		levels[level].render(g);
 		hud.draw(g);
 
@@ -211,6 +213,14 @@ public class Main implements Runnable {
 	
 	public static Level[] getLevels() {
 		return levels;
+	}
+	
+	public static Main getGame() {
+		return game;
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 	
 }

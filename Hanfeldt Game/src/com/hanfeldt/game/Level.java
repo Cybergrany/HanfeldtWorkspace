@@ -62,11 +62,10 @@ public class Level {
 	
 	public void render(Graphics g) {
 		draw(g, player.getX());
-		player.draw(g);
-		
 		for(int i=0; i<Main.npc.size(); i++) {
 			Main.npc.get(i).draw(g);
 		}
+		player.draw(g);
 	}
 	
 	public void draw(Graphics g, int posX) {
