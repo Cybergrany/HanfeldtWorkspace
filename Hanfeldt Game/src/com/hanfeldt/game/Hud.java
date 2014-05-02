@@ -29,7 +29,7 @@ public class Hud {
 		g.setFont(font);
 		g.setColor(defWhite);
 		
-		if(hearts == 0){
+		if(hearts <= 0){
 			deadCharacter.draw(g, 5, Main.sizeY - Main.tileSize);
 		}else{
 			character.draw(g, 5, Main.sizeY - Main.tileSize);
