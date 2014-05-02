@@ -105,6 +105,8 @@ public class Entity {
 	}
 	
 	public void checkCollisions() {
+		// Most of these aren't working properly TODO feex 
+		
 		//tile(s) to the right
 		try {
 			outerLoop:
@@ -129,7 +131,6 @@ public class Entity {
 				}
 		}catch(Exception e) {}
 		
-		//Below code not quiiite working yet
 		//tile(s) below
 		try {
 		outerLoop:
@@ -144,6 +145,17 @@ public class Entity {
 				}
 			}
 		}catch(Exception e) {}
+		
+		//tile(s) above
+				try {
+					outerLoop:
+						for(int i=0; i<getSizeX(); i++) {
+							if(Main.getLevels()[0].getTile(getTileX() + i, getTileY()).isSolid()) {
+								velY = 0;
+								break outerLoop;
+							}
+						}
+				}catch(Exception e) {}
 		
 	}
 	
