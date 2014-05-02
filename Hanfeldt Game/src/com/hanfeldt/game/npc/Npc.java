@@ -35,8 +35,13 @@ public class Npc extends Entity{
 		return 5;//Default max
 	}
 	
-	private void detectPlayer(){// NPC see, npc do something to player
-		
+	public void facePlayer(float moveSpeed) {
+		setDirection(Main.getGame().getPlayer().getX() < getX());
+		if(Main.getGame().getPlayer().getX() < getX()) {
+			setVelX(-moveSpeed);
+		}else{
+			setVelX(moveSpeed);
+		}
 	}
 	
 }

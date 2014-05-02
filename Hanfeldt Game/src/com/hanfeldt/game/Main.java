@@ -37,6 +37,7 @@ public class Main implements Runnable {
 	private int scale = 3;
 	private int ticksPs = 60;
 	private int frameLimit = 120;
+	private long totalTicks = 0;
 	
 	public static ArrayList<Npc> npc;
 	
@@ -160,6 +161,10 @@ public class Main implements Runnable {
 				if (System.nanoTime() > lastTick + nsPerTick) {
 					tick();
 					ticks++;
+					totalTicks++;
+					if(totalTicks >= Long.MAX_VALUE) {
+						totalTicks = 0;
+					}
 					lastTick += nsPerTick;
 
 					if ((lastTick + nsPerTick) - System.nanoTime() > 3000000) {
@@ -221,6 +226,10 @@ public class Main implements Runnable {
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public long getTotalTicks() {
+		return totalTicks;
 	}
 	
 }

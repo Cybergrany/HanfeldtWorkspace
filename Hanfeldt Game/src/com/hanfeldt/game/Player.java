@@ -10,7 +10,6 @@ public class Player extends Entity{
 	private PlayerEvents events;
 	
 	static int maxHealth = 100;
-	int jumpHeight = 4; float jumpSpeed = 1f; boolean jumped;
 	
 	public boolean alive = true;
 	

@@ -56,7 +56,7 @@ public class Entity {
 		changeY(velY);
 		cycleTicks++;
 		isMovingLeft = velX < 0;
-		isMovingRight = velY > 0;
+		isMovingRight = velX > 0;
 	}
 	
 	public void setX(float x) {
@@ -97,7 +97,7 @@ public class Entity {
 	
 	public void draw(Graphics g) {
 		sprite.draw(g, getX() - Main.getGame().getPlayer().getX() 
-					+ (Main.sizeX /2) - (Main.tileSize /2), getY());
+				+ (Main.sizeX /2) - (Main.tileSize /2), getY(), !direction);
 	}
 	
 	public int getSizeX() {
@@ -203,6 +203,18 @@ public class Entity {
 	
 	public void setVelXMax(float vxm) {
 		velXMax = vxm;
+	}
+	
+	public boolean isMovingRight() {
+		return isMovingRight;
+	}
+	
+	public boolean isMovingLeft() { 
+		return isMovingLeft;
+	}
+	
+	public void setDirection(boolean dir) {
+		direction = dir;
 	}
 	
 }
