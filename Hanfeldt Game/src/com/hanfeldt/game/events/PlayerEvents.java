@@ -40,11 +40,14 @@ public class PlayerEvents{
 	
 	public void playerDamage(int id){
 		if(id == 1){
-			
+			Sound.playSound("FallDamage.wav");
 		}
 		while(ticking){
-			playerDeath(id);
-			ticking = false;
+			if(player.getHealth() <= 0){
+				playerDeath(id);
+				ticking = false;
+			}
+			break;
 		}
 	}
 	

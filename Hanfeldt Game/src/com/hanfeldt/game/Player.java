@@ -93,6 +93,11 @@ public class Player extends Entity{
 			events.damagePlayer(getHealth(), events.fallDamage);
 		}
 		
+		if(velY > Main.terminalVelocity - .001){
+			//TODO:Serious improvements needed on this fall damage yoke.
+//			events.damagePlayer(10, events.fallDamage);
+		}
+		
 		//A moment of silence for my jumping code. May it be buried eternally inside those commits
 		
 		super.tick();
@@ -101,6 +106,11 @@ public class Player extends Entity{
 			setX((Main.getLevels()[0].getSizeX() - 1) *Main.tileSize);
 		}else if(getX() < 0) {
 			setX(0);
+		}
+		
+		if(Main.wDown && !falling) {
+			velY = -Main.terminalVelocity;
+			falling = true;
 		}
 		
 		events.tick();
