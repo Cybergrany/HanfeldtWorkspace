@@ -1,14 +1,14 @@
 package com.hanfeldt.game;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
-import com.hanfeldt.game.npc.Npc;
+import java.awt.Rectangle;
 
 public class Entity {
 	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one
 	private int health;
 	private float x, y;
+	private Rectangle bounds;
+	private float jumpHeight;
 	float velX = 0f, velY = 0f;
 	float velXMax, velYMax = 3f;
 	private int sizeX, sizeY;
@@ -31,7 +31,7 @@ public class Entity {
 	}
 	
 	public void tick(){
-		checkCollisions();
+		checkTileCollisions();
 		
 		if(falling) {
 			velY += Main.gravity;
@@ -101,20 +101,28 @@ public class Entity {
 	}
 	
 	public int getSizeX() {
-		return sizeX;
+		return sizeX *Main.tileSize;
 	}
 	
 	public int getSizeY() {
+		return sizeY *Main.tileSize;
+	}
+	
+	public int getTileSizeX(){
+		return sizeX;
+	}
+	
+	public int getTileSizeY() {
 		return sizeY;
 	}
 	
-	public void checkCollisions() {
+	public void checkTileCollisions() {
 		// Most of these aren't working properly. TODO feex
 		
 		//tile(s) to the right
 		try {
 			outerLoop:
-			for(int i=0; i<getSizeY(); i++) {
+			for(int i=0; i<getTileSizeY(); i++) {
 				if(Main.getLevels()[0].getTile(getTileX() +1, getTileY() +i).isSolid()
 					&& isMovingRight) {
 					velX = 0;
@@ -127,7 +135,7 @@ public class Entity {
 		//tile(s) to the left
 		try {
 			outerLoop:
-				for(int i=0; i<getSizeY(); i++) {
+				for(int i=0; i<getTileSizeY(); i++) {
 					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
 						velX = 0;
@@ -140,15 +148,20 @@ public class Entity {
 		//tile(s) below
 		try {
 		outerLoop:
-			for(int i=0; i<getSizeX(); i++) {
-				if(Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getSizeY()).isSolid()
-					|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY() + getSizeY()).isSolid()) {
+			for(int i=0; i<getTileSizeX(); i++) {
+				if(Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getTileSizeY()).isSolid()
+					|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid()) {
 					falling = false;
-					setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY() + getSizeY()).getY() - getSizeY());
+					if(velY >= Main.terminalVelocity - 1) {
+						if(this instanceof Player) {
+							((Player) this).getEvents().damagePlayer((int) velY, 1);
+						}
+					}
+					setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
 					break outerLoop;
 				}
 				
-				if(i == getSizeX() -1) {
+				if(i == getTileSizeX() -1) {
 					falling = true;
 				}
 			}
@@ -157,7 +170,7 @@ public class Entity {
 		//tile(s) above
 		try {
 			outerLoop:
-				for(int i=0; i<getSizeX(); i++) {
+				for(int i=0; i<getTileSizeX(); i++) {
 					if(Main.getLevels()[0].getTile(getTileX() +i, getTileY()).isSolid()
 						|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY()).isSolid()) {
 						setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY()).getY() +1);
@@ -215,6 +228,18 @@ public class Entity {
 	
 	public void setDirection(boolean dir) {
 		direction = dir;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(getX(), getY(), getSizeX(), getSizeY());
+	}
+	
+	public void setJumpHeight(float jh) {
+		jumpHeight = jh;
+	}
+	
+	public float getJumpHeight() {
+		return jumpHeight;
 	}
 	
 }

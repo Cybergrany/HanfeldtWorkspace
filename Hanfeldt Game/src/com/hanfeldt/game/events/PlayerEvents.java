@@ -19,8 +19,12 @@ public class PlayerEvents{
 	public int fallDamage = 1;//Not sure if this is best way to do this.
 	public int zombieDamage = 2;
 	
-	public int fallDeath = 1;
+	public int zombieDamageDealt = 10;
+	
 	public int zombieDeath = 2;
+	
+	private static final int hurtTime = 60; //How long you're invincible for after being hit
+	private long lastTickHurt = 0;
 
 	public PlayerEvents(Player player) {
 		this.player = player;
@@ -28,19 +32,34 @@ public class PlayerEvents{
 	}
 	
 	public void tick(){
-		if(player.getHealth() == 0){
+		if(player.getHealth() <= 0){
 			player.alive = false;
 		}
 	}
 	
-	public synchronized void damagePlayer(int damage, int id){//Should this be used for player damage events? Or Entity.changeHealth
-		player.changeHealth(-damage);
-		playerDamage(id);
+	public synchronized void damagePlayer(int damage, int id) {
+		if(id == zombieDamage) {
+			if(lastTickHurt == 0) {
+				lastTickHurt = Main.getGame().getTotalTicks() - hurtTime;
+			}
+			if(Main.getGame().getTotalTicks() >= lastTickHurt + hurtTime) {
+				lastTickHurt = Main.getGame().getTotalTicks();
+				player.changeHealth(-damage);
+				// TODO hit away from zombie
+				playerDamage(id);
+			}
+		}else{
+			player.changeHealth(-damage);
+			playerDamage(id);
+		}
 	}
 	
 	public void playerDamage(int id){
-		if(id == 1){
+		if(id == fallDamage) {
 			Sound.playSound("FallDamage.wav");
+		}
+		if(id == zombieDamage) {
+			Sound.playSound("Hit.wav");
 		}
 		while(ticking){
 			if(player.getHealth() <= 0){

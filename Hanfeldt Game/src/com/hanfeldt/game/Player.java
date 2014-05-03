@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.events.PlayerEvents;
+import com.hanfeldt.game.npc.Npc;
+import com.hanfeldt.game.npc.Zombie;
 
 public class Player extends Entity{
 	
@@ -16,6 +18,7 @@ public class Player extends Entity{
 	public Player(Sprite s, int x, int y){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
 		velXMax = 1f;
+		setJumpHeight(2);
 		events = new PlayerEvents(this);
 	}
 	
@@ -46,7 +49,7 @@ public class Player extends Entity{
 		//Bounding box, only temporary! Helps test collision detection
 		if(Main.debug) {
 			g.setColor(Color.RED);
-			g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), (getSizeX() *Main.tileSize) -1, (getSizeY() *Main.tileSize) -1);
+			g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), getSizeX() -1, getSizeY() -1);
 		}
 	}
 	
@@ -55,7 +58,7 @@ public class Player extends Entity{
 		isMovingRight = Main.dDown;
 
 		if(Main.wDown && !falling) {
-			velY = -Main.terminalVelocity;
+			velY = -getJumpHeight();
 			falling = true;
 		}
 		
@@ -94,10 +97,7 @@ public class Player extends Entity{
 			events.damagePlayer(getHealth(), events.fallDamage);
 		}
 		
-		if(velY > Main.terminalVelocity - .001){
-			//TODO:Serious improvements needed on this fall damage yoke.
-//			events.damagePlayer(10, events.fallDamage);
-		}
+		//Moved fall damage to Entity.checkCollisions (in the "below" section)
 		
 		//A moment of silence for my jumping code. May it be buried eternally inside those commits
 		
@@ -109,11 +109,26 @@ public class Player extends Entity{
 			setX(0);
 		}
 		
-		if(Main.wDown && !falling) {
-			velY = -Main.terminalVelocity;
-			falling = true;
+		events.tick();
+		
+		for(int i=0; i<Main.npc.size(); i++) {
+			if(Main.npc.get(i) instanceof Zombie) {
+				Zombie zombie = (Zombie) Main.npc.get(i);
+				if(collidedZombie(zombie)) {
+					events.damagePlayer(events.zombieDamageDealt, events.zombieDamage);
+				}
+			}
 		}
 		
 		events.tick();
 	}
+	
+	public boolean collidedZombie(Zombie zombie) {
+		return getBounds().intersects(zombie.getBounds());
+	}
+	
+	public PlayerEvents getEvents() {
+		return events;
+	}
+	
 }
