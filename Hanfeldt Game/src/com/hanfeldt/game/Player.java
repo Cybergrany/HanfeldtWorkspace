@@ -120,7 +120,6 @@ public class Player extends Entity{
 			}
 		}
 		
-		events.tick();
 	}
 	
 	public boolean collidedZombie(Zombie zombie) {

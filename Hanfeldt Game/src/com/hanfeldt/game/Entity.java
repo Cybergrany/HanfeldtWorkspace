@@ -146,11 +146,13 @@ public class Entity {
 		}catch(Exception e) {}
 		
 		//tile(s) below
+		//TODO Be able to fall down 1x1 hole
 		try {
 		outerLoop:
 			for(int i=0; i<getTileSizeX(); i++) {
-				if(Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getTileSizeY()).isSolid()
-					|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid()) {
+				boolean tileBelow = Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getTileSizeY()).isSolid();
+				boolean tileBelowRight = Main.getLevels()[0].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
+				if( (tileBelow || tileBelowRight) ) {
 					falling = false;
 					if(velY >= Main.terminalVelocity - 1) {
 						if(this instanceof Player) {

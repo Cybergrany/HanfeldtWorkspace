@@ -2,6 +2,7 @@ package com.hanfeldt.game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -33,7 +34,8 @@ public class Main implements Runnable {
 	public static float terminalVelocity = 5;
 	
 	public static SpriteSheet spriteSheet;
-
+	
+	private int lives = 3;
 	private int scale = 3;
 	private int ticksPs = 60;
 	private int frameLimit = 120;
@@ -41,6 +43,9 @@ public class Main implements Runnable {
 	
 	public static ArrayList<Npc> npc;
 	
+	private static int deadScreenTicks = 240;
+	private static long tickDied = 0;
+	private static Sprite character;
 	private static Main game;
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
@@ -51,7 +56,6 @@ public class Main implements Runnable {
 	private int level = 0;
 	private Hud hud;
 	private Spawner spawner;
-
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
 	public static void main(String[] args) {
@@ -90,15 +94,18 @@ public class Main implements Runnable {
 	public void init() {
 		gamePanel.requestFocus();
 		spriteSheet = new SpriteSheet("res/images/spritesheet.png");
+		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()));
 		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
-		hud = new Hud(player);
+		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
 		spawner = new Spawner();
-		spawner.spawnNpc(new Zombie(10, 10));
+		for(int i=0; i<5; i++) {
+			spawner.spawnNpc(new Zombie(tileSize *i, 0));
+		}
 		
 		levels = new Level[1];
 		levels[0] = new Level("res/images/level1.png", player);
@@ -187,30 +194,46 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-		levels[level].tick();
-		hud.tick();
+		if(player.alive) {
+			levels[level].tick();
+			hud.tick();
+		}else{
+			if(totalTicks >= tickDied + deadScreenTicks) {
+				respawnPlayer();
+			}
+		}
 		// Moved NPC ticking to Level, I think it's more appropriate
 	}
 
 	public void render() {
 		Graphics2D g = (Graphics2D) screenImage.getGraphics();
 
-		// Render sky
-		g.setColor(new Color(0x00, 0xAA, 0xFF));
-		g.fillRect(0, 0, sizeX, sizeY);
+		if(player.alive) {
+			// Render sky
+			g.setColor(new Color(0x00, 0xAA, 0xFF));
+			g.fillRect(0, 0, sizeX, sizeY);
 
-		for (int i = 0; i < 5; i++) {
-			cloud.draw(g, (i * 30) + 20, ((i % 2 == 0) ? 10 : 20));
+			for (int i = 0; i < 5; i++) {
+				cloud.draw(g, (i * 30) + 20, ((i % 2 == 0) ? 10 : 20));
+			}
+			
+			//Moved NPC draw to levels (Where player is also rendered)
+			
+			sun.draw(g, 190, 10);
+			for(int i = 0; i < npc.toArray().length; i++){
+				npc.get(i).draw(g);
+			}
+			levels[level].render(g);
+			hud.draw(g);
+		}else{
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, sizeX, sizeY);
+			character.draw(g, sizeX /2 - (tileSize *2), (sizeY /2) - 60);
+			Font font = new Font("Arial", Font.PLAIN, 10);
+			g.setFont(font);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("x " + Integer.toString(lives), (sizeX /2) - 5, (sizeY /2) - 49);
 		}
-		
-		//Moved NPC draw to levels (Where player is also rendered)
-		
-		sun.draw(g, 190, 10);
-		for(int i = 0; i < npc.toArray().length; i++){
-			npc.get(i).draw(g);
-		}
-		levels[level].render(g);
-		hud.draw(g);
 
 		gamePanel.repaint();
 		g.dispose();
@@ -230,6 +253,26 @@ public class Main implements Runnable {
 	
 	public long getTotalTicks() {
 		return totalTicks;
+	}
+	
+	public int getLives() {
+		return lives;
+	}
+	
+	public void playerDied() {
+		lives--;
+		player.alive = false;
+		if(lives <= 0) {
+			gameOver = true;
+		}
+		tickDied = totalTicks;
+	}
+	
+	public void respawnPlayer() {
+		player.alive = true;
+		player.setX(sizeX / 2);
+		player.setY(sizeY - tileSize - player.getSizeY());
+		player.setHealth(100);
 	}
 	
 }

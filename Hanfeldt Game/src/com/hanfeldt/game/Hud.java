@@ -13,15 +13,15 @@ public class Hud {
 	private Color defWhite = new Color(255 , 255, 255);
 	private Color transDark = new Color(0, 0, 0, 80);
 	
-	public Hud(Player player){
+	public Hud(Player player, Sprite character){
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
-		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
+		this.character = character;
 		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
 		this.player = player;
 	}
 	
 	public void tick(){
-		hearts = player.getHealth() / 20;//Max 5 hearts
+		hearts = player.getHealth() / 20;
 	}
 	
 	public void draw(Graphics g){
@@ -29,7 +29,7 @@ public class Hud {
 		g.setFont(font);
 		g.setColor(defWhite);
 		
-		if(hearts <= 0){
+		if(player.getHealth() <= 0){
 			deadCharacter.draw(g, 5, Main.sizeY - Main.tileSize);
 		}else{
 			character.draw(g, 5, Main.sizeY - Main.tileSize);

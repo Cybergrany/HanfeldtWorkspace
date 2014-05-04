@@ -32,9 +32,7 @@ public class PlayerEvents{
 	}
 	
 	public void tick(){
-		if(player.getHealth() <= 0){
-			player.alive = false;
-		}
+		
 	}
 	
 	public synchronized void damagePlayer(int damage, int id) {
@@ -61,21 +59,15 @@ public class PlayerEvents{
 		if(id == zombieDamage) {
 			Sound.playSound("Hit.wav");
 		}
-		while(ticking){
-			if(player.getHealth() <= 0){
-				playerDeath(id);
-				ticking = false;
-			}
-			break;
+		if(player.alive && player.getHealth() <= 0) {
+			Main.getGame().playerDied();
 		}
 	}
 	
 	public void playerDeath(int id){
 		//TODO: Different death id's, for example zombie bite, fall damage; so different animations and sounds can be called
-		Main.gameOver = true;
 		if(id == 1){//Falling out of map
 			Sound.playSound("FallDeath.wav");
-			
 		}
 	}
 	
