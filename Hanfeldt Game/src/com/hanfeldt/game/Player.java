@@ -3,14 +3,15 @@ package com.hanfeldt.game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import com.hanfeldt.game.events.PlayerEvents;
-import com.hanfeldt.game.npc.Npc;
+import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.npc.Zombie;
+import com.hanfeldt.game.weapon.Pistol;
+import com.hanfeldt.game.weapon.Weapon;
 
-public class Player extends Entity{
+public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
-	
+	private Weapon weaponEquipped = new Pistol(this, 8, 24, 8, 20);
 	static int maxHealth = 100;
 	
 	public boolean alive = true;
@@ -51,9 +52,11 @@ public class Player extends Entity{
 			g.setColor(Color.RED);
 			g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), getSizeX() -1, getSizeY() -1);
 		}
+		weaponEquipped.draw(g);
 	}
 	
 	public void tick() {
+		direction = Main.mouseX > Main.sizeX /2;
 		isMovingLeft = Main.aDown;
 		isMovingRight = Main.dDown;
 
@@ -79,7 +82,6 @@ public class Player extends Entity{
 				}else{
 					velX *= 1.1f;
 				}
-				direction = false;
 			}else{
 				if(isMovingRight) {
 					if(velX <= 0) {
@@ -87,14 +89,14 @@ public class Player extends Entity{
 					}else{
 						velX *= 1.1f;
 					}
-					direction = true;
 				}
 			}
 			
 		}
 		
 		if(getY() > Main.sizeY && alive){
-			events.damagePlayer(getHealth(), events.fallDamage);
+			events.damagePlayer(getHealth(), PlayerEvents.fallDeath);
+			
 		}
 		
 		//Moved fall damage to Entity.checkCollisions (in the "below" section)
@@ -115,7 +117,7 @@ public class Player extends Entity{
 			if(Main.npc.get(i) instanceof Zombie) {
 				Zombie zombie = (Zombie) Main.npc.get(i);
 				if(collidedZombie(zombie)) {
-					events.damagePlayer(events.zombieDamageDealt, events.zombieDamage);
+					events.damagePlayer(events.zombieDamageDealt, events.zombieDamage, zombie);
 				}
 			}
 		}
@@ -128,6 +130,10 @@ public class Player extends Entity{
 	
 	public PlayerEvents getEvents() {
 		return events;
+	}
+	
+	public Weapon getWeaponEquipped() {
+		return weaponEquipped;
 	}
 	
 }

@@ -4,8 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class Listener implements MouseListener, KeyListener{
+public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
 	static boolean pausePressed, debugPressed, mutePressed, soundPlayed;
 
@@ -41,7 +42,7 @@ public class Listener implements MouseListener, KeyListener{
 		switch(key){
 		
 		//Enter Debug Screen
-		case(KeyEvent.VK_F3)://Cuz Minecraft, amirite?
+		case(KeyEvent.VK_F3)://Cuz Minecraft, amirite? //Absolutely!
 			if(debugPressed){
 				Main.debug = false;
 				debugPressed = false;
@@ -84,8 +85,8 @@ public class Listener implements MouseListener, KeyListener{
 		case(KeyEvent.VK_A):
 			Main.aDown = false;
 			break;
-		case(KeyEvent.VK_W): // Space or W for jump?
-			Main.wDown = false;//W might be more intuitive, but depends on the kind of platformer we want
+		case(KeyEvent.VK_W):
+			Main.wDown = false;//W is good :)
 			soundPlayed = false;
 			break;
 		}
@@ -105,7 +106,6 @@ public class Listener implements MouseListener, KeyListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		
-		
 	}
 
 	@Override
@@ -116,14 +116,24 @@ public class Listener implements MouseListener, KeyListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
-		
+		Main.mouseDown = true;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
-		
+		Main.mouseDown = false;
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		Main.mouseX = e.getX() /Main.scale;
+		Main.mouseY = e.getY() /Main.scale;
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		Main.mouseX = e.getX() /Main.scale;
+		Main.mouseY = e.getY() /Main.scale;
 	}
 
 }

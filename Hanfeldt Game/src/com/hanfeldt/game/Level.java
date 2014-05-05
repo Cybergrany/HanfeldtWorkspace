@@ -65,7 +65,10 @@ public class Level {
 		for(int i=0; i<Main.npc.size(); i++) {
 			Main.npc.get(i).draw(g);
 		}
-		player.draw(g);
+		
+		if(player.alive) {
+			player.draw(g);
+		}
 	}
 	
 	public void draw(Graphics g, int posX) {

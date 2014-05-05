@@ -3,7 +3,7 @@ package com.hanfeldt.game.npc;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 
-public class Zombie extends Npc{
+public class Zombie extends Npc {
 	private float speed = 0.25f;
 	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);//Same as player for testing
 	

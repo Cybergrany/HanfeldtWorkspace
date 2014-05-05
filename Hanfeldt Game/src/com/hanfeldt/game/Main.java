@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import com.hanfeldt.game.npc.Npc;
 import com.hanfeldt.game.npc.Spawner;
 import com.hanfeldt.game.npc.Zombie;
+import com.hanfeldt.game.weapon.TriggerWeapon;
 
 import de.quippy.javamod.mixer.Mixer;
 import de.quippy.javamod.multimedia.MultimediaContainer;
@@ -26,17 +27,19 @@ public class Main implements Runnable {
 
 	public static int sizeX = 256, sizeY = 144;
 	public static int tileSize = 16; //Only works with 16 for the moment
+	public static int scale = 3;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
 	public static boolean running, isPaused, debug, muted, gameOver;
-	public static boolean aDown, dDown, wDown, escDown;
+	public static boolean aDown, dDown, wDown, escDown, mouseDown;
+	private static boolean mouseDownLastTick = false;
+	public static int mouseX, mouseY;
 	public static float gravity = 0.1f;
 	public static float terminalVelocity = 5;
-	
+	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public static SpriteSheet spriteSheet;
 	
 	private int lives = 3;
-	private int scale = 3;
 	private int ticksPs = 60;
 	private int frameLimit = 120;
 	private long totalTicks = 0;
@@ -54,6 +57,7 @@ public class Main implements Runnable {
 	private static Level[] levels;
 	private static String xmMusicPath = "res/sounds/ARPYSUNDAY.xm";
 	private int level = 0;
+	private Listener listener;
 	private Hud hud;
 	private Spawner spawner;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
@@ -69,9 +73,11 @@ public class Main implements Runnable {
 		screenImage = new BufferedImage(sizeX, sizeY,
 				BufferedImage.TYPE_INT_ARGB);
 		gamePanel = new GamePanel(screenImage, sizeX * scale, sizeY * scale);
-
-		gamePanel.addKeyListener(new Listener());
-		gamePanel.addMouseListener(new Listener());
+		
+		listener = new Listener();
+		gamePanel.addKeyListener(listener);
+		gamePanel.addMouseListener(listener);
+		gamePanel.addMouseMotionListener(listener);;
 
 		initFrame();
 	}
@@ -197,18 +203,26 @@ public class Main implements Runnable {
 		if(player.alive) {
 			levels[level].tick();
 			hud.tick();
+			player.getWeaponEquipped().tick();
+			if(!mouseDownLastTick && mouseDown && player.getWeaponEquipped() instanceof TriggerWeapon) {
+				((TriggerWeapon) player.getWeaponEquipped()).tryTrigger();
+			}
 		}else{
-			if(totalTicks >= tickDied + deadScreenTicks) {
+			if(totalTicks >= tickDied + deadScreenTicks && lives > 0) {
 				respawnPlayer();
 			}
 		}
+		for(int i=0; i<bullets.size(); i++) {
+			bullets.get(i).tick();
+		}
 		// Moved NPC ticking to Level, I think it's more appropriate
+		mouseDownLastTick = mouseDown;
 	}
 
 	public void render() {
 		Graphics2D g = (Graphics2D) screenImage.getGraphics();
 
-		if(player.alive) {
+		if(player.alive || lives <= 0) {
 			// Render sky
 			g.setColor(new Color(0x00, 0xAA, 0xFF));
 			g.fillRect(0, 0, sizeX, sizeY);
@@ -234,7 +248,10 @@ public class Main implements Runnable {
 			g.setColor(new Color(255, 255, 255));
 			g.drawString("x " + Integer.toString(lives), (sizeX /2) - 5, (sizeY /2) - 49);
 		}
-
+		for(int i=0; i<bullets.size(); i++) {
+			bullets.get(i).draw(g);
+		}
+		
 		gamePanel.repaint();
 		g.dispose();
 	}
@@ -273,6 +290,10 @@ public class Main implements Runnable {
 		player.setX(sizeX / 2);
 		player.setY(sizeY - tileSize - player.getSizeY());
 		player.setHealth(100);
+	}
+	
+	public static SpriteSheet getSpritesheet() {
+		return spriteSheet;
 	}
 	
 }
