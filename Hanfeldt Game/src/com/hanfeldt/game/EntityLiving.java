@@ -81,10 +81,10 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 				for(int i=0; i<getTileSizeY(); i++) {
-					if(Main.getLevels()[0].getTile(((int) getX() -1) /Main.tileSize, getTileY() +i).isSolid()
+					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
 						velX = 0;
-						setTileX(Main.getLevels()[0].getTile(getTileX() -1, getTileY()).getX() +1);
+						setTileX(Main.getLevels()[0].getTile(getTileX(), getTileY()).getX() +1);
 						break outerLoop;
 					}
 				}
