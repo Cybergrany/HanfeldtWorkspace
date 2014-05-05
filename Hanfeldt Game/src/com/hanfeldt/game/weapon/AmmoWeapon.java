@@ -1,7 +1,7 @@
 package com.hanfeldt.game.weapon;
 
-import com.hanfeldt.game.Player;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.entity.Player;
 
 public abstract class AmmoWeapon extends TriggerWeapon {
 	private int ammoInClip, totalAmmo, ammoInFullClip;

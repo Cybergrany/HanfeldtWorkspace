@@ -1,7 +1,9 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.hanfeldt.game.Main;
 
 public class Entity {
 	private float x, y;

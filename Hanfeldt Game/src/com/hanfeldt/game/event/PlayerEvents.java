@@ -1,9 +1,9 @@
 package com.hanfeldt.game.event;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Player;
 import com.hanfeldt.game.Sound;
-import com.hanfeldt.game.npc.Npc;
+import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Npc;
 
 /**
  * Made this class so Player.java doesn't get too messy. I know entity.java covers a lot of this, but we'd need something

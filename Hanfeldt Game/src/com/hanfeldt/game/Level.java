@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.hanfeldt.game.npc.Npc;
+import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Block;
 import com.hanfeldt.game.tile.Tile;

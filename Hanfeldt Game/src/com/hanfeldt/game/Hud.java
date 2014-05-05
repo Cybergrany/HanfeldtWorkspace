@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import com.hanfeldt.game.entity.Player;
+
 public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, heartx = 0;

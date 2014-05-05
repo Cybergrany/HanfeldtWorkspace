@@ -1,8 +1,8 @@
-package com.hanfeldt.game.npc;
+package com.hanfeldt.game.entity.npc;
 
-import com.hanfeldt.game.EntityLiving;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.entity.EntityLiving;
 
 /**
  * Adding code for NPC's, I'm just playing around, so hope I'm doing this right!

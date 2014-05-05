@@ -1,7 +1,9 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import com.hanfeldt.game.Main;
 
 public class Bullet extends Entity {
 	private float angle;

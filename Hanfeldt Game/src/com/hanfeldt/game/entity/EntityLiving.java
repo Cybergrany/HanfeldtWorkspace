@@ -1,7 +1,10 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.hanfeldt.game.Main;
+import com.hanfeldt.game.Sprite;
 
 public class EntityLiving extends Entity {
 	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one

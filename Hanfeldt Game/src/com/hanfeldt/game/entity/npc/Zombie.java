@@ -1,4 +1,4 @@
-package com.hanfeldt.game.npc;
+package com.hanfeldt.game.entity.npc;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;

@@ -12,9 +12,11 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
-import com.hanfeldt.game.npc.Npc;
-import com.hanfeldt.game.npc.Spawner;
-import com.hanfeldt.game.npc.Zombie;
+import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.Spawner;
+import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 
 import de.quippy.javamod.mixer.Mixer;

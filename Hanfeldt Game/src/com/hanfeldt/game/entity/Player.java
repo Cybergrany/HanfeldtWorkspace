@@ -1,10 +1,12 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.hanfeldt.game.Main;
+import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
-import com.hanfeldt.game.npc.Zombie;
 import com.hanfeldt.game.weapon.Pistol;
 import com.hanfeldt.game.weapon.Weapon;
 
