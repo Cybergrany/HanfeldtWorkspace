@@ -13,9 +13,11 @@ public class Pistol extends AmmoWeapon {
 	
 	public void trigger() {
 		if(!player.getDirection()) {
-			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) - Main.tileSize -8, player.getY() + (Main.tileSize /2)));
+			// facing left
+			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) - (Main.tileSize /2) -3, player.getY() + Main.tileSize));
 		}else{
-			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) +8, player.getY() + (Main.tileSize /2)));
+			// facing right
+			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) + (Main.tileSize /2) +4, player.getY() + Main.tileSize));
 		}
 	}
 	

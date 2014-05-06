@@ -7,16 +7,15 @@ import com.hanfeldt.game.Main;
 
 public class Bullet extends Entity {
 	private float angle;
-	private static final int length = 2;
 	private static final Color color = new Color(216, 177, 96);
 	private long totalTicks = 0;
 	
 	public Bullet(int x, int y) {
 		super(x, y);
 		try {
-			angle = (float) Math.toDegrees(Math.atan((y -Main.mouseY)/(x -Main.mouseX)));
+			angle = (float) -(Math.atan2(Main.mouseX - x, Main.mouseY - y)) + 190.02f;
 		}catch(Exception e) {
-			angle = 45;
+			angle = 0;
 		}
 	}
 	
@@ -32,7 +31,7 @@ public class Bullet extends Entity {
 	
 	public void draw(Graphics g) {
 		g.setColor(color);
-		g.drawLine(getX(), getY(), getX() -length, getY() -length);
+		g.drawLine(getX(), getY(), getX(), getY());
 	}
 	
 }

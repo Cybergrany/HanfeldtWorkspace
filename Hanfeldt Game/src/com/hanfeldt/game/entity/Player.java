@@ -13,7 +13,7 @@ import com.hanfeldt.game.weapon.Weapon;
 public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
-	private Weapon weaponEquipped = new Pistol(this, 8, 24, 8, 20);
+	private Weapon weaponEquipped = new Pistol(this, 8, 24, 8, 10);
 	static int maxHealth = 100;
 	
 	public boolean alive = true;
