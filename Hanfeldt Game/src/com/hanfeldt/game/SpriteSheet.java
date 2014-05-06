@@ -12,7 +12,7 @@ public class SpriteSheet {
 		BufferedImage temp = null;
 		
 		try {
-			temp = ImageIO.read(new File(filePath));
+			temp = ImageIO.read(Main.class.getResource(filePath));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally{

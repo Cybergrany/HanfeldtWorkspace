@@ -27,7 +27,7 @@ public class Level {
 		BufferedImage temp = null;
 		
 		try {
-			temp = ImageIO.read(new File(path));
+			temp = ImageIO.read(Main.class.getResource(path));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally{

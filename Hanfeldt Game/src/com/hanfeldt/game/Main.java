@@ -58,7 +58,7 @@ public class Main implements Runnable {
 	private Sprite cloud, sun;
 	private Player player;
 	private static Level[] levels;
-	private static String xmMusicPath = "res/sounds/ARPYSUNDAY.xm";
+	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
 	private int level = 0;
 	private Listener listener;
 	private Hud hud;
@@ -102,7 +102,7 @@ public class Main implements Runnable {
 
 	public void init() {
 		gamePanel.requestFocus();
-		spriteSheet = new SpriteSheet("res/images/spritesheet.png");
+		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
 		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
@@ -117,7 +117,7 @@ public class Main implements Runnable {
 		}
 		
 		levels = new Level[1];
-		levels[0] = new Level("res/images/level1.png", player);
+		levels[0] = new Level("/images/level1.png", player);
 		
 		//XM player
 		// TODO When muted stop playing song...
@@ -125,7 +125,7 @@ public class Main implements Runnable {
 			public void run() {
 				try {
 					Helpers.registerAllClasses();
-					File music = new File(xmMusicPath);
+					URL music = Main.class.getResource(xmMusicPath);
 					Properties props = new Properties();
 					props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
 					props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
@@ -135,7 +135,7 @@ public class Main implements Runnable {
 					props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
 					props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
 					MultimediaContainerManager.configureContainer(props);
-					URL modUrl = music.toURI().toURL();
+					URL modUrl = music;
 					MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
 					Mixer mixer = multimediaContainer.createNewMixer();
 					mixer.startPlayback();
