@@ -1,5 +1,3 @@
-CRAFTMINE
+Gonna get a proper readme with changelog etc in soon.
 
-CRAFTMINE IS A COMPLETELY ORIGINAL AND COOL GAME WHICH IS SET IN A NON-INFINITE WORLD. IN CRAFTMINE YOU CRAFT AND MINE.
-
-SUCH SEXUAL TEST PUSH
+What version should our yoke be? I'm guessing we're beta.
