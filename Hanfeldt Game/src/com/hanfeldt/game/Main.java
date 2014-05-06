@@ -18,6 +18,7 @@ import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.weapon.TriggerWeapon;
+import com.hanfeldt.io.Listener;
 
 import de.quippy.javamod.mixer.Mixer;
 import de.quippy.javamod.multimedia.MultimediaContainer;

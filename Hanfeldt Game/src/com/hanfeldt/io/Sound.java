@@ -1,9 +1,11 @@
-package com.hanfeldt.game;
+package com.hanfeldt.io;
 
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
+import com.hanfeldt.game.Main;
 
 /**
  * Sound! Now you can hear yourself mine!

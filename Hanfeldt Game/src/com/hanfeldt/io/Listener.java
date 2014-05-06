@@ -1,10 +1,13 @@
-package com.hanfeldt.game;
+package com.hanfeldt.io;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import com.hanfeldt.game.Hud;
+import com.hanfeldt.game.Main;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	

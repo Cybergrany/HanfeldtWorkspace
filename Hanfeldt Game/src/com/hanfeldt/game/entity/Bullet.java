@@ -27,11 +27,18 @@ public class Bullet extends Entity {
 		changeX((float) Math.cos(angle));
 		changeY((float) Math.sin(angle));
 		// TODO If it goes out of bounds, destroy it
+		destroyBulletAtBounds();//Lyk dis?
 	}
 	
 	public void draw(Graphics g) {
 		g.setColor(color);
 		g.drawLine(getX(), getY(), getX(), getY());
+	}
+	
+	private void destroyBulletAtBounds(){
+		if(getX() < -30 || getX() > Main.sizeX + 30 || getY() < - 30 || getY() > Main.sizeY + 30){
+			Main.getGame().bullets.remove(this);
+		}
 	}
 	
 }
