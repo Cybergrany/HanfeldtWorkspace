@@ -43,6 +43,10 @@ public class Bullet extends Entity {
 		}
 	}
 	
+	public void destroyBullet(){
+		Main.getGame().bullets.remove(this);
+	}
+	
 	public Rectangle getBounds(){
 		return new Rectangle(getX(), getY(), getX(), getY());
 	}
