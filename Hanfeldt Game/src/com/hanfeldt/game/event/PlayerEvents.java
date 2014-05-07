@@ -16,10 +16,6 @@ public class PlayerEvents{
 	
 	private Player player;
 	
-	public static int fallDamage = 1;//Not sure if this is best way to do this.
-	public static int zombieDamage = 2;
-	public static int fallDeath = 3;
-	
 	public static int zombieDamageDealt = 10;
 	
 	public static int zombieDeath = 2;
@@ -64,11 +60,9 @@ public class PlayerEvents{
 		if(id == Values.zombie_damage_id) {
 			Sound.playSound("Hit.wav");
 		}
-		if(id == Values.fall_death_id) {
-			playerDeath(fallDeath);
-		}
 		if(player.alive && player.getHealth() <= 0) {
 			Main.getGame().playerDied();
+			playerDeath(id);
 		}
 	}
 	
@@ -76,6 +70,9 @@ public class PlayerEvents{
 		//TODO: Different death id's, for example zombie bite, fall damage; so different animations and sounds can be called
 		if(id == Values.fall_death_id){//Falling out of map
 			Sound.playSound("FallDeath.wav");
+		}
+		if(id == Values.zombie_damage_id){
+			Sound.playSound("death_from_zombie.wav");
 		}
 	}
 	

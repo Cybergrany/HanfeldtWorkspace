@@ -9,16 +9,18 @@ import com.hanfeldt.game.entity.Player;
 public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, heartx = 0;
-	private Sprite heart, character, deadCharacter;
+	private Sprite heart, character, deadCharacter, crossHair;
 	private Player player;
 	
 	private Color defWhite = new Color(255 , 255, 255);
 	private Color transDark = new Color(0, 0, 0, 80);
+	private Font font = new Font("Arial", Font.PLAIN, 9);
 	
 	public Hud(Player player, Sprite character){
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
 		this.character = character;
 		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
+		crossHair = new Sprite(Main.spriteSheet, 5, 0, 1, 1);
 		this.player = player;
 	}
 	
@@ -27,7 +29,14 @@ public class Hud {
 	}
 	
 	public void draw(Graphics g){
-		Font font = new Font("Arial", Font.PLAIN, 9);
+		/*
+		 *TODO: Trying to feex pixelly text
+		 */
+//		if(g instanceof Graphics2D){
+//			Graphics2D g2 = (Graphics2D)g;
+//			g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+//					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+//		}
 		g.setFont(font);
 		g.setColor(defWhite);
 		
@@ -43,6 +52,9 @@ public class Hud {
 		}
 		
 		heartx = 19;
+		
+		g.drawOval(Main.mouseX - 7, Main.mouseY - 7, 14, 14);
+		crossHair.draw(g, Main.mouseX - 7, Main.mouseY - 7);
 		
 		if(paused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);

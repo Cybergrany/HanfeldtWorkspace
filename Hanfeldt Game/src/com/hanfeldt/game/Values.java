@@ -10,6 +10,8 @@ public class Values {
 	
 	/*
 	 * Assume damage_id is damage to player, and that damage_taken_id is damage taken from other sources
+	 * Ensure all Id's are unique
+	 * TODO: Order all Id's correctly (It's a mess, I know.)
 	 */
 	
 	public static int fall_damage_id = 1;
@@ -21,8 +23,11 @@ public class Values {
 	public static int zombie_max_health = 75;
 	
 	public static int bullet_damage_id = 4;
-	public static int bullet_damage_dealt_to_zombie = 40;
+	public static int bullet_damage_dealt_to_zombie = 10;
 	public static int bullet_damage_dealt_to_player = 60;
 	
 	public static int player_max_health = 100;
+	
+	public static int max_npc_default = 5;
+	public static int max_zombie = 3;
 }

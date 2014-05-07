@@ -2,6 +2,7 @@ package com.hanfeldt.game.entity.npc;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.event.NpcEvents;
 
@@ -33,8 +34,8 @@ public class Npc extends EntityLiving {
 	 * Can be overridden etc(I believe)
 	 * @return A default of 5.
 	 */
-	public int getMaxNpc(){
-		return 5;//Default max
+	public static int getMaxNpc(){
+		return Values.max_npc_default;//Default max
 	}
 	
 	public void facePlayer(float moveSpeed) {

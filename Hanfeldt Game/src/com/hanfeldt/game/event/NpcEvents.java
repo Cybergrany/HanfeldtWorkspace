@@ -47,7 +47,7 @@ public class NpcEvents {
 	}
 	
 	public boolean bulletCollided(Npc npc, Bullet bullet){
-		if (bullet.getBounds().intersects(npc.getBounds()) && npc.getBounds().intersects(bullet.getBounds()))
+		if (bullet.getBounds().intersects(npc.getBounds()) || npc.getBounds().intersects(bullet.getBounds()))
 			return true;
 		if(Main.debug)
 		System.out.println("Miss");

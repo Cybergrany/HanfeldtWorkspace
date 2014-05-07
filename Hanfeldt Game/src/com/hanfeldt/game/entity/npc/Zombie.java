@@ -23,8 +23,8 @@ public class Zombie extends Npc {
 		}
 	}
 	
-	public int getMaxNpc(){
-		return 2;
+	public static int getMaxNpc(){
+		return Values.max_zombie;
 	}
 	
 }

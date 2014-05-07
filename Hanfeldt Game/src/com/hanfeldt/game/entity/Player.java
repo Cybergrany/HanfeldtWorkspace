@@ -98,7 +98,7 @@ public class Player extends EntityLiving {
 		}
 		
 		if(getY() > Main.sizeY && alive){
-			events.damagePlayer(getHealth(), PlayerEvents.fallDeath);
+			events.damagePlayer(getHealth(), Values.fall_death_id);
 			
 		}
 		

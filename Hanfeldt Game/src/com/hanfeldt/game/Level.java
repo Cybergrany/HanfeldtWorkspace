@@ -51,7 +51,7 @@ public class Level {
 		}
 
 		spawner = new Spawner();
-		for(int i=0; i<5; i++) {
+		for(int i=0; i < Zombie.getMaxNpc(); i++) {
 			spawner.spawnNpc(new Zombie(Main.tileSize *i, 0));
 		}
 		

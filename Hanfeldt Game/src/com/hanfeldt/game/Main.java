@@ -110,6 +110,7 @@ public class Main implements Runnable {
 		
 		levels = new Level[1];
 		levels[0] = new Level("/images/level1.png", player);
+//		levels[0] = new Level("/images/level2.png", player);
 		
 		//XM player
 		// TODO When muted stop playing song...
