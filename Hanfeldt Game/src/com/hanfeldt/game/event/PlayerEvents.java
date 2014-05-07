@@ -1,6 +1,7 @@
 package com.hanfeldt.game.event;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.io.Sound;
@@ -57,13 +58,13 @@ public class PlayerEvents{
 	}
 	
 	public void playerDamage(int id){
-		if(id == fallDamage) {
+		if(id == Values.fall_damage_id) {
 			Sound.playSound("FallDamage.wav");
 		}
-		if(id == zombieDamage) {
+		if(id == Values.zombie_damage_id) {
 			Sound.playSound("Hit.wav");
 		}
-		if(id == fallDeath) {
+		if(id == Values.fall_death_id) {
 			playerDeath(fallDeath);
 		}
 		if(player.alive && player.getHealth() <= 0) {
@@ -73,7 +74,7 @@ public class PlayerEvents{
 	
 	public void playerDeath(int id){
 		//TODO: Different death id's, for example zombie bite, fall damage; so different animations and sounds can be called
-		if(id == fallDeath){//Falling out of map
+		if(id == Values.fall_death_id){//Falling out of map
 			Sound.playSound("FallDeath.wav");
 		}
 	}

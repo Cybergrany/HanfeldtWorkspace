@@ -1,16 +1,14 @@
 package com.hanfeldt.game.event;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Zombie;
 
 public class NpcEvents {
 	
-	public static int zombie_Id = 1;
-	
 	private Npc npc;
-	private Zombie zombie;
 	
 	public NpcEvents(Npc npc){
 		this.npc = npc;
@@ -30,7 +28,7 @@ public class NpcEvents {
 	}
 	
 	public void damageNpc(Npc npc, int damage, int id){
-		if(id == zombie_Id){
+		if(id == Values.zombie_damage_id){
 			npc.changeHealth(-damage);
 		}
 	}
@@ -46,7 +44,7 @@ public class NpcEvents {
 	public void bulletHit(Npc npc){
 		for(int i = 0; i < Main.npc.size(); i++){
 			if(Main.npc.get(i) instanceof Zombie){
-				damageNpc(Main.npc.get(i), Bullet.zombie_damage, zombie_Id);
+				damageNpc(Main.npc.get(i), Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_id);
 			}
 		}
 	}

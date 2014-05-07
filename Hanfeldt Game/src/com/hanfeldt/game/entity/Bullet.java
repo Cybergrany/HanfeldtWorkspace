@@ -12,8 +12,6 @@ public class Bullet extends Entity {
 	private static final Color color = new Color(216, 177, 96);
 	private long totalTicks = 0;
 	
-	public static int zombie_damage = 40;
-	
 	public Bullet(int x, int y) {
 		super(x, y);
 		try {

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.weapon.Pistol;
@@ -14,7 +15,7 @@ public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
 	private Weapon weaponEquipped = new Pistol(this, 8, 24, 8, 10);
-	static int maxHealth = 100;
+	static int maxHealth = Values.player_max_health;
 	
 	public boolean alive = true;
 	
@@ -119,7 +120,7 @@ public class Player extends EntityLiving {
 			if(Main.npc.get(i) instanceof Zombie) {
 				Zombie zombie = (Zombie) Main.npc.get(i);
 				if(collidedZombie(zombie)) {
-					events.damagePlayer(events.zombieDamageDealt, events.zombieDamage, zombie);
+					events.damagePlayer(Values.zombie_damage_to_player, Values.zombie_damage_id, zombie);
 				}
 			}
 		}
