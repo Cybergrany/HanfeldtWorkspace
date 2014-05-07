@@ -2,13 +2,17 @@ package com.hanfeldt.game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.npc.Npc;
 
 public class Bullet extends Entity {
 	private float angle;
 	private static final Color color = new Color(216, 177, 96);
 	private long totalTicks = 0;
+	
+	public static int zombie_damage = 40;
 	
 	public Bullet(int x, int y) {
 		super(x, y);
@@ -41,4 +45,7 @@ public class Bullet extends Entity {
 		}
 	}
 	
+	public Rectangle getBounds(){
+		return new Rectangle(getX(), getY(), getX(), getY());
+	}
 }

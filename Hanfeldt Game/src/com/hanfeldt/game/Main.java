@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -15,8 +14,6 @@ import javax.swing.JFrame;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.entity.npc.Spawner;
-import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
 
@@ -62,7 +59,6 @@ public class Main implements Runnable {
 	private int level = 0;
 	private Listener listener;
 	private Hud hud;
-	private Spawner spawner;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
 	public static void main(String[] args) {
@@ -111,10 +107,6 @@ public class Main implements Runnable {
 		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
-		spawner = new Spawner();
-		for(int i=0; i<5; i++) {
-			spawner.spawnNpc(new Zombie(tileSize *i, 0));
-		}
 		
 		levels = new Level[1];
 		levels[0] = new Level("/images/level1.png", player);

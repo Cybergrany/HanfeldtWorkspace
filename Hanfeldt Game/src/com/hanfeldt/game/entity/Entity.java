@@ -1,6 +1,5 @@
 package com.hanfeldt.game.entity;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
@@ -119,6 +118,18 @@ public class Entity {
 	
 	public boolean getDirection() {
 		return direction;
+	}
+	
+	public Rectangle getBounds() {//This doesn't really work, as getSizeX/Y are both all wrong
+		return new Rectangle(getX(), getY(), getSizeX(), getSizeY());
+	}
+	
+	public int getSizeX() {
+		return getX() *Main.tileSize;
+	}
+	
+	public int getSizeY() {
+		return getY() *Main.tileSize;
 	}
 	
 }

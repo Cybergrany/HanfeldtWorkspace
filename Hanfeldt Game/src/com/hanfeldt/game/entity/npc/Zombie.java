@@ -2,10 +2,12 @@ package com.hanfeldt.game.entity.npc;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.event.NpcEvents;
 
 public class Zombie extends Npc {
 	private float speed = 0.25f;
 	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);//Same as player for testing
+	
 	
 	public static int maxHealth = 75;
 
@@ -21,8 +23,8 @@ public class Zombie extends Npc {
 		}
 	}
 	
-	public static int getMaxNpc(){
-		return 3;
+	public int getMaxNpc(){
+		return 2;
 	}
-
+	
 }

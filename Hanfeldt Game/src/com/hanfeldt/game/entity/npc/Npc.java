@@ -3,6 +3,7 @@ package com.hanfeldt.game.entity.npc;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
+import com.hanfeldt.game.event.NpcEvents;
 
 /**
  * Adding code for NPC's, I'm just playing around, so hope I'm doing this right!
@@ -13,13 +14,16 @@ import com.hanfeldt.game.entity.EntityLiving;
 public class Npc extends EntityLiving {
 	
 	int health = 0;
+	private NpcEvents events;
 	
 	public Npc(Sprite s,int h, int x, int y){
 		super(s, h, x, y);
+		events = new NpcEvents(this);
 	}
 
 	public void tick(){
 		super.tick();
+		events.tick();
 	}
 	
 	// The same draw method is in Entity so I removed it
@@ -29,7 +33,7 @@ public class Npc extends EntityLiving {
 	 * Can be overridden etc(I believe)
 	 * @return A default of 5.
 	 */
-	public static int getMaxNpc(){
+	public int getMaxNpc(){
 		return 5;//Default max
 	}
 	

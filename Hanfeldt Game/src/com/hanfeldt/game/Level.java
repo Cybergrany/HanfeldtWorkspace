@@ -2,13 +2,12 @@ package com.hanfeldt.game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.Spawner;
+import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Block;
 import com.hanfeldt.game.tile.Tile;
@@ -22,6 +21,7 @@ public class Level {
 	private Player player;
 	public static Tile[][] tiles;//Making this public static just to test things
 	private int sizeX;
+	private Spawner spawner;
 	
 	public Level(String path, Player p) {
 		BufferedImage temp = null;
@@ -48,6 +48,11 @@ public class Level {
 					tiles[j][i] = new Air(j, i);
 				}
 			}
+		}
+
+		spawner = new Spawner();
+		for(int i=0; i<5; i++) {
+			spawner.spawnNpc(new Zombie(Main.tileSize *i, 0));
 		}
 		
 		player = p;
