@@ -15,16 +15,13 @@ import com.hanfeldt.game.event.NpcEvents;
 public class Npc extends EntityLiving {
 	
 	int health = 0;
-	private NpcEvents events;
 	
 	public Npc(Sprite s,int h, int x, int y){
 		super(s, h, x, y);
-		events = new NpcEvents(this);
 	}
 
 	public void tick(){
 		super.tick();
-		events.tick();
 	}
 	
 	// The same draw method is in Entity so I removed it
