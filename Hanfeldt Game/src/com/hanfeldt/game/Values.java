@@ -22,6 +22,8 @@ public class Values {
 	public static int zombie_damage_to_player = 10;
 	public static int zombie_max_health = 75;
 	
+	public static int npc_out_of_map_id = 5;
+	
 	public static int bullet_damage_id = 4;
 	public static int bullet_damage_dealt_to_zombie = 10;
 	public static int bullet_damage_dealt_to_player = 60;

@@ -7,8 +7,11 @@ import com.hanfeldt.game.entity.Player;
 
 public class Pistol extends AmmoWeapon {
 	
+	private int ammo;
+	
 	public Pistol(Player p, int aic, int ta, int aifc, int tt) {
 		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), aic, ta, aifc, tt);
+		ammo = getAmmoInClip();
 	}
 	
 	public void trigger() {
@@ -19,6 +22,8 @@ public class Pistol extends AmmoWeapon {
 			// facing right
 			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) + (Main.tileSize /2) +4, player.getY() + Main.tileSize));
 		}
+		changeAmmoInClip(ammo-1);
+		System.out.println(getAmmoInClip());
 	}
 	
 }

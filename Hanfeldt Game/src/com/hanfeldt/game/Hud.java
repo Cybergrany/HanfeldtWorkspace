@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
-	private static int hearts, heartx = 0;
-	private Sprite heart, character, deadCharacter, crossHair;
+	private static int hearts, bullets;
+	private static int bulletx = 19, heartx = 0;
+	private Sprite heart, character, deadCharacter, crossHair, weapon, ammo;
 	private Player player;
 	
 	private Color defWhite = new Color(255 , 255, 255);
@@ -21,11 +23,14 @@ public class Hud {
 		this.character = character;
 		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
 		crossHair = new Sprite(Main.spriteSheet, 5, 0, 1, 1);
+		weapon = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
+		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
 		this.player = player;
 	}
 	
 	public void tick(){
 		hearts = player.getHealth() / 20;
+		bullets = AmmoWeapon.getAmmoInClip();
 	}
 	
 	public void draw(Graphics g){
@@ -46,6 +51,13 @@ public class Hud {
 			character.draw(g, 5, Main.sizeY - Main.tileSize);
 		}
 		
+		for(int i = 1; i <= bullets; i++){
+			ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
+			bulletx+=15;
+		}
+		
+		bulletx = 28;
+		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.sizeY - 15);
 			heartx += 15;
@@ -55,6 +67,8 @@ public class Hud {
 		
 		g.drawOval(Main.mouseX - 7, Main.mouseY - 7, 14, 14);
 		crossHair.draw(g, Main.mouseX - 7, Main.mouseY - 7);
+		
+		weapon.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
 		
 		if(paused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);

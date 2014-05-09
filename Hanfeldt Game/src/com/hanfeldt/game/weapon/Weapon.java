@@ -1,4 +1,4 @@
-package com.hanfeldt.game.weapon;
+	package com.hanfeldt.game.weapon;
 
 import java.awt.Graphics;
 

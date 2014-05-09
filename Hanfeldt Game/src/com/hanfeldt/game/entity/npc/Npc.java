@@ -43,5 +43,4 @@ public class Npc extends EntityLiving {
 			setVelX(moveSpeed);
 		}
 	}
-	
 }

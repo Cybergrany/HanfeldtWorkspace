@@ -27,6 +27,9 @@ public class NpcEvents {
 				}
 			}
 		}
+		if(isOutsideMap(npc)){
+			killNpc(npc, Values.npc_out_of_map_id);
+		}
 	}
 	
 	public void damageNpc(Npc npc, int damage, int id){
@@ -46,7 +49,21 @@ public class NpcEvents {
 		if(id == Values.zombie_damage_from_bullet_id){
 			//TODO: A zombie death cry + zombie falling over
 			Main.npc.remove(npc);
+			if(Main.debug)
+				System.out.println("Zombie died from gunshot");
 		}
+		if(id == Values.npc_out_of_map_id){
+			Main.npc.remove(npc);
+			if(Main.debug)
+				System.out.println("Npc died from falling out of map");
+		}
+	}
+	
+	public boolean isOutsideMap(Npc npc){
+		if(npc.getY() > Main.sizeY){
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean bulletCollided(Npc npc, Bullet bullet){
@@ -57,11 +74,8 @@ public class NpcEvents {
 		return false;
 	}
 	
+	
 	public void bulletHit(Npc npc){
-//		for(int i = 0; i < Main.npc.size(); i++){
-//			if(Main.npc.get(i) instanceof Zombie ){
-				damageNpc(npc, Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_from_bullet_id);
-//			}
-//		}
+		damageNpc(npc, Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_from_bullet_id);
 	}
 }

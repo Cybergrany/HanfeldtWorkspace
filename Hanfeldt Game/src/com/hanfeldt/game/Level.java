@@ -11,6 +11,7 @@ import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Block;
 import com.hanfeldt.game.tile.Tile;
+import com.hanfeldt.game.tile.ZombieHouse;
 
 public class Level {
 	/*
@@ -20,7 +21,7 @@ public class Level {
 	private final BufferedImage levelImage;
 	private Player player;
 	public static Tile[][] tiles;//Making this public static just to test things
-	private int sizeX;
+	private int sizeX, sizeY;
 	private Spawner spawner;
 	
 	public Level(String path, Player p) {
@@ -34,9 +35,10 @@ public class Level {
 			levelImage = temp;
 		}
 		
-		int sizeY = Main.sizeY / 16;
+		sizeY = Main.sizeY / 16;
 		sizeX = levelImage.getWidth();
 		tiles = new Tile[sizeX][sizeY];
+		spawner = new Spawner();
 		
 		for(int i=0; i<sizeY; i++) {
 			for(int j=0; j<sizeX; j++) {
@@ -44,15 +46,17 @@ public class Level {
 				case 0xFF000000:
 					tiles[j][i] = new Block(j, i);
 					break;
+				case 0xff0000ff:
+					tiles[j][i] = new ZombieHouse(j, i);
+					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
+						//TODO: Regular spawning, not just on level creation.
+						spawner.spawnNpc(new Zombie(Main.tileSize *j + (i2*30), Main.tileSize * i - 40));
+					}
+					break;
 				default:
 					tiles[j][i] = new Air(j, i);
 				}
 			}
-		}
-
-		spawner = new Spawner();
-		for(int i=0; i < Zombie.getMaxNpc(); i++) {
-			spawner.spawnNpc(new Zombie(Main.tileSize *i, 0));
 		}
 		
 		player = p;
@@ -64,6 +68,7 @@ public class Level {
 		for(int i=0; i<Main.npc.size(); i++) {
 			Main.npc.get(i).tick();
 		}
+		
 	}
 	
 	public void render(Graphics g) {

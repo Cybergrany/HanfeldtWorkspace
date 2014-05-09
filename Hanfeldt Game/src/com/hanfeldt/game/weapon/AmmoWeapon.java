@@ -4,7 +4,9 @@ import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
 
 public abstract class AmmoWeapon extends TriggerWeapon {
-	private int ammoInClip, totalAmmo, ammoInFullClip;
+	private static int ammoInClip;
+	private int totalAmmo;
+	private int ammoInFullClip;
 	public AmmoWeapon(Player p, Sprite s, int aic, int ta, int aifc, int tt) {
 		super(p, s, tt);
 		ammoInClip = aic;
@@ -12,7 +14,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		ammoInFullClip = aifc;
 	}
 	
-	public int getAmmoInClip() {
+	public static int getAmmoInClip() {
 		return ammoInClip;
 	}
 	
