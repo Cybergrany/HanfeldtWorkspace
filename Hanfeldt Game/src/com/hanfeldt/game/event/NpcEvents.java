@@ -37,6 +37,9 @@ public class NpcEvents {
 		if(npc.getHealth() <= 0){
 			killNpc(npc, id);
 		}
+		npc.setVelX(6);
+//		npc.setVelX(-6);
+		npc.setVelY(-1);
 	}
 	
 	public void killNpc(Npc npc, int id){
@@ -56,7 +59,7 @@ public class NpcEvents {
 	
 	public void bulletHit(Npc npc){
 		for(int i = 0; i < Main.npc.size(); i++){
-			if(Main.npc.get(i) instanceof Zombie){
+			if(Main.npc.get(i) instanceof Zombie ){
 				damageNpc(Main.npc.get(i), Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_from_bullet_id);
 			}
 		}
