@@ -67,7 +67,7 @@ public class NpcEvents {
 	}
 	
 	public boolean bulletCollided(Npc npc, Bullet bullet){
-		if (bullet.getBounds().intersects(npc.getBounds()) || npc.getBounds().intersects(bullet.getBounds()))
+		if (npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(), bullet.getSizeX(), bullet.getSizeY()))
 			return true;
 		if(Main.debug)
 		System.out.println("Miss");
@@ -78,4 +78,5 @@ public class NpcEvents {
 	public void bulletHit(Npc npc){
 		damageNpc(npc, Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_from_bullet_id);
 	}
+	
 }

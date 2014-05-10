@@ -26,6 +26,7 @@ public class Pistol extends AmmoWeapon {
 		changeAmmoInClip(ammo-1);
 		Sound.playSound("pistol_shoot.wav");
 		System.out.println(getAmmoInClip());
+		super.trigger();
 	}
 	
 }

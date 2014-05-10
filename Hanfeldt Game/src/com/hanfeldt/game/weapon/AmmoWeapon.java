@@ -39,4 +39,9 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		totalAmmo = ta;
 	}
 	
+	public void trigger() {
+		changeAmmoInClip(-1);
+		System.out.println(ammoInClip);
+	}
+	
 }
