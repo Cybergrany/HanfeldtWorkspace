@@ -199,6 +199,9 @@ public class Main implements Runnable {
 		if(player.alive) {
 			levels[level].tick();
 			hud.tick();
+			for(int i=0; i<bullets.size(); i++) {
+				bullets.get(i).tick();
+			}
 			player.getWeaponEquipped().tick();
 			if(!mouseDownLastTick && mouseDown && player.getWeaponEquipped() instanceof TriggerWeapon) {
 				((TriggerWeapon) player.getWeaponEquipped()).tryTrigger();
@@ -207,9 +210,6 @@ public class Main implements Runnable {
 			if(totalTicks >= tickDied + deadScreenTicks && lives > 0) {
 				respawnPlayer();
 			}
-		}
-		for(int i=0; i<bullets.size(); i++) {
-			bullets.get(i).tick();
 		}
 		// Moved NPC ticking to Level, I think it's more appropriate
 		mouseDownLastTick = mouseDown;
@@ -235,6 +235,9 @@ public class Main implements Runnable {
 			}
 			levels[level].render(g);
 			hud.draw(g);
+			for(int i=0; i<bullets.size(); i++) {
+				bullets.get(i).draw(g);
+			}
 		}else{
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, sizeX, sizeY);
@@ -243,9 +246,6 @@ public class Main implements Runnable {
 			g.setFont(font);
 			g.setColor(new Color(255, 255, 255));
 			g.drawString("x " + Integer.toString(lives), (sizeX /2) - 5, (sizeY /2) - 49);
-		}
-		for(int i=0; i<bullets.size(); i++) {
-			bullets.get(i).draw(g);
 		}
 		
 		gamePanel.repaint();

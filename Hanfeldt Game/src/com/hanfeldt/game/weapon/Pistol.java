@@ -22,8 +22,7 @@ public class Pistol extends AmmoWeapon {
 			// facing right
 			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) + (Main.tileSize /2) +4, player.getY() + Main.tileSize));
 		}
-		changeAmmoInClip(ammo-1);
-		System.out.println(getAmmoInClip());
+		super.trigger();
 	}
 	
 }

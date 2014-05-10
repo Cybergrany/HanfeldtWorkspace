@@ -9,13 +9,13 @@ import com.hanfeldt.game.entity.npc.Npc;
 
 public class Bullet extends Entity {
 	private float angle;
-	private static final Color color = new Color(216, 177, 96);
+	private static final Color color = new Color(0xFF, 0x55, 0x00);
 	private long totalTicks = 0;
 	
 	public Bullet(int x, int y) {
 		super(x, y);
 		try {
-			angle = (float) -(Math.atan2(Main.mouseX - x, Main.mouseY - y)) + 190.02f;
+			angle = (float) -(Math.atan2(Main.mouseX - x, Main.mouseY - y)) + 190.08f;
 		}catch(Exception e) {
 			angle = 0;
 		}
@@ -38,7 +38,9 @@ public class Bullet extends Entity {
 	}
 	
 	private void destroyBulletAtBounds(){
-		if(getX() < -30 || getX() > Main.sizeX + 30 || getY() < - 30 || getY() > Main.sizeY + 30){
+		if (getX() < getX() - (Main.sizeX /2) ||
+			getX() > getX() + (Main.sizeX /2) ||
+			getY() < 0 || getY() > Main.sizeY){
 			Main.getGame().bullets.remove(this);
 		}
 	}
@@ -48,6 +50,15 @@ public class Bullet extends Entity {
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(getX(), getY(), getX(), getY());
+		return new Rectangle(getX(), getY(), getSizeX(), getSizeY());
 	}
+	
+	public int getSizeX() {
+		return 1;
+	}
+	
+	public int getSizeY() {
+		return 1;
+	}
+	
 }
