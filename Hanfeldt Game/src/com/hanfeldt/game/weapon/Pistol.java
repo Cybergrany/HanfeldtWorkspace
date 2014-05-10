@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.io.Sound;
 
 public class Pistol extends AmmoWeapon {
 	
@@ -23,6 +24,7 @@ public class Pistol extends AmmoWeapon {
 			Main.getGame().bullets.add(new Bullet((Main.sizeX /2) + (Main.tileSize /2) +4, player.getY() + Main.tileSize));
 		}
 		changeAmmoInClip(ammo-1);
+		Sound.playSound("pistol_shoot.wav");
 		System.out.println(getAmmoInClip());
 	}
 	
