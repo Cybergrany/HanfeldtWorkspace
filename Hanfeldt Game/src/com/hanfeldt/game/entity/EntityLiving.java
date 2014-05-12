@@ -16,6 +16,7 @@ public class EntityLiving extends Entity {
 	int cycleTicks = 0;
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
+	boolean isCollidingWithHorizTile=false;
 	
 	public EntityLiving(Sprite s, int h, int x, int y) {
 		super(x, y);
@@ -74,6 +75,7 @@ public class EntityLiving extends Entity {
 				if(Main.getLevels()[0].getTile(getTileX() +1, getTileY() +i).isSolid()
 					&& isMovingRight) {
 					velX = 0;
+					isCollidingWithHorizTile=true;
 					setTileX(Main.getLevels()[0].getTile(getTileX() +1, getTileY()).getX() -1);
 					break outerLoop;
 				}
@@ -87,6 +89,7 @@ public class EntityLiving extends Entity {
 					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
 						velX = 0;
+						isCollidingWithHorizTile=true;
 						setTileX(Main.getLevels()[0].getTile(getTileX(), getTileY()).getX() +1);
 						break outerLoop;
 					}
@@ -142,6 +145,18 @@ public class EntityLiving extends Entity {
 	
 	public int getHealth() {
 		return health;
+	}
+	
+	public void setFalling(boolean f){
+		falling = f;
+	}
+	
+	public boolean getFalling(){
+		return falling;
+	}
+	
+	public boolean isCollidingWithHorizTile(){
+		return isCollidingWithHorizTile;
 	}
 	
 }

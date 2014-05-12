@@ -17,12 +17,17 @@ public class Zombie extends Npc {
 		super(s, maxHealth, x, y);
 		setVelXMax(speed);
 		events = new NpcEvents(this);
+		setJumpHeight(2);
 	}
 	
 	public void tick() {
 		super.tick();
 		if(Main.getGame().getTotalTicks() % 120 == 0) {
 			facePlayer(speed);
+			if(isCollidingWithHorizTile() && !getFalling()){
+				setVelY(-getJumpHeight());
+				setFalling(true);
+			}
 		}
 		events.tick();
 	}
