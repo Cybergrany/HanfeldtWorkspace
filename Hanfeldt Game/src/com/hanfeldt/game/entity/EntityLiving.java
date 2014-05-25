@@ -72,11 +72,11 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 			for(int i=0; i<getTileSizeY(); i++) {
-				if(Main.getLevels()[0].getTile(getTileX() +1, getTileY() +i).isSolid()
+				if(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +1, getTileY() +i).isSolid()
 					&& isMovingRight) {
 					velX = 0;
 					isCollidingWithHorizTile=true;
-					setTileX(Main.getLevels()[0].getTile(getTileX() +1, getTileY()).getX() -1);
+					setTileX(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +1, getTileY()).getX() -1);
 					break outerLoop;
 				}
 			}
@@ -86,11 +86,11 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 				for(int i=0; i<getTileSizeY(); i++) {
-					if(Main.getLevels()[0].getTile(getTileX(), getTileY() +i).isSolid()
+					if(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
 						velX = 0;
 						isCollidingWithHorizTile=true;
-						setTileX(Main.getLevels()[0].getTile(getTileX(), getTileY()).getX() +1);
+						setTileX(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY()).getX() +1);
 						break outerLoop;
 					}
 				}
@@ -101,8 +101,8 @@ public class EntityLiving extends Entity {
 		try {
 		outerLoop:
 			for(int i=0; i<getTileSizeX(); i++) {
-				boolean tileBelow = Main.getLevels()[0].getTile(getTileX() +i, getTileY() + getTileSizeY()).isSolid();
-				boolean tileBelowRight = Main.getLevels()[0].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
+				boolean tileBelow = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i, getTileY() + getTileSizeY()).isSolid();
+				boolean tileBelowRight = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
 				if( (tileBelow || tileBelowRight) ) {
 					falling = false;
 					if(velY >= Main.terminalVelocity - 1) {
@@ -110,7 +110,7 @@ public class EntityLiving extends Entity {
 							((Player) this).getEvents().damagePlayer((int) velY, 1);
 						}
 					}
-					setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
+					setTileY(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
 					break outerLoop;
 				}
 				
@@ -124,9 +124,9 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 				for(int i=0; i<getTileSizeX(); i++) {
-					if(Main.getLevels()[0].getTile(getTileX() +i, getTileY()).isSolid()
-						|| Main.getLevels()[0].getTile(getTileX() +i +1, getTileY()).isSolid()) {
-						setTileY(Main.getLevels()[0].getTile(getTileX(), getTileY()).getY() +1);
+					if(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i, getTileY()).isSolid()
+						|| Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY()).isSolid()) {
+						setTileY(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY()).getY() +1);
 						velY = 0;
 						break outerLoop;
 					}

@@ -21,6 +21,7 @@ public class Level {
 	private final BufferedImage levelImage;
 	private Player player;
 	public static Tile[][] tiles;//Making this public static just to test things
+	public static int level;
 	private int sizeX, sizeY;
 	private Spawner spawner;
 	
@@ -34,6 +35,8 @@ public class Level {
 		}finally{
 			levelImage = temp;
 		}
+		
+		level = 0;
 		
 		sizeY = Main.sizeY / 16;
 		sizeX = levelImage.getWidth();
@@ -63,6 +66,10 @@ public class Level {
 	}
 	
 	public void tick(){
+		Main.getGame().getPlayer();
+		if(level == 0 || Main.getGame().getPlayer().levelFinished){
+//			Main.getGame().getLevels() = level;
+		}
 		player.tick();
 		
 		for(int i=0; i<Main.npc.size(); i++) {

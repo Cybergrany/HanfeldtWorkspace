@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -56,7 +57,7 @@ public class Main implements Runnable {
 	private Player player;
 	private static Level[] levels;
 	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
-	private int level = 0;
+	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
@@ -108,9 +109,9 @@ public class Main implements Runnable {
 		
 		npc = new ArrayList<Npc>();
 		
-		levels = new Level[1];
+		levels = new Level[2];
 		levels[0] = new Level("/images/level1.png", player);
-//		levels[0] = new Level("/images/level2.png", player);
+		levels[1] = new Level("/images/level1.png", player);
 		
 		//XM player
 		// TODO When muted stop playing song...
@@ -198,6 +199,7 @@ public class Main implements Runnable {
 	public void tick() {
 		if(player.alive) {
 			levels[level].tick();
+//			levels[level].tick();
 			hud.tick();
 			for(int i=0; i<bullets.size(); i++) {
 				bullets.get(i).tick();
@@ -254,6 +256,10 @@ public class Main implements Runnable {
 	
 	public static Level[] getLevels() {
 		return levels;
+	}
+	
+	public static int getCurrentLevel(){
+		return level;
 	}
 	
 	public static Main getGame() {

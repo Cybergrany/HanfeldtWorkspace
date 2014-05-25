@@ -18,12 +18,14 @@ public class Player extends EntityLiving {
 	static int maxHealth = Values.player_max_health;
 	
 	public boolean alive = true;
+	public boolean levelFinished;
 	
 	public Player(Sprite s, int x, int y){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
 		velXMax = 1f;
 		setJumpHeight(2);
 		events = new PlayerEvents(this);
+		levelFinished = false;
 	}
 	
 	public void draw(Graphics g) {
@@ -108,8 +110,10 @@ public class Player extends EntityLiving {
 		
 		super.tick();
 		
-		if(getX() >= (Main.getLevels()[0].getSizeX() - 1) *Main.tileSize) {
-			setX((Main.getLevels()[0].getSizeX() - 1) *Main.tileSize);
+		if(getX() >= (Main.getLevels()[Main.getCurrentLevel()].getSizeX() - 1) *Main.tileSize) {
+			setX((Main.getLevels()[Main.getCurrentLevel()].getSizeX() - 1) *Main.tileSize);
+			levelFinished = true;
+			System.out.println("Player finished level");
 		}else if(getX() < 0) {
 			setX(0);
 		}
