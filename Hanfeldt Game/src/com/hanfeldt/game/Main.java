@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -17,6 +16,7 @@ import javax.swing.JFrame;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
 
@@ -56,7 +56,6 @@ public class Main implements Runnable {
 	private static Main game;
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
-	private Sprite cloud, sun;
 	private static Player player;
 	private static Level[] levels;
 	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
@@ -112,10 +111,8 @@ public class Main implements Runnable {
 		gamePanel.requestFocus();
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
-		cloud = new Sprite(spriteSheet, 1, 0, 2, 1);
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()));
-		sun = new Sprite(spriteSheet, 0, 1, 2, 2);
 		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
@@ -230,17 +227,9 @@ public class Main implements Runnable {
 		Graphics2D g = (Graphics2D) screenImage.getGraphics();
 
 		if(player.alive || lives <= 0) {
-			// Render sky
-			g.setColor(new Color(0x00, 0xAA, 0xFF));
-			g.fillRect(0, 0, sizeX, sizeY);
-
-			for (int i = 0; i < 5; i++) {
-				cloud.draw(g, (i * 30) + 20, ((i % 2 == 0) ? 10 : 20));
-			}
 			
 			//Moved NPC draw to levels (Where player is also rendered)
 			
-			sun.draw(g, 190, 10);
 			for(int i = 0; i < npc.toArray().length; i++){
 				npc.get(i).draw(g);
 			}
@@ -263,6 +252,14 @@ public class Main implements Runnable {
 		g.dispose();
 	}
 	
+	//A very basic tick-based timer
+	public static boolean timer(int ms/*It's kind of measuring millis??*/){
+		if(game.getTotalTicks() % ms == 0){
+			return true;
+		}
+		return false;
+	}
+	
 	public static Level[] getLevels() {
 		return levels;
 	}
@@ -273,7 +270,6 @@ public class Main implements Runnable {
 	
 	public static void setLevel(int i){
 		levels[0] = new Level(String.format("/images/level%d.png", i + 1), player);
-//		level = i;
 	}
 	
 	public static Main getGame() {

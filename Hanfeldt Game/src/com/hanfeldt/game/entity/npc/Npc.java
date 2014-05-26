@@ -4,7 +4,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.EntityLiving;
-import com.hanfeldt.game.event.NpcEvents;
 
 /**
  * Adding code for NPC's, I'm just playing around, so hope I'm doing this right!

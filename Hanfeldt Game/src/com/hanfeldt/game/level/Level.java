@@ -1,10 +1,11 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.Zombie;
@@ -25,6 +26,7 @@ public class Level {
 	public static int level;
 	private int sizeX, sizeY;
 	private Spawner spawner;
+	private Background bg;
 	
 	public Level(String path, Player p) {
 		BufferedImage temp = null;
@@ -66,6 +68,8 @@ public class Level {
 			}
 		}
 		
+		bg = new Background();
+		
 		player = p;
 	}
 	
@@ -83,10 +87,11 @@ public class Level {
 		for(int i=0; i<Main.npc.size(); i++) {
 			Main.npc.get(i).tick();
 		}
-		
+		bg.tick();
 	}
 	
 	public void render(Graphics g) {
+		bg.draw(g);
 		draw(g, player.getX());
 		for(int i=0; i<Main.npc.size(); i++) {
 			Main.npc.get(i).draw(g);
@@ -107,6 +112,10 @@ public class Level {
 	
 	public int getSizeX() {
 		return sizeX;
+	}
+	
+	public int getSizeY(){
+		return sizeY;
 	}
 	
 	public Tile getTile(int x, int y) {

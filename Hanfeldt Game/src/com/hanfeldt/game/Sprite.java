@@ -7,7 +7,6 @@ public class Sprite {
 	private BufferedImage image;
 	private BufferedImage[] walkingAnims;
 	private int width, height;
-	private int walkingSpeed;
 	
 	public Sprite(SpriteSheet sheet, int x, int y, int w, int h) {
 		image = sheet.getImage(x, y, w, h);

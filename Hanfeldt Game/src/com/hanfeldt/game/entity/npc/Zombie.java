@@ -22,7 +22,7 @@ public class Zombie extends Npc {
 	
 	public void tick() {
 		super.tick();
-		if(Main.getGame().getTotalTicks() % 120 == 0) {
+		if(Main.timer(120)) {
 			facePlayer(speed);
 			if(isCollidingWithHorizTile() && !getFalling()){
 				setVelY(-getJumpHeight());
