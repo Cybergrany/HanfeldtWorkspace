@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 import java.net.URL;
@@ -94,6 +96,14 @@ public class Main implements Runnable {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		
+		try{
+			Toolkit kit = Toolkit.getDefaultToolkit();
+			Image img = kit.createImage(Main.class.getResource("/images/icon.png"));
+			frame.setIconImage(img);
+		}catch(Exception e){
+			System.err.println("Error in setting icon");
+		}
 
 		frame.setVisible(true);
 	}
