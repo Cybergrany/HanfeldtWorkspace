@@ -17,7 +17,7 @@
 
 
 ====A game by David Ofeldt and Ronan Hanley====
-Version: Alpha 0.1.1
+Version: Alpha 0.1.2
 
 == About ==
 Hanfeldt Zombie Shooter is a game that as of yet has no purpose, no function, but has a bangin' soundtrack. This will be updated once the authors decide on where this project is going.
@@ -30,7 +30,17 @@ M to mute.
 ==Changelog==
 [Characters in parenteses are GitHub SHA codes, to find the commit easily]
 
-a0.1.1[Current] (1208381f5869f8eb7db6c207a3d286d2416c8ae)- 
+a0.1.2 (1650cc0081531e948a2de45ea08028da7ca4d5ce)-
+-You now proceed to the next level when you reach the end of the one you are on.
+-New texture for Zombie spawners
+-Fixed ammo display in HUD
+-Zombies jump
+-Added an icon
+-Added ammo boxes
+-Added crosshair (This will probably be removed)
+-New sounds
+
+a0.1.1 (1208381f5869f8eb7db6c207a3d286d2416c8ae)- 
 -Added Guns
 -Zombies hurt you, chase you and do zombie things.
 
