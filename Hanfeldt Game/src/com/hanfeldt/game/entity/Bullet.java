@@ -41,7 +41,7 @@ public class Bullet extends Entity {
 		if (getX() < getX() - (Main.sizeX /2) ||
 			getX() > getX() + (Main.sizeX /2) ||
 			getY() < 0 || getY() > Main.sizeY){
-			Main.getGame().bullets.remove(this);
+			destroyBullet();
 		}
 	}
 	

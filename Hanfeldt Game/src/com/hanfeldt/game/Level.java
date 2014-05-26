@@ -9,9 +9,10 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.tile.Air;
+import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
 import com.hanfeldt.game.tile.Tile;
-import com.hanfeldt.game.tile.ZombieHouse;
+import com.hanfeldt.game.tile.ZombieSpawner;
 
 public class Level {
 	/*
@@ -50,11 +51,14 @@ public class Level {
 					tiles[j][i] = new Block(j, i);
 					break;
 				case 0xff0000ff:
-					tiles[j][i] = new ZombieHouse(j, i);
+					tiles[j][i] = new ZombieSpawner(j, i);
 					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
 						//TODO: Regular spawning, not just on level creation.
 						spawner.spawnNpc(new Zombie(Main.tileSize *j + (i2*30), Main.tileSize * i - 40));
 					}
+					break;
+				case 0xff00FF00:
+					tiles[j][i] = new AmmoPickup(j, i);
 					break;
 				default:
 					tiles[j][i] = new Air(j, i);
@@ -67,8 +71,12 @@ public class Level {
 	
 	public void tick(){
 		Main.getGame().getPlayer();
-		if(level == 0 || Main.getGame().getPlayer().levelFinished){
-//			Main.getGame().getLevels() = level;
+		if(player.levelFinished && level < Main.getLevels().length){
+			level++;
+			Main.setLevel(level);
+			player.setX(0);
+			player.setY(48);
+			player.levelFinished = false;
 		}
 		player.tick();
 		

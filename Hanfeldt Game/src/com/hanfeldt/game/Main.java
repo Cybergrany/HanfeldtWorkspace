@@ -31,6 +31,7 @@ public class Main implements Runnable {
 	public static int scale = 3;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
+	private int levelAmount = 3;//Amount of levels in game.
 	public static boolean running, isPaused, debug, muted, gameOver;
 	public static boolean aDown, dDown, wDown, escDown, mouseDown;
 	private static boolean mouseDownLastTick = false;
@@ -54,7 +55,7 @@ public class Main implements Runnable {
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
 	private Sprite cloud, sun;
-	private Player player;
+	private static Player player;
 	private static Level[] levels;
 	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
 	private static int level = 0;
@@ -109,9 +110,8 @@ public class Main implements Runnable {
 		
 		npc = new ArrayList<Npc>();
 		
-		levels = new Level[2];
-		levels[0] = new Level("/images/level1.png", player);
-		levels[1] = new Level("/images/level1.png", player);
+		levels = new Level[levelAmount];
+		setLevel(level);
 		
 		//XM player
 		// TODO When muted stop playing song...
@@ -199,7 +199,6 @@ public class Main implements Runnable {
 	public void tick() {
 		if(player.alive) {
 			levels[level].tick();
-//			levels[level].tick();
 			hud.tick();
 			for(int i=0; i<bullets.size(); i++) {
 				bullets.get(i).tick();
@@ -260,6 +259,11 @@ public class Main implements Runnable {
 	
 	public static int getCurrentLevel(){
 		return level;
+	}
+	
+	public static void setLevel(int i){
+		levels[0] = new Level(String.format("/images/level%d.png", i + 1), player);
+//		level = i;
 	}
 	
 	public static Main getGame() {
