@@ -3,11 +3,10 @@ package com.hanfeldt.game.level;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.entity.Player;
 
 public class Background {
+	public int layerAmount = 4;//The amount of layers in use in this level. 
 	
-	public int layerAmount = 1;
 	private BackgroundSheet[] layer;
 	private Sky sky;
 	
@@ -16,7 +15,9 @@ public class Background {
 		
 		layer = new BackgroundSheet[layerAmount];
 		
-		layer[0] = new BackgroundSheet("/images/bg1.png");
+		for(int i = 0; i < layerAmount; i++){
+			layer[i] = new BackgroundSheet(String.format("/images/maps/backgrounds/level%d/bg%d.png", 1, i));
+		}
 	}
 	
 	public void tick(){
@@ -26,7 +27,17 @@ public class Background {
 	public void draw(Graphics g){
 		sky.draw(g);
 		for(int i = 0; i < layer.length; i++){
-			layer[i].draw(g, - Main.getGame().getPlayer().getX() / 2  + (Main.sizeX /2), 0);
+			layer[i].draw(g, viewModifier(i), 0);
+		}
+	}
+	
+	private double viewModifier(int i){
+		if(i == 0){//Far items
+			return - Main.getGame().getPlayer().getX() / layerAmount;
+		}else if(i == layer.length - 1){//Close items
+			return - Main.getGame().getPlayer().getX();
+		}else {
+			return Main.getGame().getPlayer().getX() / (i -layerAmount);
 		}
 	}
 

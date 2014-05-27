@@ -269,7 +269,7 @@ public class Main implements Runnable {
 	}
 	
 	public static void setLevel(int i){
-		levels[0] = new Level(String.format("/images/level%d.png", i + 1), player);
+		levels[0] = new Level(String.format("/images/maps/levels/level%d.png", i + 1), player);
 	}
 	
 	public static Main getGame() {
