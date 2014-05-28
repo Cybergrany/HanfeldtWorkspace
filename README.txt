@@ -26,9 +26,16 @@ Hanfeldt Zombie Shooter is a game that as of yet has no purpose, no function, bu
 A and D to move Left/Right, W to jump.
 F3 to enter Developer Mode, and ESC to pause.
 M to mute.
+R to reload.
 
 ==Changelog==
-[Characters in parenteses are GitHub SHA codes, to find the commit easily]
+
+a0.1.3 (893870b568376897f24a657a6628e9921b30cf35)-
+-Added reloading (press 'R') with sounds
+-Ammo crates now give 16 bullets when you jump ONTO them
+-Bullets now in correct position
+-Bullets now 4x previous speed
+-Made icon larger to remove smoothness in taskbar
 
 a0.1.2 (1650cc0081531e948a2de45ea08028da7ca4d5ce)-
 -You now proceed to the next level when you reach the end of the one you are on.
