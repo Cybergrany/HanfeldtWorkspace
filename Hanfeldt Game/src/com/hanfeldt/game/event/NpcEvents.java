@@ -4,7 +4,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.io.Sound;
 
 public class NpcEvents {

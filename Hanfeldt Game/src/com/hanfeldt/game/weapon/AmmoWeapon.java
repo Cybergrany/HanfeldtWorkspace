@@ -3,11 +3,14 @@ package com.hanfeldt.game.weapon;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.io.Sound;
 
 public abstract class AmmoWeapon extends TriggerWeapon {
-	private static int ammoInClip;
-	private static int totalAmmo;
-	private static int ammoInFullClip;
+	private int ammoInClip;
+	private int totalAmmo;
+	private int ammoInFullClip;
+	private long reloadStarted;
+	private boolean reloadInProg, clipOutDone, clipInDone, reloadClickDone;
 	public AmmoWeapon(Player p, Sprite s, int aic, int ta, int aifc, int tt) {
 		super(p, s, tt);
 		ammoInClip = aic;
@@ -15,7 +18,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		ammoInFullClip = aifc;
 	}
 	
-	public static int getAmmoInClip() {
+	public int getAmmoInClip() {
 		return ammoInClip;
 	}
 	
@@ -23,7 +26,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		ammoInClip = aic;
 	}
 	
-	public static void changeAmmoInClip(int c) {
+	public void changeAmmoInClip(int c) {
 		if(Main.debugCheats) {
 			return;
 		}
@@ -39,7 +42,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		return totalAmmo;
 	}
 	
-	public static void setTotalAmmo(int ta) {
+	public void setTotalAmmo(int ta) {
 		totalAmmo = ta;
 	}
 	
@@ -48,15 +51,40 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	}
 	
 	public void reload() {
-		if(ammoInClip >= ammoInFullClip) {
-			return;
-		}
-		int ammoToReload = ammoInFullClip - ammoInClip;
-		if(ammoToReload > totalAmmo) {
-			ammoInClip = totalAmmo + ammoInClip;
-		}else{
-			ammoInClip = ammoInFullClip;
-			totalAmmo -= ammoToReload;
+		reloadInProg = true;
+		reloadStarted = totalTicks;
+		clipOutDone = clipInDone = reloadClickDone = false;
+	}
+	
+	public void tick() {
+		super.tick();
+		if(reloadInProg) {
+			if(!clipOutDone) {
+				Sound.playSound("weapon/ClipOut.wav");
+				clipOutDone = true;
+			}
+			if(!clipInDone && (totalTicks - reloadStarted) > 30) {
+				Sound.playSound("weapon/ClipIn.wav");
+				clipInDone = true;
+			}
+			if(!reloadClickDone && (totalTicks - reloadStarted) > 65) {
+				Sound.playSound("weapon/Reload.wav");
+				reloadClickDone = true;
+				reloadInProg = false;
+				
+				// Actual reload code
+				if(ammoInClip >= ammoInFullClip) {
+					return;
+				}
+				int ammoToReload = ammoInFullClip - ammoInClip;
+				if(ammoToReload > totalAmmo) {
+					ammoInClip = totalAmmo + ammoInClip;
+				}else{
+					ammoInClip = ammoInFullClip;
+					totalAmmo -= ammoToReload;
+				}
+			}
+			
 		}
 	}
 	
