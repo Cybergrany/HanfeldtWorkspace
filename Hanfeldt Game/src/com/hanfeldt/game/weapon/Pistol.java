@@ -16,15 +16,15 @@ public class Pistol extends AmmoWeapon {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
 			if(!player.getDirection()) {
 				// facing left
-				Main.getGame().bullets.add(new Bullet((Main.sizeX /2) - (Main.tileSize /2) -3, player.getY() + Main.tileSize));
+				Main.getGame().bullets.add(new Bullet(player.getX() - 3, player.getY() + Main.tileSize));
 			}else{
 				// facing right
-				Main.getGame().bullets.add(new Bullet((Main.sizeX /2) + (Main.tileSize /2) +4, player.getY() + Main.tileSize));
+				Main.getGame().bullets.add(new Bullet(player.getX() + Main.tileSize + 3, player.getY() + Main.tileSize));
 			}
-			Sound.playSound("pistol_shoot.wav");
+			Sound.playSound("weapon/pistol_shoot.wav");
 			super.trigger();
 		}else{
-			Sound.playSound("pistol_empty.wav");
+			Sound.playSound("weapon/pistol_empty.wav");
 		}
 	}	
 }

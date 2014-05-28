@@ -51,9 +51,14 @@ public class Hud {
 			character.draw(g, 5, Main.sizeY - Main.tileSize);
 		}
 		
-		for(int i = 1; i <= bullets; i++){
-			ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
-			bulletx+=15;
+		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
+			for(int i = 1; i <= bullets; i++){
+				ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
+				bulletx+=15;
+			}
+			weapon.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
+			String ammoString = Integer.toString(((AmmoWeapon) player.getWeaponEquipped()).getTotalAmmo());
+			g.drawString("Ammo: " + ammoString, Main.sizeX - 50, Main.sizeY - 20);
 		}
 		
 		bulletx = 28;
@@ -68,12 +73,9 @@ public class Hud {
 		g.drawOval(Main.mouseX - 7, Main.mouseY - 7, 14, 14);
 		crossHair.draw(g, Main.mouseX - 7, Main.mouseY - 7);
 		
-		weapon.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
-		
 		if(paused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);
 			g.drawString("Press 'M' to mute.", Main.sizeX / 8, Main.sizeY / 2 + 20);
-			g.drawString("I feex.", Main.sizeX / 8, Main.sizeY / 2 + 40);
 		}
 		
 		if(debug){

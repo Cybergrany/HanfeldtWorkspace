@@ -32,11 +32,17 @@ public class PlayerEvents{
 	}
 	
 	public synchronized void damagePlayer(int damage, int id) {
+		if(Main.debugCheats) {
+			return;
+		}
 		player.changeHealth(-damage);
 		playerDamage(id);
 	}
 	
 	public synchronized void damagePlayer(int damage, int id, Npc npc) {
+		if(Main.debugCheats) {
+			return;
+		}
 		if(lastTickHurt == 0) {
 			lastTickHurt = Main.getGame().getTotalTicks() - hurtTime;
 		}

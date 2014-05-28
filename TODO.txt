@@ -1,5 +1,4 @@
 Add things that need doing here.
 
 - Fix up collision detection to work properly
-- Add entity collision detection
 - Fix muting doesn't mute music

@@ -11,8 +11,8 @@ import com.hanfeldt.game.Main;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
-	static boolean pausePressed, debugPressed, mutePressed, soundPlayed;
-
+	static boolean pausePressed, debugPressed, mutePressed;
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -28,11 +28,7 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			break;
 			
 		case(KeyEvent.VK_W): //Going for W yolo
-			Main.wDown = true;//W might be more intuitive, but depends on the kind of platformer we want
-			if(!soundPlayed){
-				Sound.playSound("Jump.wav");//Better place and way to call this, I know. Just making sure it works and being lazy.
-			}
-			soundPlayed = true;
+			Main.wDown = true;
 			break;
 		
 		}
@@ -81,7 +77,10 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 				mutePressed = true;
 				Hud.muted = true;
 			}
-		
+		//Hippity hoppity skilly reloading!
+		case(KeyEvent.VK_R):
+			Main.getGame().reload();
+			break;
 		case(KeyEvent.VK_D):
 			Main.dDown = false;
 			break;
@@ -89,8 +88,7 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			Main.aDown = false;
 			break;
 		case(KeyEvent.VK_W):
-			Main.wDown = false;//W is good :)
-			soundPlayed = false;
+			Main.wDown = false;
 			break;
 		}
 	}

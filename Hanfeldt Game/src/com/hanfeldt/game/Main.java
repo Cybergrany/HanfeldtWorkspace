@@ -17,6 +17,7 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
 
@@ -42,6 +43,7 @@ public class Main implements Runnable {
 	public static float terminalVelocity = 5;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public static SpriteSheet spriteSheet;
+	public static boolean debugCheats = false; // added this to debug easier; player can't take damage and infinite bullets
 	
 	private int lives = 3;
 	private int ticksPs = 60;
@@ -289,7 +291,9 @@ public class Main implements Runnable {
 	}
 	
 	public void playerDied() {
-		lives--;
+		if(!debugCheats) {
+			lives--;
+		}
 		player.alive = false;
 		if(lives <= 0) {
 			gameOver = true;
@@ -306,6 +310,13 @@ public class Main implements Runnable {
 	
 	public static SpriteSheet getSpritesheet() {
 		return spriteSheet;
+	}
+	
+	public void reload() {
+		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
+			AmmoWeapon wep = (AmmoWeapon) player.getWeaponEquipped();
+			wep.reload();
+		}
 	}
 	
 }

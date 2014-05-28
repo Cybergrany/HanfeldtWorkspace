@@ -1,5 +1,6 @@
 package com.hanfeldt.game.weapon;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
 
@@ -23,6 +24,9 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	}
 	
 	public static void changeAmmoInClip(int c) {
+		if(Main.debugCheats) {
+			return;
+		}
 		ammoInClip += c;
 		if(ammoInClip < 0) {
 			ammoInClip = 0;
@@ -41,7 +45,19 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	
 	public void trigger() {
 		changeAmmoInClip(-1);
-		System.out.println(ammoInClip);
+	}
+	
+	public void reload() {
+		if(ammoInClip >= ammoInFullClip) {
+			return;
+		}
+		int ammoToReload = ammoInFullClip - ammoInClip;
+		if(ammoToReload > totalAmmo) {
+			ammoInClip = totalAmmo + ammoInClip;
+		}else{
+			ammoInClip = ammoInFullClip;
+			totalAmmo -= ammoToReload;
+		}
 	}
 	
 }

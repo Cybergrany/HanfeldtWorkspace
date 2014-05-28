@@ -10,11 +10,12 @@ import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.weapon.Pistol;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.io.Sound;
 
 public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
-	private Weapon weaponEquipped = new Pistol(this, 8, 24, 8, 10);
+	private Weapon weaponEquipped = new Pistol(this, 8, 8, 8, 10);
 	static int maxHealth = Values.player_max_health;
 	
 	public boolean alive = true;
@@ -65,9 +66,10 @@ public class Player extends EntityLiving {
 		isMovingLeft = Main.aDown;
 		isMovingRight = Main.dDown;
 
-		if(Main.wDown && !falling) {
+		if(Main.wDown && !falling && velY == 0) {
 			velY = -getJumpHeight();
 			falling = true;
+			Sound.playSound("Jump.wav");
 		}
 		
 		// Walk acceleration/slide is below

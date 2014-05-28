@@ -3,6 +3,7 @@ package com.hanfeldt.game.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.npc.Npc;
@@ -15,9 +16,10 @@ public class Bullet extends Entity {
 	public Bullet(int x, int y) {
 		super(x, y);
 		try {
-			angle = (float) -(Math.atan2(Main.mouseX - x, Main.mouseY - y)) + 190.08f;
+			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.tileSize),
+														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.sizeX /2 + (Main.tileSize /2) + 3:Main.sizeX /2 -3)));
 		}catch(Exception e) {
-			angle = 0;
+			e.printStackTrace();
 		}
 	}
 	
@@ -26,15 +28,17 @@ public class Bullet extends Entity {
 		if(totalTicks >= Long.MAX_VALUE) {
 			totalTicks = 0;
 		}
-		changeX((float) Math.cos(angle));
-		changeY((float) Math.sin(angle));
-		// TODO If it goes out of bounds, destroy it
-		destroyBulletAtBounds();//Lyk dis?
+		setVelX((float) Math.cos(angle*Math.PI/180));
+		setVelY((float) Math.sin(angle*Math.PI/180));
+		changeX(getVelX());
+		changeY(getVelY());
+		destroyBulletAtBounds();//Lyk dis? --> sure
 	}
 	
 	public void draw(Graphics g) {
 		g.setColor(color);
-		g.drawLine(getX(), getY(), getX(), getY());
+		int posX = getX() - Main.getGame().getPlayer().getX() + (Main.sizeX /2) - (Main.tileSize /2);
+		g.drawLine(posX, getY(), posX, getY());
 	}
 	
 	private void destroyBulletAtBounds(){
