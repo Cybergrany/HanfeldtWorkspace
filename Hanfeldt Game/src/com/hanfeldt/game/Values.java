@@ -25,8 +25,10 @@ public class Values {
 	public static int npc_out_of_map_id = 5;
 	
 	public static int bullet_damage_id = 4;
-	public static int bullet_damage_dealt_to_zombie = 10;
+	public static int bullet_damage_dealt_to_zombie = 40;
 	public static int bullet_damage_dealt_to_player = 60;
+	
+	public static int bullets_per_crate = 16; // You can change this name if you wants
 	
 	public static int player_max_health = 100;
 	

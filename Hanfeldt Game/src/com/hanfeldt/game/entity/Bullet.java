@@ -12,6 +12,7 @@ public class Bullet extends Entity {
 	private float angle;
 	private static final Color color = new Color(0xFF, 0x55, 0x00);
 	private long totalTicks = 0;
+	private float speed = 3.0f;
 	
 	public Bullet(int x, int y) {
 		super(x, y);
@@ -28,8 +29,8 @@ public class Bullet extends Entity {
 		if(totalTicks >= Long.MAX_VALUE) {
 			totalTicks = 0;
 		}
-		setVelX((float) Math.cos(angle*Math.PI/180));
-		setVelY((float) Math.sin(angle*Math.PI/180));
+		setVelX((float) Math.cos(angle*Math.PI/180) * speed);
+		setVelY((float) Math.sin(angle*Math.PI/180) * speed);
 		changeX(getVelX());
 		changeY(getVelY());
 		destroyBulletAtBounds();//Lyk dis? --> sure

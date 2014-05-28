@@ -13,5 +13,9 @@ public class ZombieSpawner extends Tile{
 	public boolean isSolid(){
 		return false;
 	}
-
+	
+	public String toString() {
+		return "ZombieSpawner";
+	}
+	
 }

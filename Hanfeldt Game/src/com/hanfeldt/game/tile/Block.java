@@ -15,4 +15,8 @@ public class Block extends Tile {
 		return true;
 	}
 	
+	public String toString() {
+		return "Block";
+	}
+	
 }

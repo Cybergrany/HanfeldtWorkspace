@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.tile.Tile;
 
 public class EntityLiving extends Entity {
 	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one
@@ -101,9 +102,11 @@ public class EntityLiving extends Entity {
 		try {
 		outerLoop:
 			for(int i=0; i<getTileSizeX(); i++) {
-				boolean tileBelow = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i, getTileY() + getTileSizeY()).isSolid();
-				boolean tileBelowRight = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
-				if( (tileBelow || tileBelowRight) ) {
+				Tile tileBelow = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i, getTileY() + getTileSizeY());
+				tileBelow.onCollidedEntity(this);
+				boolean tileBelowSolid = tileBelow.isSolid();
+				boolean tileBelowRightSolid = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
+				if(tileBelowRightSolid || tileBelowSolid) {
 					falling = false;
 					if(velY >= Main.terminalVelocity - 1) {
 						if(this instanceof Player) {

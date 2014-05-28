@@ -17,6 +17,7 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
@@ -206,7 +207,7 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-		if(player.alive) {
+	if(player.alive) {
 			levels[level].tick();
 			hud.tick();
 			for(int i=0; i<bullets.size(); i++) {

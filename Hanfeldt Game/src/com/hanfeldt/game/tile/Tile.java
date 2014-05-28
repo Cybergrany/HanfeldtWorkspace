@@ -1,6 +1,7 @@
 package com.hanfeldt.game.tile;
 
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.entity.Entity;
 
 public class Tile {
 	private Sprite sprite;
@@ -30,4 +31,7 @@ public class Tile {
 	public int getY() {
 		return y;
 	}
+	
+	public void onCollidedEntity(Entity e) {}
+	
 }

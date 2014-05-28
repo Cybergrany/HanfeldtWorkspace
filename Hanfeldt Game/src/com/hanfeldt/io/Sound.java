@@ -1,6 +1,5 @@
 package com.hanfeldt.io;
 
-import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -21,8 +20,8 @@ public class Sound {
 	public static synchronized void playSound(final String sound){//For sound, call Sound.playSound("SoundName");
 		if(!Main.muted){
 				try{
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream("/sounds/" + sound));
 					Clip clip = AudioSystem.getClip();
-					AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("res/sounds/" + sound));
 					clip.open(inputStream);
 					clip.start();
 				}catch(Exception e){

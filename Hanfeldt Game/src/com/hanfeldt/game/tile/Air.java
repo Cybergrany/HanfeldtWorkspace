@@ -10,4 +10,8 @@ public class Air extends Tile {
 		setSprite(new Sprite(Main.spriteSheet, 0, 3, 1, 1));
 	}
 	
+	public String toString() {
+		return "Air";
+	}
+	
 }

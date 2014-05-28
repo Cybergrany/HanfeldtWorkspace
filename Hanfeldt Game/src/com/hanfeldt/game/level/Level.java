@@ -22,7 +22,7 @@ public class Level {
 	
 	private final BufferedImage levelImage;
 	private Player player;
-	public static Tile[][] tiles;//Making this public static just to test things
+	public Tile[][] tiles;//Making this public static just to test things
 	public static int level;
 	private int sizeX, sizeY;
 	private Spawner spawner;
@@ -120,6 +120,10 @@ public class Level {
 	
 	public Tile getTile(int x, int y) {
 		return tiles[x][y];
+	}
+	
+	public void setTile(int x, int y, Tile t) {
+		tiles[x][y] = t;
 	}
 	
 }
