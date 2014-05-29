@@ -23,7 +23,7 @@ public class Level {
 	private final BufferedImage levelImage;
 	private Player player;
 	public Tile[][] tiles;//Making this public static just to test things
-	public static int level;
+	public static int level = 0;
 	private int sizeX, sizeY;
 	private Spawner spawner;
 	private Background bg;
@@ -39,7 +39,6 @@ public class Level {
 			levelImage = temp;
 		}
 		
-		level = 0;
 		
 		sizeY = Main.sizeY / 16;
 		sizeX = levelImage.getWidth();
@@ -68,16 +67,17 @@ public class Level {
 			}
 		}
 		
-		bg = new Background();
+		setBg(level);
 		
 		player = p;
 	}
 	
 	public void tick(){
 		Main.getGame().getPlayer();
-		if(player.levelFinished && level < Main.getLevels().length){
+		if(player.levelFinished){
 			level++;
 			Main.setLevel(level);
+			setBg(level);
 			player.setX(0);
 			player.setY(48);
 			player.levelFinished = false;
@@ -124,6 +124,10 @@ public class Level {
 	
 	public void setTile(int x, int y, Tile t) {
 		tiles[x][y] = t;
+	}
+	
+	public void setBg(int currentLevel){
+		bg = new Background(currentLevel);
 	}
 	
 }

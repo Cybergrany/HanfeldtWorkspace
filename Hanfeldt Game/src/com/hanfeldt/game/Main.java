@@ -21,6 +21,7 @@ import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
+import com.hanfeldt.io.ResourceManager;
 
 import de.quippy.javamod.mixer.Mixer;
 import de.quippy.javamod.multimedia.MultimediaContainer;
@@ -44,6 +45,7 @@ public class Main implements Runnable {
 	public static float terminalVelocity = 5;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public static SpriteSheet spriteSheet;
+	public ResourceManager resourceManager;
 	public static boolean debugCheats = false; // added this to debug easier; player can't take damage and infinite bullets
 	
 	private int lives = 3;
@@ -112,6 +114,7 @@ public class Main implements Runnable {
 
 	public void init() {
 		gamePanel.requestFocus();
+		resourceManager = new ResourceManager();
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
@@ -268,6 +271,8 @@ public class Main implements Runnable {
 	}
 	
 	public static int getCurrentLevel(){
+		//This just returns 0, for the benefit of the callers who treat levels as an array..
+		//Things break when I change it from an array of levels so I'll leave it for now.
 		return level;
 	}
 	

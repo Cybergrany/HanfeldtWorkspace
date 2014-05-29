@@ -19,6 +19,7 @@ public class BackgroundSheet {
 			temp = ImageIO.read(Main.class.getResource(path));
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.err.println("Failed to read " + path);
 		}finally{
 			sheet = temp;
 		}
