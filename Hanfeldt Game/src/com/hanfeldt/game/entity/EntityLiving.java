@@ -106,7 +106,11 @@ public class EntityLiving extends Entity {
 				tileBelow.onCollidedEntity(this);
 				boolean tileBelowSolid = tileBelow.isSolid();
 				boolean tileBelowRightSolid = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
-				if(tileBelowRightSolid || tileBelowSolid) {
+				boolean tileBelowLeftSolid = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i -1, getTileY() + getTileSizeY()).isSolid();
+				// I know this if statement is shitey, fix it if you can think of a better solution
+				if( (tileBelowSolid || tileBelowRightSolid) 
+					//Next line accounts for 1x1 hole
+					&& !(!tileBelowSolid && tileBelowRightSolid && tileBelowLeftSolid && getX() % Main.tileSize == 0) ) {
 					falling = false;
 					if(velY >= Main.terminalVelocity - 1) {
 						if(this instanceof Player) {
@@ -116,7 +120,6 @@ public class EntityLiving extends Entity {
 					setTileY(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
 					break outerLoop;
 				}
-				
 				if(i == getTileSizeX() -1) {
 					falling = true;
 				}
