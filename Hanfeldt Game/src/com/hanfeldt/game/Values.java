@@ -28,6 +28,8 @@ public class Values {
 	public static int bullet_damage_dealt_to_zombie = 40;
 	public static int bullet_damage_dealt_to_player = 60;
 	
+	public static int money_from_zombie = 25;
+	
 	public static int bullets_per_crate = 16; // You can change this name if you wants
 	
 	public static int player_max_health = 100;

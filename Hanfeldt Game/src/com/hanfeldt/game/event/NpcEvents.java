@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.io.Sound;
 
 public class NpcEvents {
@@ -37,6 +38,9 @@ public class NpcEvents {
 			Sound.playSound("zombie_hit_from_gun.wav");
 		}
 		if(npc.getHealth() <= 0){
+			if(npc instanceof Zombie && id == Values.zombie_damage_from_bullet_id) {
+				Main.getGame().getPlayer().changeMoney(Values.money_from_zombie);
+			}
 			killNpc(npc, id);
 		}
 		npc.setVelX(6);

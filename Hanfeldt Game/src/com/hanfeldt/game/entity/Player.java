@@ -17,6 +17,7 @@ public class Player extends EntityLiving {
 	private PlayerEvents events;
 	private Weapon weaponEquipped = new Pistol(this, 8, 8, 8, 10);
 	static int maxHealth = Values.player_max_health;
+	private int money = 100;
 	
 	public boolean alive = true;
 	public boolean levelFinished;
@@ -142,6 +143,18 @@ public class Player extends EntityLiving {
 	
 	public Weapon getWeaponEquipped() {
 		return weaponEquipped;
+	}
+	
+	public int getMoney() {
+		return money;
+	}
+	
+	public void setMoney(int m) {
+		money = m;
+	}
+	
+	public void changeMoney(int c) {
+		money += c;
 	}
 	
 }

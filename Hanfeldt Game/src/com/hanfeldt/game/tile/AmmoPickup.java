@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 
@@ -17,7 +18,7 @@ public class AmmoPickup extends Tile{
 	
 	public void onCollidedEntity(Entity e) {
 		super.onCollidedEntity(e);
-		if(hasAmmo) {
+		if(hasAmmo && e instanceof Player) {
 			// This is temporary while I work out why tile.setTile() doesn't work... TODO fix that
 			Weapon wep = Main.getGame().getPlayer().getWeaponEquipped();
 			if(wep instanceof AmmoWeapon) {

@@ -3,10 +3,8 @@ package com.hanfeldt.game.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.entity.npc.Npc;
 
 public class Bullet extends Entity {
 	private float angle;

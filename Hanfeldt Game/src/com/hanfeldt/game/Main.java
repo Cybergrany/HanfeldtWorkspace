@@ -17,7 +17,6 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
-import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
@@ -169,7 +168,7 @@ public class Main implements Runnable {
 		long nsPerTick = (long) 1000000000 / ticksPs;
 		long nsPerFrame = (long) 1000000000 / frameLimit;
 		long lastTimer = System.currentTimeMillis();
-		int frames = 0, ticks = 0;
+		int frames = 0;//, ticks = 0;
 		running = true;
 		isPaused = false;
 
@@ -177,13 +176,13 @@ public class Main implements Runnable {
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
 				fps = frames;
 				lastTimer = System.currentTimeMillis();
-				ticks = frames = 0;
+				/*ticks = */frames = 0;
 			}
 
 			if (!isPaused) {//Should game automatically pause on loss of focus? (... &&gamePanel.hasFocus()){...
 				if (System.nanoTime() > lastTick + nsPerTick) {
 					tick();
-					ticks++;
+					//ticks++;
 					totalTicks++;
 					if(totalTicks >= Long.MAX_VALUE) {
 						totalTicks = 0;
@@ -210,7 +209,7 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-	if(player.alive) {
+	if(player.alive && gamePanel.hasFocus()) {
 			levels[level].tick();
 			hud.tick();
 			for(int i=0; i<bullets.size(); i++) {
@@ -220,13 +219,15 @@ public class Main implements Runnable {
 			if(!mouseDownLastTick && mouseDown && player.getWeaponEquipped() instanceof TriggerWeapon) {
 				((TriggerWeapon) player.getWeaponEquipped()).tryTrigger();
 			}
-		}else{
+		}else if(!player.alive){
 			if(totalTicks >= tickDied + deadScreenTicks && lives > 0) {
 				respawnPlayer();
 			}
 		}
 		// Moved NPC ticking to Level, I think it's more appropriate
 		mouseDownLastTick = mouseDown;
+		//Focus nagger
+		hud.setHasFocus(gamePanel.hasFocus());
 	}
 
 	public void render() {
@@ -253,7 +254,6 @@ public class Main implements Runnable {
 			g.setColor(new Color(255, 255, 255));
 			g.drawString("x " + Integer.toString(lives), (sizeX /2) - 5, (sizeY /2) - 49);
 		}
-		
 		gamePanel.repaint();
 		g.dispose();
 	}

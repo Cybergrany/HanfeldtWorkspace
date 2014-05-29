@@ -3,6 +3,10 @@ package com.hanfeldt.game;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
@@ -14,9 +18,11 @@ public class Hud {
 	private Sprite heart, character, deadCharacter, crossHair, weapon, ammo;
 	private Player player;
 	
+	private boolean hasFocus = true;
 	private Color defWhite = new Color(255 , 255, 255);
 	private Color transDark = new Color(0, 0, 0, 80);
 	private Font font = new Font("Arial", Font.PLAIN, 9);
+	private ImageIcon focusNagger1, focusNagger2;
 	
 	public Hud(Player player, Sprite character){
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
@@ -26,6 +32,12 @@ public class Hud {
 		weapon = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
 		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
 		this.player = player;
+		try {
+			focusNagger1 = new ImageIcon(ImageIO.read(Hud.class.getResource("/images/FocusNagger1.png")));
+			focusNagger2 = new ImageIcon(ImageIO.read(Hud.class.getResource("/images/FocusNagger2.png")));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void tick(){
@@ -58,8 +70,9 @@ public class Hud {
 			}
 			weapon.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
 			String ammoString = Integer.toString(((AmmoWeapon) player.getWeaponEquipped()).getTotalAmmo());
-			g.drawString("Ammo: " + ammoString, Main.sizeX - 50, Main.sizeY - 20);
+			g.drawString("Ammo: " + ammoString, Main.sizeX - 80, Main.sizeY - 20);
 		}
+		g.drawString("Money: " + Integer.toString(player.getMoney()), Main.sizeX - 80, Main.sizeY - 40);
 		
 		bulletx = 28;
 		
@@ -99,5 +112,18 @@ public class Hud {
 		if(muted){
 			g.drawString("Muted", Main.sizeX - 27, Main.sizeY - 5);
 		}
+		
+		if(!hasFocus) {
+			if(Main.getGame().getTotalTicks() % 60 > 30) {
+				g.drawImage(focusNagger1.getImage(), Main.sizeX /4, Main.sizeY /3, null);
+			}else{
+				g.drawImage(focusNagger2.getImage(), Main.sizeX /4, Main.sizeY /3, null);
+			}
+		}
 	}
+	
+	public void setHasFocus(boolean hf) {
+		hasFocus = hf;
+	}
+	
 }

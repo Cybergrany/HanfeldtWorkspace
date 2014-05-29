@@ -6,7 +6,6 @@ import com.hanfeldt.game.Main;
 
 public class Entity {
 	private float x, y;
-	private Rectangle bounds;
 	float velX = 0f, velY = 0f;
 	float velXMax, velYMax = 3f;
 	boolean direction = true; // Right = true, Left = false
