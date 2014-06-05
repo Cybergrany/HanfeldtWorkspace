@@ -21,6 +21,7 @@ import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.ResourceManager;
+import com.hanfeldt.io.XMPlayer;
 
 import de.quippy.javamod.mixer.Mixer;
 import de.quippy.javamod.multimedia.MultimediaContainer;
@@ -45,7 +46,7 @@ public class Main implements Runnable {
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public static SpriteSheet spriteSheet;
 	public ResourceManager resourceManager;
-	public static boolean debugCheats = true; // added this to debug easier; player can't take damage and infinite bullets
+	public static boolean debugCheats = false; // added this to debug easier; player can't take damage and infinite bullets
 	
 	private int lives = 3;
 	private int ticksPs = 60;
@@ -66,6 +67,7 @@ public class Main implements Runnable {
 	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
+	private Mixer mixer;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
 	public static void main(String[] args) {
@@ -126,36 +128,30 @@ public class Main implements Runnable {
 		setLevel(level);
 		
 		//XM player
-		// TODO When muted stop playing song...
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					Helpers.registerAllClasses();
-					URL music = Main.class.getResource(xmMusicPath);
-					Properties props = new Properties();
-					props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
-					props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
-					props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "FALSE");
-					props.setProperty(ModContainer.PROPERTY_PLAYER_NOISEREDUCTION, "FALSE");
-					props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "TRUE");
-					props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
-					props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
-					MultimediaContainerManager.configureContainer(props);
-					URL modUrl = music;
-					MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
-					Mixer mixer = multimediaContainer.createNewMixer();
-					mixer.startPlayback();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-					System.exit(3);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				run();
-			}
-		}).start();
-		
+		try {
+			Helpers.registerAllClasses();
+			URL music = Main.class.getResource(xmMusicPath);
+			Properties props = new Properties();
+			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
+			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
+			props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "FALSE");
+			props.setProperty(ModContainer.PROPERTY_PLAYER_NOISEREDUCTION, "FALSE");
+			props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "TRUE");
+			props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
+			props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
+			MultimediaContainerManager.configureContainer(props);
+			URL modUrl = music;
+			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
+			mixer = multimediaContainer.createNewMixer();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.exit(3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		XMPlayer xmp = new XMPlayer(mixer);
+		Thread xmThread = new Thread(xmp);
+		xmThread.start();
 		// Start "GameLoop"
 		running = true;
 		debug = false;
@@ -209,7 +205,20 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-	if(player.alive && gamePanel.hasFocus()) {
+		if(muted && !mixer.isPaused()) {
+			new Thread(new Runnable() {
+				public void run() {
+					mixer.pausePlayback();	
+				}
+			}).start();
+		}else if(!muted && mixer.isPaused()) {
+			new Thread(new Runnable() {
+				public void run() {
+					mixer.pausePlayback();
+				}
+			}).start();
+		}
+		if(player.alive && gamePanel.hasFocus()) {
 			levels[level].tick();
 			hud.tick();
 			for(int i=0; i<bullets.size(); i++) {
@@ -224,6 +233,7 @@ public class Main implements Runnable {
 				respawnPlayer();
 			}
 		}
+			
 		// Moved NPC ticking to Level, I think it's more appropriate
 		mouseDownLastTick = mouseDown;
 		//Focus nagger
@@ -324,5 +334,5 @@ public class Main implements Runnable {
 			wep.reload();
 		}
 	}
-	
+
 }
