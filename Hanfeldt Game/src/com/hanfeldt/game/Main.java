@@ -50,7 +50,7 @@ public class Main implements Runnable {
 	
 	private int lives = 3;
 	private int ticksPs = 60;
-	private int frameLimit = 120;
+	private int frameLimit = 80;
 	private long totalTicks = 0;
 	
 	public static ArrayList<Npc> npc;

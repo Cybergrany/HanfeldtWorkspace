@@ -105,7 +105,10 @@ public class Level {
 	public void draw(Graphics g, int posX) {
 		for(int i=0; i<tiles[0].length; i++) {
 			for(int j=0; j<tiles.length; j++) {
-				tiles[j][i].getSprite().draw(g, (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2), i * Main.tileSize);
+				int screenX = (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2);
+				if(screenX + Main.tileSize > 0 && screenX < Main.sizeX) {
+					tiles[j][i].getSprite().draw(g, screenX, i * Main.tileSize);
+				}
 			}
 		}
 	}

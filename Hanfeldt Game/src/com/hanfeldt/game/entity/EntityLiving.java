@@ -42,8 +42,11 @@ public class EntityLiving extends Entity {
 	}
 	
 	public void draw(Graphics g) {
-		sprite.draw(g, getX() - Main.getGame().getPlayer().getX() 
-				+ (Main.sizeX /2) - (Main.tileSize /2), getY(), !direction);
+		int screenX = getX() - Main.getGame().getPlayer().getX() 
+				+ (Main.sizeX /2) - (Main.tileSize /2);
+		if(screenX + getSizeX() > 0 && screenX < Main.sizeX){
+			sprite.draw(g, screenX, getY(), !direction);
+		}
 	}
 	
 	public int getSizeX() {
