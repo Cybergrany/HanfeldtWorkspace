@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.tile.Tile;
+import com.hanfeldt.io.Sound;
 
 public class EntityLiving extends Entity {
 	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one
@@ -17,7 +18,7 @@ public class EntityLiving extends Entity {
 	int cycleTicks = 0;
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
-	boolean isCollidingWithHorizTile=false;
+	protected boolean isCollidingWithHorizTile=false;
 	
 	public EntityLiving(Sprite s, int h, int x, int y) {
 		super(x, y);
@@ -85,7 +86,6 @@ public class EntityLiving extends Entity {
 				}
 			}
 		}catch(Exception e) {}
-		
 		//tile(s) to the left
 		try {
 			outerLoop:
@@ -99,7 +99,6 @@ public class EntityLiving extends Entity {
 					}
 				}
 		}catch(Exception e) {}
-		
 		//tile(s) below
 		//TODO Be able to fall down 1x1 hole
 		try {
@@ -141,6 +140,12 @@ public class EntityLiving extends Entity {
 					}
 				}
 		}catch(Exception e) {}
+		
+	}
+	
+	public void jump(){
+		velY = -getJumpHeight();
+		falling = true;
 		
 	}
 	

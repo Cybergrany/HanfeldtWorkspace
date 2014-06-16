@@ -127,31 +127,31 @@ public class Main implements Runnable {
 		levels = new Level[levelAmount];
 		setLevel(level);
 		
-		//XM player
-		try {
-			Helpers.registerAllClasses();
-			URL music = Main.class.getResource(xmMusicPath);
-			Properties props = new Properties();
-			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
-			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
-			props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "FALSE");
-			props.setProperty(ModContainer.PROPERTY_PLAYER_NOISEREDUCTION, "FALSE");
-			props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "TRUE");
-			props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
-			props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
-			MultimediaContainerManager.configureContainer(props);
-			URL modUrl = music;
-			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
-			mixer = multimediaContainer.createNewMixer();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.exit(3);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		XMPlayer xmp = new XMPlayer(mixer);
-		Thread xmThread = new Thread(xmp);
-		xmThread.start();
+//		//XM player
+//		try {
+//			Helpers.registerAllClasses();
+//			URL music = Main.class.getResource(xmMusicPath);
+//			Properties props = new Properties();
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "FALSE");
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_NOISEREDUCTION, "FALSE");
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "TRUE");
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
+//			props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
+//			MultimediaContainerManager.configureContainer(props);
+//			URL modUrl = music;
+//			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
+//			mixer = multimediaContainer.createNewMixer();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			System.exit(3);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		XMPlayer xmp = new XMPlayer(mixer);
+//		Thread xmThread = new Thread(xmp);
+//		xmThread.start();
 		// Start "GameLoop"
 		running = true;
 		debug = false;
@@ -205,20 +205,20 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-		if(muted && !mixer.isPaused()) {
-			new Thread(new Runnable() {
-				public void run() {
-					mixer.pausePlayback();	
-				}
-			}).start();
-		}else if(!muted && mixer.isPaused()) {
-			new Thread(new Runnable() {
-				public void run() {
-					mixer.pausePlayback();
-				}
-			}).start();
-		}
-		if(player.alive && gamePanel.hasFocus()) {
+//		if(muted && !mixer.isPaused()) {
+//			new Thread(new Runnable() {
+//				public void run() {
+//					mixer.pausePlayback();	
+//				}
+//			}).start();
+//		}else if(!muted && mixer.isPaused()) {
+//			new Thread(new Runnable() {
+//				public void run() {
+//					mixer.pausePlayback();
+//				}
+//			}).start();
+//		}
+		if(player.alive) {
 			levels[level].tick();
 			hud.tick();
 			for(int i=0; i<bullets.size(); i++) {
@@ -237,7 +237,7 @@ public class Main implements Runnable {
 		// Moved NPC ticking to Level, I think it's more appropriate
 		mouseDownLastTick = mouseDown;
 		//Focus nagger
-		hud.setHasFocus(gamePanel.hasFocus());
+		hud.setHasFocus(true);
 	}
 
 	public void render() {

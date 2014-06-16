@@ -68,8 +68,7 @@ public class Player extends EntityLiving {
 		isMovingRight = Main.dDown;
 
 		if(Main.wDown && !falling && velY == 0) {
-			velY = -getJumpHeight();
-			falling = true;
+			jump();
 			Sound.playSound("Jump.wav");
 		}
 		

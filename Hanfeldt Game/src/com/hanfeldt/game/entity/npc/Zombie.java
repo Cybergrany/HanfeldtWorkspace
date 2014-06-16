@@ -17,16 +17,19 @@ public class Zombie extends Npc {
 		super(s, maxHealth, x, y);
 		setVelXMax(speed);
 		events = new NpcEvents(this);
-		setJumpHeight(2);
+		setJumpHeight(2.3f);//Slightly higher than block so they can jump over them with ease
 	}
 	
 	public void tick() {
 		super.tick();
 		if(Main.timer(120)) {
 			facePlayer(speed);
+		}
+		if(Main.timer(60)){//Checks if zombie needs to jump more often so they don't stay still as much
 			if(isCollidingWithHorizTile() && !getFalling()){
-				setVelY(-getJumpHeight());
-				setFalling(true);
+				jump();
+				facePlayer(speed);//Forward momentum towards player
+				isCollidingWithHorizTile = false;
 			}
 		}
 		events.tick();
