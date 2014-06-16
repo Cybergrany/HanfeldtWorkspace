@@ -7,9 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import javax.swing.JFrame;
 
@@ -21,13 +19,6 @@ import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.ResourceManager;
-import com.hanfeldt.io.XMPlayer;
-
-import de.quippy.javamod.mixer.Mixer;
-import de.quippy.javamod.multimedia.MultimediaContainer;
-import de.quippy.javamod.multimedia.MultimediaContainerManager;
-import de.quippy.javamod.multimedia.mod.ModContainer;
-import de.quippy.javamod.system.Helpers;
 
 public class Main implements Runnable {
 
@@ -63,11 +54,11 @@ public class Main implements Runnable {
 	private BufferedImage screenImage;
 	private static Player player;
 	private static Level[] levels;
-	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
+//	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
 	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
-	private Mixer mixer;
+//	private Mixer mixer;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
 	public static void main(String[] args) {

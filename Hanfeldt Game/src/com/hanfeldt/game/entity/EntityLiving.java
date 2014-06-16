@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.tile.Tile;
-import com.hanfeldt.io.Sound;
 
 public class EntityLiving extends Entity {
 	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one
