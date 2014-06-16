@@ -54,12 +54,12 @@ public class Main implements Runnable {
 	private BufferedImage screenImage;
 	private static Player player;
 	private static Level[] levels;
-//	private static String xmMusicPath = "/sounds/ARPYSUNDAY.xm";
 	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
-//	private Mixer mixer;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
+	
+	private Thread entityThread;
 
 	public static void main(String[] args) {
 		game = new Main();
@@ -118,31 +118,6 @@ public class Main implements Runnable {
 		levels = new Level[levelAmount];
 		setLevel(level);
 		
-//		//XM player
-//		try {
-//			Helpers.registerAllClasses();
-//			URL music = Main.class.getResource(xmMusicPath);
-//			Properties props = new Properties();
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "FALSE");
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_NOISEREDUCTION, "FALSE");
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "TRUE");
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
-//			props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
-//			MultimediaContainerManager.configureContainer(props);
-//			URL modUrl = music;
-//			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
-//			mixer = multimediaContainer.createNewMixer();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//			System.exit(3);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		XMPlayer xmp = new XMPlayer(mixer);
-//		Thread xmThread = new Thread(xmp);
-//		xmThread.start();
 		// Start "GameLoop"
 		running = true;
 		debug = false;
@@ -196,19 +171,6 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-//		if(muted && !mixer.isPaused()) {
-//			new Thread(new Runnable() {
-//				public void run() {
-//					mixer.pausePlayback();	
-//				}
-//			}).start();
-//		}else if(!muted && mixer.isPaused()) {
-//			new Thread(new Runnable() {
-//				public void run() {
-//					mixer.pausePlayback();
-//				}
-//			}).start();
-//		}
 		if(player.alive) {
 			levels[level].tick();
 			hud.tick();
