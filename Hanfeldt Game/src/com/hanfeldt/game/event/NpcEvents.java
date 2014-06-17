@@ -20,8 +20,6 @@ public class NpcEvents {
 			if(Main.getGame().bullets.get(i) instanceof Bullet){
 				Bullet bullet = (Bullet) Main.getGame().bullets.get(i);
 				if(bulletCollided(npc, bullet)){
-					if(Main.debug)
-					System.err.println(bullet.getBounds());
 					bulletHit(npc);
 					bullet.destroyBullet();
 				}
@@ -52,13 +50,9 @@ public class NpcEvents {
 		if(id == Values.zombie_damage_from_bullet_id){
 			//TODO: A zombie death cry + zombie falling over
 			Main.npc.remove(npc);
-			if(Main.debug)
-				System.out.println("Zombie died from gunshot");
 		}
 		if(id == Values.npc_out_of_map_id){
 			Main.npc.remove(npc);
-			if(Main.debug)
-				System.out.println("Npc died from falling out of map");
 		}
 	}
 	
@@ -72,8 +66,6 @@ public class NpcEvents {
 	public boolean bulletCollided(Npc npc, Bullet bullet){
 		if (npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(), bullet.getX(), bullet.getY()))
 			return true;
-		if(Main.debug)
-		System.out.println("Miss");
 		return false;
 	}
 	

@@ -14,7 +14,7 @@ public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, bullets;
 	private static int bulletx = 19, heartx = 0;
-	private Sprite heart, character, deadCharacter, crossHair, weapon, ammo;
+	private Sprite heart, character, deadCharacter, /*crossHair,*/ weapon, ammo;
 	private Player player;
 	
 	private boolean hasFocus = true;
@@ -27,7 +27,7 @@ public class Hud {
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
 		this.character = character;
 		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
-		crossHair = new Sprite(Main.spriteSheet, 5, 0, 1, 1);
+//		crossHair = new Sprite(Main.spriteSheet, 5, 0, 1, 1); //This isn't really needed for now imo, change if you want
 		weapon = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
 		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
 		this.player = player;
@@ -82,8 +82,8 @@ public class Hud {
 		
 		heartx = 19;
 		
-		g.drawOval(Main.mouseX - 7, Main.mouseY - 7, 14, 14);
-		crossHair.draw(g, Main.mouseX - 7, Main.mouseY - 7);
+//		g.drawOval(Main.mouseX - 7, Main.mouseY - 7, 14, 14);
+//		crossHair.draw(g, Main.mouseX - 7, Main.mouseY - 7);
 		
 		if(paused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);
