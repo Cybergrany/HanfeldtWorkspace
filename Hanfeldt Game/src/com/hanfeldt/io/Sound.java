@@ -1,8 +1,11 @@
 package com.hanfeldt.io;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
+import java.io.File;
 import java.net.URL;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import com.hanfeldt.game.Main;
 
@@ -19,17 +22,16 @@ public class Sound {
 	
 	public static synchronized void playSound(final String sound){//For sound, call Sound.playSound("SoundName");
 		if(!Main.muted){
-				try{
-					URL url = new Sound().getClass().getResource("/sounds/" + sound);
-					String urls=url.toString(); 
-					urls=urls.replaceFirst("file:/", "file:///");
-					AudioClip ac=Applet.newAudioClip(new URL(urls));
-					ac.play();
-				}catch(Exception e){
-					System.err.println("Error while playing sound");
-					e.printStackTrace();
+			try {
+				 URL defaultSound = Sound.class.getResource("/sounds/" + sound);
+			     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(defaultSound);
+			     Clip clip = AudioSystem.getClip();
+			     clip.open(audioInputStream);
+			     clip.start();
+			}catch(Exception e) {
+				System.out.println("Failed to play sound! Stacktrace:");
+				e.printStackTrace();
 			}
 		}
 	}
-
 }
