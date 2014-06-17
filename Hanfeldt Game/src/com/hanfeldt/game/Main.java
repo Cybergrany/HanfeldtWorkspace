@@ -58,8 +58,6 @@ public class Main implements Runnable {
 	private Listener listener;
 	private Hud hud;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
-	
-	private Thread entityThread;
 
 	public static void main(String[] args) {
 		game = new Main();
