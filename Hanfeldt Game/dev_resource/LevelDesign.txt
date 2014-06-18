@@ -1,0 +1,15 @@
+---BACKGROUNDS---
+The size of the image is 16x the amount of pixels in map.png for that level
+Eg: W and H of a map that is 180 * 90 is 180 * 16 and 90 * 16
+
+An index of 0 is furthest away (bg0.png looks like it's furthest away from the player)
+
+---Blocks---
+
+0xFF000000(Black) = Standard Block
+0xff0000ff(Blue) = Zombie Spawner
+0xff00FF00(Green) = Item Chest (Ammo) 
+0xffFF0000(Red) = CementCore
+0xff00008C(Dark Blue) = CementFloor
+0xff007700(Dark Green) = CementRoof
+0xffFFFF00(Yellow) = RoofLamp

@@ -14,7 +14,7 @@ public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, bullets;
 	private static int bulletx = 19, heartx = 0;
-	private Sprite heart, character, deadCharacter, /*crossHair,*/ weapon, ammo;
+	private Sprite heart, character, deadCharacter, pistol, ammo;
 	private Player player;
 	
 	private boolean hasFocus = true;
@@ -27,8 +27,7 @@ public class Hud {
 		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
 		this.character = character;
 		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
-//		crossHair = new Sprite(Main.spriteSheet, 5, 0, 1, 1); //This isn't really needed for now imo, change if you want
-		weapon = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
+		pistol = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
 		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
 		this.player = player;
 		try {
@@ -63,15 +62,18 @@ public class Hud {
 		}
 		
 		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
-			for(int i = 1; i <= bullets; i++){
-				ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
-				bulletx+=15;
-			}
-			weapon.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
+//			for(int i = 1; i <= bullets; i++){
+//				ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
+//				bulletx+=15;
+//			}
+			pistol.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
 			String ammoString = Integer.toString(((AmmoWeapon) player.getWeaponEquipped()).getTotalAmmo());
-			g.drawString("Ammo: " + ammoString, Main.sizeX - 80, Main.sizeY - 20);
+			String bulletString = Integer.toString(bullets);
+			
+			
+			g.drawString(bulletString + "|" + ammoString, Main.sizeX - 28, Main.sizeY - 5);
 		}
-		g.drawString("Money: " + Integer.toString(player.getMoney()), Main.sizeX - 80, Main.sizeY - 40);
+		g.drawString("$" + Integer.toString(player.getMoney()), Main.sizeX - 30, Main.sizeY - 15);
 		
 		bulletx = 28;
 		
@@ -81,9 +83,6 @@ public class Hud {
 		}
 		
 		heartx = 19;
-		
-//		g.drawOval(Main.mouseX - 7, Main.mouseY - 7, 14, 14);
-//		crossHair.draw(g, Main.mouseX - 7, Main.mouseY - 7);
 		
 		if(paused){
 			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);

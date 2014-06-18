@@ -3,11 +3,10 @@ package com.hanfeldt.game.tile;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 
-public class ZombieSpawner extends Tile{
-	
-	public ZombieSpawner(int x, int y){
+public class RoofLamp extends Tile{
+	public RoofLamp(int x, int y){
 		super(x, y);
-		setSprite(new Sprite(Main.spriteSheet,  0, 3, 1, 1));
+		setSprite(new Sprite(Main.spriteSheet, 1, 6, 1, 1));
 	}
 	
 	public boolean isSolid(){
@@ -15,7 +14,6 @@ public class ZombieSpawner extends Tile{
 	}
 	
 	public String toString() {
-		return "ZombieSpawner";
+		return "RoofLamp";
 	}
-	
 }

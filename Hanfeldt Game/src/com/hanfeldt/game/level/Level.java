@@ -12,6 +12,10 @@ import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
+import com.hanfeldt.game.tile.CementCore;
+import com.hanfeldt.game.tile.CementFloor;
+import com.hanfeldt.game.tile.CementRoof;
+import com.hanfeldt.game.tile.RoofLamp;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
 
@@ -61,6 +65,18 @@ public class Level {
 				case 0xff00FF00:
 					tiles[j][i] = new AmmoPickup(j, i);
 					break;
+				case 0xffFF0000:
+					tiles[j][i] = new CementCore(j, i);
+					break;
+				case 0xff00008C:
+					tiles[j][i] = new CementFloor(j, i);
+					break;
+				case 0xff007700:
+					tiles[j][i] = new CementRoof(j, i);
+					break;
+				case 0xffFFFF00:
+					tiles[j][i] = new RoofLamp(j, i);
+					break;
 				default:
 					tiles[j][i] = new Air(j, i);
 				}
@@ -92,7 +108,9 @@ public class Level {
 	
 	public void render(Graphics g) {
 		bg.draw(g);
+		
 		draw(g, player.getX());
+		
 		for(int i=0; i<Main.npc.size(); i++) {
 			Main.npc.get(i).draw(g);
 		}
