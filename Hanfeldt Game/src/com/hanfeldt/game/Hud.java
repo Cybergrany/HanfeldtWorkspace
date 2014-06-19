@@ -13,7 +13,7 @@ import com.hanfeldt.game.weapon.AmmoWeapon;
 public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, bullets;
-	private static int bulletx = 19, heartx = 0;
+	private static int heartx = 0;
 	private Sprite heart, character, deadCharacter, pistol, ammo;
 	private Player player;
 	
@@ -74,8 +74,6 @@ public class Hud {
 			g.drawString(bulletString + "|" + ammoString, Main.sizeX - 28, Main.sizeY - 5);
 		}
 		g.drawString("$" + Integer.toString(player.getMoney()), Main.sizeX - 30, Main.sizeY - 15);
-		
-		bulletx = 28;
 		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.sizeY - 15);

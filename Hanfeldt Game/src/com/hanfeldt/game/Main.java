@@ -1,9 +1,6 @@
 package com.hanfeldt.game;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -15,8 +12,10 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.state.Dead;
+import com.hanfeldt.game.state.Playing;
+import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.weapon.AmmoWeapon;
-import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.ResourceManager;
 
@@ -29,8 +28,6 @@ public class Main implements Runnable {
 	public static int fps;
 	private int levelAmount = 3;//Amount of levels in game.
 	public static boolean running, isPaused, debug, muted, gameOver;
-	public static boolean aDown, dDown, wDown, escDown, mouseDown;
-	private static boolean mouseDownLastTick = false;
 	public static int mouseX, mouseY;
 	public static float gravity = 0.1f;
 	public static float terminalVelocity = 5;
@@ -46,8 +43,6 @@ public class Main implements Runnable {
 	
 	public static ArrayList<Npc> npc;
 	
-	private static int deadScreenTicks = 240;
-	private static long tickDied = 0;
 	private static Sprite character;
 	private static Main game;
 	private GamePanel gamePanel;
@@ -57,6 +52,7 @@ public class Main implements Runnable {
 	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
+	private State state;
 	String name = "Craftmine - an original game about crafting. And mining! Game of the year 2014";
 
 	public static void main(String[] args) {
@@ -103,12 +99,13 @@ public class Main implements Runnable {
 	}
 
 	public void init() {
+		spriteSheet = new SpriteSheet("/images/spritesheet.png");
+		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
+		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
+		state = new Playing(this);
 		gamePanel.requestFocus();
 		resourceManager = new ResourceManager();
-		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
-		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
-		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()));
 		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
@@ -169,54 +166,12 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-		if(player.alive) {
-			levels[level].tick();
-			hud.tick();
-			for(int i=0; i<bullets.size(); i++) {
-				bullets.get(i).tick();
-			}
-			player.getWeaponEquipped().tick();
-			if(!mouseDownLastTick && mouseDown && player.getWeaponEquipped() instanceof TriggerWeapon) {
-				((TriggerWeapon) player.getWeaponEquipped()).tryTrigger();
-			}
-		}else if(!player.alive){
-			if(totalTicks >= tickDied + deadScreenTicks && lives > 0) {
-				respawnPlayer();
-			}
-		}
-			
-		// Moved NPC ticking to Level, I think it's more appropriate
-		mouseDownLastTick = mouseDown;
-		//Focus nagger
-		hud.setHasFocus(true);
+		state.tick();
 	}
 
 	public void render() {
-		Graphics2D g = (Graphics2D) screenImage.getGraphics();
-
-		if(player.alive || lives <= 0) {
-			
-			//Moved NPC draw to levels (Where player is also rendered)
-			
-			for(int i = 0; i < npc.toArray().length; i++){
-				npc.get(i).draw(g);
-			}
-			levels[level].render(g);
-			hud.draw(g);
-			for(int i=0; i<bullets.size(); i++) {
-				bullets.get(i).draw(g);
-			}
-		}else{
-			g.setColor(Color.BLACK);
-			g.fillRect(0, 0, sizeX, sizeY);
-			character.draw(g, sizeX /2 - (tileSize *2), (sizeY /2) - 60);
-			Font font = new Font("Arial", Font.PLAIN, 10);
-			g.setFont(font);
-			g.setColor(new Color(255, 255, 255));
-			g.drawString("x " + Integer.toString(lives), (sizeX /2) - 5, (sizeY /2) - 49);
-		}
+		state.draw(screenImage.getGraphics());
 		gamePanel.repaint();
-		g.dispose();
 	}
 	
 	//A very basic tick-based timer
@@ -261,11 +216,10 @@ public class Main implements Runnable {
 		if(!debugCheats) {
 			lives--;
 		}
-		player.alive = false;
 		if(lives <= 0) {
 			gameOver = true;
 		}
-		tickDied = totalTicks;
+		state = new Dead(this);
 	}
 	
 	public void respawnPlayer() {
@@ -286,4 +240,40 @@ public class Main implements Runnable {
 		}
 	}
 
+	public static int getLevel() {
+		return level;
+	}
+	
+	public Hud getHud() {
+		return hud;
+	}
+	
+	public ArrayList<Bullet> getBullets() {
+		return bullets;
+	}
+	
+	public Listener getListener() {
+		return listener;
+	}
+	
+	public GamePanel getPanel() {
+		return gamePanel;
+	}
+	
+	public ArrayList<Npc> getNpc() {
+		return npc;
+	}
+	
+	public Sprite getCharacter() {
+		return character;
+	}
+	
+	public void setState(State s) {
+		state = s;
+	}
+	
+	public State getState() {
+		return state;
+	}
+	
 }

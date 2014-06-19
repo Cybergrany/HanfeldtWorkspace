@@ -11,7 +11,8 @@ import com.hanfeldt.game.Main;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
-	static boolean pausePressed, debugPressed, mutePressed;
+	private boolean pausePressed, debugPressed, mutePressed;
+	public boolean aDown, dDown, wDown, escDown, mouseDown, mouseDownLastTick;
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -20,15 +21,15 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		switch(key){
 			
 		case(KeyEvent.VK_D):
-			Main.dDown = true;
+			dDown = true;
 			break;
 		
 		case(KeyEvent.VK_A):
-			Main.aDown = true;
+			aDown = true;
 			break;
 			
 		case(KeyEvent.VK_W): //Going for W yolo
-			Main.wDown = true;
+			wDown = true;
 			break;
 		
 		}
@@ -82,13 +83,13 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			Main.getGame().reload();
 			break;
 		case(KeyEvent.VK_D):
-			Main.dDown = false;
+			dDown = false;
 			break;
 		case(KeyEvent.VK_A):
-			Main.aDown = false;
+			aDown = false;
 			break;
 		case(KeyEvent.VK_W):
-			Main.wDown = false;
+			wDown = false;
 			break;
 		}
 	}
@@ -117,12 +118,13 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Main.mouseDown = true;
+		mouseDownLastTick = mouseDown;
+		mouseDown = true;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		Main.mouseDown = false;
+		mouseDown = false;
 	}
 
 	@Override

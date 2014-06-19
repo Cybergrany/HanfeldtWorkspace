@@ -8,30 +8,36 @@ import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
+import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.weapon.Pistol;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 
 public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
 	private Weapon weaponEquipped = new Pistol(this, 8, 8, 8, 10);
-	static int maxHealth = Values.player_max_health;
+	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
+	private Listener listener;
+	private Main main;
 	
 	public boolean alive = true;
 	public boolean levelFinished;
 	
-	public Player(Sprite s, int x, int y){
+	public Player(Sprite s, int x, int y, Listener l, Main main){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
 		velXMax = 1f;
 		setJumpHeight(2);
 		events = new PlayerEvents(this);
 		levelFinished = false;
+		listener = l;
+		this.main = main;
 	}
 	
 	public void draw(Graphics g) {
-		if( (!Main.aDown && !Main.dDown) || (Main.aDown && Main.dDown) || Main.isPaused) {
+		if( (!listener.aDown && !listener.dDown) || (listener.aDown && listener.dDown) || Main.isPaused) {
 			sprite.draw(g, (Main.sizeX /2) - (Main.tileSize /2), getY(), direction);
 			cycleTicks = 0;
 			currentCycle = 0;
@@ -64,10 +70,10 @@ public class Player extends EntityLiving {
 	
 	public void tick() {
 		direction = Main.mouseX > Main.sizeX /2;
-		isMovingLeft = Main.aDown;
-		isMovingRight = Main.dDown;
+		isMovingLeft = listener.aDown;
+		isMovingRight = listener.dDown;
 
-		if(Main.wDown && !falling && velY == 0) {
+		if(listener.wDown && !falling && velY == 0) {
 			jump();
 			Sound.playSound("Jump.wav");
 		}
@@ -101,9 +107,8 @@ public class Player extends EntityLiving {
 			
 		}
 		
-		if(getY() > Main.sizeY && alive){
+		if(getY() > Main.sizeY && main.getState() instanceof Playing){
 			events.damagePlayer(getHealth(), Values.fall_death_id);
-			
 		}
 		
 		//Moved fall damage to Entity.checkCollisions (in the "below" section)
