@@ -34,7 +34,7 @@ public class Main implements Runnable {
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public static SpriteSheet spriteSheet;
 	public ResourceManager resourceManager;
-	public static boolean debugCheats = false; // added this to debug easier; player can't take damage and infinite bullets
+	public static boolean debugCheats = false;
 	
 	private int lives = 3;
 	private int ticksPs = 60;

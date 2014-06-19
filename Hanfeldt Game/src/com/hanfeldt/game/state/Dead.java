@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
 
 public class Dead extends State {
@@ -18,7 +19,7 @@ public class Dead extends State {
 	
 	public void tick() {
 		deadFor++;
-		if(deadFor >= deadTicks) {
+		if(deadFor >= deadTicks && !Main.gameOver) {
 			main.setState(new Playing(main));
 		}
 	}
@@ -26,11 +27,19 @@ public class Dead extends State {
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Main.sizeX, Main.sizeY);
-		main.getCharacter().draw(g, Main.sizeX /2 - (Main.tileSize *2), (Main.sizeY /2) - 60);
-		Font font = new Font("Arial", Font.PLAIN, 10);
-		g.setFont(font);
-		g.setColor(new Color(255, 255, 255));
-		g.drawString("x " + Integer.toString(main.getLives()), (Main.sizeX /2) - 5, (Main.sizeY /2) - 49);
+		
+		if(!Main.gameOver){
+			main.getCharacter().draw(g, Main.sizeX /2 - (Main.tileSize *2), (Main.sizeY /2) - 60);
+			Font font = new Font("Arial", Font.PLAIN, 10);
+			g.setFont(font);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("x " + Integer.toString(main.getLives()), (Main.sizeX /2) - 5, (Main.sizeY /2) - 49);
+		}else{
+			g.setColor(Hud.transDark);
+			g.fillRect(0, 0, Main.sizeX, Main.sizeY);
+			g.setColor(Hud.defWhite);
+			g.drawString("Game Over", Main.sizeX / 2 - 20, Main.sizeY / 2);
+		}
 	}
 	
 }

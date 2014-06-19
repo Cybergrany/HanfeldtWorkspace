@@ -18,8 +18,8 @@ public class Hud {
 	private Player player;
 	
 	private boolean hasFocus = true;
-	private Color defWhite = new Color(255 , 255, 255);
-	private Color transDark = new Color(0, 0, 0, 80);
+	public static Color defWhite = new Color(255 , 255, 255);
+	public static Color transDark = new Color(0, 0, 0, 80);
 	private Font font = new Font("Arial", Font.PLAIN, 9);
 	private ImageIcon focusNagger1, focusNagger2;
 	
@@ -96,13 +96,6 @@ public class Hud {
 			
 			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.npc.toArray().length, Main.getGame().bullets.toArray().length), 10, 60);
 			
-		}
-		
-		if(Main.gameOver){
-			g.setColor(transDark);
-			g.fillRect(0, 0, Main.sizeX, Main.sizeY);
-			g.setColor(defWhite);
-			g.drawString("Game Over", Main.sizeX / 2 - 20, Main.sizeY / 2);
 		}
 		
 		if(muted){
