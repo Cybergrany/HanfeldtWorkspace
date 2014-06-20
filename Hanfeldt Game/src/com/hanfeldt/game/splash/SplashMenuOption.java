@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class SplashMenuOption {
+	
 	private String option;
 	private int x, y;
 	boolean selected;
@@ -16,6 +17,14 @@ public class SplashMenuOption {
 	
 	public String getOption() {
 		return option;
+	}
+	
+	public void setSelected(boolean sel){
+		selected = sel;
+	}
+	
+	public boolean isSelected(){
+		return selected;
 	}
 	
 	public void draw(Graphics g) {

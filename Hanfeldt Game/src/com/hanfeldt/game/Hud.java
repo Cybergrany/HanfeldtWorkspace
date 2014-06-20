@@ -14,7 +14,7 @@ public class Hud {
 	public static boolean paused = false, debug = false, muted = false;
 	private static int hearts, bullets;
 	private static int heartx = 0;
-	private Sprite heart, character, deadCharacter, pistol, ammo;
+	private Sprite heart, character, deadCharacter, pistol /*,ammo*/;
 	private Player player;
 	
 	private boolean hasFocus = true;
@@ -28,7 +28,7 @@ public class Hud {
 		this.character = character;
 		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
 		pistol = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
-		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
+//		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
 		this.player = player;
 		try {
 			focusNagger1 = new ImageIcon(ImageIO.read(Hud.class.getResource("/images/FocusNagger1.png")));

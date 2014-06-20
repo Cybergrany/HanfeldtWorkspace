@@ -8,7 +8,7 @@ public class Entity {
 	private float x, y;
 	float velX = 0f, velY = 0f;
 	float velXMax, velYMax = 3f;
-	boolean direction = true; // Right = true, Left = false
+	boolean direction = true; //Right = true, Left = false
 	boolean falling = false;
 	boolean isMovingLeft = false, isMovingRight = false;
 	
@@ -110,8 +110,10 @@ public class Entity {
 	public boolean isMovingLeft() { 
 		return isMovingLeft;
 	}
-	
-	public void setDirection(boolean dir) {
+	/**
+	 * Right = true, Left = false
+	 */
+	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete!
 		direction = dir;
 	}
 	

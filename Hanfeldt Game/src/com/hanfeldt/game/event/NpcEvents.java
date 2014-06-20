@@ -1,8 +1,11 @@
 package com.hanfeldt.game.event;
 
+import java.util.Random;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.io.Sound;
@@ -63,6 +66,13 @@ public class NpcEvents {
 		return false;
 	}
 	
+	public boolean isOutsideScreen(Npc npc){
+		if(npc.getX() < Main.getGame().getPlayer().getX() - (Main.sizeX / 2) || npc.getX() > Main.getGame().getPlayer().getX() + (Main.sizeX / 2)){
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean bulletCollided(Npc npc, Bullet bullet){
 		if (npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(), bullet.getX(), bullet.getY()))
 			return true;
@@ -72,6 +82,18 @@ public class NpcEvents {
 	
 	public void bulletHit(Npc npc){
 		damageNpc(npc, Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_from_bullet_id);
+	}
+	
+	public void idle(Npc npc, float moveSpeed){
+		if(isOutsideScreen(npc) && Main.timer(120)){
+			boolean dir = new Random().nextBoolean();
+			npc.setDirection(dir);
+			if(dir){
+				npc.setVelX(-moveSpeed);
+			}else{
+				npc.setVelX(moveSpeed);
+			}
+		}
 	}
 	
 }
