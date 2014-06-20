@@ -6,6 +6,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
 import com.hanfeldt.game.Main;
 
 /**
@@ -33,4 +35,29 @@ public class Sound {
 			}
 		}
 	}
+	
+	public static synchronized void playMp3(final String sound){;
+		if(!Main.muted){
+			new Thread(new Runnable() {
+				public void run() {
+					while(true) {
+						try {
+							AdvancedPlayer ap = new AdvancedPlayer
+						            (
+						                Sound.class.getResourceAsStream(sound),
+						                javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice()
+						            );
+						            ap.play();
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}).start();
+		}
+	}
+	
+	//This loads the class, to avoid lag spikes!
+	public static void touch() {}
+	
 }

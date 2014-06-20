@@ -18,7 +18,6 @@ public class SplashScreen {
 	
 	private Background background;
 	private static final int optionsX = 10;
-	private Listener listener;//Is this needed?
 	private static int optionChosen = -1;
 	private static int optionSelected = 0;
 	private static SplashMenuOption[] options = new SplashMenuOption[] {new SplashMenuOption("Start Game", optionsX, 80, true),
@@ -26,7 +25,6 @@ public class SplashScreen {
 	
 	public SplashScreen(String backgroundPath, Listener l){
 		background = new Background(backgroundPath);
-		listener = l;
 		options[optionSelected].setSelected(true);
 		Main.splashShowing = true;
 	}

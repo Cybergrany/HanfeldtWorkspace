@@ -13,12 +13,12 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.state.Dead;
-import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.SplashState;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.ResourceManager;
+import com.hanfeldt.io.Sound;
 
 public class Main implements Runnable {
 
@@ -57,6 +57,7 @@ public class Main implements Runnable {
 	String name = "Hanfeldt Zombie Shooter";
 
 	public static void main(String[] args) {
+		Sound.touch();
 		game = new Main();
 		Thread gameThread = new Thread(game);
 		game.init();
@@ -100,6 +101,7 @@ public class Main implements Runnable {
 	}
 
 	public void init() {
+		Sound.playMp3("/sounds/Music.mp3");
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
