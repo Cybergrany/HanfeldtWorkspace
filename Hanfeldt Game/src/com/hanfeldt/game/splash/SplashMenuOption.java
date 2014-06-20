@@ -2,6 +2,7 @@ package com.hanfeldt.game.splash;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class SplashMenuOption {
 	private String option;
@@ -9,6 +10,7 @@ public class SplashMenuOption {
 	boolean selected;
 	
 	public SplashMenuOption(String option, int x, int y, boolean selected){
+		this.selected = selected;
 		this.option = option;
 		this.x = x;
 		this.y = y;
@@ -19,12 +21,16 @@ public class SplashMenuOption {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.WHITE);
+		g.setColor(Color.RED);
 		if(selected) {
-			g.drawString("<" + option + ">", x, y);
+			g.drawString("<" + option + ">", x -7, y);
 		}else{
 			g.drawString(option, x, y);
 		}
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y -7, option.length() *7 -7, 10);
 	}
 	
 }
