@@ -1,9 +1,9 @@
 package com.hanfeldt.game.splash;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.io.Listener;
 
 /**
@@ -12,41 +12,38 @@ import com.hanfeldt.io.Listener;
  *
  */
 public class SplashScreen {
-	private Background background; //This only seems neccesary if we animate the background, I guess we'll get to that later
-	private static final int optionsX = 10, optionsHeight = 10;
-	private static final int optionsStartY = 90;
-	private Listener listener;
-	private int optionSelected = 0;
-	private SplashMenuOption[] options = new SplashMenuOption[] {new SplashMenuOption("Start Game", optionsX, optionsStartY, true),
-																 new SplashMenuOption("Options", optionsX, optionsStartY + optionsHeight, false), 
-																 new SplashMenuOption("Quit", optionsX, optionsStartY + (optionsHeight *2), false)};
+
+	final int startGame = 0;
+	final int gameSettings = 1;
+	
+	private Background background;
+	private static final int optionsX = 10;
+	private Listener listener;//Is this needed?
+	private static int optionChosen = -1;
+	private static int optionSelected = 0;
+	private static SplashMenuOption[] options = new SplashMenuOption[] {new SplashMenuOption("Start Game", optionsX, 80, true),
+																 new SplashMenuOption("Options", optionsX, 110, false)};
 	
 	public SplashScreen(String backgroundPath, Listener l){
 		background = new Background(backgroundPath);
 		listener = l;
+		options[optionSelected].setSelected(true);
+		Main.splashShowing = true;
 	}
 	
 	public void tick() {
-		Rectangle mouseRect = new Rectangle(Main.mouseX, Main.mouseY, 1, 1);
-		for(int i=0; i<options.length; i++) {
-			options[i].selected = options[i].getBounds().intersects(mouseRect);
+		if(Main.gameStarted){
+			Main.splashShowing = false;
+			Main.getGame().setState(new Playing(Main.getGame()));
 		}
-		// I should really comment more...
-		// The following code ensures less than 2 options are selected. (although I think this never happens, it's good to be sure lel)
-		int count = 0;
-		for(int i=0; i<options.length; i++) {
-			if(options[i].selected) {
-				count++;
-			}
+		switch(getOptionChosen()){
+			case -1:
+				break;
+			case startGame://Start Game
+				Main.gameStarted = true;
+			case gameSettings:
+				break;
 		}
-		if(count > 1) {
-			for(int i=0; i<options.length; i++) {
-				options[i].selected = false;
-			}
-			options[0].selected = true;
-		}
-		
-		
 	}
 	
 	public void draw(Graphics g) {
@@ -63,6 +60,27 @@ public class SplashScreen {
 			}
 		}
 		return null;
+	}
+	public static int getOptionSelected(){
+		return optionSelected;
+	}
+	
+	public static void setOptionSelected(int option){
+		options[optionSelected].setSelected(false);
+		optionSelected = option;
+		options[optionSelected].setSelected(true);
+	}
+	
+	public static void setOptionChosen(int option){
+		optionChosen = option;
+	}
+	
+	public int getOptionChosen(){
+		return optionChosen;
+	}
+	
+	public static int getOptionAmount(){
+		return options.length;
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.splash.SplashScreen;
 
-public class SplashState extends State {
+public class SplashState extends State{
 	private SplashScreen splash;
 	
 	public SplashState(Main main) {

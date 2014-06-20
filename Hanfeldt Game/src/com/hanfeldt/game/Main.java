@@ -13,6 +13,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.state.Dead;
+import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.SplashState;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.weapon.AmmoWeapon;
@@ -27,7 +28,7 @@ public class Main implements Runnable {
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
 	private int levelAmount = 3;//Amount of levels in game.
-	public static boolean running, isPaused, debug, muted, gameOver;
+	public static boolean running, isPaused, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
 	public static float gravity = 0.1f;
 	public static float terminalVelocity = 5;

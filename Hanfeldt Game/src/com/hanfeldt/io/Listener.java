@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.splash.SplashScreen;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
@@ -40,6 +41,31 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		int key = e.getKeyCode();
 		
 		switch(key){
+		
+		//Splash
+		case(KeyEvent.VK_UP):
+			if(Main.splashShowing){
+				if(SplashScreen.getOptionSelected() - 1 < 0){
+					SplashScreen.setOptionSelected(SplashScreen.getOptionAmount() - 1);
+				}else{
+					SplashScreen.setOptionSelected(SplashScreen.getOptionSelected() - 1);
+				}
+			}
+			break;
+		case(KeyEvent.VK_DOWN):
+			if(Main.splashShowing){
+				if(SplashScreen.getOptionSelected() + 1 > SplashScreen.getOptionAmount() - 1){
+					SplashScreen.setOptionSelected(0);
+				}else{
+					SplashScreen.setOptionSelected(SplashScreen.getOptionSelected() + 1);
+				}
+			}
+			break;
+		case(KeyEvent.VK_ENTER):
+			if(Main.splashShowing){
+				SplashScreen.setOptionChosen(SplashScreen.getOptionSelected());
+			}
+			break;
 		
 		//Enter Debug Screen
 		case(KeyEvent.VK_F3)://Cuz Minecraft, amirite? //Absolutely!
