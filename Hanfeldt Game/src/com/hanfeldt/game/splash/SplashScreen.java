@@ -45,7 +45,6 @@ public class SplashScreen {
 			case gameSettings:
 				break;
 		}
-		System.out.println("Called");
 	}
 	
 	public void draw(Graphics g) {
