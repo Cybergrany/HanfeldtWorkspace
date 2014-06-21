@@ -1,5 +1,9 @@
 package com.hanfeldt.game.menu;
 
+import com.hanfeldt.game.menu.screen.MenuScreen;
+import com.hanfeldt.game.menu.screen.MenuScreenOption;
+import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
+
 
 public class OptionScreen extends MenuScreen{
 	

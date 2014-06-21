@@ -1,4 +1,4 @@
-package com.hanfeldt.game.menu;
+package com.hanfeldt.game.menu.screen;
 
 import java.awt.Color;
 import java.awt.Graphics;

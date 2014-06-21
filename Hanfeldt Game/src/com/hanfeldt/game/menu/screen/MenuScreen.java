@@ -1,6 +1,8 @@
-package com.hanfeldt.game.menu;
+package com.hanfeldt.game.menu.screen;
 
 import java.awt.Graphics;
+
+import com.hanfeldt.game.menu.Background;
 
 public class MenuScreen {
 

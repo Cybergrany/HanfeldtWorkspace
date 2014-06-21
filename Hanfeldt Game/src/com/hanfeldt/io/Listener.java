@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.menu.MenuScreen;
+import com.hanfeldt.game.menu.screen.MenuScreen;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	

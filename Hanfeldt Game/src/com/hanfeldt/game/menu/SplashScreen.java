@@ -1,6 +1,9 @@
 package com.hanfeldt.game.menu;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.menu.screen.MenuScreen;
+import com.hanfeldt.game.menu.screen.MenuScreenOption;
+import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.OptionState;
 import com.hanfeldt.game.state.Playing;
 
