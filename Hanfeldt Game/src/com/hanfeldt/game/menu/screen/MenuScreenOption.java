@@ -10,6 +10,14 @@ public class MenuScreenOption {
 	private int x, y, id;
 	boolean selected;
 	
+	/**
+	 * Creates a new option on the current menu screen.
+	 * Requires an array of {@link MenuScreenOption} in your menu class.
+	 * @param option - The name of your option
+	 * @param x 
+	 * @param y
+	 * @param id - The position of this option in its array. Ensure this is from {@link MenuScreenOptionAction}'s ID list.
+	 */
 	public MenuScreenOption(String option, int x, int y, int id){
 		this.option = option;
 		this.x = x;
