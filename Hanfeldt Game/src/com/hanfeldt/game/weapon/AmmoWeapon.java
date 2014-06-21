@@ -68,7 +68,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 				clipInDone = true;
 			}
 			if(!reloadClickDone && (totalTicks - reloadStarted) > 65) {
-				Sound.playSound("weapon/Reload.wav");
+				if(totalAmmo > 0) Sound.playSound("weapon/Reload.wav");
 				reloadClickDone = true;
 				reloadInProg = false;
 				

@@ -10,7 +10,7 @@ public class SplashState extends State{
 	
 	public SplashState(Main main) {
 		super(main);
-		splash = new SplashScreen("/images/Splash.png", main.getListener());
+		splash = new SplashScreen("/images/Splash.png");
 	}
 	
 	public void tick() {

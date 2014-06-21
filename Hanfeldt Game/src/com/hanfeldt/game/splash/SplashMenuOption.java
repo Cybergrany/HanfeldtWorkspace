@@ -17,6 +17,14 @@ public class SplashMenuOption {
 		this.y = y;
 	}
 	
+	public void tick(){
+		
+	}
+	
+	public void draw(){
+		
+	}
+	
 	public String getOption() {
 		return option;
 	}
