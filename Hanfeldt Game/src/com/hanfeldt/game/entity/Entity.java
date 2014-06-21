@@ -1,10 +1,9 @@
 package com.hanfeldt.game.entity;
 
-import java.awt.Rectangle;
-
 import com.hanfeldt.game.Main;
 
 public class Entity {
+	protected long totalTicks = 0;
 	private float x, y;
 	float velX = 0f, velY = 0f;
 	float velXMax, velYMax = 3f;
@@ -41,6 +40,7 @@ public class Entity {
 		changeY(velY);
 		isMovingLeft = velX < 0;
 		isMovingRight = velX > 0;
+		totalTicks++;
 	}
 	
 	public void setX(float x) {
@@ -113,16 +113,12 @@ public class Entity {
 	/**
 	 * Right = true, Left = false
 	 */
-	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete!
+	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete! // (Ronan) Oh right
 		direction = dir;
 	}
 	
 	public boolean getDirection() {
 		return direction;
-	}
-	
-	public Rectangle getBounds() {//This doesn't really work, as getSizeX/Y are both all wrong
-		return new Rectangle(getX(), getY(), getSizeX(), getSizeY());
 	}
 	
 	public int getSizeX() {

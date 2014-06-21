@@ -95,7 +95,7 @@ public class Level {
 			Main.setLevel(level);
 			setBg(level);
 			player.setX(0);
-			player.setY(48);
+			player.setY(Main.sizeY - Main.tileSize - player.getSizeY());
 			player.levelFinished = false;
 		}
 		player.tick();

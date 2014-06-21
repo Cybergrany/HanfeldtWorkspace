@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
@@ -24,6 +25,7 @@ public class Main implements Runnable {
 
 	public static int sizeX = 256, sizeY = 144;
 	public static int tileSize = 16; //Only works with 16 for the moment
+	public static int spriteSize = 16;
 	public static int scale = 3;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
@@ -54,6 +56,7 @@ public class Main implements Runnable {
 	private Listener listener;
 	private Hud hud;
 	private State state;
+	private volatile ArrayList<GoreSpawn> gore;
 	String name = "Hanfeldt Zombie Shooter";
 
 	public static void main(String[] args) {
@@ -277,6 +280,26 @@ public class Main implements Runnable {
 	
 	public State getState() {
 		return state;
+	}
+	
+	public void addGore(int x, int y) {
+		gore.add(new GoreSpawn(x, y));
+	}
+	
+	public ArrayList<GoreSpawn> getGore() {
+		return gore;
+	}
+	
+	public void createGoreList() {
+		gore = new ArrayList<GoreSpawn>();
+	}
+	
+	public void removeGore(GoreSpawn goreSpawn) {
+		for(int i=0; i<gore.size(); i++) {
+			if(goreSpawn.equals(gore.get(i))) {
+				gore.remove(i);
+			}
+		}
 	}
 	
 }

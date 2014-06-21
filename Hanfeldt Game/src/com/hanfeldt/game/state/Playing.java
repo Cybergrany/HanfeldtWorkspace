@@ -1,8 +1,10 @@
 package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
+import java.util.Iterator;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 
@@ -14,6 +16,7 @@ public class Playing extends State {
 		p.setX(Main.sizeX /2);
 		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
+		Main.getGame().createGoreList();
 	}
 	
 	public void tick() {
@@ -26,6 +29,12 @@ public class Playing extends State {
 		if(!main.getListener().mouseDownLastTick && main.getListener().mouseDown && main.getPlayer().getWeaponEquipped() instanceof TriggerWeapon) {
 			((TriggerWeapon) main.getPlayer().getWeaponEquipped()).tryTrigger();
 		}
+		Iterator<GoreSpawn> iterator = Main.getGame().getGore().iterator();
+		while (iterator.hasNext()) {
+		    GoreSpawn gs = (GoreSpawn) iterator.next();
+		    iterator.remove();
+		    gs.tick();
+		}
 	}
 	
 	public void draw(Graphics g) {
@@ -36,6 +45,9 @@ public class Playing extends State {
 		main.getHud().draw(g);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
+		}
+		for(GoreSpawn go : Main.getGame().getGore()) {
+			go.render(g);
 		}
 		g.dispose();
 	}

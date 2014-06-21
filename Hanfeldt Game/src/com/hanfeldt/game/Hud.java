@@ -99,7 +99,7 @@ public class Hud {
 		}
 		
 		if(muted){
-			g.drawString("Muted", Main.sizeX - 27, Main.sizeY - 5);
+			g.drawString("Muted", Main.sizeX - 60, Main.sizeY - 5);
 		}
 		
 		if(!hasFocus) {

@@ -22,7 +22,7 @@ public class NpcEvents {
 			if(Main.getGame().bullets.get(i) instanceof Bullet){
 				Bullet bullet = (Bullet) Main.getGame().bullets.get(i);
 				if(bulletCollided(npc, bullet)){
-					bulletHit(npc);
+					bulletHit(npc, bullet);
 					bullet.destroyBullet();
 				}
 			}
@@ -79,7 +79,8 @@ public class NpcEvents {
 	}
 	
 	
-	public void bulletHit(Npc npc){
+	public void bulletHit(Npc npc, Bullet b){
+		Main.getGame().addGore(b.getX(), b.getY());
 		damageNpc(npc, Values.bullet_damage_dealt_to_zombie, Values.zombie_damage_from_bullet_id);
 	}
 	
