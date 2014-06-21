@@ -1,7 +1,5 @@
 package com.hanfeldt.game.menu.screen;
 
-import org.omg.IOP.Codec;
-
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.state.OptionState;
