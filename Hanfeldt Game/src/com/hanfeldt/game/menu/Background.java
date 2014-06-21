@@ -1,4 +1,4 @@
-package com.hanfeldt.game.splash;
+package com.hanfeldt.game.menu;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

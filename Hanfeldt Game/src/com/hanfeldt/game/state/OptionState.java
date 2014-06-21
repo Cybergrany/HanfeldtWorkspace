@@ -3,7 +3,7 @@ package com.hanfeldt.game.state;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.splash.OptionScreen;
+import com.hanfeldt.game.menu.OptionScreen;
 
 public class OptionState extends State{
 	private OptionScreen optionScreen;

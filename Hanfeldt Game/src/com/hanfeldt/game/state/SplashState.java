@@ -3,7 +3,7 @@ package com.hanfeldt.game.state;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.splash.SplashScreen;
+import com.hanfeldt.game.menu.SplashScreen;
 
 public class SplashState extends State{
 	private SplashScreen splash;

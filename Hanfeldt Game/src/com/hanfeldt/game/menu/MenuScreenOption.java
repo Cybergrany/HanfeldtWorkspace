@@ -1,32 +1,28 @@
-package com.hanfeldt.game.splash;
+package com.hanfeldt.game.menu;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class SplashMenuOption {
+public class MenuScreenOption {
 	
 	private String option;
-	private int x, y;
+	private int x, y, id;
 	boolean selected;
 	
-	public SplashMenuOption(String option, int x, int y, boolean selected){
-		this.selected = selected;
+	public MenuScreenOption(String option, int x, int y, int id){
 		this.option = option;
 		this.x = x;
 		this.y = y;
-	}
-	
-	public void tick(){
-		
-	}
-	
-	public void draw(){
-		
+		this.id = id;
 	}
 	
 	public String getOption() {
 		return option;
+	}
+	
+	public int getId(){
+		return id;
 	}
 	
 	public void setSelected(boolean sel){

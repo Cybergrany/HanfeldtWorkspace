@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.splash.SplashScreen;
+import com.hanfeldt.game.menu.MenuScreen;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
@@ -45,25 +45,25 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		//Splash
 		case(KeyEvent.VK_UP):
 			if(Main.splashShowing){
-				if(SplashScreen.getOptionSelected() - 1 < 0){
-					SplashScreen.setOptionSelected(SplashScreen.getOptionAmount() - 1);
+				if(MenuScreen.getOptionSelected() - 1 < 0){
+					MenuScreen.setOptionSelected(MenuScreen.getOptionAmount() - 1);
 				}else{
-					SplashScreen.setOptionSelected(SplashScreen.getOptionSelected() - 1);
+					MenuScreen.setOptionSelected(MenuScreen.getOptionSelected() - 1);
 				}
 			}
 			break;
 		case(KeyEvent.VK_DOWN):
 			if(Main.splashShowing){
-				if(SplashScreen.getOptionSelected() + 1 > SplashScreen.getOptionAmount() - 1){
-					SplashScreen.setOptionSelected(0);
+				if(MenuScreen.getOptionSelected() + 1 > MenuScreen.getOptionAmount() - 1){
+					MenuScreen.setOptionSelected(0);
 				}else{
-					SplashScreen.setOptionSelected(SplashScreen.getOptionSelected() + 1);
+					MenuScreen.setOptionSelected(MenuScreen.getOptionSelected() + 1);
 				}
 			}
 			break;
 		case(KeyEvent.VK_ENTER):
 			if(Main.splashShowing){
-				SplashScreen.setOptionChosen(SplashScreen.getOptionSelected());
+				MenuScreen.setOptionChosen(MenuScreen.getOptionSelected());
 			}
 			break;
 		
