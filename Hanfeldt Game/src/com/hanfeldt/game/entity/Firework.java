@@ -6,44 +6,66 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.hanfeldt.game.Main;
+import com.hanfeldt.game.state.GameWon;
+import com.hanfeldt.io.Sound;
+
 public class Firework extends Entity {
 	private boolean shooting = true;
 	private Random rand;
-	private int shootingTicks;
+	private int shootingTicksTotal;
+	private int lifetimeAfterExplode = 60;
 	private float angle;
+	private float alpha = 1f;
 	private Color color;
 	private float speed;
-	private ArrayList<Point> shootingPoints;
+	private ArrayList<Point> points;
+	private boolean exploded = false;
 	
-	public Firework(int x, int y) {
+	public Firework(int x, int y, Color color) {
 		super(x, y);
 		speed = 1;
-		color = Color.ORANGE;
+		this.color = color;
 		rand = new Random();
-		shootingTicks = rand.nextInt(15) + 15;
+		shootingTicksTotal = rand.nextInt(60) + 60;
 		angle = rand.nextInt(70) -35;
-		shootingPoints = new ArrayList<Point>();
+		points = new ArrayList<Point>();
 	}
 	
 	public void tick() {
 		if(shooting) {
-			shootingPoints.add(new Point(getX(), getY()));
+			points.add(new Point(getX(), getY()));
 			velX = (float) (Math.cos(angle) *speed);
 			velY = (float) (Math.sin(angle) *speed);
-			shootingTicks++;
-			if(totalTicks >= shootingTicks) {
+			if(totalTicks >= shootingTicksTotal) {
 				shooting = false;
 			}
 			changeX(velX);
 			changeY(velY);
+		}else{
+			if(!exploded) {
+				//Explosion code. I know my commenting isn't very consistent, but some is better than none! :P
+				Sound.playSound("FireworkBoom.wav");
+				int particlesSize = rand.nextInt(8) +16;
+				int lastShootIndex = points.size() -1;
+				for(int i=0; i<particlesSize; i++) {
+					points.add(new Point(points.get(lastShootIndex).x + rand.nextInt(64) -32, points.get(lastShootIndex).y + rand.nextInt(40) -20));
+				}
+				exploded = true;
+			}
+			alpha -= 0.02f;
+			if(alpha < 0f) alpha = 0;
+			if(totalTicks >= lifetimeAfterExplode + shootingTicksTotal) {
+				((GameWon) Main.getGame().getState()).removeFirework(this);
+			}
 		}
 		totalTicks++;
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(color);
-		for(int i=0; i<shootingPoints.size(); i++) {
-			g.fillRect(shootingPoints.get(i).x, shootingPoints.get(i).y, 1, 1);
+		g.setColor(new Color((float) color.getRed() /255, (float) color.getGreen() /255, (float) color.getBlue() /255, alpha));
+		for(int i=0; i<points.size(); i++) {
+			g.fillRect(points.get(i).x, points.get(i).y, 1, 1);
 		}
 	}
 	

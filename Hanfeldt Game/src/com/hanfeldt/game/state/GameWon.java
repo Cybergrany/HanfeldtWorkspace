@@ -22,8 +22,18 @@ public class GameWon extends State {
 	
 	public void tick() {
 		if(Main.getGame().getTotalTicks() >= nextFireworkTick) {
-			fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY));
-			nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(60) +60;
+			switch(rand.nextInt(3)) {
+			case 0:
+				fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, Color.RED));
+				break;
+			case 1:
+				fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, Color.BLUE));
+				break;
+			case 2:
+				fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, Color.ORANGE));
+				break;
+			}
+			nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(16) +16;
 		}
 		for(int i=0; i<fireworks.size(); i++) {
 			fireworks.get(i).tick();
@@ -40,5 +50,13 @@ public class GameWon extends State {
 			fireworks.get(i).render(g);
 		}
 	}
-
+	
+	public void removeFirework(Firework f) {
+		for(int i=0; i<fireworks.size(); i++) {
+			if(fireworks.get(i).equals(f)) {
+				fireworks.remove(i);
+			}
+		}
+	}
+	
 }

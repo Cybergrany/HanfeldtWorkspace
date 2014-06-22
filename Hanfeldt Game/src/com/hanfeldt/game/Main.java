@@ -276,7 +276,6 @@ public class Main implements Runnable {
 	
 	public void setState(State s) {
 		state = s;
-		//state = new GameWon(this);
 	}
 	
 	public State getState() {
