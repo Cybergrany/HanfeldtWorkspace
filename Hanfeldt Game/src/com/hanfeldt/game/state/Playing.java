@@ -29,11 +29,8 @@ public class Playing extends State {
 		if(!main.getListener().mouseDownLastTick && main.getListener().mouseDown && main.getPlayer().getWeaponEquipped() instanceof TriggerWeapon) {
 			((TriggerWeapon) main.getPlayer().getWeaponEquipped()).tryTrigger();
 		}
-		Iterator<GoreSpawn> iterator = Main.getGame().getGore().iterator();
-		while (iterator.hasNext()) {
-		    GoreSpawn gs = (GoreSpawn) iterator.next();
-		    iterator.remove();
-		    gs.tick();
+		for(int i=0; i<Main.getGame().getGore().size(); i++) {
+			Main.getGame().getGore().get(i).tick();
 		}
 	}
 	

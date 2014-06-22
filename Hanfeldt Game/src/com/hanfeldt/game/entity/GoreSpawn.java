@@ -7,17 +7,18 @@ import java.util.Random;
 import com.hanfeldt.game.Main;
 
 public class GoreSpawn extends Entity {
-	private static final int tickSpawnGoreDelay = 5;
-	private static final int maxGore = 16;
-	private static final int lifeTime = 180;
 	private long lastGoreSpawnTick = 0;
 	private ArrayList<Gore> gore;
 	private Random rand;
+	private  int maxGore;
+	private int tickSpawnGoreDelay;
 	
 	public GoreSpawn(int x, int y) {
 		super(x, y);
 		rand = new Random();
 		gore = new ArrayList<Gore>();
+		maxGore = rand.nextInt(16) +3;
+		tickSpawnGoreDelay = rand.nextInt(3) +1;
 	}
 	
 	public void tick() {
@@ -28,7 +29,7 @@ public class GoreSpawn extends Entity {
 		for(Gore g : gore) {
 			g.tick();
 		}
-		if(totalTicks > lifeTime) {
+		if(gore.size() > maxGore) {
 			Main.getGame().removeGore(this);
 			return;
 		}
@@ -36,7 +37,6 @@ public class GoreSpawn extends Entity {
 	}
 	
 	public void render(Graphics g) {
-		System.out.println("Rendered gorespawn.");
 		for(Gore go : gore) {
 			go.render(g);
 		}

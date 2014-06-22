@@ -4,13 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import com.hanfeldt.game.Main;
+
 public class Gore extends Entity {
 
 	public Gore(int x, int y) {
 		super(x, y);
 		falling = true;
-		velX = new Random().nextFloat() *2f;
-		velY = new Random().nextFloat() * 4f;
+		Random rand = new Random();
+		velX = rand.nextFloat() *2.5f * (rand.nextBoolean() ? 1 : -1);
+		velY = rand.nextFloat() *-1.5f;
 	}
 	
 	public void tick() {
@@ -18,9 +21,12 @@ public class Gore extends Entity {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.RED);
-		System.out.println("Rendered Gore.");
-		g.fillRect(getX(), getY(), 10, 10);
+		int screenX = getX()
+				    - (Main.getGame().getPlayer().getX() - Main.sizeX /2 - Main.tileSize /2);
+		if(screenX > 0 && screenX < Main.sizeX){
+			g.setColor(Color.RED);
+			g.fillRect(screenX, getY(), 1, 1);
+		}
 	}
 	
 }
