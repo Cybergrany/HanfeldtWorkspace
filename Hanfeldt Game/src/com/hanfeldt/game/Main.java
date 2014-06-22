@@ -22,14 +22,13 @@ import com.hanfeldt.io.ResourceManager;
 import com.hanfeldt.io.Sound;
 
 public class Main implements Runnable {
-
 	public static int sizeX = 256, sizeY = 144;
-	public static int tileSize = 16; //Only works with 16 for the moment
+	public static int tileSize = 16; //Only works properly with 16 for the moment
 	public static int spriteSize = 16;
 	public static int scale = 3;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
-	private int levelAmount = 3;//Amount of levels in game.
+	private int levelAmount = 2;//Amount of levels in game.
 	public static boolean running, isPaused, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
 	public static float gravity = 0.1f;
@@ -48,6 +47,7 @@ public class Main implements Runnable {
 	
 	private static Sprite character;
 	private static Main game;
+	private JFrame frame;
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
 	private static Player player;
@@ -82,7 +82,7 @@ public class Main implements Runnable {
 
 	private void initFrame() {
 		BorderLayout layout = new BorderLayout();
-		JFrame frame = new JFrame(name);
+		frame = new JFrame(name);
 		frame.setLayout(layout);
 		frame.addKeyListener(new Listener());
 		frame.addMouseListener(new Listener());

@@ -20,7 +20,7 @@ public class SpriteSheet {
 	}
 	
 	public BufferedImage getImage(int row, int col, int width, int height) {
-		return sheet.getSubimage(row * Main.tileSize, col * Main.tileSize, width * Main.tileSize, height * Main.tileSize);
+		return sheet.getSubimage(row * Main.spriteSize, col * Main.spriteSize, width * Main.spriteSize, height * Main.spriteSize);
 	}
 	
 }

@@ -26,7 +26,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g, int x, int y) {
-		g.drawImage(image, x + (Main.tileSize - Main.spriteSize), y + (Main.tileSize - Main.spriteSize), Main.tileSize, Main.tileSize, null);
+		g.drawImage(image, x, y, Main.tileSize, Main.tileSize, null);
 	}
 	
 	public void draw(Graphics g, int x, int y, boolean direction) {
@@ -56,4 +56,5 @@ public class Sprite {
 	public int getHeight() {
 		return height;
 	}
+	
 }
