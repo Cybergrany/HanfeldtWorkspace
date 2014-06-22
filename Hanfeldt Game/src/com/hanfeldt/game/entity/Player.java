@@ -28,7 +28,7 @@ public class Player extends EntityLiving {
 	
 	public Player(Sprite s, int x, int y, Listener l, Main main){
 		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
-		velXMax = 1f;
+		velXMax = (Main.debugCheats ? 10f : 1f);
 		setJumpHeight(2);
 		events = new PlayerEvents(this);
 		levelFinished = false;
@@ -80,12 +80,12 @@ public class Player extends EntityLiving {
 		
 		// Walk acceleration/slide is below
 		if((!isMovingLeft && !isMovingRight) || (isMovingLeft && isMovingRight)) {
-			velX *= 0.9f;
+			velX *= 0.93f;
 			
-			if(velX > 0 && velX < 0.2f) {
+			if(velX > 0 && velX < 0.15f) {
 				velX = 0;
 			}
-			if(velX < 0 && velX > -0.2f) {
+			if(velX < 0 && velX > -0.15f) {
 				velX = 0;
 			}
 		}else{
