@@ -22,7 +22,7 @@ public class GameWon extends State {
 	
 	public void tick() {
 		if(Main.getGame().getTotalTicks() >= nextFireworkTick) {
-			fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, rand.nextFloat() *4 +2));
+			fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY));
 			nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(60) +60;
 		}
 		for(int i=0; i<fireworks.size(); i++) {

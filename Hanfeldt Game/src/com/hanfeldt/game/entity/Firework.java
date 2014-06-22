@@ -15,9 +15,9 @@ public class Firework extends Entity {
 	private float speed;
 	private ArrayList<Point> shootingPoints;
 	
-	public Firework(int x, int y, float speed) {
+	public Firework(int x, int y) {
 		super(x, y);
-		this.speed = speed;
+		speed = 1;
 		color = Color.ORANGE;
 		rand = new Random();
 		shootingTicks = rand.nextInt(15) + 15;
@@ -43,7 +43,7 @@ public class Firework extends Entity {
 	public void render(Graphics g) {
 		g.setColor(color);
 		for(int i=0; i<shootingPoints.size(); i++) {
-			g.fillRect(shootingPoints.get(i).x, shootingPoints.get(i).y, 1, 2);
+			g.fillRect(shootingPoints.get(i).x, shootingPoints.get(i).y, 1, 1);
 		}
 	}
 	
