@@ -1,7 +1,6 @@
 package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
-import java.util.Iterator;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;

@@ -50,6 +50,7 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 				}else{
 					MenuScreen.setOptionSelected(MenuScreen.getOptionSelected() - 1);
 				}
+				MenuScreen.setMouseInUse(false);
 			}
 			break;
 		case(KeyEvent.VK_DOWN):
@@ -59,11 +60,12 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 				}else{
 					MenuScreen.setOptionSelected(MenuScreen.getOptionSelected() + 1);
 				}
+				MenuScreen.setMouseInUse(false);
 			}
 			break;
 		case(KeyEvent.VK_ENTER):
 			if(Main.splashShowing){
-				MenuScreen.setOptionChosen(MenuScreen.getOptionSelected());
+				MenuScreen.setOptionChosen(MenuScreen.getSelectedOption());
 			}
 			break;
 		

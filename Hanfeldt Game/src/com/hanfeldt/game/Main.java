@@ -14,7 +14,6 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.state.Dead;
-import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.state.SplashState;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.weapon.AmmoWeapon;

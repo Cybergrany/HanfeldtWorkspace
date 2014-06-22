@@ -4,8 +4,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.screen.MenuScreen;
 import com.hanfeldt.game.menu.screen.MenuScreenOption;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
-import com.hanfeldt.game.state.OptionState;
-import com.hanfeldt.game.state.Playing;
 
 /**
  * We need a splash screen.. I guess...
@@ -25,13 +23,4 @@ public class SplashScreen extends MenuScreen{
 		super(backgroundPath, options);
 		Main.splashShowing = true;
 	}
-	
-	public void tick() {
-//		Rectangle mouseRect = new Rectangle(Main.mouseX, Main.mouseY, 1, 1);
-//		for(int i=0; i<options.length; i++) {
-//			options[i].selected = options[i].getBounds().intersects(mouseRect);
-//		}
-	}
-	
-	
 }

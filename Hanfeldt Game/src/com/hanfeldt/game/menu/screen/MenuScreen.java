@@ -1,7 +1,9 @@
 package com.hanfeldt.game.menu.screen;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.Background;
 
 public class MenuScreen {
@@ -10,6 +12,7 @@ public class MenuScreen {
 	private Background background;
 	private static int optionChosen = -1;
 	private static int optionSelected = 0;
+	private static boolean mouseInUse = true;
 	private static MenuScreenOption[] options;
 	
 	public MenuScreen(String path, MenuScreenOption[] options){
@@ -19,7 +22,15 @@ public class MenuScreen {
 	}
 	
 	public void tick(){
-		
+		Rectangle mouseRect = new Rectangle(Main.mouseX, Main.mouseY, 1, 1);
+		for(int i=0; i<options.length; i++) {
+			if(options[i].getBounds().intersects(mouseRect)){
+				options[i].selected = true;
+				mouseInUse = true;
+			}else if (mouseInUse){
+				options[i].selected = false;
+			}
+		}
 	}
 	
 	public void draw(Graphics g){
@@ -29,13 +40,13 @@ public class MenuScreen {
 		}
 	}
 	
-	public MenuScreenOption getSelectedOption() {
+	public static int getSelectedOption() {
 		for(int i=0; i<options.length; i++) {
 			if(options[i].selected) {
-				return options[i];
+				return options[i].getId();
 			}
 		}
-		return null;
+		return 0;
 	}
 	public static int getOptionSelected(){
 		return optionSelected;
@@ -50,6 +61,10 @@ public class MenuScreen {
 	public static void setOptionChosen(int option){
 		optionChosen = options[option].getId();
 		optionAction(optionChosen);
+	}
+	
+	public static void setMouseInUse(boolean inUse){
+		mouseInUse = inUse;
 	}
 	
 	public int getOptionChosen(){
