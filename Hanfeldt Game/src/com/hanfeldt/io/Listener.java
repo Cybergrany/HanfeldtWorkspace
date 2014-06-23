@@ -14,7 +14,8 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 	private boolean pausePressed, debugPressed, mutePressed;
 	public boolean aDown, dDown, wDown, escDown,
 	mouseDown, mouseDownLastTick,
-	upArrowDown, downArrowDown, enterDown;
+	upArrowDown, downArrowDown, enterDown,
+	shopButtonDown, shopButtonDownLastTick;
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -46,6 +47,9 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			enterDown = true;
 			break;
 		
+		case(KeyEvent.VK_K):// 'K' seems like a good shop button to me, what do you think? 
+			shopButtonDown = true;
+			break;
 		}
 	}
 
@@ -92,7 +96,7 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 				mutePressed = true;
 				Hud.muted = true;
 			}
-		//Hippity hoppity skilly reloading!
+		//Reloading
 		case(KeyEvent.VK_R):
 			Main.getGame().reload();
 			break;
@@ -114,34 +118,21 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		case(KeyEvent.VK_ENTER):
 			enterDown = false;
 			break;
+		// Shop
+		case(KeyEvent.VK_K):// 'K' seems like a good shop button to me, what do you think? 
+			shopButtonDown = false;
+			break;
+		
 		}
 	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		
-		
-	}
+	
+	public void keyTyped(KeyEvent e) {}
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		mouseDownLastTick = mouseDown;
 		mouseDown = true;
 	}
 

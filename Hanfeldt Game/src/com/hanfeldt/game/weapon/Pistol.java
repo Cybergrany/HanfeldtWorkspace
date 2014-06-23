@@ -8,8 +8,8 @@ import com.hanfeldt.io.Sound;
 
 public class Pistol extends AmmoWeapon {
 	
-	public Pistol(Player p, int aic, int ta, int aifc, int tt) {
-		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), aic, ta, aifc, tt);
+	public Pistol(Player p, int aic, int ta) {
+		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), aic, ta, 8, 10);
 	}
 	
 	public void trigger() {

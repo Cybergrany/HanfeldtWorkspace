@@ -31,7 +31,9 @@ public class Playing extends State {
 		for(int i=0; i<Main.getGame().getGore().size(); i++) {
 			Main.getGame().getGore().get(i).tick();
 		}
-		main.getListener().mouseDownLastTick = main.getListener().mouseDown;
+		if(main.getListener().shopButtonDown && !main.getListener().shopButtonDownLastTick) {
+			main.setState(new Shop(main));
+		}
 	}
 	
 	public void draw(Graphics g) {

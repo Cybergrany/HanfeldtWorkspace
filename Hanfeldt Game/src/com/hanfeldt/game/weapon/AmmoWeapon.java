@@ -38,6 +38,10 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		}
 	}
 	
+	public void changeTotalAmmo(int c) {
+		totalAmmo += c;
+	}
+	
 	public int getTotalAmmo() {
 		return totalAmmo;
 	}

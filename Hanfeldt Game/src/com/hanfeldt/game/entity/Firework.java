@@ -15,7 +15,6 @@ public class Firework extends Entity {
 	private Random rand;
 	private int shootingTicksTotal;
 	private int lifetimeAfterExplode = 60;
-	private float angle;
 	private float alpha = 1f;
 	private Color color;
 	private float speed;
@@ -28,15 +27,14 @@ public class Firework extends Entity {
 		this.color = color;
 		rand = new Random();
 		shootingTicksTotal = rand.nextInt(60) + 60;
-		angle = rand.nextInt(70) -35;
 		points = new ArrayList<Point>();
 	}
 	
 	public void tick() {
 		if(shooting) {
 			points.add(new Point(getX(), getY()));
-			velX = (float) (Math.cos(angle) *speed);
-			velY = (float) (Math.sin(angle) *speed);
+			velX = rand.nextFloat() *0.5f -0.25f;
+			velY = -speed;
 			if(totalTicks >= shootingTicksTotal) {
 				shooting = false;
 			}

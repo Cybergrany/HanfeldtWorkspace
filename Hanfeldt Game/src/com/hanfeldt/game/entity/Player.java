@@ -17,7 +17,7 @@ import com.hanfeldt.io.Sound;
 public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
-	private Weapon weaponEquipped = new Pistol(this, 8, 8, 8, 10);
+	private Weapon weaponEquipped = new Pistol(this, 8, 8);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private Listener listener;
