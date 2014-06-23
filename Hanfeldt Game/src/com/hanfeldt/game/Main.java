@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -15,8 +14,8 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.state.Dead;
-import com.hanfeldt.game.state.SplashState;
 import com.hanfeldt.game.state.State;
+import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.ResourceManager;
@@ -54,7 +53,7 @@ public class Main implements Runnable {
 	private static Player player;
 	private static Level[] levels;
 	private static int level = 0;
-	private static Listener listener;
+	private Listener listener;
 	private Hud hud;
 	private State state;
 	private volatile ArrayList<GoreSpawn> gore;
@@ -109,7 +108,7 @@ public class Main implements Runnable {
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
-		state = new SplashState(this);
+		state = new MainMenuState(this);
 		gamePanel.requestFocus();
 		resourceManager = new ResourceManager();
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);

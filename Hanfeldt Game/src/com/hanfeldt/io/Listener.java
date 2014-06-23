@@ -8,7 +8,6 @@ import java.awt.event.MouseMotionListener;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.menu.screen.MenuScreen;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
@@ -55,19 +54,6 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		int key = e.getKeyCode();
 		
 		switch(key){
-		
-		//Splash
-		case(KeyEvent.VK_UP):
-			upArrowDown = false;
-			break;
-		
-		case(KeyEvent.VK_DOWN):
-			downArrowDown = false;
-			break;
-		
-		case(KeyEvent.VK_ENTER):
-			enterDown = false;
-			break;
 		
 		//Enter Debug Screen
 		case(KeyEvent.VK_F3)://Cuz Minecraft, amirite? //Absolutely!
@@ -118,6 +104,15 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			break;
 		case(KeyEvent.VK_W):
 			wDown = false;
+			break;
+		case(KeyEvent.VK_UP):
+			upArrowDown = false;
+			break;
+		case(KeyEvent.VK_DOWN):
+			downArrowDown = false;
+			break;
+		case(KeyEvent.VK_ENTER):
+			enterDown = false;
 			break;
 		}
 	}

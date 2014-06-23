@@ -11,7 +11,7 @@ import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
  * @author David Ofeldt
  *
  */
-public class SplashScreen extends MenuScreen{
+public class MainMenuScreen extends MenuScreen{
 	
 	private static final int optionsX = 10;
 	private static MenuScreenOption[] options = new MenuScreenOption[] {new MenuScreenOption("Start Game", optionsX, 80, MenuScreenOptionAction.startGame),
@@ -19,7 +19,7 @@ public class SplashScreen extends MenuScreen{
 																 new MenuScreenOption("Load Game", optionsX, 120, MenuScreenOptionAction.loadGame),
 																 new MenuScreenOption("Quit", optionsX, 140, MenuScreenOptionAction.quitGame)};
 	
-	public SplashScreen(String backgroundPath){
+	public MainMenuScreen(String backgroundPath){
 		super(backgroundPath, options);
 		Main.splashShowing = true;
 	}

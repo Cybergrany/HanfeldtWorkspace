@@ -2,8 +2,9 @@ package com.hanfeldt.game.menu.screen;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
-import com.hanfeldt.game.state.OptionState;
 import com.hanfeldt.game.state.Playing;
+import com.hanfeldt.game.state.State;
+import com.hanfeldt.game.state.menus.OptionMenu1State;
 
 /**
  * Any code to be performed when an option is chosen can be found here.
@@ -42,7 +43,9 @@ public final class MenuScreenOptionAction {
 		case startGame:
 			startGame();
 			break;
-			
+		case back:
+			goBack();
+			break;
 		}
 	}
 	
@@ -60,7 +63,8 @@ public final class MenuScreenOptionAction {
 	 * Opens {@link OptionScreen}
 	 */
 	public static void openOptions(){
-		Main.getGame().setState(new OptionState(Main.getGame()));
+		Main.getGame().setState(new OptionMenu1State(Main.getGame()));
+//		setLastScreen(new );
 	}
 	
 	/**
@@ -72,9 +76,12 @@ public final class MenuScreenOptionAction {
 	
 	/**
 	 * Go back to the previous menu.
-	 * TODO:NOT YET IMPLEMENTED
 	 */
 	public static void goBack(){
+		
+	}
+	
+	private void setLastScreen(State s){
 		
 	}
 }
