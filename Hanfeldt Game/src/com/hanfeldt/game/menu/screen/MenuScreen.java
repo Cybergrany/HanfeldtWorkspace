@@ -5,18 +5,20 @@ import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.Background;
+import com.hanfeldt.io.Sound;
 
 public class MenuScreen {
 
 	public int optionAmount = 0;
 	private Background background;
-	private static int optionChosen = -1;
-	private static int optionSelected = 0;
-	private static boolean mouseInUse = true;
-	private static MenuScreenOption[] options;
+	private int optionChosen = -1;
+	private int optionSelected = 0;
+	private boolean mouseInUse = true;
+	private boolean selectionChanged = false;
+	private MenuScreenOption[] options;
 	
 	public MenuScreen(String path, MenuScreenOption[] options){
-		MenuScreen.options = options;
+		this.options = options;
 		background = new Background(path);
 		options[0].setSelected(true);
 	}
@@ -25,12 +27,48 @@ public class MenuScreen {
 		Rectangle mouseRect = new Rectangle(Main.mouseX, Main.mouseY, 1, 1);
 		for(int i=0; i<options.length; i++) {
 			if(options[i].getBounds().intersects(mouseRect)){
-				options[i].selected = true;
+				if(getSelectedOption() != options[i].getId()){
+					selectionChanged = true;
+				}
+				options[i].setSelected(true);
 				mouseInUse = true;
 			}else if (mouseInUse){
-				options[i].selected = false;
+				options[i].setSelected(false);
+			}
+			if(Main.getGame().getListener().mouseDown && !Main.getGame().getListener().mouseDownLastTick && options[i].getBounds().intersects(mouseRect)){
+				setOptionChosen(getSelectedOption());
 			}
 		}
+		if(selectionChanged){
+			Sound.playSound("option_select.wav");
+			selectionChanged = false;
+		}
+		
+		if(Main.getGame().getListener().downArrowDown){
+			if(getOptionSelected() + 1 > getOptionAmount() - 1){
+				setOptionSelected(0);
+			}else{
+				setOptionSelected(getOptionSelected() + 1);
+			}
+			setMouseInUse(false);
+			Main.getGame().getListener().downArrowDown = false;//Temporary feex to stop the key from being terribly spammed
+		}
+		
+		if(Main.getGame().getListener().upArrowDown){
+			if(getOptionSelected() - 1 < 0){
+				setOptionSelected(getOptionAmount() - 1);
+			}else{
+				setOptionSelected(getOptionSelected() - 1);
+			}
+			setMouseInUse(false);
+			Main.getGame().getListener().upArrowDown = false;
+		}
+		
+		if(Main.getGame().getListener().enterDown){
+			setOptionChosen(getSelectedOption());
+			Main.getGame().getListener().enterDown = false;//Probably not necessary but it'll be grand shure
+		}
+		
 	}
 	
 	public void draw(Graphics g){
@@ -40,7 +78,7 @@ public class MenuScreen {
 		}
 	}
 	
-	public static int getSelectedOption() {
+	public int getSelectedOption() {
 		for(int i=0; i<options.length; i++) {
 			if(options[i].selected) {
 				return options[i].getId();
@@ -48,22 +86,24 @@ public class MenuScreen {
 		}
 		return 0;
 	}
-	public static int getOptionSelected(){
+	public int getOptionSelected(){
 		return optionSelected;
 	}
 	
-	public static void setOptionSelected(int option){
+	public void setOptionSelected(int option){
 		options[optionSelected].setSelected(false);
 		optionSelected = option;
 		options[optionSelected].setSelected(true);
+		Sound.playSound("option_select.wav");
 	}
 	
-	public static void setOptionChosen(int option){
+	public void setOptionChosen(int option){
 		optionChosen = options[option].getId();
 		optionAction(optionChosen);
+		Sound.playSound("option_chosen.wav");
 	}
 	
-	public static void setMouseInUse(boolean inUse){
+	public void setMouseInUse(boolean inUse){
 		mouseInUse = inUse;
 	}
 	
@@ -71,7 +111,7 @@ public class MenuScreen {
 		return optionChosen;
 	}
 	
-	public static int getOptionAmount(){
+	public int getOptionAmount(){
 		return options.length;
 	}
 	

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -53,7 +54,7 @@ public class Main implements Runnable {
 	private static Player player;
 	private static Level[] levels;
 	private static int level = 0;
-	private Listener listener;
+	private static Listener listener;
 	private Hud hud;
 	private State state;
 	private volatile ArrayList<GoreSpawn> gore;

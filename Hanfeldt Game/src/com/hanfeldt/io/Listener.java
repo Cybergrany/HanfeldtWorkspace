@@ -13,7 +13,9 @@ import com.hanfeldt.game.menu.screen.MenuScreen;
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
 	private boolean pausePressed, debugPressed, mutePressed;
-	public boolean aDown, dDown, wDown, escDown, mouseDown, mouseDownLastTick;
+	public boolean aDown, dDown, wDown, escDown,
+	mouseDown, mouseDownLastTick,
+	upArrowDown, downArrowDown, enterDown;
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -32,6 +34,18 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		case(KeyEvent.VK_W): //Going for W yolo
 			wDown = true;
 			break;
+			
+		case(KeyEvent.VK_UP):
+			upArrowDown = true;
+			break;
+			
+		case(KeyEvent.VK_DOWN):
+			downArrowDown = true;
+			break;
+			
+		case(KeyEvent.VK_ENTER):
+			enterDown = true;
+			break;
 		
 		}
 	}
@@ -44,29 +58,15 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		
 		//Splash
 		case(KeyEvent.VK_UP):
-			if(Main.splashShowing){
-				if(MenuScreen.getOptionSelected() - 1 < 0){
-					MenuScreen.setOptionSelected(MenuScreen.getOptionAmount() - 1);
-				}else{
-					MenuScreen.setOptionSelected(MenuScreen.getOptionSelected() - 1);
-				}
-				MenuScreen.setMouseInUse(false);
-			}
+			upArrowDown = false;
 			break;
+		
 		case(KeyEvent.VK_DOWN):
-			if(Main.splashShowing){
-				if(MenuScreen.getOptionSelected() + 1 > MenuScreen.getOptionAmount() - 1){
-					MenuScreen.setOptionSelected(0);
-				}else{
-					MenuScreen.setOptionSelected(MenuScreen.getOptionSelected() + 1);
-				}
-				MenuScreen.setMouseInUse(false);
-			}
+			downArrowDown = false;
 			break;
+		
 		case(KeyEvent.VK_ENTER):
-			if(Main.splashShowing){
-				MenuScreen.setOptionChosen(MenuScreen.getSelectedOption());
-			}
+			enterDown = false;
 			break;
 		
 		//Enter Debug Screen
