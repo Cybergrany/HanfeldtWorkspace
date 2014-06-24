@@ -40,7 +40,11 @@ public class Hud {
 	
 	public void tick(){
 		hearts = player.getHealth() / 20;
-		bullets = ((AmmoWeapon) player.getWeaponEquipped()).getAmmoInClip();
+		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
+			bullets = ((AmmoWeapon) player.getWeaponEquipped()).getAmmoInClip();
+		}else{
+			bullets = 0;
+		}
 	}
 	
 	public void draw(Graphics g){

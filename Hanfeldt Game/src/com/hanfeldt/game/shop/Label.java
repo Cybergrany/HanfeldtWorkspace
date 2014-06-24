@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Pistol;
 import com.hanfeldt.game.weapon.Weapon;
@@ -35,20 +36,21 @@ public class Label {
 		selected = new Rectangle(Main.mouseX, Main.mouseY, 1, 1).intersects(getBounds());
 		if(selected && listener.mouseDown && !listener.mouseDownLastTick) {
 			//User clicked the label. Whipee!
-			Weapon wep = Main.getGame().getPlayer().getWeaponEquipped();
 			AmmoWeapon ammoWep = null;
+			Player player = Main.getGame().getPlayer();
+			Weapon wep = player.getWeaponEquipped();
 			if(wep instanceof AmmoWeapon) {
 				ammoWep = (AmmoWeapon) wep;
 			}
 			switch(name) {
 			case "pistol":
-				if(Main.getGame().getPlayer().getMoney() >= cost) {
+				if(player.getMoney() >= cost) {
 					if(wep instanceof Pistol) {
 						ammoWep.changeTotalAmmo(16);
 					}else{
-						wep = new Pistol(Main.getGame().getPlayer(), ammoWep.getAmmoInClip(), ammoWep.getTotalAmmo() +8);
+						player.setWeaponEquipped(new Pistol(player, 8, +8));
 					}
-					Main.getGame().getPlayer().changeMoney(-cost);
+					player.changeMoney(-cost);
 					Sound.playSound("wep_bought.wav");
 				}else{
 					Sound.playSound("not_enough_money.wav");

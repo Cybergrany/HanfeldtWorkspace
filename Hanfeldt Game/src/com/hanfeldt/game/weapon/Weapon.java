@@ -7,7 +7,7 @@ import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
 
 public abstract class Weapon {
-	private Sprite sprite;
+	protected Sprite sprite;
 	protected Player player;
 	protected long totalTicks = 0;
 	
