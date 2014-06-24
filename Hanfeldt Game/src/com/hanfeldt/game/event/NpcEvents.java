@@ -34,11 +34,11 @@ public class NpcEvents {
 	
 	public void damageNpc(Npc npc, int damage, int id){
 		if(id == Values.zombie_damage_from_bullet_id){
-			npc.changeHealth(-damage);
 			Sound.playSound("zombie_hit_from_gun.wav");
 		}
+		npc.changeHealth(-damage);
 		if(npc.getHealth() <= 0){
-			if(npc instanceof Zombie && id == Values.zombie_damage_from_bullet_id) {
+			if(npc instanceof Zombie) {
 				Main.getGame().getPlayer().changeMoney(Values.money_from_zombie);
 			}
 			killNpc(npc, id);
@@ -49,13 +49,7 @@ public class NpcEvents {
 	}
 	
 	public void killNpc(Npc npc, int id){
-		if(id == Values.zombie_damage_from_bullet_id){
-			//TODO: A zombie death cry + zombie falling over
-			Main.npc.remove(npc);
-		}
-		if(id == Values.npc_out_of_map_id){
-			Main.npc.remove(npc);
-		}
+		Main.npc.remove(npc);
 	}
 	
 	public boolean isOutsideMap(Npc npc){

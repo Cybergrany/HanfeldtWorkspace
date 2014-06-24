@@ -9,7 +9,7 @@ import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.state.Playing;
-import com.hanfeldt.game.weapon.Pistol;
+import com.hanfeldt.game.weapon.Sword;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
@@ -17,7 +17,7 @@ import com.hanfeldt.io.Sound;
 public class Player extends EntityLiving {
 	
 	private PlayerEvents events;
-	private Weapon weaponEquipped = new Pistol(this, 8, 16);
+	private Weapon weaponEquipped = new Sword(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private Listener listener;

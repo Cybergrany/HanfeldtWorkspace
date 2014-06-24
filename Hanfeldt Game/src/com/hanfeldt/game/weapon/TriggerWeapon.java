@@ -5,7 +5,7 @@ import com.hanfeldt.game.entity.Player;
 
 public abstract class TriggerWeapon extends Weapon {
 	private int triggerRestTime;
-	private long tickTriggered = 0;
+	protected long tickTriggered = 0;
 	
 	public TriggerWeapon(Player p, Sprite s, int tt) {
 		super(p, s);

@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.EntityLiving;
+import com.hanfeldt.game.event.NpcEvents;
 
 /**
  * Adding code for NPC's, I'm just playing around, so hope I'm doing this right!
@@ -14,9 +15,11 @@ import com.hanfeldt.game.entity.EntityLiving;
 public class Npc extends EntityLiving {
 	
 	int health = 0;
+	protected NpcEvents events;
 	
 	public Npc(Sprite s,int h, int x, int y){
 		super(s, h, x, y);
+		events = new NpcEvents(this);
 	}
 
 	public void tick(){
@@ -42,4 +45,9 @@ public class Npc extends EntityLiving {
 			setVelX(moveSpeed);
 		}
 	}
+	
+	public NpcEvents getNpcvents() {
+		return events;
+	}
+	
 }

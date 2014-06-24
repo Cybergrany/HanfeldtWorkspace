@@ -1,10 +1,8 @@
 package com.hanfeldt.game;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 public class Sprite {
 	private BufferedImage image;
@@ -59,5 +57,10 @@ public class Sprite {
 	public int getHeight() {
 		return height;
 	}
+	
+	public BufferedImage getImage() {
+		return image;
+	}
+	
 	
 }

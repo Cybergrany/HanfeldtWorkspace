@@ -11,12 +11,10 @@ public class Zombie extends Npc {
 	
 	
 	public static int maxHealth = Values.zombie_max_health;
-	private NpcEvents events;
 
 	public Zombie(int x, int y) {
 		super(s, maxHealth, x, y);
 		setVelXMax(speed);
-		events = new NpcEvents(this);
 		setJumpHeight(2.3f);//Slightly higher than block so they can jump over them with ease
 	}
 	
