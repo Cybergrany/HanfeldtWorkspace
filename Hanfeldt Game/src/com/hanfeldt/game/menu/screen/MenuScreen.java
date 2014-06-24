@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.menu.Background;
 import com.hanfeldt.io.Sound;
 
 public class MenuScreen {
@@ -13,6 +12,7 @@ public class MenuScreen {
 	private Background background;
 	private int optionChosen = -1;
 	private int optionSelected = 0;
+	private int arrayPos = 0;//Temporary feex for thingy
 	private boolean mouseInUse = true;
 	private boolean selectionChanged = false;
 	private MenuScreenOption[] options;
@@ -81,6 +81,7 @@ public class MenuScreen {
 	public int getSelectedOption() {
 		for(int i=0; i<options.length; i++) {
 			if(options[i].selected) {
+				arrayPos = i;
 				return options[i].getId();
 			}
 		}
@@ -98,7 +99,7 @@ public class MenuScreen {
 	}
 	
 	public void setOptionChosen(int option){
-		optionChosen = options[option].getId();
+		optionChosen = options[arrayPos].getId();
 		optionAction(optionChosen);
 		Sound.playSound("option_chosen.wav");
 	}

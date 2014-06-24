@@ -1,5 +1,7 @@
 package com.hanfeldt.game.menu.screen;
 
+import java.security.acl.LastOwnerException;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.state.Playing;
@@ -27,6 +29,8 @@ public final class MenuScreenOptionAction {
 	
 	public static final int options_graphics = 5;
 	public static final int options_sound = 6;
+	
+	private static State lastState;//The last option screen displayed.
 	
 	/**
 	 * Performs an action based on the option passed into it.
@@ -63,8 +67,8 @@ public final class MenuScreenOptionAction {
 	 * Opens {@link OptionScreen}
 	 */
 	public static void openOptions(){
+		setLastScreen(Main.getGame().getState());
 		Main.getGame().setState(new OptionMenu1State(Main.getGame()));
-//		setLastScreen(new );
 	}
 	
 	/**
@@ -78,11 +82,11 @@ public final class MenuScreenOptionAction {
 	 * Go back to the previous menu.
 	 */
 	public static void goBack(){
-		
+		Main.getGame().setState(lastState);
 	}
 	
-	private void setLastScreen(State s){
-		
+	private static void setLastScreen(State s){
+		lastState = s;
 	}
 	
 }
