@@ -1,5 +1,6 @@
 package com.hanfeldt.game.state.menus;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
@@ -19,6 +20,8 @@ public class PauseMenuState extends State{
 	}
 	
 	public void draw(Graphics g){
+		g.setColor(new Color(0, 0, 0, 90));
+		g.fillRect(0, 0, Main.sizeX, Main.sizeY);
 		pauseScreen.draw(g);
 	}
 }

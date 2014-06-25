@@ -46,10 +46,12 @@ public class Sword extends TriggerWeapon {
 			if(!player.getDirection()) {
 				if(hitBoxLeft.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
+					Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y);
 				}
 			}else{
 				if(hitBoxRight.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
+					Main.getGame().addGore(hitBoxRight.x, hitBoxRight.y);
 				}
 			}
 		}
