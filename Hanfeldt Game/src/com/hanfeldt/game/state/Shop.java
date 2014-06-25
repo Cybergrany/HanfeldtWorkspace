@@ -21,7 +21,8 @@ public class Shop extends State {
 			e.printStackTrace();
 		}
 		Label.setListener(main.getListener());
-		labels = new Label[] {new Label("pistol", 50, 20, 20, Color.ORANGE, 0, 4, 1, 1)};
+		labels = new Label[] {new Label("pistol", 50, 20, 30, Color.ORANGE, 0, 4, 1, 1),
+							  new Label("sword", 0, 100, 30, Color.ORANGE, 4, 3, 1, 1)};
 	}
 	
 	public void tick() {

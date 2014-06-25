@@ -10,6 +10,7 @@ import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;
+import com.hanfeldt.io.Sound;
 
 public class Sword extends TriggerWeapon {
 	private static final int range = 16;
@@ -52,6 +53,7 @@ public class Sword extends TriggerWeapon {
 				}
 			}
 		}
+		Sound.playSound("Sword_Swing.wav");
 	}
 	
 }

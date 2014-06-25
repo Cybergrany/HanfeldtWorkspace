@@ -41,10 +41,10 @@ public class Playing extends State {
 			main.getNpc().get(i).draw(g);
 		}
 		Main.getLevels()[Main.getLevel()].render(g);
-		main.getHud().draw(g);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
 		}
+		main.getHud().draw(g);
 		for(GoreSpawn go : Main.getGame().getGore()) {
 			go.render(g);
 		}

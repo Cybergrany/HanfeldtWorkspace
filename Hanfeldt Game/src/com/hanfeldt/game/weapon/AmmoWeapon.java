@@ -83,6 +83,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 				int ammoToReload = ammoInFullClip - ammoInClip;
 				if(ammoToReload > totalAmmo) {
 					ammoInClip = totalAmmo + ammoInClip;
+					totalAmmo = 0;
 				}else{
 					ammoInClip = ammoInFullClip;
 					totalAmmo -= ammoToReload;
