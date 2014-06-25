@@ -37,7 +37,7 @@ public class Main implements Runnable {
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public static SpriteSheet spriteSheet;
 	public ResourceManager resourceManager;
-	public static boolean debugCheats = false;
+	public static boolean debugCheats = true;
 	
 	private int lives = 3;
 	private int ticksPs = 60;
