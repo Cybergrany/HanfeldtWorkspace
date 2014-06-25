@@ -6,6 +6,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.State;
+import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.state.menus.OptionMenu1State;
 
 /**
@@ -30,6 +31,11 @@ public final class MenuScreenOptionAction {
 	public static final int options_graphics = 5;
 	public static final int options_sound = 6;
 	
+	public static final int resumeGame = 7;
+	public static final int muteGame = 8;
+	
+	public static final int gotoMainMenu = 9;
+	
 	private static State lastState;//The last option screen displayed.
 	
 	/**
@@ -49,6 +55,15 @@ public final class MenuScreenOptionAction {
 			break;
 		case back:
 			goBack();
+			break;
+		case resumeGame:
+			resumeGame();
+			break;
+		case muteGame:
+			muteGame();
+			break;
+		case gotoMainMenu:
+			gotoMainMenu();
 			break;
 		}
 	}
@@ -83,6 +98,29 @@ public final class MenuScreenOptionAction {
 	 */
 	public static void goBack(){
 		Main.getGame().setState(lastState);
+	}
+	
+	/**
+	 * Resume the game
+	 */
+	public static void resumeGame(){
+		Main.getGame().returnToPlaying();
+	}
+	
+	/**
+	 * Mutes the game
+	 */
+	public static void muteGame(){
+		if(!Main.muted){
+			Main.muted = true;
+		}else{
+			Main.muted = false;
+		}
+	}
+	
+	public static void gotoMainMenu(){
+		//TODO:"Save game before quitting?" Dialogue. 
+		Main.getGame().setState(new MainMenuState(Main.getGame()));
 	}
 	
 	private static void setLastScreen(State s){

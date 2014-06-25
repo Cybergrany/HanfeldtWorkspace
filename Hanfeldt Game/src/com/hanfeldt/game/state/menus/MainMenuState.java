@@ -11,7 +11,7 @@ public class MainMenuState extends State{
 	
 	public MainMenuState(Main main) {
 		super(main);
-		splash = new MainMenuScreen("/images/Splash.png");
+		splash = new MainMenuScreen("/images/MenuBackgrounds/mainMenu.png");
 	}
 	
 	public void tick() {

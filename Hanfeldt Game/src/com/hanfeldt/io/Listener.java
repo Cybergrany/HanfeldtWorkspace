@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.state.menus.PauseMenuState;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
@@ -75,13 +76,11 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		//Pausing
 		case(KeyEvent.VK_ESCAPE):
 			if(pausePressed){
-				Main.isPaused = false;
 				pausePressed = false;
-				Hud.paused = false;
+				Main.getGame().returnToPlaying();
 			}else{
-				Main.isPaused = true;
 				pausePressed = true;
-				Hud.paused = true;
+				Main.getGame().setState(new PauseMenuState(Main.getGame()));
 			}
 			break;
 			

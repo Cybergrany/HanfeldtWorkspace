@@ -11,7 +11,7 @@ public class OptionMenu1State extends State{
 
 	public OptionMenu1State(Main main){
 		super(main);
-		optionScreen = new OptionScreen("/images/optionSplash.png");
+		optionScreen = new OptionScreen("/images/MenuBackgrounds/optionMenu.png");
 	}
 	
 	public void tick(){

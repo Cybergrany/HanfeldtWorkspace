@@ -37,7 +37,7 @@ public class Player extends EntityLiving {
 	}
 	
 	public void draw(Graphics g) {
-		if( (!listener.aDown && !listener.dDown) || (listener.aDown && listener.dDown) || Main.isPaused) {
+		if( (!listener.aDown && !listener.dDown) || (listener.aDown && listener.dDown)) {
 			sprite.draw(g, (Main.sizeX /2) - (Main.tileSize /2), getY(), direction);
 			cycleTicks = 0;
 			currentCycle = 0;

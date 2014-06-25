@@ -30,7 +30,7 @@ public class Main implements Runnable {
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
 	private int levelAmount = 2;//Amount of levels in game.
-	public static boolean running, isPaused, debug, muted, gameOver, gameStarted, splashShowing;
+	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
 	public static float gravity = 0.1f;
 	public static float terminalVelocity = 5;
@@ -136,7 +136,6 @@ public class Main implements Runnable {
 		long lastTimer = System.currentTimeMillis();
 		int frames = 0;//, ticks = 0;
 		running = true;
-		isPaused = false;
 
 		while (running) {
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
@@ -145,22 +144,20 @@ public class Main implements Runnable {
 				/*ticks = */frames = 0;
 			}
 
-			if (!isPaused) {//Should game automatically pause on loss of focus? (... &&gamePanel.hasFocus()){...
-				if (System.nanoTime() > lastTick + nsPerTick) {
-					tick();
-					//ticks++;
-					totalTicks++;
-					if(totalTicks >= Long.MAX_VALUE) {
-						totalTicks = 0;
-					}
-					lastTick += nsPerTick;
+			if (System.nanoTime() > lastTick + nsPerTick) {
+				tick();
+				//ticks++;
+				totalTicks++;
+				if(totalTicks >= Long.MAX_VALUE) {
+					totalTicks = 0;
+				}
+				lastTick += nsPerTick;
 
-					if ((lastTick + nsPerTick) - System.nanoTime() > 3000000) {
-						try {
-							Thread.sleep(2);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+				if ((lastTick + nsPerTick) - System.nanoTime() > 3000000) {
+					try {
+						Thread.sleep(2);
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
 			}

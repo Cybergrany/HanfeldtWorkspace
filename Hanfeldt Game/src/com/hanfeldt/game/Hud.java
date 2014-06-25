@@ -11,7 +11,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class Hud {
-	public static boolean paused = false, debug = false, muted = false;
+	public static boolean debug = false, muted = false;
 	private static int hearts, bullets;
 	private static int heartx = 0;
 	private Sprite heart, character, deadCharacter, pistol /*,ammo*/;
@@ -85,11 +85,6 @@ public class Hud {
 		}
 		
 		heartx = 19;
-		
-		if(paused){
-			g.drawString("Game is paused.", Main.sizeX / 8, Main.sizeY / 2);
-			g.drawString("Press 'M' to mute.", Main.sizeX / 8, Main.sizeY / 2 + 20);
-		}
 		
 		if(debug){
 			g.drawString("Debug Mode", 10, 10);
