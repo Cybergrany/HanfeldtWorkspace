@@ -9,8 +9,8 @@ import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.state.Playing;
-import com.hanfeldt.game.weapon.Sword;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.game.weapon.weapons.Sword;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 

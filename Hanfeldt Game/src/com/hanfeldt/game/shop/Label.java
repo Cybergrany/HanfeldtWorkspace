@@ -8,10 +8,10 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
-import com.hanfeldt.game.weapon.M16;
-import com.hanfeldt.game.weapon.Pistol;
-import com.hanfeldt.game.weapon.Sword;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.game.weapon.weapons.M16;
+import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.game.weapon.weapons.Sword;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 

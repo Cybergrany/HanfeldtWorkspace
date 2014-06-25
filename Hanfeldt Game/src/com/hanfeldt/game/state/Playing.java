@@ -5,10 +5,10 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.weapon.Pistol;
-import com.hanfeldt.game.weapon.Sword;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.game.weapon.weapons.Sword;
 
 public class Playing extends State {
 	

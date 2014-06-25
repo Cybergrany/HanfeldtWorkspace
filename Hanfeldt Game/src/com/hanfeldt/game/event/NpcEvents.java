@@ -85,7 +85,7 @@ public class NpcEvents {
 
 	public void bulletHit(Npc npc, Bullet b) {
 		Main.getGame().addGore(b.getX(), b.getY());
-		damageNpc(npc, Values.bullet_damage_dealt_to_zombie,
+		damageNpc(npc, b.getDamage(),
 				Values.zombie_damage_from_bullet_id);
 	}
 

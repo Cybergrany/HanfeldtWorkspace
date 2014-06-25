@@ -10,8 +10,9 @@ public class Bullet extends Entity {
 	private float angle;
 	private static final Color color = new Color(0xFF, 0x55, 0x00);
 	private float speed = 3.0f;
+	private static int damageValue = 10;//default damage
 	
-	public Bullet(int x, int y) {
+	public Bullet(int x, int y, int damage) {
 		super(x, y);
 		try {
 			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.tileSize),
@@ -19,6 +20,7 @@ public class Bullet extends Entity {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		damageValue = damage;
 	}
 	
 	public void tick() {
@@ -57,6 +59,10 @@ public class Bullet extends Entity {
 	
 	public int getSizeY() {
 		return 1;
+	}
+	
+	public int getDamage(){
+		return damageValue;
 	}
 	
 }

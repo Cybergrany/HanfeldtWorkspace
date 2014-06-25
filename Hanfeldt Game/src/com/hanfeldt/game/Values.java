@@ -26,8 +26,8 @@ public class Values {
 	public static int npc_out_of_map_id = 5;
 	
 	public static int bullet_damage_id = 4;
-	public static int bullet_damage_dealt_to_zombie = 40;
-	public static int bullet_damage_dealt_to_player = 60;
+	public static int bullet_damage_pistol = 40;
+	public static int bullet_damage_M16 = 20;//Half the damage seems legit
 	
 	public static int money_from_zombie = 25;
 	
