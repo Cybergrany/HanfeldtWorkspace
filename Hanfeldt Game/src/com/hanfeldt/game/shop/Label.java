@@ -8,6 +8,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
+import com.hanfeldt.game.weapon.M16;
 import com.hanfeldt.game.weapon.Pistol;
 import com.hanfeldt.game.weapon.Sword;
 import com.hanfeldt.game.weapon.Weapon;
@@ -65,6 +66,20 @@ public class Label {
 				}else{
 					Sound.playSound("not_enough_money.wav");
 				}
+				break;
+			case "m16":
+				if(player.getMoney() >= cost) {
+					if(wep instanceof M16) {
+						ammoWep.changeTotalAmmo(80);
+					}else{
+						player.setWeaponEquipped(new M16(player));
+					}
+					player.changeMoney(-cost);
+					Sound.playSound("wep_bought.wav");
+				}else{
+					Sound.playSound("not_enough_money.wav");
+				}
+				break;
 			default:
 				System.out.println("Weapon not found: " + name);
 				break;

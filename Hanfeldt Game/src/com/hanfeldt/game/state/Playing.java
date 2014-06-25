@@ -5,7 +5,10 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.weapon.Pistol;
+import com.hanfeldt.game.weapon.Sword;
 import com.hanfeldt.game.weapon.TriggerWeapon;
+import com.hanfeldt.game.weapon.Weapon;
 
 public class Playing extends State {
 	
@@ -24,9 +27,14 @@ public class Playing extends State {
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).tick();
 		}
-		main.getPlayer().getWeaponEquipped().tick();
-		if(!main.getListener().mouseDownLastTick && main.getListener().mouseDown && main.getPlayer().getWeaponEquipped() instanceof TriggerWeapon) {
-			((TriggerWeapon) main.getPlayer().getWeaponEquipped()).tryTrigger();
+		Weapon wep = main.getPlayer().getWeaponEquipped();
+		wep.tick();
+		if(main.getListener().mouseDown && wep instanceof TriggerWeapon) {
+			if((wep instanceof Pistol || wep instanceof Sword) && !main.getListener().mouseDownLastTick) {
+				((TriggerWeapon) wep).tryTrigger();
+			}else if(! (wep instanceof Pistol || wep instanceof Sword) ) {
+				((TriggerWeapon) wep).tryTrigger();
+			}
 		}
 		for(int i=0; i<Main.getGame().getGore().size(); i++) {
 			Main.getGame().getGore().get(i).tick();
