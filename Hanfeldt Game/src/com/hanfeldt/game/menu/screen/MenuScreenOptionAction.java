@@ -7,6 +7,7 @@ import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.state.menus.OptionMenu1State;
+import com.hanfeldt.io.Sound;
 
 /**
  * Any code to be performed when an option is chosen can be found here.
@@ -122,8 +123,10 @@ public final class MenuScreenOptionAction {
 	public static void muteGame(){
 		if(!Main.muted){
 			Main.muted = true;
+			Sound.pauseOggLoop();
 		}else{
 			Main.muted = false;
+			Sound.resumeOggLoop();
 		}
 	}
 	

@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.menus.PauseMenuState;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
@@ -86,15 +87,8 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			
 		//Muting
 		case(KeyEvent.VK_M):
-			if(mutePressed){
-				Main.muted = false;
-				mutePressed = false;
-				Hud.muted = false;
-			}else{
-				Main.muted = true;
-				mutePressed = true;
-				Hud.muted = true;
-			}
+			MenuScreenOptionAction.muteGame();
+			break;
 		//Reloading
 		case(KeyEvent.VK_R):
 			Main.getGame().reload();

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.MainMenuScreen;
 import com.hanfeldt.game.state.State;
+import com.hanfeldt.io.Sound;
 
 public class MainMenuState extends State{
 	private MainMenuScreen splash;
@@ -12,6 +13,8 @@ public class MainMenuState extends State{
 	public MainMenuState(Main main) {
 		super(main);
 		splash = new MainMenuScreen("/images/MenuBackgrounds/mainMenu.png");
+		Sound.setOggLoop("/sounds/Music.ogg");
+		Sound.playOggLoop();
 	}
 	
 	public void tick() {
