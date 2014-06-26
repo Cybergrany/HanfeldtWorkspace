@@ -18,18 +18,22 @@ public class Sword extends TriggerWeapon {
 	private static final int damage = 50;
 	private static final Sprite idleSprite = new Sprite(Main.getSpritesheet(), 4, 3, 1, 1);
 	
+	/**
+	 * Swashbuckling adventure awaits
+	 * @param p
+	 */
 	public Sword(Player p) {
 		super(p, new Sprite(Main.getSpritesheet(), 3, 3, 1, 1), 20);
 	}
 	
-	public void draw(Graphics g) {
-		if(tickTriggered > 0) { // Sword out straight
+	public void draw(Graphics g) {//#Im14AndThisIsFunny
+		if(tickTriggered > 0) { // Penis out straight
 			if(!player.getDirection()) {
 				sprite.draw(g, (Main.sizeX /2) - Main.tileSize -2, player.getY() + (Main.tileSize /2), player.getDirection());
 			}else{
 				sprite.draw(g, (Main.sizeX /2) +2, player.getY() + (Main.tileSize /2), player.getDirection());
 			}
-		}else{// Hold sword upright
+		}else{// Hold penis upright
 			if(!player.getDirection()) {
 				idleSprite.draw(g, (Main.sizeX /2) - 13, player.getY() + 2, player.getDirection());
 			}else{

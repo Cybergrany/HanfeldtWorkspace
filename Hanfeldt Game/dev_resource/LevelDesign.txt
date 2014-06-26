@@ -10,6 +10,7 @@ An index of 0 is furthest away (bg0.png looks like it's furthest away from the p
 0xff0000ff(Blue) = Zombie Spawner
 0xff00FF00(Green) = Item Chest (Ammo) 
 0xffFF0000(Red) = CementCore
+0xff9B0000(Dark Red) = CementBack
 0xff00008C(Dark Blue) = CementFloor
 0xff007700(Dark Green) = CementRoof
 0xffFFFF00(Yellow) = RoofLamp

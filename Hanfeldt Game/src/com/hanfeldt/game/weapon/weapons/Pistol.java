@@ -11,6 +11,13 @@ import com.hanfeldt.io.Sound;
 public class Pistol extends AmmoWeapon {
 	private int damage;
 	
+	/**
+	 * Pew-Pew-Pew
+	 * 
+	 * @param p A {@link Player} Sprite
+	 * @param aic 
+	 * @param ta
+	 */
 	public Pistol(Player p, int aic, int ta) {
 		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), aic, ta, 8, 10);
 		damage = Values.bullet_damage_pistol;

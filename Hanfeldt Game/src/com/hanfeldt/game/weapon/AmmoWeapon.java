@@ -2,6 +2,7 @@ package com.hanfeldt.game.weapon;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.SpriteSheet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.io.Sound;
 
@@ -11,6 +12,16 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	private int ammoInFullClip;
 	private long reloadStarted;
 	private boolean reloadInProg, clipOutDone, clipInDone, reloadClickDone;
+	
+	/**
+	 * An <strong>Ammo-Based Weapon</strong>, such as a gun, which usually shoots bullets or similar projectile.
+	 * @param p A {@link Player} entity.
+	 * @param s A {@link Sprite} from a valid {@link SpriteSheet}
+	 * @param aic The amount of ammo allocated to the weapon's clip when spawned in.
+	 * @param ta Total ammo allocated to weapon.
+	 * @param aifc Ammo in a full clip
+	 * @param tt Amount of time before the trigger can be pressed again.
+	 */
 	public AmmoWeapon(Player p, Sprite s, int aic, int ta, int aifc, int tt) {
 		super(p, s, tt);
 		ammoInClip = aic;

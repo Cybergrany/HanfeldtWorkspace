@@ -12,6 +12,13 @@ public class M16 extends AmmoWeapon {
 	
 	private int damage;
 	
+	/**
+	 * She weighs 150 kilograms and fires $200 custom-tooled cartridges at 10,000 rounds per minute.
+	 * It cost $400,000 to fire this weapon...for 12 seconds.
+	 * From {@link http://en.wikiquote.org/wiki/Team_Fortress_2#Meet_the_Heavy}
+	 * 
+	 * @param p A {@link Player} entity.
+	 */
 	public M16(Player p) {
 		super(p, new Sprite(Main.getSpritesheet(), 3, 4, 1, 1), 30, 60, 30, 10);
 		damage = Values.bullet_damage_M16;

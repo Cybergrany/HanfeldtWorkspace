@@ -20,7 +20,7 @@ public class MenuScreen {
 	public MenuScreen(String path, MenuScreenOption[] options){
 		this.options = options;
 		background = new Background(path);
-		options[0].setSelected(true);
+		options[0].setSelected(true);//First option selected by default
 	}
 	
 	public void tick(){

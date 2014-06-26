@@ -13,6 +13,7 @@ import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
+import com.hanfeldt.game.tile.CementBack;
 import com.hanfeldt.game.tile.CementCore;
 import com.hanfeldt.game.tile.CementFloor;
 import com.hanfeldt.game.tile.CementRoof;
@@ -77,6 +78,9 @@ public class Level {
 					break;
 				case 0xffFFFF00:
 					tiles[j][i] = new RoofLamp(j, i);
+					break;
+				case 0xff9B0000:
+					tiles[j][i] = new CementBack(j, i);
 					break;
 				default:
 					tiles[j][i] = new Air(j, i);
