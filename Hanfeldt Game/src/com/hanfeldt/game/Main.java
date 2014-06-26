@@ -129,24 +129,27 @@ public class Main implements Runnable {
 	}
 
 	public void run() {
-		long lastTick = System.nanoTime();
-		long lastFrame = System.nanoTime();
 		long nsPerTick = (long) 1000000000 / ticksPs;
 		long nsPerFrame = (long) 1000000000 / frameLimit;
+		long lastTick = System.nanoTime() - nsPerTick;
+		long lastFrame = System.nanoTime();
 		long lastTimer = System.currentTimeMillis();
-		int frames = 0;//, ticks = 0;
+		int frames = 0, ticks = 0;
 		running = true;
 
 		while (running) {
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
+				if(debug) {
+					System.out.printf("%d ticks, %d fps\n", ticks, frames);
+				}
 				fps = frames;
 				lastTimer = System.currentTimeMillis();
-				/*ticks = */frames = 0;
+				ticks = frames = 0;
 			}
 
 			if (System.nanoTime() > lastTick + nsPerTick) {
 				tick();
-				//ticks++;
+				ticks++;
 				totalTicks++;
 				if(totalTicks >= Long.MAX_VALUE) {
 					totalTicks = 0;
@@ -166,7 +169,7 @@ public class Main implements Runnable {
 				render();
 				frames++;
 
-				lastFrame = System.nanoTime();
+				lastFrame = lastFrame + nsPerFrame;
 			}
 		}
 	}
