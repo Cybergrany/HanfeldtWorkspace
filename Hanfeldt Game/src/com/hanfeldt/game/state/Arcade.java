@@ -10,9 +10,9 @@ import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 import com.hanfeldt.game.weapon.weapons.Sword;
 
-public class Playing extends State {
+public class Arcade extends State {
 	
-	public Playing(Main main) {
+	public Arcade(Main main) {
 		super(main);
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);

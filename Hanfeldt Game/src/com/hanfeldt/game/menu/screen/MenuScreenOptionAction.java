@@ -1,11 +1,10 @@
 package com.hanfeldt.game.menu.screen;
 
-import java.security.acl.LastOwnerException;
-
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
-import com.hanfeldt.game.state.Playing;
+import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
+import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.state.menus.OptionMenu1State;
 
@@ -21,7 +20,8 @@ public final class MenuScreenOptionAction {
 	 * Below is a list of option ID's.
 	 * Every option gets a unique id, and code can be run based on the id of that option(see below)
 	 */
-	public static final int startGame = 0;
+	public static final int startArcade = 0;
+	public static final int startStory = 10;
 	public static final int openOptions = 1;
 	public static final int loadGame = 2;
 	public static final int quitGame = 3;
@@ -50,8 +50,11 @@ public final class MenuScreenOptionAction {
 		case quitGame:
 			quitGame();
 			break;
-		case startGame:
-			startGame();
+		case startArcade:
+			startArcade();
+			break;
+		case startStory:
+			startStory();
 			break;
 		case back:
 			goBack();
@@ -70,12 +73,18 @@ public final class MenuScreenOptionAction {
 	
 	/**
 	 * Starts the game by disabling the menus ({@code Main.splashShowing = false} and then setting the 
-	 * game state to {@link Playing}
+	 * game state to {@link Arcade}
 	 */
-	public static void startGame(){
+	public static void startArcade(){
 		Main.gameStarted = true;
 		Main.splashShowing = false;
-		Main.getGame().setState(new Playing(Main.getGame()));
+		Main.getGame().setState(new Arcade(Main.getGame()));
+	}
+	
+	public static void startStory(){
+		Main.gameStarted = true;
+		Main.splashShowing = false;
+		Main.getGame().setState(new Story(Main.getGame()));
 	}
 	
 	/**

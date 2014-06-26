@@ -20,7 +20,7 @@ public class Dead extends State {
 	public void tick() {
 		deadFor++;
 		if(deadFor >= deadTicks && !Main.gameOver) {
-			main.setState(new Playing(main));
+			main.setState(new Arcade(main));
 		}
 	}
 	

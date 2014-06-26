@@ -14,10 +14,11 @@ import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 public class MainMenuScreen extends MenuScreen{
 	
 	private static final int optionsX = 10;
-	private static MenuScreenOption[] options = new MenuScreenOption[] {new MenuScreenOption("Start Game", optionsX, 80, MenuScreenOptionAction.startGame),
-																 new MenuScreenOption("Options", optionsX, 100 , MenuScreenOptionAction.openOptions), 
-																 new MenuScreenOption("Load Game", optionsX, 120, MenuScreenOptionAction.loadGame),
-																 new MenuScreenOption("Quit", optionsX, 140, MenuScreenOptionAction.quitGame)};
+	private static MenuScreenOption[] options = new MenuScreenOption[] {new MenuScreenOption("Arcade Mode", optionsX, 60, MenuScreenOptionAction.startArcade),
+																 new MenuScreenOption("Story Mode", optionsX, 75 , MenuScreenOptionAction.startStory), 
+																 new MenuScreenOption("Options", optionsX, 90, MenuScreenOptionAction.openOptions), 
+																 new MenuScreenOption("Load Game", optionsX, 105, MenuScreenOptionAction.loadGame),
+																 new MenuScreenOption("Quit", optionsX, 130, MenuScreenOptionAction.quitGame)};
 	
 	public MainMenuScreen(String backgroundPath){
 		super(backgroundPath, options);

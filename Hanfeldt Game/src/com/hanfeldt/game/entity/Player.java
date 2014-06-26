@@ -8,7 +8,7 @@ import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
-import com.hanfeldt.game.state.Playing;
+import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Sword;
 import com.hanfeldt.io.Listener;
@@ -107,7 +107,7 @@ public class Player extends EntityLiving {
 			
 		}
 		
-		if(getY() > Main.sizeY && main.getState() instanceof Playing){
+		if(getY() > Main.sizeY && main.getState() instanceof Arcade){
 			events.damagePlayer(getHealth(), Values.fall_death_id);
 		}
 		

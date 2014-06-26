@@ -14,7 +14,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.state.Dead;
-import com.hanfeldt.game.state.Playing;
+import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
@@ -57,7 +57,7 @@ public class Main implements Runnable {
 	private Listener listener;
 	private Hud hud;
 	private State state;
-	private Playing playingState; // So when you shop you need to save the Playing (state) somewhere :)
+	private Arcade playingState; // So when you shop you need to save the Playing (state) somewhere :)
 	private volatile ArrayList<GoreSpawn> gore;
 	String name = "Hanfeldt Zombie Shooter";
 
@@ -111,7 +111,7 @@ public class Main implements Runnable {
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
 		state = new MainMenuState(this);
-		playingState = new Playing(this);
+		playingState = new Arcade(this);
 		gamePanel.requestFocus();
 		resourceManager = new ResourceManager();
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
@@ -175,9 +175,12 @@ public class Main implements Runnable {
 	}
 
 	public void tick() {
-		state.tick();
-		listener.mouseDownLastTick = listener.mouseDown;
-		listener.shopButtonDownLastTick = listener.shopButtonDown;
+		hud.setHasFocus(gamePanel.hasFocus());
+		if(gamePanel.hasFocus()) {
+			state.tick();
+			listener.mouseDownLastTick = listener.mouseDown;
+			listener.shopButtonDownLastTick = listener.shopButtonDown;
+		}
 	}
 
 	public void render() {
