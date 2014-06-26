@@ -106,7 +106,7 @@ public class Main implements Runnable {
 	}
 
 	public void init() {
-		Sound.playMp3("/sounds/Music.mp3");
+		Sound.playMp3("");
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);

@@ -6,7 +6,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import javazoom.jl.player.advanced.AdvancedPlayer;
+import paulscode.sound.SoundSystem;
+import paulscode.sound.SoundSystemConfig;
+import paulscode.sound.SoundSystemException;
+import paulscode.sound.codecs.CodecJOrbis;
+import paulscode.sound.libraries.LibraryJavaSound;
 
 import com.hanfeldt.game.Main;
 
@@ -37,25 +41,41 @@ public class Sound {
 	}
 	
 	public static synchronized void playMp3(final String sound){;
-		if(!Main.muted){
-			new Thread(new Runnable() {
-				public void run() {
-					while(true) {
-						try {
-							AdvancedPlayer ap = new AdvancedPlayer
-						            (
-						                Sound.class.getResourceAsStream(sound),
-						                javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice()
-						            );
-						            ap.play();
-						}catch(Exception e) {
-							e.printStackTrace();
-						}
+	if(!Main.muted){
+		new Thread(new Runnable() {
+			public void run() {
+				while(true) {
+					playMusic();
 					}
 				}
 			}).start();
 		}
 	}
+	
+	public static void playMusic(){
+		SoundSystem soundSystem = null;
+		try{
+			SoundSystemConfig.addLibrary(LibraryJavaSound.class);
+			SoundSystemConfig.setCodec("ogg", CodecJOrbis.class);
+			SoundSystem.libraryCompatible(LibraryJavaSound.class);
+			soundSystem = new SoundSystem(LibraryJavaSound.class);
+		}catch(SoundSystemException e){
+			System.err.println("Lol u failed xoxo");
+			e.printStackTrace();
+		}
+		
+		soundSystem.quickPlay( false, Sound.class.getResourceAsStream("/sounds/Music.ogg").toString(), false, 0, 0, 0, SoundSystemConfig.ATTENUATION_NONE, 0);
+		
+		sleep(10);
+	}
+	
+	public static void sleep( long seconds ) { 
+	 try { 
+		 Thread.sleep( 1000 * seconds ); 
+	 }catch( InterruptedException e ){
+		  
+	  	}
+	  }
 	
 	//This loads the class, to avoid lag spikes!
 	public static void touch() {}
