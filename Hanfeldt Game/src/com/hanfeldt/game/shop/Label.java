@@ -48,9 +48,9 @@ public class Label {
 			case "pistol":
 				if(player.getMoney() >= cost) {
 					if(wep instanceof Pistol) {
-						ammoWep.changeTotalAmmo(16);
+						ammoWep.changeTotalAmmo(64);
 					}else{
-						player.setWeaponEquipped(new Pistol(player, 8, +8));
+						player.setWeaponEquipped(new Pistol(player, 8, 64));
 					}
 					player.changeMoney(-cost);
 					Sound.playSound("wep_bought.wav");

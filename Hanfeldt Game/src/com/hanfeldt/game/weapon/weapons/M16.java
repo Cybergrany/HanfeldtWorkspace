@@ -20,7 +20,7 @@ public class M16 extends AmmoWeapon {
 	 * @param p A {@link Player} entity.
 	 */
 	public M16(Player p) {
-		super(p, new Sprite(Main.getSpritesheet(), 3, 4, 1, 1), 30, 60, 30, 10);
+		super(p, new Sprite(Main.getSpritesheet(), 3, 4, 1, 1), 30, 180, 30, 10);
 		damage = Values.bullet_damage_M16;
 	}
 	
