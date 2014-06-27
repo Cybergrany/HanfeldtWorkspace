@@ -1,5 +1,6 @@
 package com.hanfeldt.game.menu.screen;
 
+import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.state.Arcade;
@@ -85,6 +86,7 @@ public final class MenuScreenOptionAction {
 	public static void startStory(){
 		Main.gameStarted = true;
 		Main.splashShowing = false;
+		Dialogue.loagImage("DialogueBox.png");
 		Main.getGame().setState(new Story(Main.getGame()));
 	}
 	

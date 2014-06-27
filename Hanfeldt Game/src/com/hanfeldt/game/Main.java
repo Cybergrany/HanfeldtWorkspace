@@ -179,6 +179,7 @@ public class Main implements Runnable {
 			state.tick();
 			listener.mouseDownLastTick = listener.mouseDown;
 			listener.shopButtonDownLastTick = listener.shopButtonDown;
+			listener.spaceDownLastTick = listener.spaceDown;
 		}
 	}
 

@@ -54,6 +54,10 @@ public class Sound {
 		oggClip.stop();
 	}
 	
+	public static boolean oggIsNull() {
+		return oggClip == null;
+	}
+	
 	/**
 	 * Thanks to this guy: http://www.cokeandcode.com/main/code/
 	 * OggClip gives us the following functions, among others;

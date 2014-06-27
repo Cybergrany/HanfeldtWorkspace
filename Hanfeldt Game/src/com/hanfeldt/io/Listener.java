@@ -17,7 +17,8 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 	public boolean aDown, dDown, wDown, escDown,
 	mouseDown, mouseDownLastTick,
 	upArrowDown, downArrowDown, enterDown,
-	shopButtonDown, shopButtonDownLastTick;
+	shopButtonDown, shopButtonDownLastTick,
+	spaceDown, spaceDownLastTick;
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -51,6 +52,10 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		
 		case(KeyEvent.VK_K):// 'K' seems like a good shop button to me, what do you think? 
 			shopButtonDown = true;
+			break;
+			
+		case(KeyEvent.VK_SPACE):
+			spaceDown = true;
 			break;
 		}
 	}
@@ -115,7 +120,12 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 		case(KeyEvent.VK_K):// 'K' seems like a good shop button to me, what do you think? 
 			shopButtonDown = false;
 			break;
-		
+			
+			//Dialogue skip
+		case(KeyEvent.VK_SPACE):
+			spaceDown = false;
+			break;
+			
 		}
 	}
 	

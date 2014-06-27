@@ -13,7 +13,9 @@ public class MainMenuState extends State{
 	public MainMenuState(Main main) {
 		super(main);
 		splash = new MainMenuScreen("/images/MenuBackgrounds/mainMenu.png");
-		Sound.setOggLoop("/sounds/Music.ogg");
+		if(Sound.oggIsNull()) {
+			Sound.setOggLoop("/sounds/Music.ogg");
+		}
 		Sound.playOggLoop();
 	}
 	
