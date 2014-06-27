@@ -6,6 +6,7 @@ import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -16,6 +17,8 @@ public class Story extends State {
 	
 	public Story(Main main) {
 		super(main);
+		main.setLevels(new Level[1]);
+		Main.setLevel(Main.getLevel());
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);
 		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));

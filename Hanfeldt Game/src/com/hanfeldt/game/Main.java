@@ -13,9 +13,11 @@ import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.state.Dead;
 import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
+import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
@@ -29,7 +31,6 @@ public class Main implements Runnable {
 	public static int scale = 3;
 	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
 	public static int fps;
-	private int levelAmount = 2;//Amount of levels in game.
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
 	public static float gravity = 0.1f;
@@ -53,6 +54,7 @@ public class Main implements Runnable {
 	private BufferedImage screenImage;
 	private static Player player;
 	private static Level[] levels;
+	private static LevelArcade arcadeLevels;
 	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
@@ -110,16 +112,13 @@ public class Main implements Runnable {
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
 		state = new MainMenuState(this);
-		playingState = new Arcade(this);
+//		playingState = new Arcade(this);//This was kinda messing with the two kinds of levels
 		gamePanel.requestFocus();
 		resourceManager = new ResourceManager();
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
 		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
-		
-		levels = new Level[levelAmount];
-		setLevel(level);
 		
 		// Start "GameLoop"
 		running = true;
@@ -196,8 +195,20 @@ public class Main implements Runnable {
 		return false;
 	}
 	
+	public void setLevels(Level[] l){
+		levels = l;
+	}
+	
 	public static Level[] getLevels() {
 		return levels;
+	}
+	
+	public void setArcadeLevel(LevelArcade la){
+		arcadeLevels = la;
+	}
+	
+	public static LevelArcade getArcadeLevels(){
+		return arcadeLevels;
 	}
 	
 	public static int getCurrentLevel(){

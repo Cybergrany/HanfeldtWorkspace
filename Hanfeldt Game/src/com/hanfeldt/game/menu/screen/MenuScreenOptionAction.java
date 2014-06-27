@@ -7,7 +7,8 @@ import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
-import com.hanfeldt.game.state.menus.OptionMenu1State;
+import com.hanfeldt.game.state.menus.OptionMenuGraphicsState;
+import com.hanfeldt.game.state.menus.OptionMenuState;
 import com.hanfeldt.io.Sound;
 
 /**
@@ -70,7 +71,11 @@ public final class MenuScreenOptionAction {
 		case gotoMainMenu:
 			gotoMainMenu();
 			break;
+		case options_graphics:
+			openGraphicsOptions();
+			break;
 		}
+		
 	}
 	
 	/**
@@ -95,7 +100,7 @@ public final class MenuScreenOptionAction {
 	 */
 	public static void openOptions(){
 		setLastScreen(Main.getGame().getState());
-		Main.getGame().setState(new OptionMenu1State(Main.getGame()));
+		Main.getGame().setState(new OptionMenuState(Main.getGame()));
 	}
 	
 	/**
@@ -135,6 +140,11 @@ public final class MenuScreenOptionAction {
 	public static void gotoMainMenu(){
 		//TODO:"Save game before quitting?" Dialogue. 
 		Main.getGame().setState(new MainMenuState(Main.getGame()));
+	}
+	
+	public static void openGraphicsOptions(){
+		
+		Main.getGame().setState(new OptionMenuGraphicsState(Main.getGame()));
 	}
 	
 	private static void setLastScreen(State s){

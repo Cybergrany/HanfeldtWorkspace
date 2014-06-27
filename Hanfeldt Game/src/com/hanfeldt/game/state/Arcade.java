@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -14,6 +15,7 @@ public class Arcade extends State {
 	
 	public Arcade(Main main) {
 		super(main);
+		main.setArcadeLevel(new LevelArcade(main.getPlayer()));
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);
 		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));
@@ -22,7 +24,7 @@ public class Arcade extends State {
 	}
 	
 	public void tick() {
-		Main.getLevels()[Main.getLevel()].tick();
+		Main.getArcadeLevels().tick();
 		main.getHud().tick();
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).tick();
@@ -48,7 +50,7 @@ public class Arcade extends State {
 		for(int i = 0; i < main.getNpc().size(); i++){
 			main.getNpc().get(i).draw(g);
 		}
-		Main.getLevels()[Main.getLevel()].render(g);
+		Main.getArcadeLevels().render(g);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
 		}
