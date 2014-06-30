@@ -85,14 +85,18 @@ public final class MenuScreenOptionAction {
 	public static void startArcade(){
 		Main.gameStarted = true;
 		Main.splashShowing = false;
-		Main.getGame().setState(new Arcade(Main.getGame()));
+		Arcade arcade = new Arcade(Main.getGame());
+		Main.getGame().setState(arcade);
+		Main.getGame().setPlayingState(arcade);
 	}
 	
 	public static void startStory(){
 		Main.gameStarted = true;
 		Main.splashShowing = false;
 		Dialogue.loagImage("DialogueBox.png");
-		Main.getGame().setState(new Story(Main.getGame()));
+		Story story = new Story(Main.getGame());
+		Main.getGame().setState(story);
+		Main.getGame().setPlayingState(story);
 	}
 	
 	/**

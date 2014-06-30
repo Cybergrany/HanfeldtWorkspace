@@ -18,8 +18,8 @@ public class Pistol extends AmmoWeapon {
 	 * @param aic 
 	 * @param ta
 	 */
-	public Pistol(Player p, int aic, int ta) {
-		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), aic, ta, 8, 10);
+	public Pistol(Player p) {
+		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), 8, 64, 8, 10);
 		damage = Values.bullet_damage_pistol;
 	}
 	

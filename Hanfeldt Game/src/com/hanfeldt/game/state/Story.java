@@ -6,6 +6,7 @@ import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Bill;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
@@ -13,17 +14,20 @@ import com.hanfeldt.game.weapon.weapons.Pistol;
 import com.hanfeldt.game.weapon.weapons.Sword;
 
 public class Story extends State {
-	private Dialogue dialogue = new Dialogue("1.txt");
+	private Dialogue dialogue;
+	private int currentDialogue = 0;
+	private int[][] dialogueTriggerX = new int[][] {{0, 400}};
 	
 	public Story(Main main) {
 		super(main);
-		main.setLevels(new Level[1]);
+		main.setLevels(new Level[2]);
 		Main.setLevel(Main.getLevel());
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);
 		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
-		Main.getGame().createGoreList();
+		main.createGoreList();
+		main.getNpc().add(new Bill(500, Main.sizeY - (Main.tileSize *4)));
 	}
 	
 	public void tick() {
@@ -42,13 +46,24 @@ public class Story extends State {
 					((TriggerWeapon) wep).tryTrigger();
 				}
 			}
-			for(int i=0; i<Main.getGame().getGore().size(); i++) {
-				Main.getGame().getGore().get(i).tick();
+			for(int i=0; i<main.getGore().size(); i++) {
+				main.getGore().get(i).tick();
 			}
 		}
-		if(main.getListener().spaceDown && !main.getListener().spaceDownLastTick) {
+		if(dialogue != null && main.getListener().spaceDown && !main.getListener().spaceDownLastTick) {
 			dialogue = null;
 		}
+		try {
+			if(dialogue == null && main.getPlayer().getX() > dialogueTriggerX[Main.getLevel()][currentDialogue]) {
+				dialogue = new Dialogue(currentDialogue + ".txt");
+				switch(currentDialogue) {
+				case 1:
+					main.getPlayer().setWeaponEquipped(new Pistol(main.getPlayer()));
+					break;
+				}
+				currentDialogue++;
+			}
+		}catch(Exception e) {}
 	}
 	
 	public void draw(Graphics g) {
@@ -60,7 +75,7 @@ public class Story extends State {
 			main.getBullets().get(i).draw(g);
 		}
 		main.getHud().draw(g);
-		for(GoreSpawn go : Main.getGame().getGore()) {
+		for(GoreSpawn go : main.getGore()) {
 			go.render(g);
 		}
 		if(!(dialogue == null)) {

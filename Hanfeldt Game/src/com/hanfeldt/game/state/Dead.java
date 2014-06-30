@@ -6,8 +6,6 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
-import com.hanfeldt.game.state.menus.MainMenuState;
 
 public class Dead extends State {
 	private static final int deadTicks = 240;
@@ -22,7 +20,8 @@ public class Dead extends State {
 	public void tick() {
 		deadFor++;
 		if(deadFor >= deadTicks && !Main.gameOver) {
-			main.setState(new Arcade(main));//TODO: Very temporary
+			main.respawnPlayer();
+			main.returnToPlaying();
 		}
 	}
 	

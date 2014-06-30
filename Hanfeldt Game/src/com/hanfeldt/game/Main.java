@@ -59,7 +59,7 @@ public class Main implements Runnable {
 	private Listener listener;
 	private Hud hud;
 	private State state;
-	private Arcade playingState; // So when you shop you need to save the Playing (state) somewhere :)
+	private State playingState;
 	private volatile ArrayList<GoreSpawn> gore;
 	String name = "Hanfeldt Zombie Shooter";
 
@@ -112,7 +112,6 @@ public class Main implements Runnable {
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
 		state = new MainMenuState(this);
-//		playingState = new Arcade(this);//This was kinda messing with the two kinds of levels
 		gamePanel.requestFocus();
 		resourceManager = new ResourceManager();
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
@@ -323,6 +322,10 @@ public class Main implements Runnable {
 				gore.remove(i);
 			}
 		}
+	}
+	
+	public void setPlayingState(State state) {
+		playingState = state;
 	}
 	
 }
