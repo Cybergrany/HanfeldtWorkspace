@@ -12,9 +12,11 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.state.Dead;
 import com.hanfeldt.game.state.State;
+import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
@@ -106,6 +108,7 @@ public class Main implements Runnable {
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
+		
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
 		resourceManager = new ResourceManager();
@@ -113,6 +116,13 @@ public class Main implements Runnable {
 		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
+		
+		//Load levels
+		Level[] temp = new Level[2];
+		temp[0] = new Level("/images/maps/levels/level1.png", getPlayer());
+		temp[1] = new Level("/images/maps/levels/level2.png", getPlayer());
+		Story.setLevels(temp);
+		System.out.println("Loading done");
 		
 		// Start "GameLoop"
 		running = true;

@@ -22,9 +22,6 @@ public class Story extends State {
 	
 	public Story(Main main) {
 		super(main);
-		levels = new Level[2];
-		levels[0] = new Level("/images/maps/levels/level1.png", main.getPlayer());
-		levels[1] = new Level("/images/maps/levels/level2.png", main.getPlayer());
 		level = 0;
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);
