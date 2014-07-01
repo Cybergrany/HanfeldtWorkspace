@@ -117,13 +117,6 @@ public class Main implements Runnable {
 		
 		npc = new ArrayList<Npc>();
 		
-		//Load levels
-		Level[] temp = new Level[2];
-		temp[0] = new Level("/images/maps/levels/level1.png", getPlayer());
-		temp[1] = new Level("/images/maps/levels/level2.png", getPlayer());
-		Story.setLevels(temp);
-		System.out.println("Loading done");
-		
 		// Start "GameLoop"
 		running = true;
 		debug = false;
