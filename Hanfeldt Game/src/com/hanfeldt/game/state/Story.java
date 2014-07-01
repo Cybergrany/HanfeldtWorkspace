@@ -17,11 +17,15 @@ public class Story extends State {
 	private Dialogue dialogue;
 	private int currentDialogue = 0;
 	private int[][] dialogueTriggerX = new int[][] {{0, 400}};
+	private static Level[] levels;
+	private static int level = 0;
 	
 	public Story(Main main) {
 		super(main);
-		main.setLevels(new Level[2]);
-		Main.setLevel(Main.getLevel());
+		levels = new Level[2];
+		levels[0] = new Level("/images/maps/levels/level1.png", main.getPlayer());
+		levels[1] = new Level("/images/maps/levels/level2.png", main.getPlayer());
+		level = 0;
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);
 		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));
@@ -32,7 +36,7 @@ public class Story extends State {
 	
 	public void tick() {
 		if(dialogue == null) {
-			Main.getLevels()[Main.getLevel()].tick();
+			levels[level].tick();
 			main.getHud().tick();
 			for(int i=0; i<main.getBullets().size(); i++) {
 				main.getBullets().get(i).tick();
@@ -54,7 +58,7 @@ public class Story extends State {
 			dialogue = null;
 		}
 		try {
-			if(dialogue == null && main.getPlayer().getX() > dialogueTriggerX[Main.getLevel()][currentDialogue]) {
+			if(dialogue == null && main.getPlayer().getX() > dialogueTriggerX[level][currentDialogue]) {
 				dialogue = new Dialogue(currentDialogue + ".txt");
 				switch(currentDialogue) {
 				case 1:
@@ -70,7 +74,7 @@ public class Story extends State {
 		for(int i = 0; i < main.getNpc().size(); i++){
 			main.getNpc().get(i).draw(g);
 		}
-		Main.getLevels()[Main.getLevel()].render(g);
+		levels[level].render(g);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
 		}
@@ -82,6 +86,22 @@ public class Story extends State {
 			dialogue.render(g);
 		}
 		g.dispose();
+	}
+	
+	public static void setLevels(Level[] l) { 
+		levels = l;
+	}
+	
+	public static Level[] getLevels() {
+		return levels;
+	}
+	
+	public static int getCurrentLevel() {
+		return level;
+	}
+	
+	public static void setLevel(int l) {
+		level = l;
 	}
 	
 }

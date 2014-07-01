@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Tile;
 
 public class EntityLiving extends Entity {
@@ -76,11 +77,11 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 			for(int i=0; i<getTileSizeY(); i++) {
-				if(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +1, getTileY() +i).isSolid()
+				if(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +1, getTileY() +i).isSolid()
 					&& isMovingRight) {
 					velX = 0;
 					isCollidingWithHorizTile=true;
-					setTileX(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +1, getTileY()).getX() -1);
+					setTileX(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +1, getTileY()).getX() -1);
 					break outerLoop;
 				}
 			}
@@ -89,11 +90,11 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 				for(int i=0; i<getTileSizeY(); i++) {
-					if(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY() +i).isSolid()
+					if(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY() +i).isSolid()
 						&& isMovingLeft) {
 						velX = 0;
 						isCollidingWithHorizTile=true;
-						setTileX(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY()).getX() +1);
+						setTileX(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY()).getX() +1);
 						break outerLoop;
 					}
 				}
@@ -103,11 +104,11 @@ public class EntityLiving extends Entity {
 		try {
 		outerLoop:
 			for(int i=0; i<getTileSizeX(); i++) {
-				Tile tileBelow = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i, getTileY() + getTileSizeY());
+				Tile tileBelow = Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i, getTileY() + getTileSizeY());
 				tileBelow.onCollidedEntity(this);
 				boolean tileBelowSolid = tileBelow.isSolid();
-				boolean tileBelowRightSolid = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
-				boolean tileBelowLeftSolid = Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i -1, getTileY() + getTileSizeY()).isSolid();
+				boolean tileBelowRightSolid = Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
+				boolean tileBelowLeftSolid = Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i -1, getTileY() + getTileSizeY()).isSolid();
 				// I know this if statement is shitey, fix it if you can think of a better solution
 				if( (tileBelowSolid || tileBelowRightSolid) 
 					//Next line accounts for 1x1 hole
@@ -118,7 +119,7 @@ public class EntityLiving extends Entity {
 							((Player) this).getEvents().damagePlayer((int) velY, 1);
 						}
 					}
-					setTileY(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
+					setTileY(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
 					break outerLoop;
 				}
 				if(i == getTileSizeX() -1) {
@@ -131,9 +132,9 @@ public class EntityLiving extends Entity {
 		try {
 			outerLoop:
 				for(int i=0; i<getTileSizeX(); i++) {
-					if(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i, getTileY()).isSolid()
-						|| Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX() +i +1, getTileY()).isSolid()) {
-						setTileY(Main.getLevels()[Main.getCurrentLevel()].getTile(getTileX(), getTileY()).getY() +1);
+					if(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i, getTileY()).isSolid()
+						|| Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i +1, getTileY()).isSolid()) {
+						setTileY(Story.getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY()).getY() +1);
 						velY = 0;
 						break outerLoop;
 					}

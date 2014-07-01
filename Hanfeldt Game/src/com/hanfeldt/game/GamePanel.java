@@ -1,5 +1,6 @@
 package com.hanfeldt.game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -19,6 +20,8 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void paintComponent(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 	}
 	

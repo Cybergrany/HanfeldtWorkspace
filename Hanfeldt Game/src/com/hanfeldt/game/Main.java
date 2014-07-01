@@ -12,12 +12,9 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.state.Dead;
-import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
-import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
@@ -53,9 +50,7 @@ public class Main implements Runnable {
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
 	private static Player player;
-	private static Level[] levels;
 	private static LevelArcade arcadeLevels;
-	private static int level = 0;
 	private Listener listener;
 	private Hud hud;
 	private State state;
@@ -194,30 +189,12 @@ public class Main implements Runnable {
 		return false;
 	}
 	
-	public void setLevels(Level[] l){
-		levels = l;
-	}
-	
-	public static Level[] getLevels() {
-		return levels;
-	}
-	
 	public void setArcadeLevel(LevelArcade la){
 		arcadeLevels = la;
 	}
 	
 	public static LevelArcade getArcadeLevels(){
 		return arcadeLevels;
-	}
-	
-	public static int getCurrentLevel(){
-		//This just returns 0, for the benefit of the callers who treat levels as an array..
-		//Things break when I change it from an array of levels so I'll leave it for now.
-		return level;
-	}
-	
-	public static void setLevel(int i){
-		levels[0] = new Level(String.format("/images/maps/levels/level%d.png", i + 1), player);
 	}
 	
 	public static Main getGame() {
@@ -262,10 +239,6 @@ public class Main implements Runnable {
 			AmmoWeapon wep = (AmmoWeapon) player.getWeaponEquipped();
 			wep.reload();
 		}
-	}
-
-	public static int getLevel() {
-		return level;
 	}
 	
 	public Hud getHud() {

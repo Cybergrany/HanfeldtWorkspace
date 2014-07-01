@@ -10,6 +10,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.state.GameWon;
+import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
@@ -96,12 +97,12 @@ public class Level {
 	public void tick(){
 		Main.getGame().getPlayer();
 		if(player.levelFinished){
-			if(level +1 >= Main.getLevels().length) {
+			if(level +1 >= Story.getLevels().length) {
 				//Win code
 				Main.getGame().setState(new GameWon(Main.getGame()));
 			}else{
 				level++;
-				Main.setLevel(level);
+				Story.setLevel(level);
 				setBg(level);
 				player.setX(0);
 				player.setY(Main.sizeY - Main.tileSize - player.getSizeY());
