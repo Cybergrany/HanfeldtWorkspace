@@ -1,33 +1,22 @@
 package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
-import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.CementFloor;
 import com.hanfeldt.game.tile.Tile;
 
-public class LevelArcade {
+public class LevelArcade extends Level {
 	/*
 	 * NOTE: 0 = air, 1 = block
 	 */
 	
-	private Player player;
-	public Tile[][] tiles;//Making this public static just to test things
-	public static int level = 0;
-	private int sizeX, sizeY;
-	private Spawner spawner;
-	private Background bg;
-	
 	public LevelArcade(Player p) {
-		
-		
-		sizeY = Main.sizeY / 16;
-		sizeX = Main.sizeX / 16;
+		sizeY = Main.sizeY / Main.tileSize;
+		sizeX = Main.sizeX / Main.tileSize;
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
 		
@@ -93,35 +82,5 @@ public class LevelArcade {
 		}
 	}
 	
-	public void draw(Graphics g, int posX) {
-		for(int i=0; i<tiles[0].length; i++) {
-			for(int j=0; j<tiles.length; j++) {
-				int screenX = (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2);
-				if(screenX + Main.tileSize > 0 && screenX < Main.sizeX) {
-					tiles[j][i].getSprite().draw(g, screenX, i * Main.tileSize);
-				}
-			}
-		}
-	}
-	
-	public int getSizeX() {
-		return sizeX;
-	}
-	
-	public int getSizeY(){
-		return sizeY;
-	}
-	
-	public Tile getTile(int x, int y) {
-		return tiles[x][y];
-	}
-	
-	public void setTile(int x, int y, Tile t) {
-		tiles[x][y] = t;
-	}
-	
-	public void setBg(int currentLevel){
-		bg = new Background(currentLevel);
-	}
 	
 }

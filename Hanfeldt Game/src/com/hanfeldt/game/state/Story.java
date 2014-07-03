@@ -8,6 +8,7 @@ import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Bill;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -17,11 +18,16 @@ public class Story extends State {
 	private Dialogue dialogue;
 	private int currentDialogue = 0;
 	private int[][] dialogueTriggerX = new int[][] {{0, 400}};
-	private static Level[] levels;
 	private static int level = 0;
 	
 	public Story(Main main) {
 		super(main);
+		//Load levels
+		Level[] levels = new Level[2];
+		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
+		levels[1] = new LevelStory("/images/maps/levels/level2.png", main.getPlayer());
+		main.setLevels(levels);
+		
 		level = 0;
 		Player p = main.getPlayer();
 		p.setX(Main.sizeX /2);
@@ -33,7 +39,7 @@ public class Story extends State {
 	
 	public void tick() {
 		if(dialogue == null) {
-			levels[level].tick();
+			main.getLevels()[level].tick();
 			main.getHud().tick();
 			for(int i=0; i<main.getBullets().size(); i++) {
 				main.getBullets().get(i).tick();
@@ -71,7 +77,7 @@ public class Story extends State {
 		for(int i = 0; i < main.getNpc().size(); i++){
 			main.getNpc().get(i).draw(g);
 		}
-		levels[level].render(g);
+		main.getLevels()[level].render(g);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
 		}
@@ -83,14 +89,6 @@ public class Story extends State {
 			dialogue.render(g);
 		}
 		g.dispose();
-	}
-	
-	public static void setLevels(Level[] l) { 
-		levels = l;
-	}
-	
-	public static Level[] getLevels() {
-		return levels;
 	}
 	
 	public static int getCurrentLevel() {

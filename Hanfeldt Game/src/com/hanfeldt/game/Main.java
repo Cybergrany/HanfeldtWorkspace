@@ -13,10 +13,8 @@ import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
-import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.state.Dead;
 import com.hanfeldt.game.state.State;
-import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
@@ -52,7 +50,7 @@ public class Main implements Runnable {
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
 	private static Player player;
-	private static LevelArcade arcadeLevels;
+	private static Level[] levels;
 	private Listener listener;
 	private Hud hud;
 	private State state;
@@ -71,7 +69,7 @@ public class Main implements Runnable {
 	public Main() {
 		screenImage = new BufferedImage(sizeX, sizeY,
 				BufferedImage.TYPE_INT_ARGB);
-		gamePanel = new GamePanel(screenImage, sizeX * scale, sizeY * scale);
+		gamePanel = new GamePanel(screenImage, (sizeX /spriteSize *tileSize)*scale, (sizeY /spriteSize *tileSize)*scale);
 		
 		listener = new Listener();
 		gamePanel.addKeyListener(listener);
@@ -192,14 +190,6 @@ public class Main implements Runnable {
 		return false;
 	}
 	
-	public void setArcadeLevel(LevelArcade la){
-		arcadeLevels = la;
-	}
-	
-	public static LevelArcade getArcadeLevels(){
-		return arcadeLevels;
-	}
-	
 	public static Main getGame() {
 		return game;
 	}
@@ -302,6 +292,14 @@ public class Main implements Runnable {
 	
 	public void setPlayingState(State state) {
 		playingState = state;
+	}
+	
+	public void setLevels(Level[] l) {
+		levels = l;
+	}
+	
+	public Level[] getLevels() {
+		return levels;
 	}
 	
 }

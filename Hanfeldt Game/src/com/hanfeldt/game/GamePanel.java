@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
-	private static final long serialVersionUID = 4796241145459172752L;
+	private static final long serialVersionUID = 1L;
 	private BufferedImage screen;
 	
 	public GamePanel(BufferedImage screen, int sizeX, int sizeY) {

@@ -22,17 +22,75 @@ import com.hanfeldt.game.tile.RoofLamp;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
 
-public class Level {
+public class LevelStory extends Level {
 	/*
 	 * NOTE: 0 = air, 1 = block
 	 */
 	
-	protected Player player;
+	private final BufferedImage levelImage;
 	public Tile[][] tiles;//Making this public static just to test things
 	public static int level = 0;
-	protected int sizeX, sizeY;
-	protected Spawner spawner;
-	protected Background bg;
+	private int sizeX, sizeY;
+	private Spawner spawner;
+	
+	public LevelStory(String path, Player p) {
+		BufferedImage temp = null;
+		
+		try {
+			temp = ImageIO.read(Main.class.getResource(path));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			levelImage = temp;
+		}
+		
+		
+		sizeY = Main.sizeY /Main.spriteSize;
+		sizeX = levelImage.getWidth();
+		tiles = new Tile[sizeX][sizeY];
+		spawner = new Spawner();
+		
+		for(int i=0; i<sizeY; i++) {
+			for(int j=0; j<sizeX; j++) {
+				switch(levelImage.getRGB(j, i)) {
+				case 0xFF000000:
+					tiles[j][i] = new Block(j, i);
+					break;
+				case 0xff0000ff:
+					tiles[j][i] = new ZombieSpawner(j, i);
+					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
+						//TODO: Regular spawning, not just on level creation.
+						spawner.spawnNpc(new Zombie(Main.tileSize *j + (i2*30), Main.tileSize * i - 40));
+					}
+					break;
+				case 0xff00FF00:
+					tiles[j][i] = new AmmoPickup(j, i);
+					break;
+				case 0xffFF0000:
+					tiles[j][i] = new CementCore(j, i);
+					break;
+				case 0xff00008C:
+					tiles[j][i] = new CementFloor(j, i);
+					break;
+				case 0xff007700:
+					tiles[j][i] = new CementRoof(j, i);
+					break;
+				case 0xffFFFF00:
+					tiles[j][i] = new RoofLamp(j, i);
+					break;
+				case 0xff9B0000:
+					tiles[j][i] = new CementBack(j, i);
+					break;
+				default:
+					tiles[j][i] = new Air(j, i);
+				}
+			}
+		}
+		
+		setBg(level);
+		
+		player = p;
+	}
 	
 	public void tick(){
 		Main.getGame().getPlayer();
@@ -72,7 +130,6 @@ public class Level {
 	}
 	
 	public void draw(Graphics g, int posX) {
-		bg.draw(g);
 		for(int i=0; i<tiles[0].length; i++) {
 			for(int j=0; j<tiles.length; j++) {
 				int screenX = (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2);

@@ -118,8 +118,8 @@ public class Player extends EntityLiving {
 		
 		super.tick();
 		
-		if(getX() >= (Story.getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.tileSize) {
-			setX((Story.getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.tileSize);
+		if(getX() >= (Main.getGame().getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.tileSize) {
+			setX((Main.getGame().getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.tileSize);
 			levelFinished = true;
 		}else if(getX() < 0) {
 			setX(0);
