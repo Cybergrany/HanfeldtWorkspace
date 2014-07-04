@@ -1,7 +1,5 @@
 package com.hanfeldt.game.entity;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
@@ -30,7 +28,7 @@ public class Player extends EntityLiving {
 	public boolean levelFinished;
 	
 	public Player(Sprite s, int x, int y, Listener l, Main main){
-		super(s, maxHealth, x, y); // Health is already set here in le constructor for Entity
+		super(s, maxHealth, x, y);
 		velXMax = (Main.debugCheats ? 10f : 1f);
 		setJumpHeight(2);
 		events = new PlayerEvents(this);
@@ -41,7 +39,7 @@ public class Player extends EntityLiving {
 	
 	public void tickWalking() {
 		if( (!listener.aDown && !listener.dDown) || (listener.aDown && listener.dDown)) {
-			walkingImage = sprite.getImage();
+			walkingImage = sprite.getImage(getDirection());
 			cycleTicks = 0;
 			currentCycle = 0;
 		}else{

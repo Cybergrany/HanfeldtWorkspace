@@ -26,7 +26,7 @@ public class Sword extends TriggerWeapon {
 		super(p, new Sprite(Main.getSpritesheet(), 3, 3, 1, 1), 20);
 	}
 	
-	public void draw(Graphics g) {//#Im14AndThisIsFunny
+	public void draw(Graphics g) {//#Im14AndThisIsFunny <-- LELELEL /r/SubredditsAreHashtags
 		if(tickTriggered > 0) { // Penis out straight
 			if(!player.getDirection()) {
 				sprite.draw(g, (Main.WIDTH /2) - Main.tileSize -2, player.getY() + (Main.tileSize /2), player.getDirection());

@@ -13,7 +13,7 @@ import com.hanfeldt.game.state.menus.PauseMenuState;
 
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
-	private boolean pausePressed, debugPressed, mutePressed;
+	private boolean pausePressed, debugPressed;
 	public boolean aDown, dDown, wDown, escDown,
 	mouseDown, mouseDownLastTick,
 	upArrowDown, downArrowDown, enterDown,

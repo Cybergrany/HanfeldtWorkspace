@@ -9,9 +9,14 @@ public abstract class State {
 	protected Main main;
 	protected Camera camera;
 	
+	public State(Main main, Camera c) {
+		this.main = main;
+		camera = c;
+	}
+	
 	public State(Main main) {
 		this.main = main;
-		camera = new Camera(0, 0, main.getPlayer());
+		camera = Main.getGame().getCamera();
 	}
 	
 	public abstract void tick();

@@ -1,6 +1,5 @@
 package com.hanfeldt.game.level;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;

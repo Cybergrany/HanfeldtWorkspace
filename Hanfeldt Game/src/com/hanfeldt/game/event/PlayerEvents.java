@@ -54,6 +54,7 @@ public class PlayerEvents{
 			}else{
 				player.setVelX(-6);
 			}
+			Main.getGame().getCamera().shake();
 			player.setVelY(-1);
 			playerDamage(id);
 		}

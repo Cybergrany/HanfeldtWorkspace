@@ -2,6 +2,7 @@ package com.hanfeldt.game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityLiving;
@@ -11,6 +12,8 @@ import com.hanfeldt.game.tile.Tile;
 public class Camera {
 	private int x, y;
 	private Player player;
+	private int shakingTicks;
+	private Random rand = new Random();
 	
 	public Camera(int x, int y, Player p) {
 		this.x = x;
@@ -31,6 +34,12 @@ public class Camera {
 	
 	public void tick() {
 		x = player.getX() - Main.WIDTH /2 + (Main.tileSize /2);
+		y = 0;
+		if(shakingTicks > 0) {
+			x += rand.nextInt(5) -2;
+			y += rand.nextInt(3) -1;
+			shakingTicks--;
+		}
 	}
 	
 	public void renderEntityLiving(Graphics g, EntityLiving e) {
@@ -78,6 +87,14 @@ public class Camera {
 	
 	public void changeY(int c) {
 		x += c;
+	}
+	
+	public void addShakingTicks(int a) {
+		shakingTicks += a;
+	}
+	
+	public void shake() {
+		addShakingTicks(rand.nextInt(10) +20);
 	}
 	
 }

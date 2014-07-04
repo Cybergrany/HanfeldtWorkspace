@@ -1,6 +1,5 @@
 package com.hanfeldt.game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -16,6 +15,7 @@ public class Sprite {
 	}
 	
 	public Sprite(BufferedImage image) {
+		this.image = image;
 		width = image.getWidth() /Main.tileSize;
 		height = image.getHeight() /Main.tileSize;
 	}
@@ -32,7 +32,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g, int x, int y) {
-		g.drawImage(image, x, y, Main.tileSize, Main.tileSize, null);
+		g.drawImage(image, x, y, getWidth(), getHeight(), null);
 	}
 	
 	public void draw(Graphics g, int x, int y, boolean direction) {
@@ -52,7 +52,7 @@ public class Sprite {
 	}
 	
 	public BufferedImage getWalkingImage(boolean dir, int currentCycle) {
-		BufferedImage ret = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage ret = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = ret.getGraphics();
 		
 		if(dir) {
@@ -60,8 +60,7 @@ public class Sprite {
 		}else{
 			g.drawImage(walkingAnims[currentCycle], 0 + (Main.tileSize), 0, - Main.tileSize * width, Main.tileSize *height, null);
 		}
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, ret.getWidth(), ret.getHeight());
+		g.dispose();
 		return ret;
 	}
 	
@@ -89,5 +88,16 @@ public class Sprite {
 		return image;
 	}
 	
+	public BufferedImage getImage(boolean direction) { 
+		if(direction) {
+			return getImage();
+		}else{
+			BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+			Graphics g = image.getGraphics();
+			g.drawImage(getImage(), getWidth(), 0, 0, getHeight(), 0, 0, getWidth(), getHeight(), null);
+			g.dispose();
+			return image;
+		}
+	}
 	
 }

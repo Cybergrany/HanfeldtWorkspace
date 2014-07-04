@@ -94,7 +94,7 @@ public final class MenuScreenOptionAction {
 		Main.gameStarted = true;
 		Main.splashShowing = false;
 		Dialogue.loagImage("DialogueBox.png");
-		Story story = new Story(Main.getGame());
+		Story story = new Story(Main.getGame(), Main.getGame().getCamera());
 		Main.getGame().setState(story);
 		Main.getGame().setPlayingState(story);
 	}

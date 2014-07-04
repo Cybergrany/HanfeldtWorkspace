@@ -53,6 +53,7 @@ public class Main implements Runnable {
 	private static Level[] levels;
 	private Listener listener;
 	private Hud hud;
+	private Camera camera;
 	private State state;
 	private State playingState;
 	private volatile ArrayList<GoreSpawn> gore;
@@ -300,6 +301,13 @@ public class Main implements Runnable {
 	
 	public Level[] getLevels() {
 		return levels;
+	}
+	
+	public Camera getCamera() {
+		if(camera == null) {
+			camera = new Camera(0, 0, getPlayer());
+		}
+		return camera;
 	}
 	
 }

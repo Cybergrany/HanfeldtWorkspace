@@ -1,8 +1,8 @@
 package com.hanfeldt.game.state;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
+import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Bullet;
@@ -23,8 +23,8 @@ public class Story extends State {
 	private int[][] dialogueTriggerX = new int[][] {{0, 400}};
 	private static int level = 0;
 	
-	public Story(Main main) {
-		super(main);
+	public Story(Main main, Camera c) {
+		super(main, c);
 		//Load levels
 		Level[] levels = new Level[2];
 		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
@@ -82,16 +82,8 @@ public class Story extends State {
 	}
 	
 	public void draw(Graphics g) {
-		Player p = main.getPlayer();
-		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
-		if(p.getWeaponEquipped() != null) {
-			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX(), p.getY());
-		}
-		for(Npc n :  main.getNpc()){
-			camera.renderEntityLiving(g,n);
-		}
 		main.getLevels()[level].render(g, camera);
-		for(Bullet bill : main.getBullets()) {
+		for(Bullet bill /* Lel */ : main.getBullets()) {
 			camera.renderBullet(g, bill);
 		}
 		main.getHud().draw(g);
@@ -101,6 +93,11 @@ public class Story extends State {
 		if(!(dialogue == null)) {
 			dialogue.render(g);
 		}
+		for(Npc n :  main.getNpc()){
+			camera.renderEntityLiving(g,n);
+		}
+		Player p = main.getPlayer();
+		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
 		g.dispose();
 	}
 	
