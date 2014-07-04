@@ -44,8 +44,8 @@ public class Sword extends TriggerWeapon {
 	
 	protected void trigger() {
 		ArrayList<Npc> npcs = Main.getGame().getNpc();
-		Rectangle hitBoxLeft = new Rectangle(player.getX() - Main.tileSize, player.getY(), Main.tileSize, Main.tileSize *2);
-		Rectangle hitBoxRight= new Rectangle(player.getX() + Main.tileSize, player.getY(), Main.tileSize, Main.tileSize *2);
+		Rectangle hitBoxLeft = new Rectangle(player.getX() - range, player.getY(), range, range *2);
+		Rectangle hitBoxRight= new Rectangle(player.getX() + range, player.getY(), range, range *2);
 		for(int i=0; i<npcs.size(); i++) {
 			NpcEvents e = npcs.get(i).getNpcvents();
 			if(!player.getDirection()) {

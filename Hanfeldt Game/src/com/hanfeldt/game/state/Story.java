@@ -9,6 +9,7 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Bill;
+import com.hanfeldt.game.entity.npc.Billy;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelStory;
@@ -22,6 +23,7 @@ public class Story extends State {
 	private int currentDialogue = 0;
 	private int[][] dialogueTriggerX = new int[][] {{0, 400}};
 	private static int level = 0;
+	private int lastLevel = 0;
 	
 	public Story(Main main, Camera c) {
 		super(main, c);
@@ -38,6 +40,7 @@ public class Story extends State {
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
 		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.tileSize *4)));
+		main.getNpc().add(new Billy(600, Main.HEIGHT - (Main.tileSize *4)));
 	}
 	
 	public void tick() {
