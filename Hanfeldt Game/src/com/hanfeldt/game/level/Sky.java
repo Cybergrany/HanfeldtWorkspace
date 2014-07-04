@@ -21,7 +21,7 @@ public class Sky{
 	
 	public void draw(Graphics g){
 		g.setColor(new Color(0x00, 0xAA, 0xFF));
-		g.fillRect(0, 0, Main.sizeX, Main.sizeY);
+		g.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
 		
 		for (int i = 0; i < 5; i++) {
 			cloud.draw(g, (i * 30) + 20, ((i % 2 == 0) ? 10 : 20));

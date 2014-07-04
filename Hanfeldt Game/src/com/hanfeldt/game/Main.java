@@ -22,11 +22,11 @@ import com.hanfeldt.io.ResourceManager;
 import com.hanfeldt.io.Sound;
 
 public class Main implements Runnable {
-	public static int sizeX = 256, sizeY = 144;
+	public static final int WIDTH = 256, HEIGHT = 144;
 	public static int tileSize = 16; //Only works properly with 16 for the moment
 	public static int spriteSize = 16;
 	public static int scale = 3;
-	public static int tilesX = sizeX / tileSize, tilesY = sizeY / tileSize;
+	public static int tilesX = WIDTH / tileSize, tilesY = HEIGHT / tileSize;
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
@@ -67,9 +67,9 @@ public class Main implements Runnable {
 	}
 
 	public Main() {
-		screenImage = new BufferedImage(sizeX, sizeY,
+		screenImage = new BufferedImage(WIDTH, HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
-		gamePanel = new GamePanel(screenImage, (sizeX /spriteSize *tileSize)*scale, (sizeY /spriteSize *tileSize)*scale);
+		gamePanel = new GamePanel(screenImage, (WIDTH /spriteSize *tileSize)*scale, (HEIGHT /spriteSize *tileSize)*scale);
 		
 		listener = new Listener();
 		gamePanel.addKeyListener(listener);
@@ -105,7 +105,7 @@ public class Main implements Runnable {
 	public void init() {
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
-		player = new Player(playerSprite, sizeX / 2, sizeY - tileSize * (1 + playerSprite.getHeight()), listener, this);
+		player = new Player(playerSprite, WIDTH / 2, HEIGHT - tileSize * (1 + playerSprite.getTileHeight()), listener, this);
 		
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
@@ -218,8 +218,8 @@ public class Main implements Runnable {
 	
 	public void respawnPlayer() {
 		player.alive = true;
-		player.setX(sizeX / 2);
-		player.setY(sizeY - tileSize - player.getSizeY());
+		player.setX(WIDTH / 2);
+		player.setY(HEIGHT - tileSize - player.getSizeY());
 		player.setHealth(100);
 	}
 	

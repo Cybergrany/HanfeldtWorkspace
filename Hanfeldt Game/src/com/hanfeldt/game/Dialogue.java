@@ -36,7 +36,7 @@ public class Dialogue {
 		if(dialogueBox == null) {
 			return;
 		}
-		g.drawImage(dialogueBox, 0, 0, Main.sizeX, Main.sizeY, null);
+		g.drawImage(dialogueBox, 0, 0, Main.WIDTH, Main.HEIGHT, null);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Kai", Font.PLAIN, 10));
 		for(int i=0; i<text.length; i++) {

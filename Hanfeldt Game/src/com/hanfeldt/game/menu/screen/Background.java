@@ -19,7 +19,7 @@ public class Background {
 	}
 	
 	public void draw(Graphics g){
-		g.drawImage(image, 0, 0, Main.sizeX, Main.sizeY, null);
+		g.drawImage(image, 0, 0, Main.WIDTH, Main.HEIGHT, null);
 	}
 	
 }

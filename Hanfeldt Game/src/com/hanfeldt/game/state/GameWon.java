@@ -24,13 +24,13 @@ public class GameWon extends State {
 		if(Main.getGame().getTotalTicks() >= nextFireworkTick) {
 			switch(rand.nextInt(3)) {
 			case 0:
-				fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, Color.RED));
+				fireworks.add(new Firework(rand.nextInt(Main.WIDTH), Main.HEIGHT, Color.RED));
 				break;
 			case 1:
-				fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, Color.BLUE));
+				fireworks.add(new Firework(rand.nextInt(Main.WIDTH), Main.HEIGHT, Color.BLUE));
 				break;
 			case 2:
-				fireworks.add(new Firework(rand.nextInt(Main.sizeX), Main.sizeY, Color.ORANGE));
+				fireworks.add(new Firework(rand.nextInt(Main.WIDTH), Main.HEIGHT, Color.ORANGE));
 				break;
 			}
 			nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(16) +16;
@@ -42,10 +42,10 @@ public class GameWon extends State {
 		
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, Main.sizeX, Main.sizeY);
+		g.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
 		g.setColor(Color.WHITE);
-		g.drawString("Congratulations!", Main.sizeX /2 - (("Congratulation!".length() /2) *7), Main.sizeY /4);
-		g.drawString("You win!", Main.sizeX /2 - (("You win!".length() /2) *7), Main.sizeY /2);
+		g.drawString("Congratulations!", Main.WIDTH /2 - (("Congratulation!".length() /2) *7), Main.HEIGHT /4);
+		g.drawString("You win!", Main.WIDTH /2 - (("You win!".length() /2) *7), Main.HEIGHT /2);
 		for(int i=0; i<fireworks.size(); i++) {
 			fireworks.get(i).render(g);
 		}

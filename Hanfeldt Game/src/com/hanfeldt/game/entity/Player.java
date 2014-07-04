@@ -2,6 +2,7 @@ package com.hanfeldt.game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
@@ -16,7 +17,8 @@ import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 
 public class Player extends EntityLiving {
-	
+	public static final int ticksPerAnimChange = 4;
+	private BufferedImage walkingImage;
 	private PlayerEvents events;
 	private Weapon weaponEquipped = new Sword(this);
 	public static int maxHealth = Values.player_max_health;
@@ -37,13 +39,13 @@ public class Player extends EntityLiving {
 		this.main = main;
 	}
 	
-	public void draw(Graphics g) {
+	public void tickWalking() {
 		if( (!listener.aDown && !listener.dDown) || (listener.aDown && listener.dDown)) {
-			sprite.draw(g, (Main.sizeX /2) - (Main.tileSize /2), getY(), direction);
+			walkingImage = sprite.getImage();
 			cycleTicks = 0;
 			currentCycle = 0;
 		}else{
-			sprite.draw(g, (Main.sizeX /2) - (Main.tileSize /2), getY(), direction, currentCycle);
+			walkingImage = sprite.getWalkingImage(direction, currentCycle);
 			if(cycleTicks >= ticksPerAnimChange) {
 				if(currentCycle >= sprite.getWalkingAnimsLength() -1 && cycleGoingUp) {
 					cycleGoingUp = false;
@@ -61,16 +63,11 @@ public class Player extends EntityLiving {
 			}
 		}
 		
-		//Bounding box, only temporary! Helps test collision detection
-		if(Main.debug) {
-			g.setColor(Color.RED);
-			g.drawRect((Main.sizeX /2) - (Main.tileSize /2), getY(), getSizeX() -1, getSizeY() -1);
-		}
-		weaponEquipped.draw(g);
 	}
 	
 	public void tick() {
-		direction = Main.mouseX > Main.sizeX /2;
+		tickWalking();
+		direction = Main.mouseX > Main.WIDTH /2;
 		isMovingLeft = listener.aDown;
 		isMovingRight = listener.dDown;
 
@@ -108,7 +105,7 @@ public class Player extends EntityLiving {
 			
 		}
 		
-		if(getY() > Main.sizeY && (main.getState() instanceof Arcade || main.getState() instanceof Story)){
+		if(getY() > Main.HEIGHT && (main.getState() instanceof Arcade || main.getState() instanceof Story)){
 			events.damagePlayer(getHealth(), Values.fall_death_id);
 		}
 		
@@ -164,6 +161,14 @@ public class Player extends EntityLiving {
 	
 	public void changeMoney(int c) {
 		money += c;
+	}
+	
+	public BufferedImage getWalkingImage() {
+		if(walkingImage == null) {
+			return sprite.getImage();
+		}else{
+			return walkingImage;
+		}
 	}
 	
 }

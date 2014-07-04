@@ -1,5 +1,6 @@
 package com.hanfeldt.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -12,6 +13,11 @@ public class Sprite {
 		image = sheet.getImage(x, y, w, h);
 		width = w;
 		height = h;
+	}
+	
+	public Sprite(BufferedImage image) {
+		width = image.getWidth() /Main.tileSize;
+		height = image.getHeight() /Main.tileSize;
 	}
 	
 	public Sprite(SpriteSheet sheet, int x, int y, int w, int h, int numWalkingAnims) {
@@ -45,16 +51,38 @@ public class Sprite {
 		}
 	}
 	
+	public BufferedImage getWalkingImage(boolean dir, int currentCycle) {
+		BufferedImage ret = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics g = ret.getGraphics();
+		
+		if(dir) {
+			g.drawImage(walkingAnims[currentCycle], 0, 0, null);
+		}else{
+			g.drawImage(walkingAnims[currentCycle], 0 + (Main.tileSize), 0, - Main.tileSize * width, Main.tileSize *height, null);
+		}
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, ret.getWidth(), ret.getHeight());
+		return ret;
+	}
+	
 	public int getWalkingAnimsLength() {
 		return walkingAnims.length;
 	}
 	
-	public int getWidth() {
+	public int getTileWidth() {
 		return width;
 	}
 	
-	public int getHeight() {
+	public int getTileHeight() {
 		return height;
+	}
+	
+	public int getWidth() {
+		return width *Main.tileSize;
+	}
+	
+	public int getHeight() {
+		return height *Main.tileSize;
 	}
 	
 	public BufferedImage getImage() {

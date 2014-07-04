@@ -23,7 +23,7 @@ public class Tooltip {
 	}
 	
 	public void draw(Graphics g){
-		g.draw3DRect((Main.sizeX / 2) - (getLongestString() / 2), (Main.sizeY / 2) - ((options.length / 2) * 20), getLongestString() + 5, options.length * 20 , true);//Shmancy 3D
+		g.draw3DRect((Main.WIDTH / 2) - (getLongestString() / 2), (Main.HEIGHT / 2) - ((options.length / 2) * 20), getLongestString() + 5, options.length * 20 , true);//Shmancy 3D
 		for(int i = 0; i < options.length; i++){
 			options[i].draw(g);
 		}

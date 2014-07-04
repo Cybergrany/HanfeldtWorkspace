@@ -1,12 +1,15 @@
 package com.hanfeldt.game.state;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Bill;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.weapon.TriggerWeapon;
@@ -30,20 +33,25 @@ public class Story extends State {
 		
 		level = 0;
 		Player p = main.getPlayer();
-		p.setX(Main.sizeX /2);
-		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));
+		p.setX(Main.WIDTH /2);
+		p.setY(Main.HEIGHT - Main.tileSize * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
-		main.getNpc().add(new Bill(500, Main.sizeY - (Main.tileSize *4)));
+		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.tileSize *4)));
 	}
 	
 	public void tick() {
+		camera.tick();
 		if(dialogue == null) {
 			main.getLevels()[level].tick();
 			main.getHud().tick();
 			for(int i=0; i<main.getBullets().size(); i++) {
 				main.getBullets().get(i).tick();
 			}
+			for(int i=0; i<main.getNpc().size(); i++) {
+				main.getNpc().get(i).tick();
+			}
+			main.getPlayer().tick();
 			Weapon wep = main.getPlayer().getWeaponEquipped();
 			wep.tick();
 			if(main.getListener().mouseDown && wep instanceof TriggerWeapon) {
@@ -74,12 +82,17 @@ public class Story extends State {
 	}
 	
 	public void draw(Graphics g) {
-		for(int i = 0; i < main.getNpc().size(); i++){
-			main.getNpc().get(i).draw(g);
+		Player p = main.getPlayer();
+		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
+		if(p.getWeaponEquipped() != null) {
+			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX(), p.getY());
 		}
-		main.getLevels()[level].render(g);
-		for(int i=0; i<main.getBullets().size(); i++) {
-			main.getBullets().get(i).draw(g);
+		for(Npc n :  main.getNpc()){
+			camera.renderEntityLiving(g,n);
+		}
+		main.getLevels()[level].render(g, camera);
+		for(Bullet bill : main.getBullets()) {
+			camera.renderBullet(g, bill);
 		}
 		main.getHud().draw(g);
 		for(GoreSpawn go : main.getGore()) {

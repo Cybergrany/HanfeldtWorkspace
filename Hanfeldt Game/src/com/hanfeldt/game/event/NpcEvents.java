@@ -61,16 +61,16 @@ public class NpcEvents {
 	}
 
 	public boolean isOutsideMap(Npc npc) {
-		if (npc.getY() > Main.sizeY) {
+		if (npc.getY() > Main.HEIGHT) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean isOutsideScreen(Npc npc) {
-		if (npc.getX() < Main.getGame().getPlayer().getX() - (Main.sizeX / 2)
+		if (npc.getX() < Main.getGame().getPlayer().getX() - (Main.WIDTH / 2)
 				|| npc.getX() > Main.getGame().getPlayer().getX()
-						+ (Main.sizeX / 2)) {
+						+ (Main.WIDTH / 2)) {
 			return true;
 		}
 		return false;

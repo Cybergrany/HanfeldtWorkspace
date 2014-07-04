@@ -1,6 +1,5 @@
 package com.hanfeldt.game.entity;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
@@ -9,7 +8,6 @@ import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Tile;
 
 public class EntityLiving extends Entity {
-	public static final int ticksPerAnimChange = 4; // A shorter name for this would be nice but I can't think of one
 	private int health;
 	private float jumpHeight;
 	private int sizeX, sizeY;
@@ -24,8 +22,8 @@ public class EntityLiving extends Entity {
 		super(x, y);
 		sprite = s;
 		this.health = h;
-		sizeX = sprite.getWidth();
-		sizeY = sprite.getHeight();
+		sizeX = sprite.getTileWidth();
+		sizeY = sprite.getTileHeight();
 	}
 	
 	public void tick() {
@@ -41,15 +39,6 @@ public class EntityLiving extends Entity {
 	public float getJumpHeight() {
 		return jumpHeight;
 	}
-	
-	public void draw(Graphics g) {
-		int screenX = getX() - Main.getGame().getPlayer().getX() 
-				+ (Main.sizeX /2) - (Main.tileSize /2);
-		if(screenX + getSizeX() > 0 && screenX < Main.sizeX){
-			sprite.draw(g, screenX, getY(), !direction);
-		}
-	}
-	
 	public int getSizeX() {
 		return sizeX *Main.tileSize;
 	}
@@ -81,7 +70,7 @@ public class EntityLiving extends Entity {
 					&& isMovingRight) {
 					velX = 0;
 					isCollidingWithHorizTile=true;
-					setTileX(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX() +1, getTileY()).getX() -1);
+					setTileX(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX() +1, getTileY()).getTileX() -1);
 					break outerLoop;
 				}
 			}
@@ -94,7 +83,7 @@ public class EntityLiving extends Entity {
 						&& isMovingLeft) {
 						velX = 0;
 						isCollidingWithHorizTile=true;
-						setTileX(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY()).getX() +1);
+						setTileX(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY()).getTileX() +1);
 						break outerLoop;
 					}
 				}
@@ -119,7 +108,7 @@ public class EntityLiving extends Entity {
 							((Player) this).getEvents().damagePlayer((int) velY, 1);
 						}
 					}
-					setTileY(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY() + getTileSizeY()).getY() - getTileSizeY());
+					setTileY(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY() + getTileSizeY()).getTileY() - getTileSizeY());
 					break outerLoop;
 				}
 				if(i == getTileSizeX() -1) {
@@ -134,7 +123,7 @@ public class EntityLiving extends Entity {
 				for(int i=0; i<getTileSizeX(); i++) {
 					if(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i, getTileY()).isSolid()
 						|| Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX() +i +1, getTileY()).isSolid()) {
-						setTileY(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY()).getY() +1);
+						setTileY(Main.getGame().getLevels()[Story.getCurrentLevel()].getTile(getTileX(), getTileY()).getTileY() +1);
 						velY = 0;
 						break outerLoop;
 					}
@@ -171,6 +160,10 @@ public class EntityLiving extends Entity {
 	
 	public boolean isCollidingWithHorizTile(){
 		return isCollidingWithHorizTile;
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
 	}
 	
 }

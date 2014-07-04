@@ -2,6 +2,7 @@ package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
 
+import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
@@ -15,8 +16,8 @@ public class LevelArcade extends Level {
 	 */
 	
 	public LevelArcade(Player p) {
-		sizeY = Main.sizeY / Main.tileSize;
-		sizeX = Main.sizeX / Main.tileSize;
+		sizeY = Main.HEIGHT / Main.tileSize;
+		sizeX = Main.WIDTH / Main.tileSize;
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
 		
@@ -46,40 +47,12 @@ public class LevelArcade extends Level {
 	}
 	
 	public void tick(){
-		Main.getGame().getPlayer();
-//		if(player.levelFinished){
-//			if(level +1 >= Main.getLevels().length) {
-//				//Win code
-//				Main.getGame().setState(new GameWon(Main.getGame()));
-//			}else{
-//				level++;
-//				Main.setLevel(level);
-//				setBg(level);
-//				player.setX(0);
-//				player.setY(Main.sizeY - Main.tileSize - player.getSizeY());
-//				player.levelFinished = false;
-//			}
-//		}
-		player.tick();
-		
-		for(int i=0; i<Main.npc.size(); i++) {
-			Main.npc.get(i).tick();
-		}
 		bg.tick();
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g, Camera c) {
 		bg.draw(g);
-		
-		draw(g, player.getX());
-		
-		for(int i=0; i<Main.npc.size(); i++) {
-			Main.npc.get(i).draw(g);
-		}
-		
-		if(player.alive) {
-			player.draw(g);
-		}
+		super.render(g, c);
 	}
 	
 	

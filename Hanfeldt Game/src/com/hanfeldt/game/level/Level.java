@@ -1,26 +1,14 @@
 package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
+import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
-import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.state.Story;
-import com.hanfeldt.game.tile.Air;
-import com.hanfeldt.game.tile.AmmoPickup;
-import com.hanfeldt.game.tile.Block;
-import com.hanfeldt.game.tile.CementBack;
-import com.hanfeldt.game.tile.CementCore;
-import com.hanfeldt.game.tile.CementFloor;
-import com.hanfeldt.game.tile.CementRoof;
-import com.hanfeldt.game.tile.RoofLamp;
 import com.hanfeldt.game.tile.Tile;
-import com.hanfeldt.game.tile.ZombieSpawner;
 
 public class Level {
 	/*
@@ -45,7 +33,7 @@ public class Level {
 				Story.setLevel(level);
 				setBg(level);
 				player.setX(0);
-				player.setY(Main.sizeY - Main.tileSize - player.getSizeY());
+				player.setY(Main.HEIGHT - Main.tileSize - player.getSizeY());
 				player.levelFinished = false;
 			}
 		}
@@ -57,28 +45,16 @@ public class Level {
 		bg.tick();
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g, Camera c) {
 		bg.draw(g);
-		
-		draw(g, player.getX());
-		
-		for(int i=0; i<Main.npc.size(); i++) {
-			Main.npc.get(i).draw(g);
-		}
-		
-		if(player.alive) {
-			player.draw(g);
-		}
+		draw(g, c);
 	}
 	
-	public void draw(Graphics g, int posX) {
+	public void draw(Graphics g, Camera c) {
 		bg.draw(g);
 		for(int i=0; i<tiles[0].length; i++) {
 			for(int j=0; j<tiles.length; j++) {
-				int screenX = (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2);
-				if(screenX + Main.tileSize > 0 && screenX < Main.sizeX) {
-					tiles[j][i].getSprite().draw(g, screenX, i * Main.tileSize);
-				}
+				c.renderTile(g, tiles[j][i]);
 			}
 		}
 	}

@@ -29,15 +29,15 @@ public class Sword extends TriggerWeapon {
 	public void draw(Graphics g) {//#Im14AndThisIsFunny
 		if(tickTriggered > 0) { // Penis out straight
 			if(!player.getDirection()) {
-				sprite.draw(g, (Main.sizeX /2) - Main.tileSize -2, player.getY() + (Main.tileSize /2), player.getDirection());
+				sprite.draw(g, (Main.WIDTH /2) - Main.tileSize -2, player.getY() + (Main.tileSize /2), player.getDirection());
 			}else{
-				sprite.draw(g, (Main.sizeX /2) +2, player.getY() + (Main.tileSize /2), player.getDirection());
+				sprite.draw(g, (Main.WIDTH /2) +2, player.getY() + (Main.tileSize /2), player.getDirection());
 			}
 		}else{// Hold penis upright
 			if(!player.getDirection()) {
-				idleSprite.draw(g, (Main.sizeX /2) - 13, player.getY() + 2, player.getDirection());
+				idleSprite.draw(g, (Main.WIDTH /2) - 13, player.getY() + 2, player.getDirection());
 			}else{
-				idleSprite.draw(g, (Main.sizeX /2) - 3, player.getY() +2, player.getDirection());
+				idleSprite.draw(g, (Main.WIDTH /2) - 3, player.getY() +2, player.getDirection());
 			}
 		}
 	}

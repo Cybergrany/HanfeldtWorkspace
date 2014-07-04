@@ -60,9 +60,9 @@ public class Hud {
 		g.setColor(defWhite);
 		
 		if(player.getHealth() <= 0){
-			deadCharacter.draw(g, 5, Main.sizeY - Main.tileSize);
+			deadCharacter.draw(g, 5, Main.HEIGHT - Main.tileSize);
 		}else{
-			character.draw(g, 5, Main.sizeY - Main.tileSize);
+			character.draw(g, 5, Main.HEIGHT - Main.tileSize);
 		}
 		
 		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
@@ -70,17 +70,17 @@ public class Hud {
 //				ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
 //				bulletx+=15;
 //			}
-			pistol.draw(g, Main.sizeX-Main.tileSize, Main.sizeY - Main.tileSize);
+			pistol.draw(g, Main.WIDTH-Main.tileSize, Main.HEIGHT - Main.tileSize);
 			String ammoString = Integer.toString(((AmmoWeapon) player.getWeaponEquipped()).getTotalAmmo());
 			String bulletString = Integer.toString(bullets);
 			
 			
-			g.drawString(bulletString + "|" + ammoString, Main.sizeX - 28, Main.sizeY - 5);
+			g.drawString(bulletString + "|" + ammoString, Main.WIDTH - 28, Main.HEIGHT - 5);
 		}
-		g.drawString("$" + Integer.toString(player.getMoney()), Main.sizeX - 30, Main.sizeY - 15);
+		g.drawString("$" + Integer.toString(player.getMoney()), Main.WIDTH - 30, Main.HEIGHT - 15);
 		
 		for(int i = 1; i <= hearts; i++){
-			heart.draw(g, heartx, Main.sizeY - 15);
+			heart.draw(g, heartx, Main.HEIGHT - 15);
 			heartx += 15;
 		}
 		
@@ -98,14 +98,14 @@ public class Hud {
 		}
 		
 		if(muted){
-			g.drawString("Muted", Main.sizeX - 60, Main.sizeY - 5);
+			g.drawString("Muted", Main.WIDTH - 60, Main.HEIGHT - 5);
 		}
 		
 		if(!hasFocus) {
 			if(Main.getGame().getTotalTicks() % 60 > 30) {
-				g.drawImage(focusNagger1.getImage(), Main.sizeX /4, Main.sizeY /3, null);
+				g.drawImage(focusNagger1.getImage(), Main.WIDTH /4, Main.HEIGHT /3, null);
 			}else{
-				g.drawImage(focusNagger2.getImage(), Main.sizeX /4, Main.sizeY /3, null);
+				g.drawImage(focusNagger2.getImage(), Main.WIDTH /4, Main.HEIGHT /3, null);
 			}
 		}
 	}

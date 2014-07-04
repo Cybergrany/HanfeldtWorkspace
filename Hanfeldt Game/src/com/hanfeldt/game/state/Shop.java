@@ -36,8 +36,8 @@ public class Shop extends State {
 	}
 	
 	public void draw(Graphics g) {
-		g.drawImage(background, 0, 0, Main.sizeX, Main.sizeY, null);
-		g.drawString("SHOP", Main.sizeX /2 -("SHOP".length() /2 *10), 15);
+		g.drawImage(background, 0, 0, Main.WIDTH, Main.HEIGHT, null);
+		g.drawString("SHOP", Main.WIDTH /2 -("SHOP".length() /2 *10), 15);
 		for(int i=0; i<labels.length; i++) {
 			labels[i].draw(g);
 		}

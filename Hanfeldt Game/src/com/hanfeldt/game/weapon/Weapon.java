@@ -23,12 +23,8 @@ public abstract class Weapon {
 		}
 	}
 	
-	public void draw(Graphics g) {
-		if(!player.getDirection()) {
-			sprite.draw(g, (Main.sizeX /2) - Main.tileSize, player.getY() + (Main.tileSize /2), player.getDirection());
-		}else{
-			sprite.draw(g, (Main.sizeX /2), player.getY() + (Main.tileSize /2), player.getDirection());
-		}
+	public Sprite getSprite() {
+		return sprite;
 	}
 	
 }

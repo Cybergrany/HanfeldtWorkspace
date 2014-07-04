@@ -28,10 +28,6 @@ public class LevelStory extends Level {
 	 */
 	
 	private final BufferedImage levelImage;
-	public Tile[][] tiles;//Making this public static just to test things
-	public static int level = 0;
-	private int sizeX, sizeY;
-	private Spawner spawner;
 	
 	public LevelStory(String path, Player p) {
 		BufferedImage temp = null;
@@ -45,7 +41,7 @@ public class LevelStory extends Level {
 		}
 		
 		
-		sizeY = Main.sizeY /Main.spriteSize;
+		sizeY = Main.HEIGHT /Main.spriteSize;
 		sizeX = levelImage.getWidth();
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
@@ -93,7 +89,6 @@ public class LevelStory extends Level {
 	}
 	
 	public void tick(){
-		Main.getGame().getPlayer();
 		if(player.levelFinished){
 			if(level +1 >= Main.getGame().getLevels().length) {
 				//Win code
@@ -103,61 +98,12 @@ public class LevelStory extends Level {
 				Story.setLevel(level);
 				setBg(level);
 				player.setX(0);
-				player.setY(Main.sizeY - Main.tileSize - player.getSizeY());
+				player.setY(Main.HEIGHT - Main.tileSize - player.getSizeY());
 				player.levelFinished = false;
 			}
 		}
-		player.tick();
 		
-		for(int i=0; i<Main.npc.size(); i++) {
-			Main.npc.get(i).tick();
-		}
 		bg.tick();
-	}
-	
-	public void render(Graphics g) {
-		bg.draw(g);
-		
-		draw(g, player.getX());
-		
-		for(int i=0; i<Main.npc.size(); i++) {
-			Main.npc.get(i).draw(g);
-		}
-		
-		if(player.alive) {
-			player.draw(g);
-		}
-	}
-	
-	public void draw(Graphics g, int posX) {
-		for(int i=0; i<tiles[0].length; i++) {
-			for(int j=0; j<tiles.length; j++) {
-				int screenX = (j * Main.tileSize) - posX + (Main.sizeX /2) - (Main.tileSize /2);
-				if(screenX + Main.tileSize > 0 && screenX < Main.sizeX) {
-					tiles[j][i].getSprite().draw(g, screenX, i * Main.tileSize);
-				}
-			}
-		}
-	}
-	
-	public int getSizeX() {
-		return sizeX;
-	}
-	
-	public int getSizeY(){
-		return sizeY;
-	}
-	
-	public Tile getTile(int x, int y) {
-		return tiles[x][y];
-	}
-	
-	public void setTile(int x, int y, Tile t) {
-		tiles[x][y] = t;
-	}
-	
-	public void setBg(int currentLevel){
-		bg = new Background(currentLevel);
 	}
 	
 }

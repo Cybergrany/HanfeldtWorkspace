@@ -18,8 +18,8 @@ public class Arcade extends State {
 		super(main);
 		main.setLevels(new Level[] {new LevelArcade(main.getPlayer())});
 		Player p = main.getPlayer();
-		p.setX(Main.sizeX /2);
-		p.setY(Main.sizeY - Main.tileSize * (1 + p.getTileSizeY()));
+		p.setX(Main.WIDTH /2);
+		p.setY(Main.HEIGHT - Main.tileSize * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		Main.getGame().createGoreList();
 	}
@@ -49,12 +49,13 @@ public class Arcade extends State {
 	
 	public void draw(Graphics g) {
 		for(int i = 0; i < main.getNpc().size(); i++){
-			main.getNpc().get(i).draw(g);
+			camera.renderEntityLiving(g, main.getNpc().get(i));
 		}
-		((LevelArcade) (Main.getGame().getLevels()[0])).render(g);
+		((LevelArcade) (Main.getGame().getLevels()[0])).render(g, camera);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
 		}
+		camera.renderEntityLiving(g, main.getPlayer());
 		main.getHud().draw(g);
 		for(GoreSpawn go : Main.getGame().getGore()) {
 			go.render(g);
