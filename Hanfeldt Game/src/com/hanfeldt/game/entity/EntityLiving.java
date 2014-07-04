@@ -1,6 +1,8 @@
 package com.hanfeldt.game.entity;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
@@ -164,6 +166,14 @@ public class EntityLiving extends Entity {
 	
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	public Sprite getReverseSprite() {
+		BufferedImage image = new BufferedImage(getSizeX(), getSizeY(), BufferedImage.TYPE_INT_ARGB);
+		Graphics g = image.getGraphics();
+		g.drawImage(sprite.getImage(), getSizeX(), 0, 0, getSizeY(), 0, 0, getSizeX(), getSizeY(), null);
+		g.dispose();
+		return new Sprite(image);
 	}
 	
 }

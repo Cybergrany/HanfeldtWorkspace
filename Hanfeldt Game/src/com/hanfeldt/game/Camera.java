@@ -43,7 +43,11 @@ public class Camera {
 	}
 	
 	public void renderEntityLiving(Graphics g, EntityLiving e) {
-		renderSprite(g, e.getSprite(), e.getX(), e.getY());
+		if(e.getDirection()) {
+			renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
+		}else{
+			renderSprite(g, e.getSprite(), e.getX(), e.getY());
+		}
 	}
 	
 	public void renderTile(Graphics g, Tile t) {
@@ -55,9 +59,10 @@ public class Camera {
 		int screenY = b.getY() - y;
 		if(screenX +1 >= 0 &&
 			screenX <= Main.WIDTH &&
-			screenY +1 <= 0 &&
-			screenY >= Main.HEIGHT) {
-			g.fillRect(b.getX(), b.getY(), b.getX() +1, b.getY() +1);
+			screenY +1 >= 0 &&
+			screenY <= Main.HEIGHT) {
+			g.setColor(Bullet.COLOR);
+			g.fillRect(screenX, screenY, 1, 1);
 		}
 	}
 	

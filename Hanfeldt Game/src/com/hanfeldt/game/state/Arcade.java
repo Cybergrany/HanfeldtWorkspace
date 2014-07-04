@@ -26,6 +26,7 @@ public class Arcade extends State {
 	
 	public void tick() {
 		Main.getGame().getLevels()[0].tick();
+		main.getPlayer().tick();
 		main.getHud().tick();
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).tick();
@@ -45,6 +46,7 @@ public class Arcade extends State {
 		if(main.getListener().shopButtonDown && !main.getListener().shopButtonDownLastTick) {
 			main.setState(new Shop(main));
 		}
+		camera.tick();
 	}
 	
 	public void draw(Graphics g) {
@@ -55,7 +57,13 @@ public class Arcade extends State {
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
 		}
-		camera.renderEntityLiving(g, main.getPlayer());
+		Player p = main.getPlayer();
+		if(p.getDirection()) {
+			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.tileSize /2);
+		}else{
+			camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.tileSize /2);
+		}
+		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
 		main.getHud().draw(g);
 		for(GoreSpawn go : Main.getGame().getGore()) {
 			go.render(g);

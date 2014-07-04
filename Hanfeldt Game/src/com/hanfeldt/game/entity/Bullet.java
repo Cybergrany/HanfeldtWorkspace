@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 import com.hanfeldt.game.Main;
 
 public class Bullet extends Entity {
+	public static final Color COLOR = new Color(0xFF, 0x55, 0x00);
 	private float angle;
-	private static final Color color = new Color(0xFF, 0x55, 0x00);
 	private float speed = 3.0f;
 	private static int damageValue = 10;//default damage
 	
@@ -32,7 +32,7 @@ public class Bullet extends Entity {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(color);
+		g.setColor(COLOR);
 		int posX = getX() - Main.getGame().getPlayer().getX() + (Main.WIDTH /2) - (Main.tileSize /2);
 		g.drawLine(posX, getY(), posX, getY());
 	}

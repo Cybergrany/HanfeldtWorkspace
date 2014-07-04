@@ -41,7 +41,6 @@ public class Story extends State {
 	}
 	
 	public void tick() {
-		camera.tick();
 		if(dialogue == null) {
 			main.getLevels()[level].tick();
 			main.getHud().tick();
@@ -52,6 +51,7 @@ public class Story extends State {
 				main.getNpc().get(i).tick();
 			}
 			main.getPlayer().tick();
+			camera.tick();
 			Weapon wep = main.getPlayer().getWeaponEquipped();
 			wep.tick();
 			if(main.getListener().mouseDown && wep instanceof TriggerWeapon) {
@@ -90,14 +90,19 @@ public class Story extends State {
 		for(GoreSpawn go : main.getGore()) {
 			go.render(g);
 		}
-		if(!(dialogue == null)) {
-			dialogue.render(g);
-		}
 		for(Npc n :  main.getNpc()){
 			camera.renderEntityLiving(g,n);
 		}
 		Player p = main.getPlayer();
 		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
+		if(p.getDirection()) {
+			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.tileSize /2);
+		}else{
+			camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.tileSize /2);
+		}
+		if(!(dialogue == null)) {
+			dialogue.render(g);
+		}
 		g.dispose();
 	}
 	

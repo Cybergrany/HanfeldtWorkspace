@@ -1,5 +1,9 @@
 	package com.hanfeldt.game.weapon;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Player;
 
@@ -22,6 +26,14 @@ public abstract class Weapon {
 	
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	public Sprite getReverseSprite() {
+		BufferedImage reverseImage = new BufferedImage(Main.tileSize, Main.tileSize, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = reverseImage.getGraphics();
+		g.drawImage(getSprite().getImage(), Main.tileSize, 0, 0, Main.tileSize, 0, 0, Main.tileSize, Main.tileSize, null);
+		g.dispose();
+		return new Sprite(reverseImage);
 	}
 	
 }
