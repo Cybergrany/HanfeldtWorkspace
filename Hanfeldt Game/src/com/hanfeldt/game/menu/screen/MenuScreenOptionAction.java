@@ -93,7 +93,7 @@ public final class MenuScreenOptionAction {
 	public static void startStory(){
 		Main.gameStarted = true;
 		Main.splashShowing = false;
-		Dialogue.loagImage("DialogueBox.png");
+		Dialogue.loadImage("DialogueBox.png");
 		Story story = new Story(Main.getGame(), Main.getGame().getCamera());
 		Main.getGame().setState(story);
 		Main.getGame().setPlayingState(story);

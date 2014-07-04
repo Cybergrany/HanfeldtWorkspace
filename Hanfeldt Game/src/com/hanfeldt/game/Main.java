@@ -39,7 +39,7 @@ public class Main implements Runnable {
 	
 	private int lives = 3;
 	private int ticksPs = 60;
-	private int frameLimit = 80;
+	private int frameLimit = 10000;
 	private long totalTicks = 0;
 	
 	public static ArrayList<Npc> npc;
@@ -180,7 +180,7 @@ public class Main implements Runnable {
 
 	public void render() {
 		state.draw(screenImage.getGraphics());
-		gamePanel.repaint();
+		gamePanel.render();
 	}
 	
 	//A very basic tick-based timer

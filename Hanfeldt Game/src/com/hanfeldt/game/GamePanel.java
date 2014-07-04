@@ -1,13 +1,13 @@
 package com.hanfeldt.game;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
-
-public class GamePanel extends JPanel {
+public class GamePanel extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage screen;
 	
@@ -17,13 +17,22 @@ public class GamePanel extends JPanel {
 		setMinimumSize(panelDimension);
 		setMaximumSize(panelDimension);
 		setPreferredSize(panelDimension);
+		setIgnoreRepaint(true);
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void render() {
+		BufferStrategy bs = getBufferStrategy();
+		if(bs == null) {
+			createBufferStrategy(3);
+			requestFocus();
+			return;
+		}
+		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
+		g.dispose();
+		bs.show();
 	}
 	
 }

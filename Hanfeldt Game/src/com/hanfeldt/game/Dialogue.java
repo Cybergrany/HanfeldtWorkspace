@@ -45,7 +45,7 @@ public class Dialogue {
 		g.drawString("<Press Space to continue>", 20, 90);
 	}
 	
-	public static void loagImage(String path) {
+	public static void loadImage(String path) {
 		try {
 			dialogueBox = ImageIO.read(Dialogue.class.getResource("/images/" + path));
 		}catch(Exception e) {
