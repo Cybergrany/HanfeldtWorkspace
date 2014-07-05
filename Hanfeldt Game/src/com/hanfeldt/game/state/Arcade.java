@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.weapon.TriggerWeapon;
@@ -40,6 +41,9 @@ public class Arcade extends State {
 				((TriggerWeapon) wep).tryTrigger();
 			}
 		}
+		for(int i=0; i<main.getNpc().size(); i++) {
+			main.getNpc().get(i).tick();
+		}
 		for(int i=0; i<Main.getGame().getGore().size(); i++) {
 			Main.getGame().getGore().get(i).tick();
 		}
@@ -56,6 +60,9 @@ public class Arcade extends State {
 		((LevelArcade) (Main.getGame().getLevels()[0])).render(g, camera);
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).draw(g);
+		}
+		for(Npc n :  main.getNpc()){
+			camera.renderEntityLiving(g,n);
 		}
 		Player p = main.getPlayer();
 		if(p.getDirection()) {

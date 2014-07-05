@@ -2,6 +2,7 @@ package com.hanfeldt.game.menu.screen;
 
 import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
@@ -144,6 +145,8 @@ public final class MenuScreenOptionAction {
 	public static void gotoMainMenu(){
 		//TODO:"Save game before quitting?" Dialogue. 
 		Main.getGame().setState(new MainMenuState(Main.getGame()));
+		if(Main.getGame().getState() instanceof Story || Main.getGame().getState() instanceof Arcade)
+			Main.getGame().getLevels()[0].clearLevel();
 	}
 	
 	public static void openGraphicsOptions(){

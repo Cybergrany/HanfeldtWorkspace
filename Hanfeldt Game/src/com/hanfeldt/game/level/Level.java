@@ -9,6 +9,7 @@ import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.state.Story;
+import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
 
 public class Level {
@@ -77,6 +78,21 @@ public class Level {
 	
 	public void setBg(int currentLevel){
 		bg = new Background(currentLevel);
+	}
+	
+	/**
+	 * Temporary method to clear the current level, avoiding conflicts 
+	 * when switching between game modes.
+	 */
+	public void clearLevel(){
+		for(int y = 0; y < sizeY; y++){
+			for(int x = 0; x < sizeX; x++){
+				setTile(x, y, new Air(x, y));
+			}
+		}
+		for(int i = 0; i < Main.getGame().npc.toArray().length; i++){
+			Main.getGame().npc.remove(i);
+		}
 	}
 	
 }

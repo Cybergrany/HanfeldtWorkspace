@@ -26,20 +26,21 @@ public class LevelArcade extends Level {
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
 		
+		//Set all blocks to air
 		for(int i=0; i<sizeY; i++) {
 			for(int j=0; j<sizeX; j++) {
 				tiles[j][i] = new Air(j, i);	
 			}
 		}
 		
-		generateLevel(p);
+		generateLevel(/*p*/);
 		
 		setBg(level);
 		
 		player = p;
 	}
 	
-	public void generateLevel(Player p){
+	public void generateLevel(/*Player p,*/){
 		
 		//Rough Terrain
 		for(int y=0; y<sizeY; y++) {
@@ -119,12 +120,20 @@ public class LevelArcade extends Level {
 			}
 		}
 		
+		//TODO:Ensure player won't spawn stuck in block or over hole
+//		for(int y = 0; y < sizeY; y++){
+//			for(int x = 0; x < sizeX; x++){
+//				for(int i = 0; i <= 2; i++){
+//					
+//				}
+//			}
+//		}
+		
 		//Spawn Zombies
 		for(int y = 0; y < sizeY; y++){
 			for(int x = 0; x < sizeX; x++){
 				if(tiles[x][y] instanceof ZombieSpawner)
 				for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
-					//TODO: Regular spawning, not just on level creation.
 					spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
 			}
