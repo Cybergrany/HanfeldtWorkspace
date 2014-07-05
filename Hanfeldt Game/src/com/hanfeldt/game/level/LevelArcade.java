@@ -7,10 +7,13 @@ import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
+import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.CementCore;
 import com.hanfeldt.game.tile.CementFloor;
+import com.hanfeldt.game.tile.CementRoof;
 import com.hanfeldt.game.tile.Tile;
+import com.hanfeldt.game.tile.ZombieSpawner;
 
 public class LevelArcade extends Level {
 	/*
@@ -19,7 +22,7 @@ public class LevelArcade extends Level {
 	
 	public LevelArcade(Player p) {
 		sizeY = Main.HEIGHT / Main.TILE_SIZE;
-		sizeX = Main.WIDTH / Main.TILE_SIZE * 2;
+		sizeX = Main.WIDTH / Main.TILE_SIZE * 5;
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
 		
@@ -51,21 +54,18 @@ public class LevelArcade extends Level {
 					}
 					
 					
-//					
-//					if(new Random().nextInt(100) > 90){
-//						try{
-//							int r = new Random().nextInt(Main.HEIGHT - 3);
-//							for(int i = 0; i <= r; i++){
-//								tiles[x - i][y - i] = new CementFloor(x - i, y - i);
-//							}
-//						}catch(Exception e){}
-//					}
+					
+					if(new Random().nextInt(100) > 90){
+						try{
+							int r = new Random().nextInt(sizeY - 6);
+							for(int i = 0; i <= r; i++){
+								tiles[x][y - i] = new CementFloor(x, y - i);
+							}
+						}catch(Exception e){}
+					}
 				}
 				
-//				Alright, I'm gonna start on some random level generation
-//				I'm doing pretty shit
-//				yolo
-//				One min, gotta add the game itself to obs
+				
 				if (new Random().nextInt(100) > 80){
 					try{
 						if(tiles[x][y] instanceof CementCore)
@@ -74,6 +74,20 @@ public class LevelArcade extends Level {
 				}
 			}
 		}
+		
+		//Roof
+		for(int y=0; y<sizeY; y++) {
+			for(int x=0; x<sizeX; x++) {
+				if(y < 1){
+					if(new Random().nextInt(100) > 10){
+						try{
+							tiles[x][y] = new CementRoof(x, y);
+						}catch(Exception e){}
+					}
+				}
+			}
+		}
+		
 		
 		//Corrections
 		for(int y=0; y<sizeY; y++) {
@@ -87,6 +101,31 @@ public class LevelArcade extends Level {
 				//Left-hand side wall
 				if(x < 1){
 					tiles[x][y] = new CementCore(x, y);
+				}
+			}
+		}
+		
+		//Spawners
+		for(int y=0; y<sizeY; y++) {
+			for(int x=0; x<sizeX; x++) {
+				if(new Random().nextInt(100) > 80){
+					try{
+						for(int i = 0; i <= 2; i++)
+						if(tiles[x] [y + i] instanceof CementCore && tiles[x][y] instanceof Air){
+							tiles[x][y] = new ZombieSpawner(x, y);
+						}
+					}catch(Exception e){}
+				}
+			}
+		}
+		
+		//Spawn Zombies
+		for(int y = 0; y < sizeY; y++){
+			for(int x = 0; x < sizeX; x++){
+				if(tiles[x][y] instanceof ZombieSpawner)
+				for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
+					//TODO: Regular spawning, not just on level creation.
+					spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
 			}
 		}

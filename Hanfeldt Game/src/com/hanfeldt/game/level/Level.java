@@ -47,7 +47,6 @@ public class Level {
 	}
 	
 	public void render(Graphics g, Camera c) {
-		bg.draw(g);
 		draw(g, c);
 	}
 	
