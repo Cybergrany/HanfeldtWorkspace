@@ -14,18 +14,14 @@ public class Dialogue {
 	private static BufferedImage dialogueBox;
 	private String[] text;
 	
-	public Dialogue(String path) {
+	public Dialogue(String path) throws Exception {
 		ArrayList<String> lines = new ArrayList<String>();
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(Dialogue.class.getResourceAsStream("/dialogues/" + path)));
-			String line;
-			while((line = br.readLine()) != null) {
-				lines.add(line);
-			}
-			br.close();
-		}catch(Exception e) {
-			e.printStackTrace();
+		BufferedReader br = new BufferedReader(new InputStreamReader(Dialogue.class.getResourceAsStream("/dialogues/" + path)));
+		String line;
+		while((line = br.readLine()) != null) {
+			lines.add(line);
 		}
+		br.close();
 		text = new String[lines.size()];
 		for(int i=0; i<lines.size(); i++) {
 			text[i] = lines.get(i);

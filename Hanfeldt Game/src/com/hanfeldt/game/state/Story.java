@@ -15,15 +15,16 @@ import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 import com.hanfeldt.game.weapon.weapons.Sword;
 
 public class Story extends State {
 	private Dialogue dialogue;
-	private int currentDialogue = 0;
-	private int[][] dialogueTriggerX = new int[][] {{0, 400}};
+	private int currentDialogue = 0, totalDialogues = 0;
+	private int[][] dialogueTriggerX = new int[][] {{0, 400}, {Main.tileSize *35}};
 	private static int level = 0;
-	private int lastLevel = 0;
+	private static int lastLevel = 0;
 	
 	public Story(Main main, Camera c) {
 		super(main, c);
@@ -40,10 +41,13 @@ public class Story extends State {
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
 		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.tileSize *4)));
-		main.getNpc().add(new Billy(600, Main.HEIGHT - (Main.tileSize *4)));
 	}
 	
 	public void tick() {
+		if(lastLevel == 0 && level == 1) {
+			main.getNpc().add(new Billy(Main.tileSize *40, Main.HEIGHT - (Main.tileSize *5)));
+			currentDialogue = 0;
+		}
 		if(dialogue == null) {
 			main.getLevels()[level].tick();
 			main.getHud().tick();
@@ -73,13 +77,16 @@ public class Story extends State {
 		}
 		try {
 			if(dialogue == null && main.getPlayer().getX() > dialogueTriggerX[level][currentDialogue]) {
-				dialogue = new Dialogue(currentDialogue + ".txt");
-				switch(currentDialogue) {
+				dialogue = new Dialogue(totalDialogues + ".txt");
+				switch(totalDialogues) {
 				case 1:
 					main.getPlayer().setWeaponEquipped(new Pistol(main.getPlayer()));
 					break;
+				case 2:
+					main.getPlayer().setWeaponEquipped(new M16(main.getPlayer()));
 				}
 				currentDialogue++;
+				totalDialogues++;
 			}
 		}catch(Exception e) {}
 	}
@@ -114,6 +121,7 @@ public class Story extends State {
 	}
 	
 	public static void setLevel(int l) {
+		lastLevel = level;
 		level = l;
 	}
 	
