@@ -34,11 +34,11 @@ public class Tile {
 	}
 	
 	public int getX() {
-		return x *Main.tileSize;
+		return x *Main.TILE_SIZE;
 	}
 	
 	public int getY() {
-		return y *Main.tileSize;
+		return y *Main.TILE_SIZE;
 	}
 	
 	public void onCollidedEntity(Entity e) {}

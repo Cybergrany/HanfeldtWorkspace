@@ -42,11 +42,11 @@ public class EntityLiving extends Entity {
 		return jumpHeight;
 	}
 	public int getSizeX() {
-		return sizeX *Main.tileSize;
+		return sizeX *Main.TILE_SIZE;
 	}
 	
 	public int getSizeY() {
-		return sizeY *Main.tileSize;
+		return sizeY *Main.TILE_SIZE;
 	}
 	
 	public int getTileSizeX(){
@@ -103,9 +103,9 @@ public class EntityLiving extends Entity {
 				// I know this if statement is shitey, fix it if you can think of a better solution
 				if( (tileBelowSolid || tileBelowRightSolid) 
 					//Next line accounts for 1x1 hole
-					&& !(!tileBelowSolid && tileBelowRightSolid && tileBelowLeftSolid && getX() % Main.tileSize == 0) ) {
+					&& !(!tileBelowSolid && tileBelowRightSolid && tileBelowLeftSolid && getX() % Main.TILE_SIZE == 0) ) {
 					falling = false;
-					if(velY >= Main.terminalVelocity - 1) {
+					if(velY >= Main.TERMINAL_VELOCITY - 1) {
 						if(this instanceof Player) {
 							((Player) this).getEvents().damagePlayer((int) velY, 1);
 						}

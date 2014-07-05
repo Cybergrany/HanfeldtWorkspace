@@ -19,7 +19,7 @@ public class Arcade extends State {
 		main.setLevels(new Level[] {new LevelArcade(main.getPlayer())});
 		Player p = main.getPlayer();
 		p.setX(Main.WIDTH /2);
-		p.setY(Main.HEIGHT - Main.tileSize * (1 + p.getTileSizeY()));
+		p.setY(Main.HEIGHT - Main.TILE_SIZE * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		Main.getGame().createGoreList();
 	}
@@ -59,9 +59,9 @@ public class Arcade extends State {
 		}
 		Player p = main.getPlayer();
 		if(p.getDirection()) {
-			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.tileSize /2);
+			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
 		}else{
-			camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.tileSize /2);
+			camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
 		}
 		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
 		main.getHud().draw(g);

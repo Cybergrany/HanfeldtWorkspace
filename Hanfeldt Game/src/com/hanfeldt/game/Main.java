@@ -23,34 +23,35 @@ import com.hanfeldt.io.Sound;
 
 public class Main implements Runnable {
 	public static final int WIDTH = 256, HEIGHT = 144;
-	public static int tileSize = 16; //Only works properly with 16 for the moment
-	public static int spriteSize = 16;
-	public static int scale = 3;
-	public static int tilesX = WIDTH / tileSize, tilesY = HEIGHT / tileSize;
+	public static final int TILE_SIZE = 16; //Only works properly with 16 for the moment
+	public static final int SPRITE_SIZE = 16;
+	public static final int SCALE = 3;
+	public static final int tilesX = WIDTH / TILE_SIZE, tilesY = HEIGHT / TILE_SIZE;
+	public static final float GRAVITY = 0.1f;
+	public static final float TERMINAL_VELOCITY = 5;
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
-	public static float gravity = 0.1f;
-	public static float terminalVelocity = 5;
-	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	public static SpriteSheet spriteSheet;
-	public ResourceManager resourceManager;
 	public static boolean debugCheats = false;
+	public static SpriteSheet spriteSheet;
+	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	public ResourceManager resourceManager;
+	
 	
 	private int lives = 3;
 	private int ticksPs = 60;
 	private int frameLimit = 10000;
 	private long totalTicks = 0;
 	
-	public static ArrayList<Npc> npc;
+	public ArrayList<Npc> npc;
 	
 	private static Sprite character;
 	private static Main game;
+	private Player player;
+	private Level[] levels;
 	private JFrame frame;
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
-	private static Player player;
-	private static Level[] levels;
 	private Listener listener;
 	private Hud hud;
 	private Camera camera;
@@ -70,7 +71,7 @@ public class Main implements Runnable {
 	public Main() {
 		screenImage = new BufferedImage(WIDTH, HEIGHT,
 				BufferedImage.TYPE_INT_ARGB);
-		gamePanel = new GamePanel(screenImage, (WIDTH /spriteSize *tileSize)*scale, (HEIGHT /spriteSize *tileSize)*scale);
+		gamePanel = new GamePanel(screenImage, (WIDTH /SPRITE_SIZE *TILE_SIZE)*SCALE, (HEIGHT /SPRITE_SIZE *TILE_SIZE)*SCALE);
 		
 		listener = new Listener();
 		gamePanel.addKeyListener(listener);
@@ -106,7 +107,7 @@ public class Main implements Runnable {
 	public void init() {
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
-		player = new Player(playerSprite, WIDTH / 2, HEIGHT - tileSize * (1 + playerSprite.getTileHeight()), listener, this);
+		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);
 		
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
@@ -184,7 +185,7 @@ public class Main implements Runnable {
 	}
 	
 	//A very basic tick-based timer
-	public static boolean timer(int ms/*It's kind of measuring millis??*/){
+	public static boolean timer(int ms){
 		if(game.getTotalTicks() % ms == 0){
 			return true;
 		}
@@ -220,7 +221,7 @@ public class Main implements Runnable {
 	public void respawnPlayer() {
 		player.alive = true;
 		player.setX(WIDTH / 2);
-		player.setY(HEIGHT - tileSize - player.getSizeY());
+		player.setY(HEIGHT - TILE_SIZE - player.getSizeY());
 		player.setHealth(100);
 	}
 	

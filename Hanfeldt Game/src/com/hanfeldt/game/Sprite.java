@@ -16,8 +16,8 @@ public class Sprite {
 	
 	public Sprite(BufferedImage image) {
 		this.image = image;
-		width = image.getWidth() /Main.tileSize;
-		height = image.getHeight() /Main.tileSize;
+		width = image.getWidth() /Main.TILE_SIZE;
+		height = image.getHeight() /Main.TILE_SIZE;
 	}
 	
 	public Sprite(SpriteSheet sheet, int x, int y, int w, int h, int numWalkingAnims) {
@@ -39,7 +39,7 @@ public class Sprite {
 		if(direction) {
 			g.drawImage(image, x, y, null);
 		}else{
-			g.drawImage(image, x + (Main.tileSize), y, - Main.tileSize * width, Main.tileSize *height, null);
+			g.drawImage(image, x + (Main.TILE_SIZE), y, - Main.TILE_SIZE * width, Main.TILE_SIZE *height, null);
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class Sprite {
 		if(direction) {
 			g.drawImage(walkingAnims[walkingAnim], x, y, null);
 		}else{
-			g.drawImage(walkingAnims[walkingAnim], x + (Main.tileSize), y, - Main.tileSize * width, Main.tileSize *height, null);
+			g.drawImage(walkingAnims[walkingAnim], x + (Main.TILE_SIZE), y, - Main.TILE_SIZE * width, Main.TILE_SIZE *height, null);
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class Sprite {
 		if(dir) {
 			g.drawImage(walkingAnims[currentCycle], 0, 0, null);
 		}else{
-			g.drawImage(walkingAnims[currentCycle], 0 + (Main.tileSize), 0, - Main.tileSize * width, Main.tileSize *height, null);
+			g.drawImage(walkingAnims[currentCycle], 0 + (Main.TILE_SIZE), 0, - Main.TILE_SIZE * width, Main.TILE_SIZE *height, null);
 		}
 		g.dispose();
 		return ret;
@@ -77,11 +77,11 @@ public class Sprite {
 	}
 	
 	public int getWidth() {
-		return width *Main.tileSize;
+		return width *Main.TILE_SIZE;
 	}
 	
 	public int getHeight() {
-		return height *Main.tileSize;
+		return height *Main.TILE_SIZE;
 	}
 	
 	public BufferedImage getImage() {

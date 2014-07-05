@@ -22,7 +22,7 @@ public class Gore extends Entity {
 	
 	public void render(Graphics g) {
 		int screenX = getX()
-				    - (Main.getGame().getPlayer().getX() - Main.WIDTH /2 - Main.tileSize /2);
+				    - (Main.getGame().getPlayer().getX() - Main.WIDTH /2 - Main.TILE_SIZE /2);
 		if(screenX > 0 && screenX < Main.WIDTH){
 			g.setColor(Color.RED);
 			g.fillRect(screenX, getY(), 1, 1);

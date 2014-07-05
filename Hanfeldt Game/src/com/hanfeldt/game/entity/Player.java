@@ -113,8 +113,8 @@ public class Player extends EntityLiving {
 		
 		super.tick();
 		
-		if(getX() >= (Main.getGame().getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.tileSize) {
-			setX((Main.getGame().getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.tileSize);
+		if(getX() >= (Main.getGame().getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.TILE_SIZE) {
+			setX((Main.getGame().getLevels()[Story.getCurrentLevel()].getSizeX() - 1) *Main.TILE_SIZE);
 			levelFinished = true;
 		}else if(getX() < 0) {
 			setX(0);
@@ -122,9 +122,9 @@ public class Player extends EntityLiving {
 		
 		events.tick();
 		
-		for(int i=0; i<Main.npc.size(); i++) {
-			if(Main.npc.get(i) instanceof Zombie) {
-				Zombie zombie = (Zombie) Main.npc.get(i);
+		for(int i=0; i<Main.getGame().getNpc().size(); i++) {
+			if(Main.getGame().getNpc().get(i) instanceof Zombie) {
+				Zombie zombie = (Zombie) Main.getGame().getNpc().get(i);
 				if(collidedZombie(zombie)) {
 					events.damagePlayer(Values.zombie_damage_to_player, Values.zombie_damage_id, zombie);
 				}

@@ -146,14 +146,14 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		Main.mouseX = e.getX() /Main.scale;
-		Main.mouseY = e.getY() /Main.scale;
+		Main.mouseX = e.getX() /Main.SCALE;
+		Main.mouseY = e.getY() /Main.SCALE;
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		Main.mouseX = e.getX() /Main.scale;
-		Main.mouseY = e.getY() /Main.scale;
+		Main.mouseX = e.getX() /Main.SCALE;
+		Main.mouseY = e.getY() /Main.SCALE;
 	}
 
 }

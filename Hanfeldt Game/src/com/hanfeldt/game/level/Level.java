@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.state.Story;
@@ -33,14 +34,14 @@ public class Level {
 				Story.setLevel(level);
 				setBg(level);
 				player.setX(0);
-				player.setY(Main.HEIGHT - Main.tileSize - player.getSizeY());
+				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
 				player.levelFinished = false;
 			}
 		}
 		player.tick();
 		
-		for(int i=0; i<Main.npc.size(); i++) {
-			Main.npc.get(i).tick();
+		for(Npc n : Main.getGame().getNpc()) {
+			n.tick();
 		}
 		bg.tick();
 	}

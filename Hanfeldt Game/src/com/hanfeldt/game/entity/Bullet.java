@@ -15,8 +15,8 @@ public class Bullet extends Entity {
 	public Bullet(int x, int y, int damage) {
 		super(x, y);
 		try {
-			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.tileSize),
-														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.tileSize /2) + 3:Main.WIDTH /2 -3)));
+			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.TILE_SIZE),
+														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class Bullet extends Entity {
 	
 	public void draw(Graphics g) {
 		g.setColor(COLOR);
-		int posX = getX() - Main.getGame().getPlayer().getX() + (Main.WIDTH /2) - (Main.tileSize /2);
+		int posX = getX() - Main.getGame().getPlayer().getX() + (Main.WIDTH /2) - (Main.TILE_SIZE /2);
 		g.drawLine(posX, getY(), posX, getY());
 	}
 	

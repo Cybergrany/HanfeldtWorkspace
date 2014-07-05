@@ -33,7 +33,7 @@ public class Camera {
 	}
 	
 	public void tick() {
-		x = player.getX() - Main.WIDTH /2 + (Main.tileSize /2);
+		x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
 		y = 0;
 		if(shakingTicks > 0) {
 			x += rand.nextInt(5) -2;

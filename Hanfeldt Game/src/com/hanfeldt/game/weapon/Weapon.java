@@ -29,9 +29,9 @@ public abstract class Weapon {
 	}
 	
 	public Sprite getReverseSprite() {
-		BufferedImage reverseImage = new BufferedImage(Main.tileSize, Main.tileSize, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage reverseImage = new BufferedImage(Main.TILE_SIZE, Main.TILE_SIZE, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = reverseImage.getGraphics();
-		g.drawImage(getSprite().getImage(), Main.tileSize, 0, 0, Main.tileSize, 0, 0, Main.tileSize, Main.tileSize, null);
+		g.drawImage(getSprite().getImage(), Main.TILE_SIZE, 0, 0, Main.TILE_SIZE, 0, 0, Main.TILE_SIZE, Main.TILE_SIZE, null);
 		g.dispose();
 		return new Sprite(reverseImage);
 	}

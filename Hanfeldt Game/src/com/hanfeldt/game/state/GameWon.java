@@ -17,7 +17,7 @@ public class GameWon extends State {
 		super(main);
 		fireworks = new ArrayList<Firework>();
 		rand = new Random();
-		nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(120) +60;
+		nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(30) +30;
 	}
 	
 	public void tick() {

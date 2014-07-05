@@ -18,7 +18,7 @@ public class Entity {
 	
 	public void tick(){
 		if(falling) {
-			velY += Main.gravity;
+			velY += Main.GRAVITY;
 		}else{
 			if(velY > 0.0f) {
 				velY = 0;
@@ -30,10 +30,10 @@ public class Entity {
 			velX = velXMax;
 		}
 		
-		if(velY < -Main.terminalVelocity) {
-			velY = -Main.terminalVelocity;
-		}else if(velY > Main.terminalVelocity) {
-			velY = Main.terminalVelocity;
+		if(velY < -Main.TERMINAL_VELOCITY) {
+			velY = -Main.TERMINAL_VELOCITY;
+		}else if(velY > Main.TERMINAL_VELOCITY) {
+			velY = Main.TERMINAL_VELOCITY;
 		}
 		
 		changeX(velX);
@@ -68,19 +68,19 @@ public class Entity {
 	}
 	
 	public int getTileX() {
-		return ((int) x) /Main.tileSize;
+		return ((int) x) /Main.TILE_SIZE;
 	}
 	
 	public int getTileY() {
-		return ((int) y) /Main.tileSize;
+		return ((int) y) /Main.TILE_SIZE;
 	}
 	
 	public void setTileX(int x) {
-		setX(x *Main.tileSize);
+		setX(x *Main.TILE_SIZE);
 	}
 	
 	public void setTileY(int y) {
-		setY(y *Main.tileSize);
+		setY(y *Main.TILE_SIZE);
 	}
 	
 	public void setVelX(float vx) {
@@ -122,11 +122,11 @@ public class Entity {
 	}
 	
 	public int getSizeX() {
-		return getX() *Main.tileSize;
+		return getX() *Main.TILE_SIZE;
 	}
 	
 	public int getSizeY() {
-		return getY() *Main.tileSize;
+		return getY() *Main.TILE_SIZE;
 	}
 	
 }

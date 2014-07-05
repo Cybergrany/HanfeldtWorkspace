@@ -9,7 +9,7 @@ public class Spawner {
 	}
 	
 	public void spawnNpc(Npc npc){
-		Main.npc.add(npc);
+		Main.getGame().getNpc().add(npc);
 	}
 	
 	public void tick(){

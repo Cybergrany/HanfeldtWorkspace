@@ -60,9 +60,9 @@ public class Hud {
 		g.setColor(defWhite);
 		
 		if(player.getHealth() <= 0){
-			deadCharacter.draw(g, 5, Main.HEIGHT - Main.tileSize);
+			deadCharacter.draw(g, 5, Main.HEIGHT - Main.TILE_SIZE);
 		}else{
-			character.draw(g, 5, Main.HEIGHT - Main.tileSize);
+			character.draw(g, 5, Main.HEIGHT - Main.TILE_SIZE);
 		}
 		
 		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
@@ -70,7 +70,7 @@ public class Hud {
 //				ammo.draw(g,Main.sizeX - bulletx, Main.sizeY - 19);
 //				bulletx+=15;
 //			}
-			pistol.draw(g, Main.WIDTH-Main.tileSize, Main.HEIGHT - Main.tileSize);
+			pistol.draw(g, Main.WIDTH-Main.TILE_SIZE, Main.HEIGHT - Main.TILE_SIZE);
 			String ammoString = Integer.toString(((AmmoWeapon) player.getWeaponEquipped()).getTotalAmmo());
 			String bulletString = Integer.toString(bullets);
 			
@@ -93,7 +93,7 @@ public class Hud {
 			
 			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50); //Well Dayum, it can
 			
-			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.npc.toArray().length, Main.getGame().bullets.toArray().length), 10, 60);
+			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.getGame().getNpc().toArray().length, Main.getGame().bullets.toArray().length), 10, 60);
 			
 		}
 		

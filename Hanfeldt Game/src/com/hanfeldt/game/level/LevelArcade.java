@@ -18,8 +18,8 @@ public class LevelArcade extends Level {
 	 */
 	
 	public LevelArcade(Player p) {
-		sizeY = Main.HEIGHT / Main.tileSize;
-		sizeX = Main.WIDTH / Main.tileSize * 2;
+		sizeY = Main.HEIGHT / Main.TILE_SIZE;
+		sizeX = Main.WIDTH / Main.TILE_SIZE * 2;
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
 		

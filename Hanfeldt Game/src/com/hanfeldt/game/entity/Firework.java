@@ -11,6 +11,7 @@ import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.io.Sound;
 
 public class Firework extends Entity {
+	private static final int maxVelX = 1;
 	private boolean shooting = true;
 	private Random rand;
 	private int shootingTicksTotal;
@@ -28,13 +29,13 @@ public class Firework extends Entity {
 		rand = new Random();
 		shootingTicksTotal = rand.nextInt(60) + 60;
 		points = new ArrayList<Point>();
+		velX = rand.nextFloat() *1f * (rand.nextFloat() *1f *(rand.nextBoolean() ? -1 : 1));
+		velY = -speed;
 	}
 	
 	public void tick() {
 		if(shooting) {
 			points.add(new Point(getX(), getY()));
-			velX = rand.nextFloat() *0.5f -0.25f;
-			velY = -speed;
 			if(totalTicks >= shootingTicksTotal) {
 				shooting = false;
 			}

@@ -40,7 +40,7 @@ public class LevelStory extends Level {
 		}
 		
 		
-		sizeY = Main.HEIGHT /Main.spriteSize;
+		sizeY = Main.HEIGHT /Main.SPRITE_SIZE;
 		sizeX = levelImage.getWidth();
 		tiles = new Tile[sizeX][sizeY];
 		spawner = new Spawner();
@@ -55,7 +55,7 @@ public class LevelStory extends Level {
 					tiles[j][i] = new ZombieSpawner(j, i);
 					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
 						//TODO: Regular spawning, not just on level creation.
-						spawner.spawnNpc(new Zombie(Main.tileSize *j + (i2*30), Main.tileSize * i - 40));
+						spawner.spawnNpc(new Zombie(Main.TILE_SIZE *j + (i2*30), Main.TILE_SIZE * i - 40));
 					}
 					break;
 				case 0xff00FF00:
@@ -97,7 +97,7 @@ public class LevelStory extends Level {
 				Story.setLevel(level);
 				setBg(level);
 				player.setX(0);
-				player.setY(Main.HEIGHT - Main.tileSize - player.getSizeY());
+				player.setY(Main.HEIGHT - Main.TILE_SIZE - player.getSizeY());
 				player.levelFinished = false;
 			}
 		}

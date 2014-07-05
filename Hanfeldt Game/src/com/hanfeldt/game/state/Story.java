@@ -22,7 +22,7 @@ import com.hanfeldt.game.weapon.weapons.Sword;
 public class Story extends State {
 	private Dialogue dialogue;
 	private int currentDialogue = 0, totalDialogues = 0;
-	private int[][] dialogueTriggerX = new int[][] {{0, 400}, {Main.tileSize *35}};
+	private int[][] dialogueTriggerX = new int[][] {{0, 400}, {Main.TILE_SIZE *35}};
 	private static int level = 0;
 	private static int lastLevel = 0;
 	
@@ -37,15 +37,15 @@ public class Story extends State {
 		level = 0;
 		Player p = main.getPlayer();
 		p.setX(Main.WIDTH /2);
-		p.setY(Main.HEIGHT - Main.tileSize * (1 + p.getTileSizeY()));
+		p.setY(Main.HEIGHT - Main.TILE_SIZE * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
-		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.tileSize *4)));
+		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
 	}
 	
 	public void tick() {
 		if(lastLevel == 0 && level == 1) {
-			main.getNpc().add(new Billy(Main.tileSize *40, Main.HEIGHT - (Main.tileSize *5)));
+			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
 			currentDialogue = 0;
 		}
 		if(dialogue == null) {
@@ -106,9 +106,9 @@ public class Story extends State {
 		Player p = main.getPlayer();
 		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
 		if(p.getDirection()) {
-			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.tileSize /2);
+			camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
 		}else{
-			camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.tileSize /2);
+			camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
 		}
 		if(!(dialogue == null)) {
 			dialogue.render(g);

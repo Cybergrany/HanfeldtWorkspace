@@ -57,7 +57,7 @@ public class NpcEvents {
 	}
 
 	public void killNpc(Npc npc, int id) {
-		Main.npc.remove(npc);
+		Main.getGame().getNpc().remove(npc);
 	}
 
 	public boolean isOutsideMap(Npc npc) {
