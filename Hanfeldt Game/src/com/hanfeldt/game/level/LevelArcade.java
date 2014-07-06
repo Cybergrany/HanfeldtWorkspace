@@ -117,11 +117,11 @@ public class LevelArcade extends Level {
 		//Spawners
 		for(int y=0; y<sizeY; y++) {
 			for(int x=0; x<sizeX; x++) {
-				if(new Random().nextInt(100) > 80){
+				if(new Random().nextInt(100) > 70){
 					try{
 						for(int i = 0; i <= 2; i++)
-						if(tiles.getFromInnerArray(x, y)instanceof CementCore && tiles.getFromInnerArray(x, y) instanceof Air){
-							tiles.addToInnerArray(x, y, new ZombieSpawner(x, y));
+						if(tiles.getFromInnerArray(x, y)instanceof CementCore && tiles.getFromInnerArray(x, y - 2) instanceof Air){
+							tiles.addToInnerArray(x, y - 2, new ZombieSpawner(x, y - 2));
 						}
 					}catch(Exception e){}
 				}
@@ -141,7 +141,7 @@ public class LevelArcade extends Level {
 			for(int x = 0; x < sizeX; x++){
 				if(tiles.getFromInnerArray(x, y) instanceof ZombieSpawner)
 				for(int i2 = 0; i2 < new Random().nextInt(Zombie.getMaxNpc() + 1); i2++) {
-					spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
+					spawner.spawnNpc(new Zombie(Main.TILE_SIZE * x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
 			}
 		}
