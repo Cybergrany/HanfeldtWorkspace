@@ -78,6 +78,7 @@ public class Hud {
 			g.drawString(bulletString + "|" + ammoString, Main.WIDTH - 28, Main.HEIGHT - 5);
 		}
 		g.drawString("$" + Integer.toString(player.getMoney()), Main.WIDTH - 30, Main.HEIGHT - 15);
+		g.drawString("SCORE: " + Long.toString(player.getScore()), Main.WIDTH /2 - 30, 8);
 		
 		for(int i = 1; i <= hearts; i++){
 			heart.draw(g, heartx, Main.HEIGHT - 15);

@@ -38,7 +38,6 @@ public class Story extends Playing {
 	}
 	
 	public void tick() {
-		super.tick();
 		if(lastLevel == 0 && level == 1) {
 			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
 			currentDialogue = 0;
@@ -46,6 +45,7 @@ public class Story extends Playing {
 		}
 		if(dialogue == null) {
 			main.getLevels()[level].tick();
+			super.tick();
 		}
 		if(dialogue != null && main.getListener().spaceDown && !main.getListener().spaceDownLastTick) {
 			dialogue = null;

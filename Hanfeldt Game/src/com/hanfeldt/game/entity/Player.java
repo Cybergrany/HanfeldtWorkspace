@@ -21,6 +21,7 @@ public class Player extends EntityLiving {
 	private Weapon weaponEquipped = new Sword(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
+	private long score = 0;
 	private Listener listener;
 	private Main main;
 	
@@ -159,6 +160,18 @@ public class Player extends EntityLiving {
 	
 	public void changeMoney(int c) {
 		money += c;
+	}
+	
+	public long getScore() {
+		return score;
+	}
+	
+	public void setScore(int s) {
+		score = s;
+	}
+	
+	public void changeScore(int c) {
+		score += c;
 	}
 	
 	public BufferedImage getWalkingImage() {

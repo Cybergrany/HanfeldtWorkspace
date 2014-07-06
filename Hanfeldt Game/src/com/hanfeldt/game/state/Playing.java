@@ -38,7 +38,7 @@ public abstract class Playing extends State {
 		main.getPlayer().tick();
 		camera.tick();
 		Weapon wep = main.getPlayer().getWeaponEquipped();
-		wep.tick();
+		if(wep != null) wep.tick();
 		if(main.getListener().mouseDown && wep instanceof TriggerWeapon) {
 			if((wep instanceof Pistol || wep instanceof Sword) && !main.getListener().mouseDownLastTick) {
 				((TriggerWeapon) wep).tryTrigger();
@@ -64,26 +64,28 @@ public abstract class Playing extends State {
 		}
 		Player p = main.getPlayer();
 		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
-		if(p.getWeaponEquipped() instanceof Sword) {
-			Sword tw = (Sword) (p.getWeaponEquipped());
-			if(tw.isTriggered()) {
+		if(main.getPlayer().getWeaponEquipped() != null) {
+			if(p.getWeaponEquipped() instanceof Sword) {
+				Sword tw = (Sword) (p.getWeaponEquipped());
+				if(tw.isTriggered()) {
+					if(p.getDirection()) {
+						camera.renderSprite(g, tw.getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
+					}else{
+						camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
+					}
+				}else{
+					if(p.getDirection()) {
+						camera.renderSprite(g, tw.getNotTriggeredSprite(), p.getX() +5, p.getY() +2);
+					}else{
+						camera.renderSprite(g, tw.getNotTriggeredSprite(), p.getX() -5, p.getY() +2);
+					}
+				}
+			}else{
 				if(p.getDirection()) {
-					camera.renderSprite(g, tw.getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
+					camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
 				}else{
 					camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
 				}
-			}else{
-				if(p.getDirection()) {
-					camera.renderSprite(g, tw.getNotTriggeredSprite(), p.getX() +5, p.getY() +2);
-				}else{
-					camera.renderSprite(g, tw.getNotTriggeredSprite(), p.getX() -5, p.getY() +2);
-				}
-			}
-		}else{
-			if(p.getDirection()) {
-				camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
-			}else{
-				camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
 			}
 		}
 	}

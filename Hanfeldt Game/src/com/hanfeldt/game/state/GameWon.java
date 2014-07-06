@@ -46,6 +46,9 @@ public class GameWon extends State {
 		g.setColor(Color.WHITE);
 		g.drawString("Congratulations!", Main.WIDTH /2 - (("Congratulation!".length() /2) *7), Main.HEIGHT /4);
 		g.drawString("You win!", Main.WIDTH /2 - (("You win!".length() /2) *7), Main.HEIGHT /2);
+		g.drawString("You finished with a score of:", Main.WIDTH /2 - (("You finished with a score of:".length() /2) *5), Main.HEIGHT /2 +30);
+		String scoreString = Long.toString(main.getPlayer().getScore());
+		g.drawString(scoreString, Main.WIDTH /2 - (scoreString.length() /2) *5, Main.HEIGHT /2 +40);
 		for(int i=0; i<fireworks.size(); i++) {
 			fireworks.get(i).render(g);
 		}

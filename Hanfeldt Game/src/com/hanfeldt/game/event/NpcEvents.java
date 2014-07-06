@@ -42,8 +42,9 @@ public class NpcEvents {
 		npc.changeHealth(-damage);
 		if (npc.getHealth() <= 0) {
 			if (npc instanceof Zombie) {
-				Main.getGame().getPlayer()
-						.changeMoney(Values.money_from_zombie);
+				Main.getGame().getPlayer().changeMoney(Values.money_from_zombie);
+				Main.getGame().getPlayer().changeScore(Values.score_from_zombie);
+				
 			}
 			killNpc(npc, id);
 		}
