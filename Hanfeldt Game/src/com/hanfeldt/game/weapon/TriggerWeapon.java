@@ -7,6 +7,7 @@ import com.hanfeldt.game.entity.Player;
 public abstract class TriggerWeapon extends Weapon {
 	private int triggerRestTime;
 	protected long tickTriggered = 0;
+	private boolean triggered = false;
 	
 	/**
 	 * This kind of weapon is simpler than a {@link AmmoWeapon}, requiring no ammo.
@@ -23,6 +24,9 @@ public abstract class TriggerWeapon extends Weapon {
 		super.tick();
 		if(totalTicks >= triggerRestTime + tickTriggered) {
 			tickTriggered = 0;
+			triggered = false;
+		}else{
+			triggered = true;
 		}
 	}
 	
@@ -34,5 +38,9 @@ public abstract class TriggerWeapon extends Weapon {
 	}
 	
 	protected abstract void trigger();
+	
+	public boolean isTriggered() {
+		return triggered;
+	}
 	
 }

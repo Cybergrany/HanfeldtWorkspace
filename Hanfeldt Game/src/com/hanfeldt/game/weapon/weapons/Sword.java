@@ -2,6 +2,7 @@ package com.hanfeldt.game.weapon.weapons;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
@@ -33,7 +34,7 @@ public class Sword extends TriggerWeapon {
 			}else{
 				sprite.draw(g, (Main.WIDTH /2) +2, player.getY() + (Main.TILE_SIZE /2), player.getDirection());
 			}
-		}else{// Hold penis upright
+		}else{// Hold penis upright LELEL
 			if(!player.getDirection()) {
 				idleSprite.draw(g, (Main.WIDTH /2) - 13, player.getY() + 2, player.getDirection());
 			}else{
@@ -61,6 +62,10 @@ public class Sword extends TriggerWeapon {
 			}
 		}
 		Sound.playSound("Sword_Swing.wav");
+	}
+	
+	public Sprite getNotTriggeredSprite() {
+		return new Sprite(Main.getSpritesheet().getImage(4, 3, 1, 1));
 	}
 	
 }
