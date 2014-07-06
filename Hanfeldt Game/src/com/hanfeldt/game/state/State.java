@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
-
+// I'll fill this class out more later
 public abstract class State {
 	protected Main main;
 	protected Camera camera;
