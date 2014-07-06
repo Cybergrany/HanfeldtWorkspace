@@ -24,5 +24,9 @@ public class TileArrayList<T> extends ArrayList<ArrayList<T>>{
 		
 		inner.set(index2, element);
 	}
+	
+	public T getFromInnerArray(int index, int index2){
+		return this.get(index).get(index2);
+	}
 
 }

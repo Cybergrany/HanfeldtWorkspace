@@ -39,52 +39,59 @@ public class LevelStory extends Level {
 			levelImage = temp;
 		}
 		
-		
 		sizeY = Main.HEIGHT /Main.SPRITE_SIZE;
 		sizeX = levelImage.getWidth();
-		tiles = new Tile[sizeX][sizeY];
+		
+		tiles = new TileArrayList<Tile>();
+		tiles.addToInnerArray(sizeX, sizeY, null);
+		
 		spawner = new Spawner();
 		
-		for(int i=0; i<sizeY; i++) {
-			for(int j=0; j<sizeX; j++) {
-				switch(levelImage.getRGB(j, i)) {
-				case 0xFF000000:
-					tiles[j][i] = new Block(j, i);
-					break;
-				case 0xff0000ff:
-					tiles[j][i] = new ZombieSpawner(j, i);
-					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
-						//TODO: Regular spawning, not just on level creation.
-						spawner.spawnNpc(new Zombie(Main.TILE_SIZE *j + (i2*30), Main.TILE_SIZE * i - 40));
-					}
-					break;
-				case 0xff00FF00:
-					tiles[j][i] = new AmmoPickup(j, i);
-					break;
-				case 0xffFF0000:
-					tiles[j][i] = new CementCore(j, i);
-					break;
-				case 0xff00008C:
-					tiles[j][i] = new CementFloor(j, i);
-					break;
-				case 0xff007700:
-					tiles[j][i] = new CementRoof(j, i);
-					break;
-				case 0xffFFFF00:
-					tiles[j][i] = new RoofLamp(j, i);
-					break;
-				case 0xff9B0000:
-					tiles[j][i] = new CementBack(j, i);
-					break;
-				default:
-					tiles[j][i] = new Air(j, i);
-				}
-			}
-		}
+		generateLevel();
+		
+		
 		
 		setBg(level);
 		
 		player = p;
+	}
+	
+	public void generateLevel(){
+		for(int x=0; x<sizeY; x++) {
+			for(int y=0; y<sizeX; y++) {
+				switch(levelImage.getRGB(y, x)) {
+				case 0xFF000000:
+					tiles.addToInnerArray(y, x, new Block(y, x));
+					break;
+				case 0xff0000ff:
+					tiles.addToInnerArray(y, x, new ZombieSpawner(y, x));
+					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
+						spawner.spawnNpc(new Zombie(Main.TILE_SIZE *y + (i2*30), Main.TILE_SIZE * x - 40));
+					}
+					break;
+				case 0xff00FF00:
+					tiles.addToInnerArray(y, x, new AmmoPickup(y, x));
+					break;
+				case 0xffFF0000:
+					tiles.addToInnerArray(y, x, new CementCore(y, x));
+					break;
+				case 0xff00008C:
+					tiles.addToInnerArray(y, x, new CementFloor(y, x));
+					break;
+				case 0xff007700:
+					tiles.addToInnerArray(y, x, new CementRoof(y, x));
+					break;
+				case 0xffFFFF00:
+					tiles.addToInnerArray(y, x, new RoofLamp(y, x));
+					break;
+				case 0xff9B0000:
+					tiles.addToInnerArray(y, x, new CementBack(y, x));
+					break;
+				default:
+					tiles.addToInnerArray(y, x, new Air(y, x));
+				}
+			}
+		}
 	}
 	
 	public void tick(){

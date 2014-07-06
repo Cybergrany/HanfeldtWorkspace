@@ -18,8 +18,8 @@ public class Level {
 	 */
 	
 	protected Player player;
-	public Tile[][] tiles;//Making this public static just to test things
-//	public TileArrayList<Tile> tiles;
+//	public Tile[][] tiles;//Making this public static just to test things
+	public TileArrayList<Tile> tiles;
 	
 	
 	public static int level = 0;
@@ -56,9 +56,12 @@ public class Level {
 	
 	public void draw(Graphics g, Camera c) {
 		bg.draw(g);
-		for(int i=0; i<tiles[0].length; i++) {
-			for(int j=0; j<tiles.length; j++) {
-				c.renderTile(g, tiles[j][i]);
+		for(int i=0; i<tiles.size(); i++) {
+			for(int j=0; j<tiles.size(); j++) {
+				try{
+				if(tiles.getFromInnerArray(j, i) != null)
+				c.renderTile(g, tiles.getFromInnerArray(j, i));
+				}catch(Exception e){}
 			}
 		}
 	}
@@ -72,11 +75,11 @@ public class Level {
 	}
 	
 	public Tile getTile(int x, int y) {
-		return tiles[x][y];
+		return tiles.get(x).get(y);
 	}
 	
 	public void setTile(int x, int y, Tile t) {
-		tiles[x][y] = t;
+		tiles.addToInnerArray(x, y, t);
 	}
 	
 	public void setBg(int currentLevel){

@@ -26,13 +26,15 @@ public class LevelArcade extends Level {
 		sizeX = Main.WIDTH / Main.TILE_SIZE * 2;//Twice the size of screen
 		
 		//*Sigh* I'm not too good when it comes to this kinda stuff, but let's see if this works
-		tiles = new Tile[sizeX][sizeY];//TODO: This must become an ArrayList
+		tiles = new TileArrayList<Tile>();
+		tiles.addToInnerArray(sizeX, sizeY, null);
+		
 		spawner = new Spawner();
 		
 		//Set all blocks to air
 		for(int i=0; i<sizeY; i++) {
 			for(int j=0; j<sizeX; j++) {
-				tiles[j][i] = new Air(j, i);	
+				tiles.addToInnerArray(j, i, new Air(j, i));
 			}
 		}
 		
@@ -53,7 +55,7 @@ public class LevelArcade extends Level {
 					//Floor (With gaps)
 					if(new Random().nextInt(100) > 10){
 						try{
-							tiles[x][y] = new CementCore(x, y);
+							tiles.addToInnerArray(x, y, new CementCore(x, y));
 						}catch(Exception e){}
 					}
 					
@@ -63,7 +65,7 @@ public class LevelArcade extends Level {
 						try{
 							int r = new Random().nextInt(sizeY - 6);
 							for(int i = 0; i <= r; i++){
-								tiles[x][y - i] = new CementFloor(x, y - i);
+								tiles.addToInnerArray(x, y - i, new CementFloor(x, y - i));
 							}
 						}catch(Exception e){}
 					}
@@ -72,8 +74,8 @@ public class LevelArcade extends Level {
 				
 				if (new Random().nextInt(100) > 80){
 					try{
-						if(tiles[x][y] instanceof CementCore)
-						tiles[x][y - 1] = new CementCore(x, y - 1);
+						if(tiles.getFromInnerArray(x, y) instanceof CementCore)
+							tiles.addToInnerArray(x, y - 1, new CementCore(x, y - 1));
 					}catch(Exception e){}
 				}
 			}
@@ -85,10 +87,10 @@ public class LevelArcade extends Level {
 				if(y < 1){
 					if(new Random().nextInt(100) > 10){
 						try{
-							tiles[x][y] = new CementRoof(x, y);
+							tiles.addToInnerArray(x, y, new CementRoof(x, y));
 							//Lamps
 							if(new Random().nextInt(100) > 90){
-								tiles[x][y + 1] = new RoofLamp(x, y + 1);
+								tiles.addToInnerArray(x, y + 1, new RoofLamp(x, y + 1));
 							}
 						}catch(Exception e){}
 					}
@@ -101,13 +103,13 @@ public class LevelArcade extends Level {
 			for(int x=0; x<sizeX; x++) {
 				//Smooth out floor
 				try{
-					if(tiles[x][y] instanceof CementCore && tiles[x][y - 1] instanceof Air){
-							tiles[x][y] = new CementFloor(x, y);
+					if(tiles.getFromInnerArray(x, y + 1) instanceof CementCore && tiles.getFromInnerArray(x, y) instanceof Air){
+						tiles.addToInnerArray(x, y + 1, new CementFloor(x, y + 1));
 					}
 				}catch(Exception e){}
 				//Left-hand side wall
 				if(x < 1){
-					tiles[x][y] = new CementCore(x, y);
+					tiles.addToInnerArray(x, y, new CementCore(x, y));
 				}
 			}
 		}
@@ -118,8 +120,8 @@ public class LevelArcade extends Level {
 				if(new Random().nextInt(100) > 80){
 					try{
 						for(int i = 0; i <= 2; i++)
-						if(tiles[x] [y + i] instanceof CementCore && tiles[x][y] instanceof Air){
-							tiles[x][y] = new ZombieSpawner(x, y);
+						if(tiles.getFromInnerArray(x, y)instanceof CementCore && tiles.getFromInnerArray(x, y) instanceof Air){
+							tiles.addToInnerArray(x, y, new ZombieSpawner(x, y));
 						}
 					}catch(Exception e){}
 				}
@@ -137,7 +139,7 @@ public class LevelArcade extends Level {
 		//Spawn Zombies
 		for(int y = 0; y < sizeY; y++){
 			for(int x = 0; x < sizeX; x++){
-				if(tiles[x][y] instanceof ZombieSpawner)
+				if(tiles.getFromInnerArray(x, y) instanceof ZombieSpawner)
 				for(int i2 = 0; i2 < new Random().nextInt(Zombie.getMaxNpc() + 1); i2++) {
 					spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
