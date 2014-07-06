@@ -103,11 +103,11 @@ public class Camera {
 		addShakingTicks(rand.nextInt(10) +20);
 	}
 	
-	//A nice little semi-transparent rectangle that draws over your screen
+	//TODO: A nice little semi-transparent rectangle that draws over your screen
 	//when you get injured
-	public void drawBlood(Graphics g){
-		g.setColor(new Color(255, 0 , 0, 66));
-		g.drawRect(0, 0, Main.WIDTH, Main.HEIGHT);
-	}
+//	public void drawBlood(Graphics g){
+//		g.setColor(new Color(255, 0 , 0, 66));
+//		g.drawRect(0, 0, Main.WIDTH, Main.HEIGHT);
+//	}
 	
 }

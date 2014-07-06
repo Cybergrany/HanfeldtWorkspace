@@ -19,6 +19,9 @@ public class Level {
 	
 	protected Player player;
 	public Tile[][] tiles;//Making this public static just to test things
+//	public TileArrayList<Tile> tiles;
+	
+	
 	public static int level = 0;
 	protected int sizeX, sizeY;
 	protected Spawner spawner;

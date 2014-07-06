@@ -1,7 +1,6 @@
 package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.util.Random;
 
 import com.hanfeldt.game.Camera;
@@ -24,8 +23,10 @@ public class LevelArcade extends Level {
 	
 	public LevelArcade(Player p) {
 		sizeY = Main.HEIGHT / Main.TILE_SIZE;
-		sizeX = Main.WIDTH / Main.TILE_SIZE * 5;
-		tiles = new Tile[sizeX][sizeY];
+		sizeX = Main.WIDTH / Main.TILE_SIZE * 2;//Twice the size of screen
+		
+		//*Sigh* I'm not too good when it comes to this kinda stuff, but let's see if this works
+		tiles = new Tile[sizeX][sizeY];//TODO: This must become an ArrayList
 		spawner = new Spawner();
 		
 		//Set all blocks to air
@@ -35,14 +36,14 @@ public class LevelArcade extends Level {
 			}
 		}
 		
-		generateLevel(p);
+		generateLevel(/*p*/);
 		
 		setBg(level);
 		
 		player = p;
 	}
 	
-	public void generateLevel(Player p){
+	public void generateLevel(/*Player p*/){
 		
 		//Rough Terrain
 		for(int y=0; y<sizeY; y++) {
@@ -85,6 +86,7 @@ public class LevelArcade extends Level {
 					if(new Random().nextInt(100) > 10){
 						try{
 							tiles[x][y] = new CementRoof(x, y);
+							//Lamps
 							if(new Random().nextInt(100) > 90){
 								tiles[x][y + 1] = new RoofLamp(x, y + 1);
 							}
@@ -145,11 +147,35 @@ public class LevelArcade extends Level {
 	
 	public void tick(){
 		bg.tick();
+		generateLevelContinuous();
 	}
 	
 	public void render(Graphics g, Camera c) {
 		bg.draw(g);
 		super.render(g, c);
+	}
+	
+	public void generateLevelContinuous(){
+		int prevSizeX = sizeX;
+		if(player.getX() / Main.TILE_SIZE > sizeX / 2){
+			prevSizeX = sizeX;
+			System.err.println(prevSizeX);
+			sizeX += Main.WIDTH / Main.TILE_SIZE + 2;
+			System.out.println(sizeX);
+		}
+		
+		for(int y = 0; y < sizeY; y++){
+			for(int x = prevSizeX - 2; x < sizeX; x++){
+//				tiles[x][y] = new Air(x, y);
+//				System.out.println("Air placed at x: " + x + "y: " + y);
+				
+//				if(y > sizeY - 2){
+//					System.out.println("More floor generated at x: " + x + "y: " + y);
+//				}
+			}
+			
+		}
+//		System.out.println(player.getX() / Main.TILE_SIZE);
 	}
 	
 	
