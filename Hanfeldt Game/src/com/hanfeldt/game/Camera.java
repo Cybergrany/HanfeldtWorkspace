@@ -1,5 +1,6 @@
 package com.hanfeldt.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -100,6 +101,13 @@ public class Camera {
 	
 	public void shake() {
 		addShakingTicks(rand.nextInt(10) +20);
+	}
+	
+	//A nice little semi-transparent rectangle that draws over your screen
+	//when you get injured
+	public void drawBlood(Graphics g){
+		g.setColor(new Color(255, 0 , 0, 66));
+		g.drawRect(0, 0, Main.WIDTH, Main.HEIGHT);
 	}
 	
 }

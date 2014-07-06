@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+import com.hanfeldt.game.Main;
+
 /**
  * Class for any file-based operations which need to be performed.
  * @author David Ofeldt
@@ -32,7 +34,8 @@ public class ResourceManager {
 			e.printStackTrace();
 		}
 		StringTokenizer st = new StringTokenizer(line, ",");
-		System.out.println(level);
+		if(Main.debug)
+		System.out.println("Current Level: "  +level);
 		for(int i=0; i<level -1; i++) {
 			st.nextToken();
 		}

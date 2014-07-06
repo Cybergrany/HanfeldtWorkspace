@@ -1,6 +1,7 @@
 package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 import com.hanfeldt.game.Camera;
@@ -12,6 +13,7 @@ import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.CementCore;
 import com.hanfeldt.game.tile.CementFloor;
 import com.hanfeldt.game.tile.CementRoof;
+import com.hanfeldt.game.tile.RoofLamp;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
 
@@ -33,14 +35,14 @@ public class LevelArcade extends Level {
 			}
 		}
 		
-		generateLevel(/*p*/);
+		generateLevel(p);
 		
 		setBg(level);
 		
 		player = p;
 	}
 	
-	public void generateLevel(/*Player p,*/){
+	public void generateLevel(Player p){
 		
 		//Rough Terrain
 		for(int y=0; y<sizeY; y++) {
@@ -83,12 +85,14 @@ public class LevelArcade extends Level {
 					if(new Random().nextInt(100) > 10){
 						try{
 							tiles[x][y] = new CementRoof(x, y);
+							if(new Random().nextInt(100) > 90){
+								tiles[x][y + 1] = new RoofLamp(x, y + 1);
+							}
 						}catch(Exception e){}
 					}
 				}
 			}
 		}
-		
 		
 		//Corrections
 		for(int y=0; y<sizeY; y++) {
@@ -121,19 +125,18 @@ public class LevelArcade extends Level {
 		}
 		
 		//TODO:Ensure player won't spawn stuck in block or over hole
-//		for(int y = 0; y < sizeY; y++){
-//			for(int x = 0; x < sizeX; x++){
-//				for(int i = 0; i <= 2; i++){
-//					
-//				}
-//			}
-//		}
+		for(int y = 0; y < sizeY; y++){
+			for(int x = 0; x < sizeX; x++){
+				//Screw it; I'll do this later
+				//Player doesn't seem to spawn inside a block anyways
+			}
+		}
 		
 		//Spawn Zombies
 		for(int y = 0; y < sizeY; y++){
 			for(int x = 0; x < sizeX; x++){
 				if(tiles[x][y] instanceof ZombieSpawner)
-				for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
+				for(int i2 = 0; i2 < new Random().nextInt(Zombie.getMaxNpc() + 1); i2++) {
 					spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
 			}

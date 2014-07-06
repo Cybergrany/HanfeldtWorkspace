@@ -83,6 +83,7 @@ public class Level {
 	/**
 	 * Temporary method to clear the current level, avoiding conflicts 
 	 * when switching between game modes.
+	 * TODO:Feex
 	 */
 	public void clearLevel(){
 		for(int y = 0; y < sizeY; y++){

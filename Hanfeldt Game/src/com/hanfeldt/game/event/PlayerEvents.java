@@ -55,6 +55,8 @@ public class PlayerEvents{
 				player.setVelX(-6);
 			}
 			Main.getGame().getCamera().shake();
+//			Main.getGame().getCamera().drawBlood();
+			Main.getGame().addGore(player.getX(), player.getY());
 			player.setVelY(-1);
 			playerDamage(id);
 		}
