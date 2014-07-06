@@ -44,7 +44,6 @@ public class Server implements Runnable{
 							}
 						}
 						writer.println(hsName + ":" + Integer.toString(hiscore));
-						
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
@@ -55,7 +54,7 @@ public class Server implements Runnable{
 	
 	public static void main(String[] args) {
 		Server server = new Server();
-		server.start();
+		new Thread(server).start();
 	}
 	
 	
