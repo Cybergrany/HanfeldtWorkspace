@@ -172,6 +172,7 @@ public final class MenuScreenOptionAction {
 	}
 	
 	public static void openHighScores(){
+		Client.sendScores();
 		setLastScreen(Main.getGame().getState());
 		Main.getGame().setState(new HighScoreDisplayandChangeState(Main.getGame()));
 	}
