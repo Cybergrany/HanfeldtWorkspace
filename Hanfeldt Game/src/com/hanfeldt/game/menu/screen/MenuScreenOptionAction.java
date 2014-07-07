@@ -162,8 +162,8 @@ public final class MenuScreenOptionAction {
 	
 	public static void setUsername(){
 		Main.username = JOptionPane.showInputDialog("Enter your username\n(Used for hiscores)");
-		while(Main.username == null || Main.username.trim().isEmpty()) {
-			Main.username = JOptionPane.showInputDialog("Invalid username, try again please.");
+		if(Main.username == null || Main.username.trim().isEmpty()) {
+			Main.username = "user";
 		}
 	}
 	

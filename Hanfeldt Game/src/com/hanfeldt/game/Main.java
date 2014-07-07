@@ -107,10 +107,6 @@ public class Main implements Runnable {
 	}
 
 	public void init() {
-		username = JOptionPane.showInputDialog("Enter your username\n(Used for hiscores)");
-		if(username == null || username.trim().isEmpty()) {
-			username = "user";
-		}
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);
