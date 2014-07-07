@@ -8,8 +8,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.Zombie;
-import com.hanfeldt.game.state.GameWon;
-import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
@@ -56,7 +54,6 @@ public class LevelStory extends Level {
 	}
 	
 	public void generateLevel(){
-		System.out.println("LEL");
 		for(int x=0; x<sizeY; x++) {
 			for(int y=0; y<sizeX; y++) {
 				switch(levelImage.getRGB(y, x)) {

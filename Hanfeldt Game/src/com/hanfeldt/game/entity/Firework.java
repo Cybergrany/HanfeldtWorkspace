@@ -11,7 +11,6 @@ import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.io.Sound;
 
 public class Firework extends Entity {
-	private static final int maxVelX = 1;
 	private boolean shooting = true;
 	private Random rand;
 	private int shootingTicksTotal;

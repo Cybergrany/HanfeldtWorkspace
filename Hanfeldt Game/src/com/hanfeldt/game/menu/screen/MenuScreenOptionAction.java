@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 
 import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;

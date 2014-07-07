@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
@@ -34,7 +33,7 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
-	public static boolean debugCheats = true;
+	public static boolean debugCheats = false;
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public ResourceManager resourceManager;

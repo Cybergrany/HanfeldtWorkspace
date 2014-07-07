@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
