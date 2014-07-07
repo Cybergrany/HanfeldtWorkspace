@@ -37,7 +37,7 @@ public class Main implements Runnable {
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public ResourceManager resourceManager;
-	public String username = "user";
+	public static String username = "user";
 	
 	private int lives = 3;
 	private int ticksPs = 60;
@@ -106,10 +106,6 @@ public class Main implements Runnable {
 	}
 
 	public void init() {
-		username = JOptionPane.showInputDialog("Enter your username\n(Used for hiscores)");
-		while(username == null || username.trim().isEmpty()) {
-			username = JOptionPane.showInputDialog("Invalid username, try again please.");
-		}
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);

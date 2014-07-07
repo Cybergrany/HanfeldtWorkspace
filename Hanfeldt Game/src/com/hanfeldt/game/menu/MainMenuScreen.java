@@ -18,7 +18,8 @@ public class MainMenuScreen extends MenuScreen{
 																 new MenuScreenOption("Story Mode", optionsX, 75 , MenuScreenOptionAction.startStory), 
 																 new MenuScreenOption("Options", optionsX, 90, MenuScreenOptionAction.openOptions), 
 																 new MenuScreenOption("Load Game", optionsX, 105, MenuScreenOptionAction.loadGame),
-																 new MenuScreenOption("Quit", optionsX, 130, MenuScreenOptionAction.quitGame)};
+																 new MenuScreenOption("Set username", optionsX, 120, MenuScreenOptionAction.setUsername),
+																 new MenuScreenOption("Quit", optionsX, 135, MenuScreenOptionAction.quitGame)};
 	
 	public MainMenuScreen(String backgroundPath){
 		super(backgroundPath, options);

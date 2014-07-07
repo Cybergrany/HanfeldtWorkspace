@@ -50,7 +50,6 @@ public class LevelStory extends Level {
 		generateLevel();
 		
 		
-		
 		setBg(level);
 		
 		player = p;
