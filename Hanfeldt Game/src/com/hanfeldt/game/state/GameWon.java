@@ -29,7 +29,7 @@ public class GameWon extends State {
 		fireworks = new ArrayList<Firework>();
 		rand = new Random();
 		nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(30) +30;
-		String username = main.username;
+		String username = Main.username;
 		long score = main.getPlayer().getScore();
 		try {
 			Socket server = new Socket();
