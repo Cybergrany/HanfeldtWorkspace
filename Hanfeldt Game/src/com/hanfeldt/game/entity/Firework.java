@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.io.Sound;
 
@@ -54,7 +55,12 @@ public class Firework extends Entity {
 			alpha -= 0.02f;
 			if(alpha < 0f) alpha = 0;
 			if(totalTicks >= lifetimeAfterExplode + shootingTicksTotal) {
-				((GameWon) Main.getGame().getState()).removeFirework(this);
+				//May as well do this, as it won't be used outside of gamewon and arcade
+				if(Main.getGame().getState() instanceof GameWon){
+					removeFirework(GameWon.fireworks);
+				}else{
+					removeFirework(LevelArcade.fireworks);
+				}
 			}
 		}
 		totalTicks++;
@@ -67,4 +73,11 @@ public class Firework extends Entity {
 		}
 	}
 	
+	public void removeFirework(ArrayList<Firework> f) {
+		for(int i=0; i < f.size(); i++) {
+			if(f.get(i).equals(this)) {
+				f.remove(i);
+			}
+		}
+	}
 }

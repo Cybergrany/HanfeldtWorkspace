@@ -5,9 +5,11 @@ import javax.swing.JOptionPane;
 import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
+import com.hanfeldt.game.server.Client;
 import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.Story;
+import com.hanfeldt.game.state.menus.HighScoreDisplayandChangeState;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.state.menus.OptionMenuGraphicsState;
 import com.hanfeldt.game.state.menus.OptionMenuState;
@@ -41,6 +43,7 @@ public final class MenuScreenOptionAction {
 	
 	public static final int gotoMainMenu = 9;
 	public static final int setUsername = 11;
+	public static final int openHighScores = 12;
 	
 	private static State lastState;//The last option screen displayed.
 	
@@ -80,6 +83,8 @@ public final class MenuScreenOptionAction {
 		case setUsername:
 			setUsername();
 			break;
+		case openHighScores:
+			openHighScores();
 		}
 		
 	}
@@ -150,12 +155,12 @@ public final class MenuScreenOptionAction {
 	public static void gotoMainMenu(){
 		//TODO:"Save game before quitting?" Dialogue. 
 		Main.getGame().setState(new MainMenuState(Main.getGame()));
+		Client.sendScores();
 		if(Main.getGame().getState() instanceof Story || Main.getGame().getState() instanceof Arcade)
 			Main.getGame().getLevels()[0].clearLevel();
 	}
 	
 	public static void openGraphicsOptions(){
-		
 		Main.getGame().setState(new OptionMenuGraphicsState(Main.getGame()));
 	}
 	
@@ -164,6 +169,11 @@ public final class MenuScreenOptionAction {
 		if(Main.username == null || Main.username.trim().isEmpty()) {
 			Main.username = "user";
 		}
+	}
+	
+	public static void openHighScores(){
+		setLastScreen(Main.getGame().getState());
+		Main.getGame().setState(new HighScoreDisplayandChangeState(Main.getGame()));
 	}
 	
 	private static void setLastScreen(State s){

@@ -1,5 +1,7 @@
 package com.hanfeldt.game.entity.npc;
 
+import java.awt.Dimension;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
@@ -39,5 +41,4 @@ public class Zombie extends Npc {
 	public static int getMaxNpc(){
 		return Values.max_zombie;
 	}
-	
 }

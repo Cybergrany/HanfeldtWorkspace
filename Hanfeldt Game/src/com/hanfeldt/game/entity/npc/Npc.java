@@ -1,5 +1,7 @@
 package com.hanfeldt.game.entity.npc;
 
+import java.awt.Dimension;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
@@ -16,10 +18,12 @@ public class Npc extends EntityLiving {
 	
 	int health = 0;
 	protected NpcEvents events;
+	private static Dimension spawnLocation;
 	
 	public Npc(Sprite s,int h, int x, int y){
 		super(s, h, x, y);
 		events = new NpcEvents(this);
+		spawnLocation = new Dimension(x, y);
 	}
 
 	public void tick(){
@@ -48,6 +52,10 @@ public class Npc extends EntityLiving {
 	
 	public NpcEvents getNpcvents() {
 		return events;
+	}
+	
+	public Dimension getSpawnLocation(){
+		return spawnLocation;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.hanfeldt.game.level;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Camera;
@@ -8,6 +9,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
+import com.hanfeldt.game.tile.ZombieSpawner;
 
 public class Level {
 	/*
@@ -87,8 +89,25 @@ public class Level {
 	 * @return
 	 */
 	public boolean tileFilled(int x, int y){
-		if(tiles.getFromInnerArray(x, y) instanceof Tile){
+		if(tiles.getFromInnerArray(x, y) instanceof Tile && !(tiles.getFromInnerArray(x, y) instanceof Air)){
 			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns true if a zombie has been spawned from this spawner
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean spawnedFromSpawner(int x, int y){
+		if(tiles.getFromInnerArray(x, y) instanceof ZombieSpawner){
+			for(int i = 0; i < Main.getGame().getNpc().size(); i++){
+				if(Main.getGame().getNpc().get(i).getSpawnLocation() == new Dimension(x, y)){
+					return true;
+				}
+			}
 		}
 		return false;
 	}
