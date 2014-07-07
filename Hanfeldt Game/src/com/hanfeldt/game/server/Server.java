@@ -58,7 +58,7 @@ class ServerThread implements Runnable {
 		try {
 			PrintWriter writer = new PrintWriter(client.getOutputStream());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			int hiscore = 0;
+			int hiscore = -Integer.MAX_VALUE;
 			String hsName = null;
 			
 			BufferedReader hsReader = new BufferedReader(new FileReader("dev_resource/hiscores.txt"));
@@ -68,7 +68,7 @@ class ServerThread implements Runnable {
 				String name = st.nextToken();
 				int score = Integer.parseInt(st.nextToken());
 				st.nextToken();
-				if(score > hiscore) {
+				if(score >= hiscore) {
 					hiscore = score;
 					hsName = name;
 				}

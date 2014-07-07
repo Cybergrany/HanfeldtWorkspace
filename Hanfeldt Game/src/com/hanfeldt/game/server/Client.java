@@ -39,7 +39,6 @@ public class Client {
 			StringTokenizer st = new StringTokenizer(hsReader.readLine(), ";");
 			hsName = st.nextToken();
 			bestHs = Long.parseLong(st.nextToken());
-			System.out.println(bestHs);
 			
 			sWriter.println(username + ";" + score);
 			sWriter.flush();

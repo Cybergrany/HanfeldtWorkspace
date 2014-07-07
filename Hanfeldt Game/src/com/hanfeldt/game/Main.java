@@ -59,7 +59,7 @@ public class Main implements Runnable {
 	private State state;
 	private State playingState;
 	private volatile ArrayList<GoreSpawn> gore;
-	String name = "Hanfeldt Zombie Shooter";
+	static final String name = "Hanfeldt Zombie Shooter";
 
 	public static void main(String[] args) {
 		System.setProperty("java.net.preferIPv4Stack", "true");
