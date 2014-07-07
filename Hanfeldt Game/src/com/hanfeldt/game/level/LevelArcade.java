@@ -153,7 +153,7 @@ public class LevelArcade extends Level {
 	}
 	
 	public void render(Graphics g, Camera c) {
-		bg.draw(g);
+//		bg.draw(g);
 		super.render(g, c);
 	}
 	
