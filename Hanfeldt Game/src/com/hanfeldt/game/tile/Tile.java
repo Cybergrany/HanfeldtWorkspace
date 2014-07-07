@@ -1,8 +1,12 @@
 package com.hanfeldt.game.tile;
 
+import java.awt.Rectangle;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.EntityLiving;
+import com.hanfeldt.game.entity.Player;
 
 public class Tile {
 	private Sprite sprite;
@@ -39,6 +43,18 @@ public class Tile {
 	
 	public int getY() {
 		return y *Main.TILE_SIZE;
+	}
+	
+	public boolean collidedEntityLiving(EntityLiving e){
+		Rectangle r = new Rectangle(getX(), getY());
+		if(e.getBounds().intersects(r)){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean collidedPlayer(Player p){
+		return false;
 	}
 	
 	public void onCollidedEntity(Entity e) {}

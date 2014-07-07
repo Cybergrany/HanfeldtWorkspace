@@ -58,6 +58,14 @@ public class Level {
 		return tiles.get(x).get(y);
 	}
 	
+	/**
+	 * Returns the linkedList of tiles
+	 * @return tiles
+	 */
+	public TileLinkedList<Tile> getTile(){
+		return tiles;
+	}
+	
 	public void setTile(int x, int y, Tile t) {
 		tiles.addToInnerArray(x, y, t);
 	}

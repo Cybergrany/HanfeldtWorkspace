@@ -288,7 +288,7 @@ public class LevelArcade extends Level {
 						difficulty++;//Difficulty only advances if a shop spawns?
 						spawnShop = false;
 					}
-					}catch(Exception e){}
+				}catch(Exception e){}
 			}
 		}
 		
