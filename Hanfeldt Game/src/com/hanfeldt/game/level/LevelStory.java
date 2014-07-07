@@ -42,7 +42,7 @@ public class LevelStory extends Level {
 		sizeY = Main.HEIGHT /Main.SPRITE_SIZE;
 		sizeX = levelImage.getWidth();
 		
-		tiles = new TileArrayList<Tile>();
+		tiles = new TileLinkedList<Tile>();
 		tiles.addToInnerArray(sizeX, sizeY, null);
 		
 		spawner = new Spawner();

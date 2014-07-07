@@ -26,7 +26,7 @@ public class LevelArcade extends Level {
 		sizeX = Main.WIDTH / Main.TILE_SIZE * 2;//Twice the size of screen
 		
 		//*Sigh* I'm not too good when it comes to this kinda stuff, but let's see if this works
-		tiles = new TileArrayList<Tile>();
+		tiles = new TileLinkedList<Tile>();
 		tiles.addToInnerArray(sizeX, sizeY, null);
 		
 		spawner = new Spawner();
@@ -158,6 +158,7 @@ public class LevelArcade extends Level {
 	}
 	
 	public void generateLevelContinuous(){
+		int temp = 0;
 		int prevSizeX = sizeX;
 		if(player.getX() / Main.TILE_SIZE > sizeX / 2){
 			prevSizeX = sizeX;
@@ -166,25 +167,36 @@ public class LevelArcade extends Level {
 			System.out.println(sizeX);
 		}
 		
+		//Generate a floor
 		for(int y = 0; y < sizeY; y++){
-			for(int x = prevSizeX - 2; x < sizeX; x++){
-				try{
-					if(!tiles.getFromInnerArray(x, y).tileFilled()){//TODO: Actually needs to work
-						tiles.addToInnerArray(x, y, new Air(x, y));
-					}
+			for(int x = prevSizeX; x < sizeX - 2; x++){
+				tiles.addToInnerArray(x, y, null);//Makes sure that there is something in the list to prevent outofbounds
+				
+//					if(!tiles.isEmpty()){//TODO: Actually needs to work
+//						tiles.addToInnerArray(x, y, new Air(x, y));
+//						System.out.println("Air added at x: " + x + "y: " + y);
+//					}
 					
-					if(y > sizeY - 2){
-						if(new Random().nextInt(100) > 10){
-							try{
-								tiles.addToInnerArray(x, y, new CementCore(x, y));
-								System.out.println("Core added at x: " + x + "y: " + y);
-							}catch(Exception e){}
-						}
+				if(y > sizeY - 2){
+					if(new Random().nextInt(100) > 10 && !tileFilled(x, y)){
+						try{
+							tiles.addToInnerArray(x, y, new CementCore(x, y));
+							temp++;
+							System.out.println("Core added at x: " + x + "y: " + y + "Cores added: "+ temp);
+						}catch(Exception e){}
 					}
-				}catch(Exception e){}			
+				}			
 			}
 		}
-//		System.out.println(player.getX() / Main.TILE_SIZE);
+		
+		//Gotta save memory somehowfor(int y = 0; y < sizeY; y++){
+		for(int y = 0; y < sizeY; y++){
+			for(int x = prevSizeX - 4; x < sizeX - 2; x++){
+//				if(tileFilled(x, y)){
+//					
+//				}
+			}
+		}
 	}
 	
 	

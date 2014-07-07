@@ -7,12 +7,10 @@ import com.hanfeldt.game.entity.Entity;
 public class Tile {
 	private Sprite sprite;
 	private int x, y;
-	private boolean tileFilled = false;
 	
 	public Tile(int x, int y) {
 		this.x = x;
 		this.y = y;
-		tileFilled = true;
 	}
 	
 	public boolean isSolid() {
@@ -41,10 +39,6 @@ public class Tile {
 	
 	public int getY() {
 		return y *Main.TILE_SIZE;
-	}
-	
-	public boolean tileFilled(){
-		return tileFilled;
 	}
 	
 	public void onCollidedEntity(Entity e) {}

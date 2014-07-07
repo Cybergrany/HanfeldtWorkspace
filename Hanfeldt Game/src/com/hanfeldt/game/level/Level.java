@@ -17,7 +17,7 @@ public class Level {
 	
 	protected Player player;
 //	public Tile[][] tiles;//Making this public static just to test things
-	public TileArrayList<Tile> tiles;
+	public TileLinkedList<Tile> tiles;
 	
 	
 	public static int level = 0;
@@ -79,6 +79,19 @@ public class Level {
 		for(int i = 0; i < Main.getGame().npc.toArray().length; i++){
 			Main.getGame().npc.remove(i);
 		}
+	}
+	
+	/**
+	 * Returns true if a space is occupied by a tile
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean tileFilled(int x, int y){
+		if(tiles.getFromInnerArray(x, y) instanceof Tile){
+			return true;
+		}
+		return false;
 	}
 	
 }
