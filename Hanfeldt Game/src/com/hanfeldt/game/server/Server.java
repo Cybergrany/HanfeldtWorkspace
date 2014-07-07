@@ -61,7 +61,6 @@ public class Server implements Runnable{
 						scoreWriter.println(packetInput);
 						scoreWriter.close();
 						reader.close();
-						serverSock.close();
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
