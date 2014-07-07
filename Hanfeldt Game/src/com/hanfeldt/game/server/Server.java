@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -17,6 +18,7 @@ public class Server implements Runnable{
 	
 	public Server() {
 		try {
+			if(serverSock != null)
 			serverSock = new ServerSocket(port);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -26,6 +28,7 @@ public class Server implements Runnable{
 	public void run() {
 		while(true) {
 			try {
+				if(serverSock!=null)
 				client = serverSock.accept();
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -58,6 +61,7 @@ public class Server implements Runnable{
 						scoreWriter.println(packetInput);
 						scoreWriter.close();
 						reader.close();
+						serverSock.close();
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
