@@ -38,7 +38,7 @@ public class Main implements Runnable {
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public ResourceManager resourceManager;
-	public String username = "user";
+	public static String username = "user";
 	
 	private int lives = 3;
 	private int ticksPs = 60;

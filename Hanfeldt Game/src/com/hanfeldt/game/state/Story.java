@@ -22,6 +22,7 @@ public class Story extends Playing {
 	
 	public Story(Main main, Camera c) {
 		super(main, c);
+		
 		//Load levels
 		Level[] levels = new Level[2];
 		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());

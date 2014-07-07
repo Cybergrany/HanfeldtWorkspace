@@ -1,5 +1,7 @@
 package com.hanfeldt.game.menu.screen;
 
+import javax.swing.JOptionPane;
+
 import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.level.Level;
@@ -39,6 +41,7 @@ public final class MenuScreenOptionAction {
 	public static final int muteGame = 8;
 	
 	public static final int gotoMainMenu = 9;
+	public static final int setUsername = 11;
 	
 	private static State lastState;//The last option screen displayed.
 	
@@ -74,6 +77,9 @@ public final class MenuScreenOptionAction {
 			break;
 		case options_graphics:
 			openGraphicsOptions();
+			break;
+		case setUsername:
+			setUsername();
 			break;
 		}
 		
@@ -152,6 +158,13 @@ public final class MenuScreenOptionAction {
 	public static void openGraphicsOptions(){
 		
 		Main.getGame().setState(new OptionMenuGraphicsState(Main.getGame()));
+	}
+	
+	public static void setUsername(){
+		Main.username = JOptionPane.showInputDialog("Enter your username\n(Used for hiscores)");
+		while(Main.username == null || Main.username.trim().isEmpty()) {
+			Main.username = JOptionPane.showInputDialog("Invalid username, try again please.");
+		}
 	}
 	
 	private static void setLastScreen(State s){

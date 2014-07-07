@@ -168,14 +168,21 @@ public class LevelArcade extends Level {
 		
 		for(int y = 0; y < sizeY; y++){
 			for(int x = prevSizeX - 2; x < sizeX; x++){
-//				tiles[x][y] = new Air(x, y);
-//				System.out.println("Air placed at x: " + x + "y: " + y);
-				
-//				if(y > sizeY - 2){
-//					System.out.println("More floor generated at x: " + x + "y: " + y);
-//				}
+				try{
+					if(!tiles.getFromInnerArray(x, y).tileFilled()){//TODO: Actually needs to work
+						tiles.addToInnerArray(x, y, new Air(x, y));
+					}
+					
+					if(y > sizeY - 2){
+						if(new Random().nextInt(100) > 10){
+							try{
+								tiles.addToInnerArray(x, y, new CementCore(x, y));
+								System.out.println("Core added at x: " + x + "y: " + y);
+							}catch(Exception e){}
+						}
+					}
+				}catch(Exception e){}			
 			}
-			
 		}
 //		System.out.println(player.getX() / Main.TILE_SIZE);
 	}
