@@ -38,6 +38,20 @@ public class Story extends Playing {
 	}
 	
 	public void tick() {
+		Player player = main.getPlayer();
+		if(player.levelFinished){
+			if(level +1 >= Main.getGame().getLevels().length) {
+				//Win code
+				Main.getGame().setState(new GameWon(Main.getGame()));
+			}else{
+				level++;
+				Story.setLevel(level);
+				main.getLevels()[level].setBg(level);
+				player.setX(0);
+				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
+				player.levelFinished = false;
+			}
+		}
 		if(lastLevel == 0 && level == 1) {
 			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
 			currentDialogue = 0;
@@ -51,14 +65,14 @@ public class Story extends Playing {
 			dialogue = null;
 		}
 		try {
-			if(dialogue == null && main.getPlayer().getX() > dialogueTriggerX[level][currentDialogue]) {
+			if(dialogue == null && player.getX() > dialogueTriggerX[level][currentDialogue]) {
 				dialogue = new Dialogue(totalDialogues + ".txt");
 				switch(totalDialogues) {
 				case 1:
-					main.getPlayer().setWeaponEquipped(new Pistol(main.getPlayer()));
+					player.setWeaponEquipped(new Pistol(player));
 					break;
 				case 2:
-					main.getPlayer().setWeaponEquipped(new M16(main.getPlayer()));
+					player.setWeaponEquipped(new M16(player));
 				}
 				currentDialogue++;
 				totalDialogues++;

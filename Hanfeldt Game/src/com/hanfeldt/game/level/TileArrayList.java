@@ -28,5 +28,13 @@ public class TileArrayList<T> extends ArrayList<ArrayList<T>>{
 	public T getFromInnerArray(int index, int index2){
 		return this.get(index).get(index2);
 	}
-
+	
+	public int getInnerArraySize() {
+		if(get(0) == null) {
+			return 0;
+		}else{
+			return get(0).size();
+		}
+	}
+	
 }

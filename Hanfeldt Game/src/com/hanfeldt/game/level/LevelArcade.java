@@ -148,7 +148,7 @@ public class LevelArcade extends Level {
 	}
 	
 	public void tick(){
-		bg.tick();
+		super.tick();
 		generateLevelContinuous();
 	}
 	

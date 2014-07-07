@@ -15,6 +15,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.state.Dead;
+import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
@@ -41,7 +42,7 @@ public class Main implements Runnable {
 	
 	private int lives = 3;
 	private int ticksPs = 60;
-	private int frameLimit = 10000;
+	private int frameLimit = 90;
 	private long totalTicks = 0;
 	
 	public ArrayList<Npc> npc;
@@ -107,8 +108,8 @@ public class Main implements Runnable {
 
 	public void init() {
 		username = JOptionPane.showInputDialog("Enter your username\n(Used for hiscores)");
-		while(username == null || username.trim().isEmpty()) {
-			username = JOptionPane.showInputDialog("Invalid username, try again please.");
+		if(username == null || username.trim().isEmpty()) {
+			username = "user";
 		}
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
@@ -155,21 +156,22 @@ public class Main implements Runnable {
 					totalTicks = 0;
 				}
 				lastTick += nsPerTick;
-
-				if ((lastTick + nsPerTick) - System.nanoTime() > 3000000) {
-					try {
-						Thread.sleep(2);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
 			}
 
-			if (System.nanoTime() > lastFrame + nsPerFrame) {
+			if (System.nanoTime() > lastFrame + nsPerFrame && !(System.nanoTime() > lastTick + nsPerTick)) {
 				render();
 				frames++;
 
 				lastFrame = lastFrame + nsPerFrame;
+			}
+			
+			if ((lastTick + nsPerTick) - System.nanoTime() > 5 &&
+				(lastFrame + nsPerFrame) - System.nanoTime() > 5) {
+				try {
+					Thread.sleep(0, 3);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -235,9 +237,11 @@ public class Main implements Runnable {
 	}
 	
 	public void reload() {
-		if(player.getWeaponEquipped() instanceof AmmoWeapon) {
-			AmmoWeapon wep = (AmmoWeapon) player.getWeaponEquipped();
-			wep.reload();
+		if(state != null && state instanceof Playing) {
+			if(player.getWeaponEquipped() != null && player.getWeaponEquipped() instanceof AmmoWeapon) {
+				AmmoWeapon wep = (AmmoWeapon) player.getWeaponEquipped();
+				wep.reload();
+			}
 		}
 	}
 	

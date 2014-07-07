@@ -57,6 +57,7 @@ public class LevelStory extends Level {
 	}
 	
 	public void generateLevel(){
+		System.out.println("LEL");
 		for(int x=0; x<sizeY; x++) {
 			for(int y=0; y<sizeX; y++) {
 				switch(levelImage.getRGB(y, x)) {
@@ -92,24 +93,6 @@ public class LevelStory extends Level {
 				}
 			}
 		}
-	}
-	
-	public void tick(){
-		if(player.levelFinished){
-			if(level +1 >= Main.getGame().getLevels().length) {
-				//Win code
-				Main.getGame().setState(new GameWon(Main.getGame()));
-			}else{
-				level++;
-				Story.setLevel(level);
-				setBg(level);
-				player.setX(0);
-				player.setY(Main.HEIGHT - Main.TILE_SIZE - player.getSizeY());
-				player.levelFinished = false;
-			}
-		}
-		
-		bg.tick();
 	}
 	
 }

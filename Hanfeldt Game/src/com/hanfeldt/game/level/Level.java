@@ -7,8 +7,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
-import com.hanfeldt.game.state.GameWon;
-import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
 
@@ -28,25 +26,6 @@ public class Level {
 	protected Background bg;
 	
 	public void tick(){
-		Main.getGame().getPlayer();
-		if(player.levelFinished){
-			if(level +1 >= Main.getGame().getLevels().length) {
-				//Win code
-				Main.getGame().setState(new GameWon(Main.getGame()));
-			}else{
-				level++;
-				Story.setLevel(level);
-				setBg(level);
-				player.setX(0);
-				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
-				player.levelFinished = false;
-			}
-		}
-		player.tick();
-		
-		for(Npc n : Main.getGame().getNpc()) {
-			n.tick();
-		}
 		bg.tick();
 	}
 	
@@ -56,7 +35,7 @@ public class Level {
 	
 	public void draw(Graphics g, Camera c) {
 		bg.draw(g);
-		for(int i=0; i<tiles.size(); i++) {
+		for(int i=0; i<tiles.getInnerArraySize(); i++) {
 			for(int j=0; j<tiles.size(); j++) {
 				try{
 				if(tiles.getFromInnerArray(j, i) != null)
