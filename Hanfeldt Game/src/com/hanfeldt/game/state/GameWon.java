@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Firework;
+import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.server.Client;
 
 public class GameWon extends State {
@@ -20,6 +21,9 @@ public class GameWon extends State {
 		rand = new Random();
 		nextFireworkTick = Main.getGame().getTotalTicks() + rand.nextInt(30) +30;
 		
+		if(Main.username == null || Main.username == "user"){
+			MenuScreenOptionAction.setUsername();
+		}
 		Client.sendScores();
 	}
 	

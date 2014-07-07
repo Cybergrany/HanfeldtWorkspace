@@ -155,6 +155,9 @@ public final class MenuScreenOptionAction {
 	public static void gotoMainMenu(){
 		//TODO:"Save game before quitting?" Dialogue. 
 		Main.getGame().setState(new MainMenuState(Main.getGame()));
+		if(Main.username == null || Main.username == "user"){
+			setUsername();
+		}
 		Client.sendScores();
 		if(Main.getGame().getState() instanceof Story || Main.getGame().getState() instanceof Arcade)
 			Main.getGame().getLevels()[0].clearLevel();
