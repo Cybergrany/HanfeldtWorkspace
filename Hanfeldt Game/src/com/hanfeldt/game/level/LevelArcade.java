@@ -153,7 +153,6 @@ public class LevelArcade extends Level {
 	}
 	
 	public void render(Graphics g, Camera c) {
-//		bg.draw(g);
 		super.render(g, c);
 	}
 	
@@ -178,10 +177,11 @@ public class LevelArcade extends Level {
 //					}
 					
 				if(y > sizeY - 2){
-					if(new Random().nextInt(100) > 10 && !tileFilled(x, y)){
+					if(new Random().nextInt(100) > 5 && !tileFilled(x, y)){
 						try{
 							tiles.addToInnerArray(x, y, new CementCore(x, y));
 							temp++;
+							
 							System.out.println("Core added at x: " + x + "y: " + y + "Cores added: "+ temp);
 						}catch(Exception e){}
 					}
