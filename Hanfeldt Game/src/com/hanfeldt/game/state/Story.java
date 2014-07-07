@@ -45,8 +45,7 @@ public class Story extends Playing {
 				//Win code
 				Main.getGame().setState(new GameWon(Main.getGame()));
 			}else{
-				level++;
-				Story.setLevel(level);
+				Story.addLevel(level);
 				main.getLevels()[level].setBg(level);
 				player.setX(0);
 				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
@@ -94,9 +93,9 @@ public class Story extends Playing {
 		return level;
 	}
 	
-	public static void setLevel(int l) {
+	public static void addLevel(int l) {
 		lastLevel = level;
-		level = l;
+		level = l +1;
 	}
 	
 }
