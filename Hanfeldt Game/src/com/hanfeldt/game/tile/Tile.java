@@ -1,11 +1,8 @@
 package com.hanfeldt.game.tile;
 
-import java.awt.Rectangle;
-
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.entity.Entity;
-import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 
 public class Tile {
