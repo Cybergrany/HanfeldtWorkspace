@@ -17,7 +17,6 @@ public class Level {
 	 */
 	
 	protected Player player;
-//	public Tile[][] tiles;//Making this public static just to test things
 	public TileLinkedList<Tile> tiles;
 	
 	

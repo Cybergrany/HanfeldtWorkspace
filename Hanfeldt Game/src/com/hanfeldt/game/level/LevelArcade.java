@@ -239,7 +239,7 @@ public class LevelArcade extends Level {
 		}
 		
 		for(int y=0; y<sizeY; y++) {
-			for(int x = prevSizeX; x < sizeX - 2; x++) {
+			for(int x = prevSizeX; x < sizeX; x++) {
 				//Smooth out floor
 				try{
 					if(tiles.getFromInnerArray(x, y + 1) instanceof CementCore && tiles.getFromInnerArray(x, y) instanceof Air){
@@ -292,13 +292,21 @@ public class LevelArcade extends Level {
 			}
 		}
 		
-		//Gotta save memory somehowfor(int y = 0; y < sizeY; y++){
-		//TODO
+		//Gotta save memory somehow, even if it barely works
+		//TODO: Make better
+		//TODO: Somehow force the player to continue in the same direction
+		//TODO: Don't code lazily and actually add code to generate the level in the opposite direction
+		//TODO: Fuck it, the first one was easier.
 		for(int y = 0; y < sizeY; y++){
-			for(int x = prevSizeX - 4; x < sizeX - 2; x++){
-//				if(tileFilled(x, y)){
-//					
-//				}
+			for(int x = 0; x < sizeX - 2; x++){
+				if(x < player.getX() / Main.TILE_SIZE - ((Main.WIDTH / 2) / Main.TILE_SIZE) - 10){
+					tiles.addToInnerArray(x, y, null);//Sets passed tiles to null in the array, which should save memory and fps, right?
+					for(int i = 0; i < Main.getGame().getNpc().size(); i++){
+						if(Main.getGame().getNpc().get(i).getX() / Main.TILE_SIZE < x){
+							Main.getGame().getNpc().remove(i);//Kills npcs you've passed
+						}
+					}
+				}
 			}
 		}
 	}

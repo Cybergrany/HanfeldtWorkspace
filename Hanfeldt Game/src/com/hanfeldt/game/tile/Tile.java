@@ -45,13 +45,13 @@ public class Tile {
 		return y *Main.TILE_SIZE;
 	}
 	
-	public boolean collidedEntityLiving(EntityLiving e){
-		Rectangle r = new Rectangle(getX(), getY());
-		if(e.getBounds().intersects(r)){
-			return true;
-		}
-		return false;
-	}
+//	public boolean collidedEntityLiving(EntityLiving e){
+//		Rectangle r = new Rectangle(getX(), getY());
+//		if(e.getBounds().intersects(r)){
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	public boolean collidedPlayer(Player p){
 		return false;

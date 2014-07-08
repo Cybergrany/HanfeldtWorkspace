@@ -13,9 +13,13 @@ import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
 import com.hanfeldt.game.tile.CementBack;
 import com.hanfeldt.game.tile.CementCore;
+import com.hanfeldt.game.tile.CementCoreModern;
 import com.hanfeldt.game.tile.CementFloor;
 import com.hanfeldt.game.tile.CementRoof;
 import com.hanfeldt.game.tile.RoofLamp;
+import com.hanfeldt.game.tile.SupportedRoad;
+import com.hanfeldt.game.tile.SupportedRoadBase;
+import com.hanfeldt.game.tile.SupportedRoadBaseElevated;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
 
@@ -54,38 +58,50 @@ public class LevelStory extends Level {
 	}
 	
 	public void generateLevel(){
-		for(int x=0; x<sizeY; x++) {
-			for(int y=0; y<sizeX; y++) {
-				switch(levelImage.getRGB(y, x)) {
+		for(int y=0; y<sizeY; y++) {
+			for(int x=0; x<sizeX; x++) {
+				switch(levelImage.getRGB(x, y)) {
 				case 0xFF000000:
-					tiles.addToInnerArray(y, x, new Block(y, x));
+					tiles.addToInnerArray(x, y, new Block(x, y));
 					break;
 				case 0xff0000ff:
-					tiles.addToInnerArray(y, x, new ZombieSpawner(y, x));
+					tiles.addToInnerArray(x, y, new ZombieSpawner(x, y));
 					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
-						spawner.spawnNpc(new Zombie(Main.TILE_SIZE *y + (i2*30), Main.TILE_SIZE * x - 40));
+						spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
 					}
 					break;
 				case 0xff00FF00:
-					tiles.addToInnerArray(y, x, new AmmoPickup(y, x));
+					tiles.addToInnerArray(x, y, new AmmoPickup(x, y));
 					break;
 				case 0xffFF0000:
-					tiles.addToInnerArray(y, x, new CementCore(y, x));
+					tiles.addToInnerArray(x, y, new CementCore(x, y));
 					break;
 				case 0xff00008C:
-					tiles.addToInnerArray(y, x, new CementFloor(y, x));
+					tiles.addToInnerArray(x, y, new CementFloor(x, y));
 					break;
 				case 0xff007700:
-					tiles.addToInnerArray(y, x, new CementRoof(y, x));
+					tiles.addToInnerArray(x, y, new CementRoof(x, y));
 					break;
 				case 0xffFFFF00:
-					tiles.addToInnerArray(y, x, new RoofLamp(y, x));
+					tiles.addToInnerArray(x, y, new RoofLamp(x, y));
 					break;
 				case 0xff9B0000:
-					tiles.addToInnerArray(y, x, new CementBack(y, x));
+					tiles.addToInnerArray(x, y, new CementBack(x, y));
+					break;
+				case 0xffB200FF:
+					tiles.addToInnerArray(x, y, new SupportedRoad(x, y));
+					break;
+				case 0xffB20084:
+					tiles.addToInnerArray(x, y, new SupportedRoadBase(x, y));
+					break;
+				case 0xffFFFF8C:
+					tiles.addToInnerArray(x, y, new SupportedRoadBaseElevated(x, y));
+					break;
+				case 0xff559F74:
+					tiles.addToInnerArray(x, y, new CementCoreModern(x, y));
 					break;
 				default:
-					tiles.addToInnerArray(y, x, new Air(y, x));
+					tiles.addToInnerArray(x, y, new Air(x, y));
 				}
 			}
 		}
