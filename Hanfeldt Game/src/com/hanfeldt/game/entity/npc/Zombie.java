@@ -1,7 +1,5 @@
 package com.hanfeldt.game.entity.npc;
 
-import java.awt.Dimension;
-
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;

@@ -21,7 +21,7 @@ import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.ResourceManager;
 import com.hanfeldt.io.Sound;
-
+//Git inside eclipse test lel
 public class Main implements Runnable {
 	public static final int WIDTH = 256, HEIGHT = 144;
 	public static final int TILE_SIZE = 16; //Only works properly with 16 for the moment
