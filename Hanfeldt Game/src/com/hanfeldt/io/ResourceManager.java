@@ -18,6 +18,10 @@ public class ResourceManager {
 		
 	}
 	
+	public void getLevelProperties(){
+		
+	}
+	
 	/**
 	 * Returns amount of image files(.png) in a specified directory. To assist in background loading.
 	 * @param path directory to be searched

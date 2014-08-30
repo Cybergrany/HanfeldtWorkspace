@@ -10,6 +10,7 @@ import com.hanfeldt.game.entity.npc.Bill;
 import com.hanfeldt.game.entity.npc.Billy;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelStory;
+import com.hanfeldt.game.scripting.NpcScript;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 
@@ -19,6 +20,8 @@ public class Story extends Playing {
 	private int[][] dialogueTriggerX = new int[][] {{0, 400}, {Main.TILE_SIZE *35}};
 	private static int level = 0;
 	private static int lastLevel = 0;
+	
+	private NpcScript script;
 	
 	public Story(Main main, Camera c) {
 		super(main, c);
@@ -36,6 +39,8 @@ public class Story extends Playing {
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
 		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
+		
+		script = new NpcScript(main, p);
 	}
 	
 	public void tick() {
