@@ -12,9 +12,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import com.hanfeldt.game.Values;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.Story;
 
@@ -73,10 +75,25 @@ public class ResourceManager {
 		printDebug("---Level Properties---\n");
 		
 		printDebug("Background Amount: " + p.getProperty("bgAmount"));
+		Values.currentLevelBgAmount = Integer.parseInt(p.getProperty("bgAmount"));
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
+		Values.currentLevelNpcList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
 		printDebug("Location of NPC's: " + p.getProperty("npcLocation"));
-		printDebug("NPC Trigger: " + p.getProperty("npcxTrigger"));
+		String[] temp =  p.getProperty("npcLocation").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+		Values.currentLevelNpcLocation = new ArrayList<Integer>();
+		for(int i = 0; i <temp.length; i++){
+			try{
+				Values.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
+			}catch(NumberFormatException nfe){
+				printErrorDebug("Oh shit your config file is fucked. Boo hoo");
+				System.err.println("Got a bit of an error in your config :(");
+				MenuScreenOptionAction.goBack();
+			}
+		}
+		printDebug("NPC Trigger: " + p.getProperty("npcXTrigger"));
+		//TODO: this
 		printDebug("NPCActions: " + p.getProperty("npcAction"));
+		Values.currentLevelNpcAction = p.getProperty("npcAction").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
 		printDebug("\n--- Level Properties---\n");
 		
 		input.close();

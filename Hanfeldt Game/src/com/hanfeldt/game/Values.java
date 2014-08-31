@@ -1,5 +1,7 @@
 package com.hanfeldt.game;
 
+import java.util.ArrayList;
+
 /**
  * Values.java - contains values that would be used often in the game,
  * such as bullet damage, zombie damage etc.
@@ -38,4 +40,11 @@ public class Values {
 	
 	public static int max_npc_default = 5;
 	public static int max_zombie = 3;
+	
+	public static int currentLevelBgAmount = 0;
+	public static String[] currentLevelNpcList;
+	public static ArrayList<Integer> currentLevelNpcLocation;
+	public static int[][] currentLevelNpcTrigger;
+	public static String[] currentLevelNpcAction;
+	
 }

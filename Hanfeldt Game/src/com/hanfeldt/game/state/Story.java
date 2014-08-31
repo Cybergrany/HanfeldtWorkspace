@@ -26,6 +26,8 @@ public class Story extends Playing {
 	
 	public Story(Main main, Camera c) {
 		super(main, c);
+
+		ResourceManager.loadProperties();
 		
 		//Load levels
 		Level[] levels = new Level[2];
@@ -40,8 +42,6 @@ public class Story extends Playing {
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
 		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
-		
-		ResourceManager.loadProperties();
 		script = new NpcScript(main, p);
 	}
 	
