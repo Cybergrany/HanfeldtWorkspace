@@ -69,7 +69,7 @@ public class PropertyConfig {
 		p.setProperty("bgAmount", Integer.toString(bgAmount));
 		p.setProperty("npcList", Arrays.toString(npcList));
 		p.setProperty("npcLocation", Arrays.toString(npcLocation));
-		p.setProperty("npcXTriger", Arrays.toString(npcXTrigger));
+		p.setProperty("npcXTrigger", Arrays.toString(npcXTrigger));
 		p.setProperty("npcAction", Arrays.toString(npcAction));
 		
 		p.store(output, null);

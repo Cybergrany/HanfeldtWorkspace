@@ -22,7 +22,7 @@ public class Debug {
 	
 	public static void printErrorDebug(Object o){
 		if(Main.debug){
-			System.out.println(o);
+			System.err.println(o);
 		}
 	}
 	

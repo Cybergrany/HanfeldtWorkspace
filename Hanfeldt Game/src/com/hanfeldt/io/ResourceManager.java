@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.Story;
 
 /**
@@ -35,7 +36,7 @@ public class ResourceManager {
 		
 		try{
 			printDebug("Reading Level properties file...\n");
-			loadLevelProperties(Story.getCurrentLevel() + 1, String.format("/config/levels/level%d/level.conf", Story.getCurrentLevel()), input, prop);
+			loadLevelProperties(Story.getCurrentLevel() + 1, String.format("/config/levels/level%d/level.conf", Story.getCurrentLevel() + 1), input, prop);
 		}catch(IOException e){
 			printErrorDebug("Error while reading properties file.");
 			printStackTraceDebug(e);
@@ -62,8 +63,7 @@ public class ResourceManager {
 		URL resourceUrl = PropertyConfig.class.getResource(path);
 		if(resourceUrl == null){
 			printErrorDebug("Level configuration file missing! Returning to main menu...");
-			//TODO: GOTO Main Menu
-			System.exit(0);
+			MenuScreenOptionAction.goBack();
 		}
 		File file = new File(resourceUrl.toURI());
 		input = new FileInputStream(file);
@@ -72,11 +72,11 @@ public class ResourceManager {
 		p.load(input);
 		printDebug("---Level Properties---\n");
 		
-		printDebug(p.getProperty("bgAmount"));
-		printDebug(p.getProperty("npcList"));
-		printDebug(p.getProperty("npcLocation"));
-		printDebug(p.getProperty("npcxTrigger"));
-		printDebug(p.getProperty("npcAction"));
+		printDebug("Background Amount: " + p.getProperty("bgAmount"));
+		printDebug("List of NPC's: " + p.getProperty("npcList"));
+		printDebug("Location of NPC's: " + p.getProperty("npcLocation"));
+		printDebug("NPC Trigger: " + p.getProperty("npcxTrigger"));
+		printDebug("NPCActions: " + p.getProperty("npcAction"));
 		printDebug("\n--- Level Properties---\n");
 		
 		input.close();
