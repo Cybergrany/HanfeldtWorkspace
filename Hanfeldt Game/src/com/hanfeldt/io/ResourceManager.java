@@ -1,10 +1,21 @@
 package com.hanfeldt.io;
 
+import static com.hanfeldt.io.Debug.printDebug;
+import static com.hanfeldt.io.Debug.printErrorDebug;
+import static com.hanfeldt.io.Debug.printStackTraceDebug;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Properties;
 import java.util.StringTokenizer;
 
-import com.hanfeldt.game.Main;
+import com.hanfeldt.game.state.Story;
 
 /**
  * Class for any file-based operations which need to be performed.
@@ -18,8 +29,57 @@ public class ResourceManager {
 		
 	}
 	
-	public void getLevelProperties(){
+	public static void loadProperties(){
+		Properties prop = new Properties();
+		InputStream input = null;
 		
+		try{
+			printDebug("Reading Level properties file...\n");
+			loadLevelProperties(Story.getCurrentLevel() + 1, String.format("/config/levels/level%d/level.conf", Story.getCurrentLevel()), input, prop);
+		}catch(IOException e){
+			printErrorDebug("Error while reading properties file.");
+			printStackTraceDebug(e);
+		} catch (URISyntaxException e) {
+			printStackTraceDebug(e);
+		}finally{
+			if(input != null){
+				try{
+					input.close();
+				}catch(IOException e){
+					printStackTraceDebug(e);
+				}
+			}
+		}
+	}
+	
+	/***
+	 * Load Level properties as set in /config/levels/level1/level.conf, then update variables with them in Values.java
+	 * @throws {@link URISyntaxException}
+	 * @throws {@link IOException}
+	 */
+	public static void loadLevelProperties(int level, String path, InputStream input, Properties p) throws IOException, URISyntaxException{
+		printDebug("Loading properties for level " + level);
+		URL resourceUrl = PropertyConfig.class.getResource(path);
+		if(resourceUrl == null){
+			printErrorDebug("Level configuration file missing! Returning to main menu...");
+			//TODO: GOTO Main Menu
+			System.exit(0);
+		}
+		File file = new File(resourceUrl.toURI());
+		input = new FileInputStream(file);
+		
+		printDebug("Loading properties from: " + path);
+		p.load(input);
+		printDebug("---Level Properties---\n");
+		
+		printDebug(p.getProperty("bgAmount"));
+		printDebug(p.getProperty("npcList"));
+		printDebug(p.getProperty("npcLocation"));
+		printDebug(p.getProperty("npcxTrigger"));
+		printDebug(p.getProperty("npcAction"));
+		printDebug("\n--- Level Properties---\n");
+		
+		input.close();
 	}
 	
 	/**
@@ -38,8 +98,7 @@ public class ResourceManager {
 			e.printStackTrace();
 		}
 		StringTokenizer st = new StringTokenizer(line, ",");
-		if(Main.debug)
-		System.out.println("Current Level: "  +level);
+		printDebug("Current Level: "  +level);
 		for(int i=0; i<level -1; i++) {
 			st.nextToken();
 		}

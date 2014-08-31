@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 import org.newdawn.easyogg.OggClip;
 
 import com.hanfeldt.game.Main;
+import static com.hanfeldt.io.Debug.*;
 
 /**
  * Sound! Now you can hear yourself mine!
@@ -32,7 +33,7 @@ public class Sound {
 			     clip.open(audioInputStream);
 			     clip.start();
 			}catch(Exception e) {
-				System.out.println("Failed to play sound! Stacktrace:");
+				printErrorDebug("Failed to play sound! Stacktrace:");
 				e.printStackTrace();
 			}
 		}

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Properties;
 
 import com.hanfeldt.game.Main;
@@ -18,14 +19,14 @@ import com.hanfeldt.game.Main;
 public class PropertyConfig {
 	
 
-	private static String filename = "level.conf";
+	private static String filenameLevel = "level.conf";
 	
 	public static int level = 1; //The level to configure
 	public static int bgAmount = 4;//How many layers of backgrounds this level has
 	public static String[]  npcList  = new String[] {"Bill"};//List of NPC's in this Level
-	public static int[][] npcLocation = new int[][] {{500, Main.HEIGHT - (Main.TILE_SIZE*4)}};//Where the NPC's are
-	public static int[][] npcXTrigger = new int[][] {{0, 400}, {Main.TILE_SIZE * 35}};//Where the NPC is triggered
-	public static String[][] npcAction = new String[][]{{"give", "Pistol"}};//What happens(Apart from Dialogue) when the NPC is triggered
+	public static String[] npcLocation = new String[] {"500", Integer.toString(Main.HEIGHT - (Main.TILE_SIZE*4))};//Where the NPC's are
+	public static String[] npcXTrigger = new String[] {"0, 400", Integer.toString(Main.TILE_SIZE * 35)};//Where the NPC is triggered
+	public static String[] npcAction = new String[]{"give", "Pistol"};//What happens(Apart from Dialogue) when the NPC is triggered
 	
 	public static void main(String[] args){
 		
@@ -33,7 +34,7 @@ public class PropertyConfig {
 		OutputStream output = null;
 		try{
 			System.out.println("Attempting to write properties file...");
-			setLevelProperties(String.format("/config/levels/level%d/%s", level, filename), output, properties);
+			setLevelProperties(String.format("/config/levels/level%d/%s", level, filenameLevel), output, properties);
 		}catch(IOException e){
 			System.err.println("Something went wrong dammit");
 			e.printStackTrace();
@@ -53,9 +54,12 @@ public class PropertyConfig {
 	}
 	
 	public static void setLevelProperties(String levelPath, OutputStream output, Properties p) throws IOException, URISyntaxException{
-		System.out.println(levelPath);
 		URL resourceUrl = PropertyConfig.class.getResource(levelPath);
-		System.out.println(resourceUrl);
+		
+		if(resourceUrl == null){
+			System.out.println("File not found: " + levelPath + "\nPlease create this file, as I am too lazy to code in a file creator");
+			System.exit(0);
+		}
 		File file = new File(resourceUrl.toURI());
 		
 		output = new FileOutputStream(file);
@@ -63,10 +67,12 @@ public class PropertyConfig {
 		System.out.println("Writing to properties file to " + levelPath);
 		
 		p.setProperty("bgAmount", Integer.toString(bgAmount));
-		p.setProperty("npcList", npcList.toString());
-		p.setProperty("npcLocation", npcLocation.toString());
-		p.setProperty("npcXTriger", npcXTrigger.toString());
-		p.setProperty("npcAction", npcAction.toString());
+		p.setProperty("npcList", Arrays.toString(npcList));
+		p.setProperty("npcLocation", Arrays.toString(npcLocation));
+		p.setProperty("npcXTriger", Arrays.toString(npcXTrigger));
+		p.setProperty("npcAction", Arrays.toString(npcAction));
+		
+		p.store(output, null);
 		
 		System.out.println("Write successful!");
 		

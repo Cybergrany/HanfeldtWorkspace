@@ -13,6 +13,7 @@ import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.scripting.NpcScript;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.io.ResourceManager;
 
 public class Story extends Playing {
 	private Dialogue dialogue;
@@ -40,6 +41,7 @@ public class Story extends Playing {
 		main.createGoreList();
 		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
 		
+		ResourceManager.loadProperties();
 		script = new NpcScript(main, p);
 	}
 	
