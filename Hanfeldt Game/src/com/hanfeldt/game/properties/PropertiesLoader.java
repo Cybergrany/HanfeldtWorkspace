@@ -1,20 +1,17 @@
-package com.hanfeldt.io;
+package com.hanfeldt.game.properties;
 
 import static com.hanfeldt.io.Debug.printDebug;
 import static com.hanfeldt.io.Debug.printErrorDebug;
 import static com.hanfeldt.io.Debug.printStackTraceDebug;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.StringTokenizer;
 
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
@@ -25,9 +22,9 @@ import com.hanfeldt.game.state.Story;
  * @author David Ofeldt
  *
  */
-public class ResourceManager {
+public class PropertiesLoader {
 	
-	public ResourceManager(){
+	public PropertiesLoader(){
 
 		
 	}
@@ -86,9 +83,8 @@ public class ResourceManager {
 				Values.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
 			}catch(NumberFormatException nfe){
 				printErrorDebug("Oh shit your config file is fucked. Boo hoo");
-				System.err.println("Got a bit of an error in your config :(");
-				MenuScreenOptionAction.goBack();
 			}
+			System.out.println(temp[i]);
 		}
 		printDebug("NPC Trigger: " + p.getProperty("npcXTrigger"));
 		//TODO: this
@@ -98,28 +94,4 @@ public class ResourceManager {
 		
 		input.close();
 	}
-	
-	/**
-	 * Returns amount of image files(.png) in a specified directory. To assist in background loading.
-	 * @param path directory to be searched
-	 * @return resources(int) - amount of image files in the specified directory
-	 */
-	public int getImageResourcesInDir(String path){
-		String dirWithoutSlashes = path.replaceAll("/", "");
-		int level = Character.digit(dirWithoutSlashes.charAt(dirWithoutSlashes.length() -1), 10);
-		String line = null;
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/level.conf")));
-			line = reader.readLine();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		StringTokenizer st = new StringTokenizer(line, ",");
-		printDebug("Current Level: "  +level);
-		for(int i=0; i<level -1; i++) {
-			st.nextToken();
-		}
-		return Integer.parseInt(st.nextToken());
-	}
-	
 }

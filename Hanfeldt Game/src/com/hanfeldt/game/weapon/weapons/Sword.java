@@ -5,8 +5,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;

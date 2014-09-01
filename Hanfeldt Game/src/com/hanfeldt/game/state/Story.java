@@ -2,18 +2,18 @@ package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
 
-import com.hanfeldt.game.Camera;
-import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Bill;
 import com.hanfeldt.game.entity.npc.Billy;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelStory;
+import com.hanfeldt.game.properties.PropertiesLoader;
+import com.hanfeldt.game.scripting.Dialogue;
 import com.hanfeldt.game.scripting.NpcScript;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
-import com.hanfeldt.io.ResourceManager;
 
 public class Story extends Playing {
 	private Dialogue dialogue;
@@ -27,7 +27,7 @@ public class Story extends Playing {
 	public Story(Main main, Camera c) {
 		super(main, c);
 
-		ResourceManager.loadProperties();
+		PropertiesLoader.loadProperties();
 		
 		//Load levels
 		Level[] levels = new Level[2];

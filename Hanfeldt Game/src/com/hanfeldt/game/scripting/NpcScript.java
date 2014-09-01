@@ -1,6 +1,5 @@
 package com.hanfeldt.game.scripting;
 
-import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 

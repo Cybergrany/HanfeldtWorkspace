@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Hud;
 
 public class Dead extends State {
 	private static final int deadTicks = 240;

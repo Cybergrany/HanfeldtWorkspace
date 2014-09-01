@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Firework;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;

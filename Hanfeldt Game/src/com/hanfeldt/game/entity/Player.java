@@ -3,8 +3,8 @@ package com.hanfeldt.game.entity;
 import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.state.Playing;

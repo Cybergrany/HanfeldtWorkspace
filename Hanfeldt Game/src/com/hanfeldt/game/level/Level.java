@@ -3,8 +3,8 @@ package com.hanfeldt.game.level;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.tile.Air;

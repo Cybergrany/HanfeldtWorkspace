@@ -1,7 +1,7 @@
 package com.hanfeldt.game.tile;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.display.Sprite;
 
 public class SupportedRoad extends Tile{
 	public SupportedRoad(int x, int y){

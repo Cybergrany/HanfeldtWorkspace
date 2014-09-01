@@ -1,4 +1,4 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.scripting;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+
+import com.hanfeldt.game.Main;
 
 public class Dialogue {
 	private static BufferedImage dialogueBox;

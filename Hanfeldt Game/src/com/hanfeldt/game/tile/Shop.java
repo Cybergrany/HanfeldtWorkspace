@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.Player;
 

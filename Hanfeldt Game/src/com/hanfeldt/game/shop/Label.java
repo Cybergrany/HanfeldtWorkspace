@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Weapon;

@@ -8,18 +8,23 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import com.hanfeldt.game.display.Camera;
+import com.hanfeldt.game.display.GamePanel;
+import com.hanfeldt.game.display.Hud;
+import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.state.Dead;
 import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
-import com.hanfeldt.io.ResourceManager;
 import com.hanfeldt.io.Sound;
 //Git inside eclipse test lel
 public class Main implements Runnable {
@@ -36,7 +41,7 @@ public class Main implements Runnable {
 	public static boolean debugCheats = false;
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	public ResourceManager resourceManager;
+	public PropertiesLoader resourceManager;
 	public static String username = "user";
 	
 	private int lives = 3;
@@ -113,7 +118,7 @@ public class Main implements Runnable {
 		
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
-		resourceManager = new ResourceManager();
+		resourceManager = new PropertiesLoader();
 		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
 		hud = new Hud(player, character);
 		

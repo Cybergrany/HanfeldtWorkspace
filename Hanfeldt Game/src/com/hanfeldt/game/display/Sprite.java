@@ -1,7 +1,9 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.display;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import com.hanfeldt.game.Main;
 
 public class Sprite {
 	private BufferedImage image;

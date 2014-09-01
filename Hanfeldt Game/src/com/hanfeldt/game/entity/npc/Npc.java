@@ -3,8 +3,8 @@ package com.hanfeldt.game.entity.npc;
 import java.awt.Dimension;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.event.NpcEvents;
 

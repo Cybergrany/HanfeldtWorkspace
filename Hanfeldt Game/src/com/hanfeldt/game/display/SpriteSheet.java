@@ -1,8 +1,10 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.display;
 
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+
+import com.hanfeldt.game.Main;
 
 public class SpriteSheet {
 	private final BufferedImage sheet;

@@ -1,4 +1,4 @@
-package com.hanfeldt.io;
+package com.hanfeldt.game.properties;
 
 import java.io.File;
 import java.io.FileOutputStream;

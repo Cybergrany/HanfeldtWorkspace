@@ -1,9 +1,10 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.display;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;

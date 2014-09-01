@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
+import com.hanfeldt.game.display.Sprite;
 
 public class Sky{
 	

@@ -1,4 +1,4 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.display;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 

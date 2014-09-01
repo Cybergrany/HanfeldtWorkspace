@@ -2,8 +2,8 @@ package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
 
-import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 // I'll fill this class out more later
 public abstract class State {
 	protected Main main;

@@ -2,8 +2,8 @@ package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
 
-import com.hanfeldt.game.Camera;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;

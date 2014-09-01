@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import com.hanfeldt.game.Hud;
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Hud;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.menus.PauseMenuState;
 

@@ -1,8 +1,8 @@
 package com.hanfeldt.game.weapon;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
-import com.hanfeldt.game.SpriteSheet;
+import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.io.Sound;
 

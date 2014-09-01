@@ -2,9 +2,9 @@ package com.hanfeldt.game.menu.screen;
 
 import javax.swing.JOptionPane;
 
-import com.hanfeldt.game.Dialogue;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.menu.OptionScreen;
+import com.hanfeldt.game.scripting.Dialogue;
 import com.hanfeldt.game.server.Client;
 import com.hanfeldt.game.state.Arcade;
 import com.hanfeldt.game.state.State;

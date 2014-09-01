@@ -3,6 +3,7 @@ package com.hanfeldt.game.level;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.Values;
 
 public class Background {
 	public int layerAmount;//The amount of layers in use in this level. 
@@ -14,7 +15,9 @@ public class Background {
 	public Background(int level){
 		sky = new Sky();
 		currentLevel = level + 1;
-		layerAmount = Main.getGame().resourceManager.getImageResourcesInDir(levelPath(currentLevel));
+//		layerAmount = Main.getGame().resourceManager.getImageResourcesInDir(levelPath(currentLevel));
+		layerAmount = Values.currentLevelBgAmount;
+		System.out.println("Amount of bgs loaded: " + layerAmount);
 		
 		layer = new BackgroundSheet[layerAmount];
 		

@@ -1,8 +1,8 @@
 package com.hanfeldt.game.entity.npc;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Sprite;
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.display.Sprite;
 
 public class Zombie extends Npc {
 	private float speed = 0.25f;

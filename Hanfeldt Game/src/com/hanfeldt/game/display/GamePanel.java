@@ -1,4 +1,4 @@
-package com.hanfeldt.game;
+package com.hanfeldt.game.display;
 
 import java.awt.Canvas;
 import java.awt.Color;
