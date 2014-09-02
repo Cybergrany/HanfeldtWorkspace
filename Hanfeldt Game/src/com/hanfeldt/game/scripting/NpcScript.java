@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.event.ItemGiveEvent;
+import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.state.Story;
 import com.hanfeldt.io.Debug;
 
@@ -21,6 +23,7 @@ public class NpcScript {
 	private static int currentDialogue = 0;
 	private static int[] dialogueTriggerX;
 	private static int currentLevel;
+	private static String[] actions;
 	
 	public NpcScript(Main main, Player p){
 		this.main = main;
@@ -34,13 +37,7 @@ public class NpcScript {
 		try {
 			if(dialogue == null && player.getX() > dialogueTriggerX[currentDialogue]) {
 				dialogue = new Dialogue((currentLevel + 1) + "." + currentDialogue + ".txt");
-//				switch(totalDialogues) {
-//				case 1:
-//					player.setWeaponEquipped(new Pistol(player));
-//					break;
-//				case 2:
-//					player.setWeaponEquipped(new M16(player));
-//				}
+//				checkTriggerAction();
 				currentDialogue++;
 			}
 		}catch(IOException e) {
@@ -67,8 +64,18 @@ public class NpcScript {
 		}
 	}
 	
-	public static void setNpcTriggers(int[] triggers){
+	public static void setNpcTriggersAndActions(int[] triggers, String[] action){
 		dialogueTriggerX = new int[triggers.length];
 		dialogueTriggerX = triggers;
+		actions = action;
+	}
+	
+	private void checkTriggerAction(){
+		int i = currentDialogue;
+		switch(actions[i]){
+			case "give" :
+				ItemGiveEvent.checkGiveCommand(actions[i + 1]);
+				break;
+		}
 	}
 }

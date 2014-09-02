@@ -18,7 +18,7 @@ public class LevelLoader {
 	public static void loadLevel(int level){
 		PropertiesLoader.loadProperties();
 		NpcScript.resetDialogue();
-		NpcScript.setNpcTriggers(currentLevelNpcTrigger);
+		NpcScript.setNpcTriggersAndActions(currentLevelNpcTrigger, currentLevelNpcAction);
 		Main.getGame().setLevels(new LevelStory(String.format("/images/maps/levels/level%d.png", level + 1), Main.getGame().getPlayer()));
 		NpcList.loadCharacters();
 		Main.getGame().getLevels().setBg(level);

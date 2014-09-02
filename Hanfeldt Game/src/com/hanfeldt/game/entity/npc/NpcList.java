@@ -27,13 +27,9 @@ public class NpcList {
 			switch(characterList[i]){
 			case "Bill":
 				Spawner.spawnNpc(new Bill(currentLevelNpcLocation.get(currentCharacter), currentLevelNpcLocation.get(currentCharacter + 1)));
-				System.out.println("Bill placed at: ");
-				System.out.println(currentLevelNpcLocation.get(currentCharacter) + "Y: " + currentLevelNpcLocation.get(currentCharacter + 1));
 				break;
 			case "Billy":
 				Spawner.spawnNpc(new Billy(currentLevelNpcLocation.get(currentCharacter), currentLevelNpcLocation.get(currentCharacter + 1)));
-				System.out.println("Billy placed at: ");
-				System.out.println(currentLevelNpcLocation.get(currentCharacter) + "Y:  " + currentLevelNpcLocation.get(currentCharacter + 1));
 				break;
 			}
 			currentCharacter+=2;

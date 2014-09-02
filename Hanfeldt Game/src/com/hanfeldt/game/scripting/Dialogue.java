@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.event.CommandEvent;
 
 public class Dialogue {
 	private static BufferedImage dialogueBox;
@@ -22,7 +23,11 @@ public class Dialogue {
 		BufferedReader br = new BufferedReader(new InputStreamReader(Dialogue.class.getResourceAsStream("/dialogues/" + path)));
 		String line;
 		while((line = br.readLine()) != null) {
-			lines.add(line);
+			if(line.startsWith("/")){
+				CommandEvent.checkCommand(line.replace("/", ""));
+			}else{
+				lines.add(line);
+			}
 		}
 		br.close();
 		text = new String[lines.size()];

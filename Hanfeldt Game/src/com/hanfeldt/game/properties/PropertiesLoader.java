@@ -85,11 +85,7 @@ public class PropertiesLoader {
 		String[] temp =  p.getProperty("npcLocation").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
 		NpcList.currentLevelNpcLocation = new ArrayList<Integer>();
 		for(int i = 0; i <temp.length; i++){
-			try{
-				NpcList.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
-			}catch(NumberFormatException nfe){
-				printErrorDebug("Oh shit your config file is fucked. Boo hoo");
-			}
+			NpcList.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
 		}
 		
 		//NPC Triggers
@@ -102,7 +98,7 @@ public class PropertiesLoader {
 	
 		//NPC Actions
 		printDebug("NPCActions: " + p.getProperty("npcAction"));
-		LevelLoader.currentLevelNpcAction = p.getProperty("npcAction").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+		LevelLoader.currentLevelNpcAction = p.getProperty("npcAction").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
 	
 		printDebug("\n--- Level Properties---\n");
 		
