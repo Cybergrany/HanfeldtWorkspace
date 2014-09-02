@@ -12,7 +12,7 @@ import com.hanfeldt.game.Main;
 public class Client {
 	
 	public static boolean hsServerAvailable = false;
-	private static final String ip = "188.141.30.230";
+	private static final String ip = "127.0.0.1";
 	private static final short port = 21001;
 	public static String hsName = null;
 	public static long bestHs = 0;

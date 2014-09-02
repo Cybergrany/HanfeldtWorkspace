@@ -7,7 +7,7 @@ import com.hanfeldt.game.display.Camera;
 // I'll fill this class out more later
 public abstract class State {
 	protected Main main;
-	protected Camera camera;
+	protected static Camera camera;
 	
 	public State(Main main, Camera c) {
 		this.main = main;

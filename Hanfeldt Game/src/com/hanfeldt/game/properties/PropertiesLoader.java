@@ -13,8 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.npc.NpcList;
+import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.Story;
 
@@ -72,24 +72,38 @@ public class PropertiesLoader {
 		p.load(input);
 		printDebug("---Level Properties---\n");
 		
+		//Bg amount
 		printDebug("Background Amount: " + p.getProperty("bgAmount"));
-		Values.currentLevelBgAmount = Integer.parseInt(p.getProperty("bgAmount"));
+		LevelLoader.currentLevelBgAmount = Integer.parseInt(p.getProperty("bgAmount"));
+		
+		//Npc List
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
-		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+		
+		//Location of NPC's
 		printDebug("Location of NPC's: " + p.getProperty("npcLocation"));
-		String[] temp =  p.getProperty("npcLocation").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
-		Values.currentLevelNpcLocation = new ArrayList<Integer>();
+		String[] temp =  p.getProperty("npcLocation").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+		LevelLoader.currentLevelNpcLocation = new ArrayList<Integer>();
 		for(int i = 0; i <temp.length; i++){
 			try{
-				Values.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
+				LevelLoader.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
 			}catch(NumberFormatException nfe){
 				printErrorDebug("Oh shit your config file is fucked. Boo hoo");
 			}
 		}
+		
+		//NPC Triggers
 		printDebug("NPC Trigger: " + p.getProperty("npcXTrigger"));
-		//TODO: this
+		String[] temp1 = p.getProperty("npcXTrigger").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+		LevelLoader.currentLevelNpcTrigger = new int[temp1.length];
+		for(int i = 0; i < temp.length; i++){
+			LevelLoader.currentLevelNpcTrigger[i] = Integer.parseInt(temp1[i]);
+		}
+	
+		//NPC Actions
 		printDebug("NPCActions: " + p.getProperty("npcAction"));
-		Values.currentLevelNpcAction = p.getProperty("npcAction").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+		LevelLoader.currentLevelNpcAction = p.getProperty("npcAction").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+	
 		printDebug("\n--- Level Properties---\n");
 		
 		input.close();

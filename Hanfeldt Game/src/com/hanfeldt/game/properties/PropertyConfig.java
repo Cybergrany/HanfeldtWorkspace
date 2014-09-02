@@ -23,9 +23,9 @@ public class PropertyConfig {
 	
 	public static int level = 1; //The level to configure
 	public static int bgAmount = 4;//How many layers of backgrounds this level has
-	public static String[]  npcList  = new String[] {"Bill"};//List of NPC's in this Level
+	public static String[]  npcList  = new String[] {"Billy"};//List of NPC's in this Level
 	public static String[] npcLocation = new String[] {"500", Integer.toString(Main.HEIGHT - (Main.TILE_SIZE*4))};//Where the NPC's are
-	public static String[] npcXTrigger = new String[] {"0, 400", Integer.toString(Main.TILE_SIZE * 35)};//Where the NPC is triggered
+	public static String[] npcXTrigger = new String[] {"0, 400"};//Where the NPC is triggered
 	public static String[] npcAction = new String[]{"give", "Pistol"};//What happens(Apart from Dialogue) when the NPC is triggered
 	
 	public static void main(String[] args){

@@ -1,6 +1,5 @@
 package com.hanfeldt.game;
 
-import java.util.ArrayList;
 
 /**
  * Values.java - contains values that would be used often in the game,
@@ -40,9 +39,4 @@ public class Values {
 	
 	public static int max_npc_default = 5;
 	public static int max_zombie = 3;
-	
-	public static int currentLevelBgAmount = 0;
-	public static ArrayList<Integer> currentLevelNpcLocation;
-	public static int[][] currentLevelNpcTrigger;
-	public static String[] currentLevelNpcAction;
 }

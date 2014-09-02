@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class Dialogue {
 	private static BufferedImage dialogueBox;
 	private String[] text;
 	
-	public Dialogue(String path) throws Exception {
+	public Dialogue(String path) throws IOException  {
 		ArrayList<String> lines = new ArrayList<String>();
 		BufferedReader br = new BufferedReader(new InputStreamReader(Dialogue.class.getResourceAsStream("/dialogues/" + path)));
 		String line;

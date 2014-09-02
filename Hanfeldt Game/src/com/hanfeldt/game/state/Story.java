@@ -8,6 +8,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.characters.Bill;
 import com.hanfeldt.game.entity.npc.characters.Billy;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.scripting.Dialogue;
@@ -16,9 +17,6 @@ import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 
 public class Story extends Playing {
-	private Dialogue dialogue;
-	private int currentDialogue = 0, totalDialogues = 0;
-	private int[][] dialogueTriggerX = new int[][] {{0, 400}, {Main.TILE_SIZE *35}};
 	private static int level = 0;
 	private static int lastLevel = 0;
 	
@@ -30,6 +28,7 @@ public class Story extends Playing {
 		PropertiesLoader.loadProperties();
 		
 		//Load levels
+		LevelLoader.loadLevel(level);
 		Level[] levels = new Level[2];
 		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
 		levels[1] = new LevelStory("/images/maps/levels/level2.png", main.getPlayer());
@@ -61,38 +60,20 @@ public class Story extends Playing {
 		}
 		if(lastLevel == 0 && level == 1) {
 			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
-			currentDialogue = 0;
+//			currentDialogue = 0;
 			lastLevel = level;
 		}
-		if(dialogue == null) {
+		if(NpcScript.getDialogue() == null) {
 			main.getLevels()[level].tick();
 			super.tick();
 		}
-		if(dialogue != null && main.getListener().spaceDown && !main.getListener().spaceDownLastTick) {
-			dialogue = null;
-		}
-		try {
-			if(dialogue == null && player.getX() > dialogueTriggerX[level][currentDialogue]) {
-				dialogue = new Dialogue(totalDialogues + ".txt");
-				switch(totalDialogues) {
-				case 1:
-					player.setWeaponEquipped(new Pistol(player));
-					break;
-				case 2:
-					player.setWeaponEquipped(new M16(player));
-				}
-				currentDialogue++;
-				totalDialogues++;
-			}
-		}catch(Exception e) {}
+		script.tick();
 	}
 	
 	public void draw(Graphics g) {
 		main.getLevels()[level].render(g, camera);
 		super.draw(g);
-		if(!(dialogue == null)) {
-			dialogue.render(g);
-		}
+		script.draw(g);
 		g.dispose();
 	}
 	

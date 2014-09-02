@@ -10,6 +10,7 @@ import com.hanfeldt.game.entity.npc.characters.Billy;
  */
 public class NpcList {
 	
+	
 	public static String[] characterList;
 	public static String[] monsterList;
 	
@@ -17,7 +18,7 @@ public class NpcList {
 		
 	}
 	
-	public void loadCharacter(String character, int x, int y){
+	public void loadCharacters(String character, int x, int y){
 		for(int i = 0; i < characterList.length; i++){
 			if(character == characterList[i]){
 				switch(characterList[i]){
