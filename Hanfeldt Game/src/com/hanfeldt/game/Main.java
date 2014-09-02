@@ -54,7 +54,7 @@ public class Main implements Runnable {
 	private static Sprite character;
 	private static Main game;
 	private Player player;
-	private Level[] levels;
+	private Level levels;
 	private JFrame frame;
 	private GamePanel gamePanel;
 	private BufferedImage screenImage;
@@ -306,11 +306,11 @@ public class Main implements Runnable {
 		playingState = state;
 	}
 	
-	public void setLevels(Level[] l) {
+	public void setLevels(Level l) {
 		levels = l;
 	}
 	
-	public Level[] getLevels() {
+	public Level getLevels() {
 		return levels;
 	}
 	

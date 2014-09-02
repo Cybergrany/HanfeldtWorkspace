@@ -15,6 +15,7 @@ import com.hanfeldt.game.scripting.Dialogue;
 import com.hanfeldt.game.scripting.NpcScript;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.io.Debug;
 
 public class Story extends Playing {
 	private static int level = 0;
@@ -29,9 +30,12 @@ public class Story extends Playing {
 		
 		//Load levels
 		LevelLoader.loadLevel(level);
-		Level[] levels = new Level[2];
-		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
-		levels[1] = new LevelStory("/images/maps/levels/level2.png", main.getPlayer());
+//		Level[] levels = new Level[2];
+//		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
+//		levels[1] = new LevelStory("/images/maps/levels/level2.png", main.getPlayer());
+
+		Level levels = new Level();
+		levels = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
 		main.setLevels(levels);
 		
 		level = 0;
@@ -47,12 +51,13 @@ public class Story extends Playing {
 	public void tick() {
 		Player player = main.getPlayer();
 		if(player.levelFinished){
-			if(level +1 >= Main.getGame().getLevels().length) {
+			if(level +1 >= 2) {
+				Debug.printErrorDebug("Add levelamount chack to Story.java, line 51");
 				//Win code
 				Main.getGame().setState(new GameWon(Main.getGame()));
 			}else{
 				Story.addLevel(level);
-				main.getLevels()[level].setBg(level);
+				LevelLoader.loadLevel(level);
 				player.setX(0);
 				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
 				player.levelFinished = false;
@@ -60,18 +65,17 @@ public class Story extends Playing {
 		}
 		if(lastLevel == 0 && level == 1) {
 			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
-//			currentDialogue = 0;
 			lastLevel = level;
 		}
 		if(NpcScript.getDialogue() == null) {
-			main.getLevels()[level].tick();
+			main.getLevels().tick();
 			super.tick();
 		}
 		script.tick();
 	}
 	
 	public void draw(Graphics g) {
-		main.getLevels()[level].render(g, camera);
+		main.getLevels().render(g, camera);
 		super.draw(g);
 		script.draw(g);
 		g.dispose();

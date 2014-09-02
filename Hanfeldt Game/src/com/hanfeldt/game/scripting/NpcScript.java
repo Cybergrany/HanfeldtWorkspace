@@ -18,7 +18,7 @@ public class NpcScript {
 	private Player player;
 	private Main main;
 	private static Dialogue dialogue;
-	private int currentDialogue = 0, totalDialogues = 0;
+	private static int currentDialogue = 0, totalDialogues = 0;
 	private static int[] dialogueTriggerX;
 	private int currentLevel;
 	
@@ -34,7 +34,7 @@ public class NpcScript {
 		}
 		try {
 			if(dialogue == null && player.getX() > dialogueTriggerX[currentDialogue]) {
-				dialogue = new Dialogue(totalDialogues + ".txt");
+				dialogue = new Dialogue((currentLevel + 1) + "." + totalDialogues + ".txt");
 //				switch(totalDialogues) {
 //				case 1:
 //					player.setWeaponEquipped(new Pistol(player));
@@ -49,12 +49,17 @@ public class NpcScript {
 			System.err.println("Dialogue file not found for level " + currentLevel);
 			Debug.printStackTraceDebug(e);
 		}catch(Exception e){
-			Debug.printErrorDebug("Error while loading script.");
+//			Debug.printErrorDebug("Error while loading script.");
+//			Debug.printStackTraceDebug(e);
 		}
 	}
 	
 	public static Dialogue getDialogue(){
 		return dialogue;
+	}
+	
+	public static void resetDialogue(){
+		currentDialogue = 0;
 	}
 	
 	public void draw(Graphics g){

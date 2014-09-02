@@ -58,7 +58,7 @@ public class PropertiesLoader {
 	 * @throws {@link URISyntaxException}
 	 * @throws {@link IOException}
 	 */
-	public static void loadLevelProperties(int level, String path, InputStream input, Properties p) throws IOException, URISyntaxException{
+	private static void loadLevelProperties(int level, String path, InputStream input, Properties p) throws IOException, URISyntaxException{
 		printDebug("Loading properties for level " + level);
 		URL resourceUrl = PropertyConfig.class.getResource(path);
 		if(resourceUrl == null){
@@ -96,7 +96,7 @@ public class PropertiesLoader {
 		printDebug("NPC Trigger: " + p.getProperty("npcXTrigger"));
 		String[] temp1 = p.getProperty("npcXTrigger").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
 		LevelLoader.currentLevelNpcTrigger = new int[temp1.length];
-		for(int i = 0; i < temp.length; i++){
+		for(int i = 0; i < temp1.length; i++){
 			LevelLoader.currentLevelNpcTrigger[i] = Integer.parseInt(temp1[i]);
 		}
 	

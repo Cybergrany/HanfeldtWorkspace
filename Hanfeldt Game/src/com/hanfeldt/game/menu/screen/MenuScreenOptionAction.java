@@ -160,7 +160,7 @@ public final class MenuScreenOptionAction {
 		}
 		Client.sendScores();
 		if(Main.getGame().getState() instanceof Story || Main.getGame().getState() instanceof Arcade)
-			Main.getGame().getLevels()[0].clearLevel();
+			Main.getGame().getLevels().clearLevel();
 	}
 	
 	public static void openGraphicsOptions(){
