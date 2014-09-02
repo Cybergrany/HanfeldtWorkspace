@@ -1,0 +1,4 @@
+<You> You there! Have you seen my son?
+<Bill> No, but this will help you find him...
+*Bill hands you a pistol*
+<You> Whoah, thank you!
