@@ -35,11 +35,11 @@ public class Level {
 	
 	public void draw(Graphics g, Camera c) {
 		bg.draw(g);
-		for(int i=0; i<tiles.getInnerArraySize(); i++) {
+		for(int i=0; i<tiles.getTileArraySize(); i++) {
 			for(int j=0; j<tiles.size(); j++) {
 				try{
-				if(tiles.getFromInnerArray(j, i) != null)
-				c.renderTile(g, tiles.getFromInnerArray(j, i));
+				if(tiles.getTile(j, i) != null)
+				c.renderTile(g, tiles.getTile(j, i));
 				}catch(Exception e){}
 			}
 		}
@@ -66,7 +66,7 @@ public class Level {
 	}
 	
 	public void setTile(int x, int y, Tile t) {
-		tiles.addToInnerArray(x, y, t);
+		tiles.addTile(x, y, t);
 	}
 	
 	public void setBg(int currentLevel){
@@ -96,7 +96,7 @@ public class Level {
 	 * @return
 	 */
 	public boolean tileFilled(int x, int y){
-		if(tiles.getFromInnerArray(x, y) instanceof Tile && !(tiles.getFromInnerArray(x, y) instanceof Air)){
+		if(tiles.getTile(x, y) instanceof Tile && !(tiles.getTile(x, y) instanceof Air)){
 			return true;
 		}
 		return false;
@@ -109,7 +109,7 @@ public class Level {
 	 * @return
 	 */
 	public boolean spawnedFromSpawner(int x, int y){
-		if(tiles.getFromInnerArray(x, y) instanceof ZombieSpawner){
+		if(tiles.getTile(x, y) instanceof ZombieSpawner){
 			for(int i = 0; i < Main.getGame().getNpc().size(); i++){
 				if(Main.getGame().getNpc().get(i).getSpawnLocation() == new Dimension(x, y)){
 					return true;

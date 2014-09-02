@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.entity.npc.NpcList;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
 import com.hanfeldt.game.state.Story;
 
@@ -74,7 +75,7 @@ public class PropertiesLoader {
 		printDebug("Background Amount: " + p.getProperty("bgAmount"));
 		Values.currentLevelBgAmount = Integer.parseInt(p.getProperty("bgAmount"));
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
-		Values.currentLevelNpcList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
 		printDebug("Location of NPC's: " + p.getProperty("npcLocation"));
 		String[] temp =  p.getProperty("npcLocation").replaceAll("\\[", "").replaceAll("\\]", "").split(",");
 		Values.currentLevelNpcLocation = new ArrayList<Integer>();
@@ -84,7 +85,6 @@ public class PropertiesLoader {
 			}catch(NumberFormatException nfe){
 				printErrorDebug("Oh shit your config file is fucked. Boo hoo");
 			}
-			System.out.println(temp[i]);
 		}
 		printDebug("NPC Trigger: " + p.getProperty("npcXTrigger"));
 		//TODO: this

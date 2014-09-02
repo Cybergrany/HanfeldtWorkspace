@@ -5,9 +5,10 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
-import com.hanfeldt.game.entity.npc.Zombie;
+import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.AmmoPickup;
 import com.hanfeldt.game.tile.Block;
@@ -22,6 +23,7 @@ import com.hanfeldt.game.tile.SupportedRoadBase;
 import com.hanfeldt.game.tile.SupportedRoadBaseElevated;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
+import com.hanfeldt.io.ResourceManager;
 
 public class LevelStory extends Level {
 	/*
@@ -45,9 +47,7 @@ public class LevelStory extends Level {
 		sizeX = levelImage.getWidth();
 		
 		tiles = new TileLinkedList<Tile>();
-		tiles.addToInnerArray(sizeX, sizeY, null);
-		
-		spawner = new Spawner();
+		tiles.addTile(sizeX, sizeY, null);
 		
 		generateLevel();
 		
@@ -62,46 +62,46 @@ public class LevelStory extends Level {
 			for(int x=0; x<sizeX; x++) {
 				switch(levelImage.getRGB(x, y)) {
 				case 0xFF000000:
-					tiles.addToInnerArray(x, y, new Block(x, y));
+					tiles.addTile(x, y, new Block(x, y));
 					break;
 				case 0xff0000ff:
-					tiles.addToInnerArray(x, y, new ZombieSpawner(x, y));
+					tiles.addTile(x, y, new ZombieSpawner(x, y));
 					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
-						spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
+						Spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
 					}
 					break;
 				case 0xff00FF00:
-					tiles.addToInnerArray(x, y, new AmmoPickup(x, y));
+					tiles.addTile(x, y, new AmmoPickup(x, y));
 					break;
 				case 0xffFF0000:
-					tiles.addToInnerArray(x, y, new CementCore(x, y));
+					tiles.addTile(x, y, new CementCore(x, y));
 					break;
 				case 0xff00008C:
-					tiles.addToInnerArray(x, y, new CementFloor(x, y));
+					tiles.addTile(x, y, new CementFloor(x, y));
 					break;
 				case 0xff007700:
-					tiles.addToInnerArray(x, y, new CementRoof(x, y));
+					tiles.addTile(x, y, new CementRoof(x, y));
 					break;
 				case 0xffFFFF00:
-					tiles.addToInnerArray(x, y, new RoofLamp(x, y));
+					tiles.addTile(x, y, new RoofLamp(x, y));
 					break;
 				case 0xff9B0000:
-					tiles.addToInnerArray(x, y, new CementBack(x, y));
+					tiles.addTile(x, y, new CementBack(x, y));
 					break;
 				case 0xffB200FF:
-					tiles.addToInnerArray(x, y, new SupportedRoad(x, y));
+					tiles.addTile(x, y, new SupportedRoad(x, y));
 					break;
 				case 0xffB20084:
-					tiles.addToInnerArray(x, y, new SupportedRoadBase(x, y));
+					tiles.addTile(x, y, new SupportedRoadBase(x, y));
 					break;
 				case 0xffFFFF8C:
-					tiles.addToInnerArray(x, y, new SupportedRoadBaseElevated(x, y));
+					tiles.addTile(x, y, new SupportedRoadBaseElevated(x, y));
 					break;
 				case 0xff559F74:
-					tiles.addToInnerArray(x, y, new CementCoreModern(x, y));
+					tiles.addTile(x, y, new CementCoreModern(x, y));
 					break;
 				default:
-					tiles.addToInnerArray(x, y, new Air(x, y));
+					tiles.addTile(x, y, new Air(x, y));
 				}
 			}
 		}

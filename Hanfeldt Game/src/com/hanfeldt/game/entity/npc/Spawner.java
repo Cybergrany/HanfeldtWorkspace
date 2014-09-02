@@ -8,7 +8,7 @@ public class Spawner {
 		
 	}
 	
-	public void spawnNpc(Npc npc){
+	public static void spawnNpc(Npc npc){
 		Main.getGame().getNpc().add(npc);
 	}
 	

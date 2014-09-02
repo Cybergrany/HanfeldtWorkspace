@@ -34,7 +34,7 @@ public class Sound {
 			     clip.start();
 			}catch(Exception e) {
 				printErrorDebug("Failed to play sound! Stacktrace:");
-				e.printStackTrace();
+				printStackTraceDebug(e);
 			}
 		}
 	}

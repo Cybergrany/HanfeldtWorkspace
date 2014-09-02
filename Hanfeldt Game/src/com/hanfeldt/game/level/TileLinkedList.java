@@ -2,17 +2,30 @@ package com.hanfeldt.game.level;
 
 import java.util.LinkedList;
 
+import com.hanfeldt.game.tile.Tile;
+
 public class TileLinkedList<T> extends LinkedList<LinkedList<T>>{
 	private static final long serialVersionUID = -8280017693328004392L;
 	
-	public void addToInnerArray(int index, T element){
+	/**
+	 * Add a tile to the TileLinkedList
+	 * @param index Index where the tile is to be added
+	 * @param element Element to be added at index - must be of {@link Tile} type.
+	 */
+	public void addTile(int index, T element){
 		while(index >= this.size()){
 			this.add(new LinkedList<T>());
 		}
 		this.get(index).add(element);
 	}
 	
-	public void addToInnerArray(int index, int index2, T element){
+	/**
+	 * Add a tile to the TileLinkedList
+	 * @param index Location of tile on X axis.
+	 * @param index2 Location of tile on Y axis
+	 * @param element  Element to be added at index - must be of {@link Tile} type.
+	 */
+	public void addTile(int index, int index2, T element){
 		while(index >= this.size()){
 			this.add(new LinkedList<T>());
 		}
@@ -25,11 +38,11 @@ public class TileLinkedList<T> extends LinkedList<LinkedList<T>>{
 		inner.set(index2, element);
 	}
 	
-	public T getFromInnerArray(int index, int index2){
+	public T getTile(int index, int index2){
 		return this.get(index).get(index2);
 	}
 	
-	public int getInnerArraySize() {
+	public int getTileArraySize() {
 		if(get(0) == null) {
 			return 0;
 		}else{

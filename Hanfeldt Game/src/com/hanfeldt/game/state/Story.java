@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.npc.Bill;
-import com.hanfeldt.game.entity.npc.Billy;
+import com.hanfeldt.game.entity.npc.characters.Bill;
+import com.hanfeldt.game.entity.npc.characters.Billy;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.properties.PropertiesLoader;
@@ -37,7 +37,7 @@ public class Story extends Playing {
 		
 		level = 0;
 		Player p = main.getPlayer();
-		p.setX(Main.WIDTH /2);
+//		p.setX(Main.WIDTH /2);
 		p.setY(Main.HEIGHT - Main.TILE_SIZE * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
