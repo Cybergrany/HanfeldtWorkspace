@@ -18,14 +18,13 @@ public class NpcScript {
 	private Player player;
 	private Main main;
 	private static Dialogue dialogue;
-	private static int currentDialogue = 0, totalDialogues = 0;
+	private static int currentDialogue = 0;
 	private static int[] dialogueTriggerX;
-	private int currentLevel;
+	private static int currentLevel;
 	
 	public NpcScript(Main main, Player p){
 		this.main = main;
 		this.player = p;
-		currentLevel = Story.getCurrentLevel();
 	}
 	
 	public void tick(){
@@ -34,7 +33,7 @@ public class NpcScript {
 		}
 		try {
 			if(dialogue == null && player.getX() > dialogueTriggerX[currentDialogue]) {
-				dialogue = new Dialogue((currentLevel + 1) + "." + totalDialogues + ".txt");
+				dialogue = new Dialogue((currentLevel + 1) + "." + currentDialogue + ".txt");
 //				switch(totalDialogues) {
 //				case 1:
 //					player.setWeaponEquipped(new Pistol(player));
@@ -43,7 +42,6 @@ public class NpcScript {
 //					player.setWeaponEquipped(new M16(player));
 //				}
 				currentDialogue++;
-				totalDialogues++;
 			}
 		}catch(IOException e) {
 			System.err.println("Dialogue file not found for level " + currentLevel);
@@ -60,6 +58,7 @@ public class NpcScript {
 	
 	public static void resetDialogue(){
 		currentDialogue = 0;
+		currentLevel = Story.getCurrentLevel();//May as well put this here as this is called on level init
 	}
 	
 	public void draw(Graphics g){

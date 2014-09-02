@@ -83,10 +83,10 @@ public class PropertiesLoader {
 		//Location of NPC's
 		printDebug("Location of NPC's: " + p.getProperty("npcLocation"));
 		String[] temp =  p.getProperty("npcLocation").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
-		LevelLoader.currentLevelNpcLocation = new ArrayList<Integer>();
+		NpcList.currentLevelNpcLocation = new ArrayList<Integer>();
 		for(int i = 0; i <temp.length; i++){
 			try{
-				LevelLoader.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
+				NpcList.currentLevelNpcLocation.add(i, Integer.parseInt(temp[i]));
 			}catch(NumberFormatException nfe){
 				printErrorDebug("Oh shit your config file is fucked. Boo hoo");
 			}

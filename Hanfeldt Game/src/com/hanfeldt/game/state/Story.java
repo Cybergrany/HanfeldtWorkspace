@@ -30,13 +30,6 @@ public class Story extends Playing {
 		
 		//Load levels
 		LevelLoader.loadLevel(level);
-//		Level[] levels = new Level[2];
-//		levels[0] = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
-//		levels[1] = new LevelStory("/images/maps/levels/level2.png", main.getPlayer());
-
-		Level levels = new Level();
-		levels = new LevelStory("/images/maps/levels/level1.png", main.getPlayer());
-		main.setLevels(levels);
 		
 		level = 0;
 		Player p = main.getPlayer();
@@ -44,7 +37,7 @@ public class Story extends Playing {
 		p.setY(Main.HEIGHT - Main.TILE_SIZE * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
-		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
+//		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
 		script = new NpcScript(main, p);
 	}
 	
@@ -64,7 +57,7 @@ public class Story extends Playing {
 			}
 		}
 		if(lastLevel == 0 && level == 1) {
-			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
+//			main.getNpc().add(new Billy(Main.TILE_SIZE *40, Main.HEIGHT - (Main.TILE_SIZE *5)));
 			lastLevel = level;
 		}
 		if(NpcScript.getDialogue() == null) {

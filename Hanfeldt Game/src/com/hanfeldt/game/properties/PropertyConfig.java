@@ -21,9 +21,9 @@ public class PropertyConfig {
 
 	private static String filenameLevel = "level.conf";
 	
-	public static int level = 2; //The level to configure
+	public static int level = 1; //The level to configure
 	public static int bgAmount = 4;//How many layers of backgrounds this level has
-	public static String[]  npcList  = new String[] {"Billy"};//List of NPC's in this Level
+	public static String[]  npcList  = new String[] {"Bill"};//List of NPC's in this Level
 	public static String[] npcLocation = new String[] {"500", Integer.toString(Main.HEIGHT - (Main.TILE_SIZE*4))};//Where the NPC's are
 	public static String[] npcXTrigger = new String[] {"400"};//Where the NPC is triggered
 	public static String[] npcAction = new String[]{"give", "M16"};//What happens(Apart from Dialogue) when the NPC is triggered
@@ -77,6 +77,8 @@ public class PropertyConfig {
 		System.out.println("Write successful!");
 		
 		output.close();
+		
+		System.out.println("Closed successfully");
 	}
 
 }
