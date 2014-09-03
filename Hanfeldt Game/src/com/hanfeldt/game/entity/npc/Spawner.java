@@ -11,9 +11,4 @@ public class Spawner {
 	public static void spawnNpc(Npc npc){
 		Main.getGame().getNpc().add(npc);
 	}
-	
-	public void tick(){
-		
-	}
-	
 }

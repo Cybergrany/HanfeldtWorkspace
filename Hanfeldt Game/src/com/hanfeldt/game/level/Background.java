@@ -16,7 +16,6 @@ public class Background {
 		currentLevel = level + 1;
 //		layerAmount = Main.getGame().resourceManager.getImageResourcesInDir(levelPath(currentLevel));
 		layerAmount = LevelLoader.currentLevelBgAmount;
-		System.out.println("Amount of bgs loaded: " + layerAmount);
 		
 		layer = new BackgroundSheet[layerAmount];
 		

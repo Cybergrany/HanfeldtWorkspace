@@ -33,7 +33,6 @@ public class NpcList {
 				break;
 			}
 			currentCharacter+=2;
-			System.out.println(currentCharacter);
 		}
 	}
 }

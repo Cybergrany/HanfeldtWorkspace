@@ -91,7 +91,7 @@ public class NpcEvents {
 	}
 
 	public void idle(Npc npc, float moveSpeed) {
-		if (isOutsideScreen(npc) && Main.timer(120)) {
+		if (Main.timer(120)) {
 			boolean dir = new Random().nextBoolean();
 			npc.setDirection(dir);
 			if (dir) {

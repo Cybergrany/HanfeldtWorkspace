@@ -30,8 +30,6 @@ public class Npc extends EntityLiving {
 		super.tick();
 	}
 	
-	// The same draw method is in Entity so I removed it
-	
 	/**
 	 * Max amount of NPC's allowed.
 	 * Can be overridden etc(I believe)

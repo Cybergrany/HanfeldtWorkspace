@@ -6,6 +6,11 @@ public class CommandEvent {
 		
 	}
 	
+	/**
+	 * Checks a command and executes it if it matches the list of available commands
+	 * Please note that two word commands are only supported for the time being.
+	 * @param command
+	 */
 	public static void checkCommand(String command){
 		command = command.toLowerCase();
 		String[] commandAr = command.split("\\s+");

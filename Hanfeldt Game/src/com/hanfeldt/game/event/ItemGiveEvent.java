@@ -3,6 +3,7 @@ package com.hanfeldt.game.event;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.io.Debug;
 
 public class ItemGiveEvent {
 	
@@ -12,15 +13,14 @@ public class ItemGiveEvent {
 	
 	public static void checkGiveCommand(String command){
 		command.toLowerCase();
-		System.err.println(command);
 		switch(command){
 			case "pistol":
 				Main.getGame().getPlayer().setWeaponEquipped(new Pistol(Main.getGame().getPlayer()));
-				System.out.println("Pistol given");
+				Debug.printDebug("Pistol given to player.");
 				break;
 			case "m16":
 				Main.getGame().getPlayer().setWeaponEquipped(new M16(Main.getGame().getPlayer()));
-				System.out.println("m16 given");
+				Debug.printDebug("M16 given to player");
 				break;
 		}
 	}
