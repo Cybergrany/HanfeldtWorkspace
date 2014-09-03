@@ -5,15 +5,15 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
-import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.EntityLiving;
 
 public abstract class Weapon {
 	protected Sprite sprite;
-	protected Player player;
+	protected EntityLiving entity;
 	protected long totalTicks = 0;
 	
-	public Weapon(Player p, Sprite s) {
-		player = p;
+	public Weapon(EntityLiving e, Sprite s) {
+		entity = e;
 		sprite = s;
 	}
 	

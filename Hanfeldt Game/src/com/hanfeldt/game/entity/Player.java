@@ -8,7 +8,6 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.state.Playing;
-import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Sword;
 import com.hanfeldt.io.Listener;

@@ -49,8 +49,8 @@ public class Background {
 		return String.format("/images/maps/backgrounds/level%d/bg%d.png", levelNumber, layer);
 	}
 	
-	private String levelPath(int levelNumber){
-		return String.format("/images/maps/backgrounds/level%d/", levelNumber);
-	}
+//	private String levelPath(int levelNumber){
+//		return String.format("/images/maps/backgrounds/level%d/", levelNumber);
+//	}
 
 }

@@ -3,6 +3,7 @@ package com.hanfeldt.game.weapon;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.io.Sound;
 
@@ -22,7 +23,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	 * @param aifc Ammo in a full clip
 	 * @param tt Amount of time before the trigger can be pressed again.
 	 */
-	public AmmoWeapon(Player p, Sprite s, int aic, int ta, int aifc, int tt) {
+	public AmmoWeapon(EntityLiving p, Sprite s, int aic, int ta, int aifc, int tt) {
 		super(p, s, tt);
 		ammoInClip = aic;
 		totalAmmo = ta;

@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Sound;
@@ -19,19 +20,19 @@ public class M16 extends AmmoWeapon {
 	 * 
 	 * @param p A {@link Player} entity.
 	 */
-	public M16(Player p) {
+	public M16(EntityLiving p) {
 		super(p, new Sprite(Main.getSpritesheet(), 3, 4, 1, 1), 30, 180, 30, 10);
 		damage = Values.bullet_damage_M16;
 	}
 	
 	public void trigger() {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
-			if(!player.getDirection()) {
+			if(!entity.getDirection()) {
 				// facing left
-				Main.getGame().bullets.add(new Bullet(player.getX() - 5, player.getY() + Main.TILE_SIZE -2, damage));
+				Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage));
 			}else{
 				// facing right
-				Main.getGame().bullets.add(new Bullet(player.getX() + Main.TILE_SIZE + 5, player.getY() + Main.TILE_SIZE -2, damage));
+				Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage));
 			}
 			Sound.playSound("weapon/pistol_shoot.wav");
 			super.trigger();

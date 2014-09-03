@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
-import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;
 import com.hanfeldt.game.weapon.TriggerWeapon;
@@ -22,33 +22,33 @@ public class Sword extends TriggerWeapon {
 	 * Swashbuckling adventure awaits
 	 * @param p
 	 */
-	public Sword(Player p) {
+	public Sword(EntityLiving p) {
 		super(p, new Sprite(Main.getSpritesheet(), 3, 3, 1, 1), 20);
 	}
 	
 	public void draw(Graphics g) {//#Im14AndThisIsFunny <-- LELELEL /r/SubredditsAreHashtags
 		if(tickTriggered > 0) { // Penis out straight
-			if(!player.getDirection()) {
-				sprite.draw(g, (Main.WIDTH /2) - Main.TILE_SIZE -2, player.getY() + (Main.TILE_SIZE /2), player.getDirection());
+			if(!entity.getDirection()) {
+				sprite.draw(g, (Main.WIDTH /2) - Main.TILE_SIZE -2, entity.getY() + (Main.TILE_SIZE /2), entity.getDirection());
 			}else{
-				sprite.draw(g, (Main.WIDTH /2) +2, player.getY() + (Main.TILE_SIZE /2), player.getDirection());
+				sprite.draw(g, (Main.WIDTH /2) +2, entity.getY() + (Main.TILE_SIZE /2), entity.getDirection());
 			}
 		}else{// Hold penis upright LELEL
-			if(!player.getDirection()) {
-				idleSprite.draw(g, (Main.WIDTH /2) - 13, player.getY() + 2, player.getDirection());
+			if(!entity.getDirection()) {
+				idleSprite.draw(g, (Main.WIDTH /2) - 13, entity.getY() + 2, entity.getDirection());
 			}else{
-				idleSprite.draw(g, (Main.WIDTH /2) - 3, player.getY() +2, player.getDirection());
+				idleSprite.draw(g, (Main.WIDTH /2) - 3, entity.getY() +2, entity.getDirection());
 			}
 		}
 	}
 	
 	protected void trigger() {
 		ArrayList<Npc> npcs = Main.getGame().getNpc();
-		Rectangle hitBoxLeft = new Rectangle(player.getX() - range, player.getY(), range, range *2);
-		Rectangle hitBoxRight= new Rectangle(player.getX() + range, player.getY(), range, range *2);
+		Rectangle hitBoxLeft = new Rectangle(entity.getX() - range, entity.getY(), range, range *2);
+		Rectangle hitBoxRight= new Rectangle(entity.getX() + range, entity.getY(), range, range *2);
 		for(int i=0; i<npcs.size(); i++) {
 			NpcEvents e = npcs.get(i).getNpcvents();
-			if(!player.getDirection()) {
+			if(!entity.getDirection()) {
 				if(hitBoxLeft.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
 					Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y);
