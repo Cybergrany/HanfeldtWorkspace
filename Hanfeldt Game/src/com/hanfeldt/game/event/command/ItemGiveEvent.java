@@ -1,4 +1,4 @@
-package com.hanfeldt.game.event;
+package com.hanfeldt.game.event.command;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.weapon.weapons.M16;
@@ -12,7 +12,6 @@ public class ItemGiveEvent {
 	}
 	
 	public static void checkGiveCommand(String command){
-		command.toLowerCase();
 		switch(command){
 			case "pistol":
 				Main.getGame().getPlayer().setWeaponEquipped(new Pistol(Main.getGame().getPlayer()));

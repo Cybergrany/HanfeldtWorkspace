@@ -1,4 +1,4 @@
-package com.hanfeldt.game.event;
+package com.hanfeldt.game.event.command;
 
 public class CommandEvent {
 	
@@ -19,6 +19,9 @@ public class CommandEvent {
 		switch(command){
 			case "give":
 				ItemGiveEvent.checkGiveCommand(subcommand);
+				break;
+			case "set":
+				SetCommandEvent.checkSetCommand(subcommand);
 				break;
 		}
 	}

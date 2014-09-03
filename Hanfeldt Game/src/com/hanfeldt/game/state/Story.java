@@ -5,16 +5,9 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.npc.characters.Bill;
-import com.hanfeldt.game.entity.npc.characters.Billy;
-import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelLoader;
-import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.properties.PropertiesLoader;
-import com.hanfeldt.game.scripting.Dialogue;
 import com.hanfeldt.game.scripting.NpcScript;
-import com.hanfeldt.game.weapon.weapons.M16;
-import com.hanfeldt.game.weapon.weapons.Pistol;
 import com.hanfeldt.io.Debug;
 
 public class Story extends Playing {

@@ -5,8 +5,7 @@ import java.io.IOException;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.event.ItemGiveEvent;
-import com.hanfeldt.game.level.LevelLoader;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.state.Story;
 import com.hanfeldt.io.Debug;
 
@@ -23,7 +22,7 @@ public class NpcScript {
 	private static int currentDialogue = 0;
 	private static int[] dialogueTriggerX;
 	private static int currentLevel;
-	private static String[] actions;
+//	private static String[] actions;
 	
 	public NpcScript(Main main, Player p){
 		this.main = main;
@@ -67,15 +66,19 @@ public class NpcScript {
 	public static void setNpcTriggersAndActions(int[] triggers, String[] action){
 		dialogueTriggerX = new int[triggers.length];
 		dialogueTriggerX = triggers;
-		actions = action;
+//		actions = action;
 	}
 	
-	private void checkTriggerAction(){
-		int i = currentDialogue;
-		switch(actions[i]){
-			case "give" :
-				ItemGiveEvent.checkGiveCommand(actions[i + 1]);
-				break;
-		}
-	}
+//	public static Npc getCurrentTriggeredNpc(){
+//		
+//	}
+	
+//	private void checkTriggerAction(){
+//		int i = currentDialogue;
+//		switch(actions[i]){
+//			case "give" :
+//				ItemGiveEvent.checkGiveCommand(actions[i + 1]);
+//				break;
+//		}
+//	}
 }

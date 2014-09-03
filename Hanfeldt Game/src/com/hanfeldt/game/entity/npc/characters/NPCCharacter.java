@@ -18,7 +18,7 @@ public class NPCCharacter extends Npc{
 	
 	private Weapon weaponEquipped;
 
-	public  float speed = 0.25f;
+	public  float speed = 0.35f;
 	
 	boolean followingPlayer = false;
 
@@ -37,8 +37,10 @@ public class NPCCharacter extends Npc{
 		if(Main.timer(60)){
 			if(isCollidingWithHorizTile() && !getFalling()){
 				jump();
+				isCollidingWithHorizTile = false;
+			}else{
+				facePlayer(speed);
 			}
-			facePlayer(speed);
 		}
 	}
 	

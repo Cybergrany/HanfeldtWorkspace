@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.event.CommandEvent;
+import com.hanfeldt.game.event.command.CommandEvent;
 
 public class Dialogue {
 	private static BufferedImage dialogueBox;

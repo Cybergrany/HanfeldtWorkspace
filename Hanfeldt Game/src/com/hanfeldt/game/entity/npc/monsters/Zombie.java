@@ -26,12 +26,11 @@ public class Zombie extends Npc {
 		if(Main.timer(60)){//Checks if zombie needs to jump more often so they don't stay still as much
 			if(isCollidingWithHorizTile() && !getFalling()){
 				jump();
-				if(events.isOutsideScreen(this)){
-					events.idle(this, speed);
-				}else{
-					facePlayer(speed);//Forward momentum towards player
-				}
 				isCollidingWithHorizTile = false;
+			}if(events.isOutsideScreen(this)){
+				events.idle(this, speed);
+			}else{
+				facePlayer(speed);//Forward momentum towards player
 			}
 		}
 		events.tick();

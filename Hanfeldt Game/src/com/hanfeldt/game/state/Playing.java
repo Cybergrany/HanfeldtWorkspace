@@ -1,6 +1,7 @@
 package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
@@ -8,6 +9,7 @@ import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -61,6 +63,37 @@ public abstract class Playing extends State {
 		}
 		for(Npc n :  main.getNpc()){
 			camera.renderEntityLiving(g,n);
+		}
+		ArrayList<Npc> npc = Main.getGame().getNpc();
+		for(int i = 0; i < npc.size(); i++){
+			if(npc.get(i) instanceof NPCCharacter){
+				NPCCharacter npcChar = (NPCCharacter) npc.get(i);
+				if(npcChar.getWeaponEquipped() != null){
+					if(npcChar.getWeaponEquipped() instanceof Sword) {
+						Sword tw = (Sword) (npcChar.getWeaponEquipped());
+						if(tw.isTriggered()) {
+							if(npcChar.getDirection()) {
+								camera.renderSprite(g, npcChar.getWeaponEquipped().getReverseSprite(), npcChar.getX() - 10, npcChar.getY() +Main.TILE_SIZE /2);
+							}else{
+								camera.renderSprite(g, tw.getSprite(), npcChar.getX() +10, npcChar.getY() +Main.TILE_SIZE /2);
+							}
+						}else{
+							if(npcChar.getDirection()) {
+								//Keeping this cause the way they hold it looks kinda cool
+								camera.renderSprite(g, tw.getNotTriggeredSprite(), npcChar.getX() +5, npcChar.getY() +2);
+							}else{
+								camera.renderSprite(g, tw.getNotTriggeredSprite(), npcChar.getX() -5, npcChar.getY() +2);
+							}
+						}
+					}else{
+						if(npcChar.getDirection()) {
+							camera.renderSprite(g, npcChar.getWeaponEquipped().getReverseSprite(), npcChar.getX() - 10, npcChar.getY() +Main.TILE_SIZE /2);
+						}else{
+							camera.renderSprite(g, npcChar.getWeaponEquipped().getSprite(), npcChar.getX() +10, npcChar.getY() +Main.TILE_SIZE /2);
+						}
+					}
+				}
+			}
 		}
 		Player p = main.getPlayer();
 		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
