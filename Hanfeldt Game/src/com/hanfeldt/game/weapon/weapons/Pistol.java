@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.BulletNpcFired;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
@@ -28,10 +29,18 @@ public class Pistol extends AmmoWeapon {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
 			if(!entity.getDirection()) {
 				// facing left
-				Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage));
+				if(entity instanceof Player){
+					Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage));
+				}else{
+					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX(), entity.getAimY(), entity));
+				}
 			}else{
 				// facing right
-				Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage));
+				if(entity instanceof Player){
+					Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage));
+				}else{
+					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX(), entity.getAimY(), entity));
+				}
 			}
 			Sound.playSound("weapon/pistol_shoot.wav");
 			super.trigger();

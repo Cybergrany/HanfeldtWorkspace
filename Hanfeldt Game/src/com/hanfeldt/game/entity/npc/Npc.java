@@ -56,4 +56,8 @@ public class Npc extends EntityLiving {
 		return spawnLocation;
 	}
 	
+	public NpcEvents getEvents(){
+		return events;
+	}
+	
 }

@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
-import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Tile;
 
 public class EntityLiving extends Entity {
@@ -19,6 +18,8 @@ public class EntityLiving extends Entity {
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
 	protected boolean isCollidingWithHorizTile=false;
+	
+	int aimX, aimY;
 	
 	public EntityLiving(Sprite s, int h, int x, int y) {
 		super(x, y);
@@ -166,6 +167,22 @@ public class EntityLiving extends Entity {
 	
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	public int getAimX(){
+		return aimX;
+	}
+	
+	public void setAimX(int aX){
+		aimX = aX;
+	}
+	
+	public int getAimY(){
+		return aimY;
+	}
+	
+	public void setAimY(int aY){
+		aimY = aY;
 	}
 	
 	public Sprite getReverseSprite() {

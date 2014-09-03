@@ -65,4 +65,12 @@ public class Bullet extends Entity {
 		return damageValue;
 	}
 	
+	public float getAngle(){
+		return angle;
+	}
+	
+	public void setAngle(float angel){
+		angle = angel;//O sweet gabe(rial)
+	}
+	
 }

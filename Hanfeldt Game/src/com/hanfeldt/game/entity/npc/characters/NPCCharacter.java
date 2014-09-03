@@ -1,5 +1,7 @@
 package com.hanfeldt.game.entity.npc.characters;
 
+import java.util.ArrayList;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Npc;
@@ -18,9 +20,9 @@ public class NPCCharacter extends Npc{
 	
 	private Weapon weaponEquipped;
 
-	public  float speed = 0.35f;
+	public  float speed = 0.35f;//Fuckin' nyooom
 	
-	boolean followingPlayer = false;
+	private boolean followingPlayer = false;
 
 	public NPCCharacter(Sprite s, int h, int x, int y) {
 		super(s, h, x, y);
@@ -40,19 +42,33 @@ public class NPCCharacter extends Npc{
 				isCollidingWithHorizTile = false;
 			}else{
 				facePlayer(speed);
+				aim();
+			}
+		}
+	}
+	
+	/**
+	 * Aims at baddies
+	 */
+	public void aim(){
+		ArrayList<Npc> npc1 = Main.getGame().getNpc();
+		int closestXf = 0, closestXc = 0;
+		for(int i = 0; i < npc1.size(); i++){
+			Npc npc = npc1.get(i);
+			if(!(npc instanceof NPCCharacter))
+			if(!npc.getEvents().isOutsideMap(npc)){
+				if(!direction){//Facing left
+					if(closestXf <= 0 || closestXf < getX() - npc.getX() && getX() - npc.getX() > 0){
+						closestXf =  getX() - npc.getX();
+						System.out.println(closestXf);
+					}
+				}
 			}
 		}
 	}
 	
 	public void setFollowingPlayer(boolean following){
 		followingPlayer = following;
-	}
-	
-	public void pickupWeapon(Weapon weapon) throws InstantiationException, IllegalAccessException{
-		//Sigh I need a better way to do this.....
-		if(weapon instanceof Sword){
-			weaponEquipped = new Sword(this);
-		}
 	}
 	
 	public Weapon getWeaponEquipped() {

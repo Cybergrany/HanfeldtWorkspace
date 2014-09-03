@@ -64,6 +64,7 @@ public abstract class Playing extends State {
 		for(Npc n :  main.getNpc()){
 			camera.renderEntityLiving(g,n);
 		}
+		//TODO: I'm thinking this is kind of inefficient... I've left it, because FPS seems good..
 		ArrayList<Npc> npc = Main.getGame().getNpc();
 		for(int i = 0; i < npc.size(); i++){
 			if(npc.get(i) instanceof NPCCharacter){
