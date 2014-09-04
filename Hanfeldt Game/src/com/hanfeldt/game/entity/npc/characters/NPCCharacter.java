@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Sword;
 
@@ -21,8 +22,8 @@ public class NPCCharacter extends Npc{
 	private Weapon weaponEquipped;
 
 	public  float speed = 0.35f;//Fuckin' nyooom
-	
 	private boolean followingPlayer = false;
+	private int aimAccuracy = 100;
 
 	public NPCCharacter(Sprite s, int h, int x, int y) {
 		super(s, h, x, y);
@@ -52,19 +53,42 @@ public class NPCCharacter extends Npc{
 	 */
 	public void aim(){
 		ArrayList<Npc> npc1 = Main.getGame().getNpc();
-		int closestXf = 0, closestXc = 0;
+		int closestXl = 0, closestXr = 0;
 		for(int i = 0; i < npc1.size(); i++){
 			Npc npc = npc1.get(i);
 			if(!(npc instanceof NPCCharacter))
 			if(!npc.getEvents().isOutsideMap(npc)){
-				if(!direction){//Facing left
-					if(closestXf <= 0 || closestXf < getX() - npc.getX() && getX() - npc.getX() > 0){
-						closestXf =  getX() - npc.getX();
-						System.out.println(closestXf);
+				if(direction){//Facing left
+					if(closestXl < getX() - npc.getX() || closestXl == 0){
+						closestXl =  getX() - npc.getX();
+						if(closestXl > 0){
+							setAimX(npc.getX());
+							setAimY(npc.getY() - 2);
+//							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
+							if(weaponEquipped instanceof TriggerWeapon){
+								((TriggerWeapon) weaponEquipped).tryTrigger();
+							}
+						}
+					}
+				}else{//Facing right
+					if(closestXr < npc.getX() - getX() || closestXr == 0){
+						closestXr =  getX() - npc.getX();
+						if(closestXr > 0){
+							setAimX(npc.getX());
+							setAimY(npc.getY());
+//							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
+							if(weaponEquipped instanceof TriggerWeapon){
+								((TriggerWeapon) weaponEquipped).tryTrigger();
+							}
+						}
 					}
 				}
 			}
 		}
+	}
+	
+	public void setAimAccuracy(int acc){
+		aimAccuracy = acc;
 	}
 	
 	public void setFollowingPlayer(boolean following){
