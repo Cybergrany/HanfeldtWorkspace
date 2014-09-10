@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;
@@ -23,7 +24,7 @@ public class Sword extends TriggerWeapon {
 	 * @param p
 	 */
 	public Sword(EntityLiving p) {
-		super(p, new Sprite(Main.getSpritesheet(), 3, 3, 1, 1), 20);
+		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 0, 1, 1), 20);
 	}
 	
 	public void draw(Graphics g) {//#Im14AndThisIsFunny <-- LELELEL /r/SubredditsAreHashtags

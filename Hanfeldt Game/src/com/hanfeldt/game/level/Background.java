@@ -8,11 +8,11 @@ public class Background {
 	public int layerAmount;//The amount of layers in use in this level. 
 	
 	private BackgroundSheet[] layer;
-	private Sky sky;
+//	private Sky sky;
 	private int currentLevel;
 	
 	public Background(int level){
-		sky = new Sky();
+//		sky = new Sky();
 		currentLevel = level + 1;
 //		layerAmount = Main.getGame().resourceManager.getImageResourcesInDir(levelPath(currentLevel));
 		layerAmount = LevelLoader.currentLevelBgAmount;
@@ -25,11 +25,11 @@ public class Background {
 	}
 	
 	public void tick(){
-		sky.tick();
+//		sky.tick();
 	}
 	
 	public void draw(Graphics g){
-		sky.draw(g);
+//		sky.draw(g);
 		for(int i = 0; i < layer.length; i++){
 			layer[i].draw(g, viewModifier(i), 0);
 		}

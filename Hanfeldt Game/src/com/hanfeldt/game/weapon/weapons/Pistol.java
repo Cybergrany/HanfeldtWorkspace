@@ -3,6 +3,7 @@ package com.hanfeldt.game.weapon.weapons;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.BulletNpcFired;
 import com.hanfeldt.game.entity.EntityLiving;
@@ -21,7 +22,7 @@ public class Pistol extends AmmoWeapon {
 	 * @param ta
 	 */
 	public Pistol(EntityLiving p) {
-		super(p, new Sprite(Main.getSpritesheet(), 0, 4, 1, 1), 8, 64, 8, 10);
+		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 1, 1, 1), 8, 64, 8, 10);
 		damage = Values.bullet_damage_pistol;
 	}
 	

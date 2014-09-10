@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.Player;
 
@@ -13,7 +14,7 @@ public class Shop extends Tile{
 	
 	public Shop(int x, int y){
 		super(x, y);
-		setSprite((new Sprite(Main.spriteSheet, 0, 7, 2, 1)));
+		setSprite((new Sprite(SpriteSheet.getSheet(SpriteSheet.block), 1, 3, 2, 1)));
 	}
 	
 	public void onCollidedEntity(Entity e){

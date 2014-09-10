@@ -17,7 +17,7 @@ An index of 0 is furthest away (bg0.png looks like it's furthest away from the p
 
 0xffFFFF00(Yellow) = RoofLamp
 
-0xffB200FF(Magneta) = SupportedRoad
-0xffB20084(Dark Magneta) = SupportedRoadBase
-0xffFFFF8C(Bright Yellow) = SupportedRoadBaseElevated
+0xffB200FF(Magneta) = RoadSurface
+0xffB20084(Dark Magneta) = RoadBase
+0xffFFFF8C(Bright Yellow) = NONE
 0xff559F74(Puke Green) = CementCoreModern

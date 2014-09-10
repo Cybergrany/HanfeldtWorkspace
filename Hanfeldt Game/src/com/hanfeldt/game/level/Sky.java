@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 
+@Deprecated
 public class Sky{
 	
 	private Sprite cloud, sun;

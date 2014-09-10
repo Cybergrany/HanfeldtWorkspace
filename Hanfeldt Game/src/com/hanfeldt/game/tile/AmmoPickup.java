@@ -3,6 +3,7 @@ package com.hanfeldt.game.tile;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
@@ -13,7 +14,7 @@ public class AmmoPickup extends Tile{
 	
 	public AmmoPickup(int x, int y) {
 		super(x, y);
-		setSprite(new Sprite(Main.spriteSheet, 2, 5, 1, 1));
+		setSprite(new Sprite(SpriteSheet.getSheet(SpriteSheet.block), 0, 1, 1, 1));
 	}
 	
 	public void onCollidedEntity(Entity e) {

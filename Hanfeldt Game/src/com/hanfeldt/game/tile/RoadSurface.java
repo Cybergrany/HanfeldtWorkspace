@@ -1,12 +1,12 @@
 package com.hanfeldt.game.tile;
 
-import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 
-public class SupportedRoad extends Tile{
-	public SupportedRoad(int x, int y){
+public class RoadSurface extends Tile{
+	public RoadSurface(int x, int y){
 		super(x, y);
-		setSprite(new Sprite(Main.spriteSheet,  3, 5, 1, 1));
+		setSprite(new Sprite(SpriteSheet.getSheet(SpriteSheet.block),  0, 2, 1, 1));
 	}
 	
 	public boolean isSolid(){

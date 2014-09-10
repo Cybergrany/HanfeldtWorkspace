@@ -1,12 +1,12 @@
 package com.hanfeldt.game.tile;
 
-import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 
 public class CementFloor extends Tile{
 	public CementFloor(int x, int y){
 		super(x, y);
-		setSprite(new Sprite(Main.spriteSheet,  1, 5, 1, 1));
+		setSprite(new Sprite(SpriteSheet.getSheet(SpriteSheet.block),  1, 0, 1, 1));
 	}
 	
 	public boolean isSolid(){

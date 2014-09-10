@@ -3,6 +3,7 @@ package com.hanfeldt.game.weapon.weapons;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
@@ -21,7 +22,7 @@ public class M16 extends AmmoWeapon {
 	 * @param p A {@link Player} entity.
 	 */
 	public M16(EntityLiving p) {
-		super(p, new Sprite(Main.getSpritesheet(), 3, 4, 1, 1), 30, 180, 30, 10);
+		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 2, 1, 1), 30, 180, 30, 10);
 		damage = Values.bullet_damage_M16;
 	}
 	

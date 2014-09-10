@@ -16,10 +16,9 @@ import com.hanfeldt.game.tile.CementCore;
 import com.hanfeldt.game.tile.CementCoreModern;
 import com.hanfeldt.game.tile.CementFloor;
 import com.hanfeldt.game.tile.CementRoof;
+import com.hanfeldt.game.tile.RoadBase;
+import com.hanfeldt.game.tile.RoadSurface;
 import com.hanfeldt.game.tile.RoofLamp;
-import com.hanfeldt.game.tile.SupportedRoad;
-import com.hanfeldt.game.tile.SupportedRoadBase;
-import com.hanfeldt.game.tile.SupportedRoadBaseElevated;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
 
@@ -84,13 +83,13 @@ public class LevelStory extends Level {
 					tiles.addTile(x, y, new CementBack(x, y));
 					break;
 				case 0xffB200FF:
-					tiles.addTile(x, y, new SupportedRoad(x, y));
+					tiles.addTile(x, y, new RoadSurface(x, y));
 					break;
 				case 0xffB20084:
-					tiles.addTile(x, y, new SupportedRoadBase(x, y));
+					tiles.addTile(x, y, new RoadBase(x, y));
 					break;
 				case 0xffFFFF8C:
-					tiles.addTile(x, y, new SupportedRoadBaseElevated(x, y));
+					tiles.addTile(x, y, new RoadBase(x, y));//TODO Nothing here atm
 					break;
 				case 0xff559F74:
 					tiles.addTile(x, y, new CementCoreModern(x, y));
