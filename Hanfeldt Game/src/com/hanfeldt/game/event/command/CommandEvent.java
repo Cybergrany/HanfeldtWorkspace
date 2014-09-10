@@ -23,6 +23,8 @@ public class CommandEvent {
 			case "set":
 				SetCommandEvent.checkSetCommand(subcommand);
 				break;
+			case "spawn":
+				SpawnCommandEvent.checkSpawnCommand(subcommand);
 		}
 	}
 }

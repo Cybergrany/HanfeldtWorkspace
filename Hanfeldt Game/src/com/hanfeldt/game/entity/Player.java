@@ -137,30 +137,31 @@ public class Player extends EntityLiving {
 		}
 		
 		//Bitta sprinting
-				if(listener.shiftDown && (listener.wDown || listener.dDown)){
-					if(!tired)
-					velXMax = 2f;
-					if(!tired && Main.timer(4)){
-						stamina--;
-					}
-					if(stamina <= - 10){
-						tired = true;
-						velXMax = 1f;
-					}
-				}else{
-					velXMax = 1f;
-					if(stamina < 69 && Main.timer(100)){
-						stamina++;
-						if(stamina > 10){
-							tired = false;
-						}
-					}
+		if(!Main.debugCheats)
+		if(listener.shiftDown && (listener.wDown || listener.dDown)){
+			if(!tired)
+			velXMax = 2f;
+			if(!tired && Main.timer(4)){
+				stamina--;
+			}
+			if(stamina <= - 10){
+				tired = true;
+				velXMax = 1f;
+			}
+		}else{
+			velXMax = 1f;
+			if(stamina < 69 && Main.timer(100)){
+				stamina++;
+				if(stamina > 10){
+					tired = false;
 				}
-				
-				//stamina recovers twice as fast when not moving
-				if(stamina < 69 && !isMovingLeft && !isMovingRight && Main.timer(50)){
-					stamina++;
-				}
+			}
+		}
+		
+		//stamina recovers twice as fast when not moving
+		if(stamina < 69 && !isMovingLeft && !isMovingRight && Main.timer(50)){
+			stamina++;
+		}
 		
 	}
 	

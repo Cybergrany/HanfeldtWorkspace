@@ -67,7 +67,9 @@ public class Sprite {
 	}
 	
 	public int getWalkingAnimsLength() {
+		if(walkingAnims != null)
 		return walkingAnims.length;
+		return 0;
 	}
 	
 	public int getTileWidth() {

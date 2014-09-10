@@ -14,6 +14,7 @@ import com.hanfeldt.game.display.Hud;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
@@ -38,7 +39,7 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
-	public static boolean debugCheats = false;
+	public static boolean debugCheats = true;
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public PropertiesLoader resourceManager;
@@ -50,6 +51,7 @@ public class Main implements Runnable {
 	private long totalTicks = 0;
 	
 	public ArrayList<Npc> npc;
+	public ArrayList<EntityItem> items;
 	
 	private static Sprite character;
 	private static Main game;
@@ -123,6 +125,7 @@ public class Main implements Runnable {
 		hud = new Hud(player, character);
 		
 		npc = new ArrayList<Npc>();
+		items = new ArrayList<EntityItem>();
 		
 		// Start "GameLoop"
 		running = true;
@@ -264,6 +267,10 @@ public class Main implements Runnable {
 	
 	public ArrayList<Npc> getNpc() {
 		return npc;
+	}
+	
+	public ArrayList<EntityItem> getItems(){
+		return items;
 	}
 	
 	public Sprite getCharacter() {

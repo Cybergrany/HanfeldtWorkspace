@@ -7,9 +7,9 @@ import java.util.Random;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityLiving;
+import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
 import com.hanfeldt.game.tile.Tile;
 
 public class Camera {
@@ -42,6 +42,14 @@ public class Camera {
 			x += rand.nextInt(5) -2;
 			y += rand.nextInt(3) -1;
 			shakingTicks--;
+		}
+	}
+	
+	public void renderEntityItem(Graphics g, EntityItem e){
+		if(e.getDirection()){
+			renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
+		}else{
+			renderSprite(g, e.getSprite(), e.getX(), e.getY());
 		}
 	}
 	

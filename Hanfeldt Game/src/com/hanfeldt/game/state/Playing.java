@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
@@ -37,6 +38,9 @@ public abstract class Playing extends State {
 		for(int i=0; i<main.getNpc().size(); i++) {
 			main.getNpc().get(i).tick();
 		}
+		for(int i = 0; i < main.getItems().size(); i++){
+			main.getItems().get(i).tick();
+		}
 		main.getPlayer().tick();
 		camera.tick();
 		Weapon wep = main.getPlayer().getWeaponEquipped();
@@ -64,6 +68,10 @@ public abstract class Playing extends State {
 		for(Npc n :  main.getNpc()){
 			camera.renderEntityLiving(g,n);
 		}
+		for(EntityItem ei : main.getItems()){
+			camera.renderEntityItem(g, ei);
+		}
+		
 		//TODO: I'm thinking this is kind of inefficient... I've left it, because FPS seems good..
 		ArrayList<Npc> npc = Main.getGame().getNpc();
 		for(int i = 0; i < npc.size(); i++){

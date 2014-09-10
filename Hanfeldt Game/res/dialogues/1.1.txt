@@ -3,6 +3,7 @@
 *Bill hands you a pistol*
 /give pistol
 /set npc_following
+/spawn sword
 <Bill> Here, I may as well follow you now as well,
 seeing as the dev coded that in.
 <You> Whoah, thank you!
