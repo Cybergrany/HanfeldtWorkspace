@@ -19,6 +19,7 @@ import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.level.Level;
+import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.state.Dead;
 import com.hanfeldt.game.state.Playing;
@@ -39,7 +40,7 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
-	public static boolean debugCheats = true;
+	public static boolean debugCheats = false;
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public PropertiesLoader resourceManager;
@@ -53,7 +54,6 @@ public class Main implements Runnable {
 	public ArrayList<Npc> npc;
 	public ArrayList<EntityItem> items;
 	
-	private static Sprite character;
 	private static Main game;
 	private Player player;
 	private Level levels;
@@ -114,15 +114,18 @@ public class Main implements Runnable {
 	}
 
 	public void init() {
+		LevelLoader.initLevel();
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
-		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
+		SpriteSheet playerSheet = SpriteSheet.getSheet(SpriteSheet.player);
+//		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
+
+		Sprite playerSprite = new Sprite(playerSheet, 0, 0, 1, 2, 3);
 		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);
 		
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
 		resourceManager = new PropertiesLoader();
-		character = new Sprite(Main.spriteSheet, 1, 3, 1, 1);
-		hud = new Hud(player, character);
+		hud = new Hud(player);
 		
 		npc = new ArrayList<Npc>();
 		items = new ArrayList<EntityItem>();
@@ -271,10 +274,6 @@ public class Main implements Runnable {
 	
 	public ArrayList<EntityItem> getItems(){
 		return items;
-	}
-	
-	public Sprite getCharacter() {
-		return character;
 	}
 	
 	public void setState(State s) {

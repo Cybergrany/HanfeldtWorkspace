@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
-import com.hanfeldt.game.tile.Tile;
 
 public class EntityLiving extends Entity {
 	public static final int ticksPerAnimChange = 4;

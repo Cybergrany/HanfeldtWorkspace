@@ -24,7 +24,7 @@ public class ResourceManager {
 		
 		if(method != null){
 			try{
-				method.invoke(classObject, args);
+				method.invoke(classObject, args[0]);
 			} catch (IllegalArgumentException e) {
 				System.err.println("IllegalArgumentException when calling method " + methodName);
 				Debug.printStackTraceDebug(e);
@@ -44,6 +44,7 @@ public class ResourceManager {
 //		getClassFromString(className).;
 //	}
 	
+	@SuppressWarnings("rawtypes")
 	public static Class getClassFromString(String className){
 		try {
 			return Class.forName(className);

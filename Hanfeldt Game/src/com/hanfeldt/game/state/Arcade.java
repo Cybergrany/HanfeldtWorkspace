@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelArcade;
 
 public class Arcade extends Playing {

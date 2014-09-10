@@ -39,8 +39,6 @@ public class LevelArcade extends Level {
 		tiles = new TileLinkedList<Tile>();
 		tiles.addTile(sizeX, sizeY, null);
 		
-		spawner = new Spawner();
-		
 		//Set all blocks to air
 		for(int i=0; i<sizeY; i++) {
 			for(int j=0; j<sizeX; j++) {
@@ -155,7 +153,7 @@ public class LevelArcade extends Level {
 			for(int x = 0; x < sizeX; x++){
 				if(tiles.getTile(x, y) instanceof ZombieSpawner)
 				for(int i2 = 0; i2 < new Random().nextInt(Zombie.getMaxNpc() + difficulty); i2++) {
-					spawner.spawnNpc(new Zombie(Main.TILE_SIZE * x + (i2*30), Main.TILE_SIZE * y - 40));
+					Spawner.spawnNpc(new Zombie(Main.TILE_SIZE * x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
 			}
 		}
@@ -273,7 +271,7 @@ public class LevelArcade extends Level {
 				if(tiles.getTile(x, y) instanceof ZombieSpawner)
 				for(int i2 = 0; i2 < new Random().nextInt(Zombie.getMaxNpc() + difficulty); i2++) {
 					if(!spawnedFromSpawner(x, y))
-					spawner.spawnNpc(new Zombie(Main.TILE_SIZE * x + (i2*30), Main.TILE_SIZE * y - 40));
+					Spawner.spawnNpc(new Zombie(Main.TILE_SIZE * x + (i2*30), Main.TILE_SIZE * y - 40));
 				}
 			}
 		}

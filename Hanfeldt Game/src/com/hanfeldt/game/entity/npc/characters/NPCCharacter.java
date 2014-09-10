@@ -92,6 +92,10 @@ public class NPCCharacter extends Npc{
 		aimAccuracy = acc;
 	}
 	
+	public int getAimAccuracy(){
+		return aimAccuracy;
+	}
+	
 	public void setFollowingPlayer(boolean following){
 		followingPlayer = following;
 	}

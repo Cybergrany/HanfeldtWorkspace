@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
@@ -23,7 +22,6 @@ import com.hanfeldt.game.tile.SupportedRoadBase;
 import com.hanfeldt.game.tile.SupportedRoadBaseElevated;
 import com.hanfeldt.game.tile.Tile;
 import com.hanfeldt.game.tile.ZombieSpawner;
-import com.hanfeldt.io.ResourceManager;
 
 public class LevelStory extends Level {
 	/*

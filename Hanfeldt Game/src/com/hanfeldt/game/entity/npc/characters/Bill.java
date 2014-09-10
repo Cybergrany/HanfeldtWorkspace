@@ -1,7 +1,7 @@
 package com.hanfeldt.game.entity.npc.characters;
 
-import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 
 /**
@@ -12,7 +12,7 @@ import com.hanfeldt.game.weapon.weapons.Pistol;
 public class Bill extends NPCCharacter {
 
 	public Bill(int x, int y) {
-		super(new Sprite(Main.getSpritesheet(), 6, 0, 1, 2, 3), 100, x, y);
+		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.character), 0, 0, 1, 2, 3), 100, x, y);
 		setHealth(50);//Weak-ass puny human
 		setWeaponEquipped(new Pistol(this));
 		setVelXMax(speed);

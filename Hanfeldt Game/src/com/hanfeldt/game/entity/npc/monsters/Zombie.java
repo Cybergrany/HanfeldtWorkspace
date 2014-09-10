@@ -3,12 +3,13 @@ package com.hanfeldt.game.entity.npc.monsters;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.npc.Npc;
 
 public class Zombie extends Npc {
 	private float speed = 0.25f;
 //	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);
-	private static Sprite s = new Sprite(Main.spriteSheet, 6, 4, 1 , 2, 3);
+	private static Sprite s = new Sprite(SpriteSheet.getSheet(SpriteSheet.monster), 0, 0, 1 , 2, 3);
 	
 	
 	public static int maxHealth = Values.zombie_max_health;

@@ -24,10 +24,10 @@ public class Hud {
 	private Font font = new Font("Arial", Font.PLAIN, 9);
 	private ImageIcon focusNagger1, focusNagger2;
 	
-	public Hud(Player player, Sprite character){
-		heart = new Sprite(Main.spriteSheet, 3, 0, 1, 1);
-		this.character = character;
-		deadCharacter = new Sprite(Main.spriteSheet, 4, 0, 1, 1);
+	public Hud(Player player){
+		heart = new Sprite(SpriteSheet.getSheet(SpriteSheet.misc), 0, 0, 1, 1);
+		character = new Sprite(SpriteSheet.getSheet(SpriteSheet.misc), 2, 0, 1, 1);
+		deadCharacter = new Sprite(SpriteSheet.getSheet(SpriteSheet.misc), 1, 0, 1, 1);
 		pistol = new Sprite(Main.getSpritesheet(), 0, 4, 1, 1);
 //		ammo = new Sprite(Main.getSpritesheet(), 1, 4, 1, 1);
 		this.player = player;
@@ -128,6 +128,10 @@ public class Hud {
 	
 	public void setHasFocus(boolean hf) {
 		hasFocus = hf;
+	}
+	
+	public Sprite getCharacterHead(){
+		return character;
 	}
 	
 }

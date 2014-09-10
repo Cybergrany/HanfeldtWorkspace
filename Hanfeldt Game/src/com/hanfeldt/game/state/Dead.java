@@ -30,7 +30,7 @@ public class Dead extends State {
 		g.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
 		
 		if(!Main.gameOver){
-			main.getCharacter().draw(g, Main.WIDTH /2 - (Main.TILE_SIZE *2), (Main.HEIGHT /2) - 60);
+			main.getHud().getCharacterHead().draw(g, Main.WIDTH /2 - (Main.TILE_SIZE *2), (Main.HEIGHT /2) - 60);
 			Font font = new Font("Arial", Font.PLAIN, 10);
 			g.setFont(font);
 			g.setColor(new Color(255, 255, 255));
