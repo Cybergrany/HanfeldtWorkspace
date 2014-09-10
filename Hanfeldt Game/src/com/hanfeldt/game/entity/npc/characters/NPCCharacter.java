@@ -7,7 +7,6 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.Sword;
 
 /**
  * Class for NPC characters, which will (when finished) contain code to allow NPC's to interact
@@ -31,6 +30,8 @@ public class NPCCharacter extends Npc{
 	
 	public void tick(){
 		super.tick();
+		if(sprite.getWalkingAnimsLength() > 0)
+		tickWalking();
 		if(followingPlayer){
 			followPlayer();
 		}
@@ -59,7 +60,7 @@ public class NPCCharacter extends Npc{
 			if(!(npc instanceof NPCCharacter))
 			if(!npc.getEvents().isOutsideMap(npc)){
 				if(direction){//Facing left
-					if(closestXl < getX() - npc.getX() || closestXl == 0){
+					if(closestXl < getX() - npc.getX() + getX() || closestXl == 0){
 						closestXl =  getX() - npc.getX();
 						if(closestXl > 0){
 							setAimX(npc.getX());
@@ -75,7 +76,7 @@ public class NPCCharacter extends Npc{
 						closestXr =  getX() - npc.getX();
 						if(closestXr > 0){
 							setAimX(npc.getX());
-							setAimY(npc.getY());
+							setAimY(npc.getY() - 2);
 //							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
 							if(weaponEquipped instanceof TriggerWeapon){
 								((TriggerWeapon) weaponEquipped).tryTrigger();

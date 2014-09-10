@@ -9,6 +9,8 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.tile.Tile;
 
 public class EntityLiving extends Entity {
+	public static final int ticksPerAnimChange = 4;
+	private BufferedImage walkingImage;
 	private int health;
 	private float jumpHeight;
 	private int sizeX, sizeY;
@@ -135,6 +137,25 @@ public class EntityLiving extends Entity {
 		
 	}
 	
+	public void tickWalking(){
+		walkingImage = sprite.getWalkingImage(!direction, currentCycle);
+		if(cycleTicks >= ticksPerAnimChange) {
+			if(currentCycle >= sprite.getWalkingAnimsLength() -1 && cycleGoingUp) {
+				cycleGoingUp = false;
+			}else if(currentCycle == 0 && !cycleGoingUp){
+				cycleGoingUp = true;
+			}
+			
+			if(cycleGoingUp) {
+				currentCycle++;
+			}else{
+				currentCycle--;
+			}
+			
+			cycleTicks = 0;
+		}
+	}
+	
 	public void jump(){
 		velY = -getJumpHeight();
 		falling = true;
@@ -191,6 +212,14 @@ public class EntityLiving extends Entity {
 		g.drawImage(sprite.getImage(), getSizeX(), 0, 0, getSizeY(), 0, 0, getSizeX(), getSizeY(), null);
 		g.dispose();
 		return new Sprite(image);
+	}
+	
+	public BufferedImage getWalkingImage() {
+		if(walkingImage == null) {
+			return sprite.getImage();
+		}else{
+			return walkingImage;
+		}
 	}
 	
 }

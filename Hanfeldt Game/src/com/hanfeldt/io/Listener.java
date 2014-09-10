@@ -15,7 +15,7 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 	
 	private boolean pausePressed, debugPressed;
 	public boolean aDown, dDown, wDown, escDown,
-	mouseDown, mouseDownLastTick,
+	shiftDown, mouseDown, mouseDownLastTick,
 	upArrowDown, downArrowDown, enterDown,
 	shopButtonDown, shopButtonDownLastTick,
 	spaceDown, spaceDownLastTick;
@@ -56,6 +56,10 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			
 		case(KeyEvent.VK_SPACE):
 			spaceDown = true;
+			break;
+			
+		case(KeyEvent.VK_SHIFT):
+			shiftDown = true;
 			break;
 		}
 	}
@@ -115,6 +119,9 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			break;
 		case(KeyEvent.VK_ENTER):
 			enterDown = false;
+			break;
+		case(KeyEvent.VK_SHIFT):
+			shiftDown = false;
 			break;
 		// Shop
 		case(KeyEvent.VK_K):// 'K' seems like a good shop button to me, what do you think? 

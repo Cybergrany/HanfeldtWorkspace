@@ -8,6 +8,8 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
 import com.hanfeldt.game.tile.Tile;
 
 public class Camera {
@@ -44,11 +46,15 @@ public class Camera {
 	}
 	
 	public void renderEntityLiving(Graphics g, EntityLiving e) {
-		if(e.getDirection()) {
-			renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
-		}else{
-			renderSprite(g, e.getSprite(), e.getX(), e.getY());
-		}
+		if(e instanceof Npc && e.getSprite().getWalkingAnimsLength() > 1){
+			renderImage(g, e.getWalkingImage(), e.getX(), e.getY());
+		}else if(e.getDirection()) {
+				renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
+			}else{
+				renderSprite(g, e.getSprite(), e.getX(), e.getY());
+			}
+
+//		camera.renderImage(g, npc.get(i).getWalkingImage(), npc.get(i).getX(),  npc.get(i).getY());
 	}
 	
 	public void renderTile(Graphics g, Tile t) {

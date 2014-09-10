@@ -53,7 +53,7 @@ public class Sprite {
 		}
 	}
 	
-	public BufferedImage getWalkingImage(boolean dir, int currentCycle) {
+	public BufferedImage getWalkingImage(boolean dir, int currentCycle){
 		BufferedImage ret = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = ret.getGraphics();
 		

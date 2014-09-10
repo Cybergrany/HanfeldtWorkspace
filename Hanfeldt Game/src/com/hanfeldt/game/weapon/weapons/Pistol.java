@@ -32,16 +32,16 @@ public class Pistol extends AmmoWeapon {
 				if(entity instanceof Player){
 					Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage));
 				}else{
-					System.out.println(entity.getAimX() + "\t" + entity.getAimY() + "\tDelete from Pistol.java");
-					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX(), entity.getAimY(), entity));
+//					System.out.println(entity.getAimX() + "\t" + entity.getAimY() + "\tDelete from Pistol.java");
+					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
 				}
 			}else{
 				// facing right
 				if(entity instanceof Player){
 					Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage));
 				}else{
-					System.out.println(entity.getAimX() + "\t" + entity.getAimY());
-					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX(), entity.getAimY(), entity));
+//					System.out.println(entity.getAimX() + "\t" + entity.getAimY());
+					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
 				}
 			}
 			Sound.playSound("weapon/pistol_shoot.wav");

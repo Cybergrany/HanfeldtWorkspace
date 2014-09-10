@@ -8,18 +8,13 @@ import com.hanfeldt.game.Main;
 
 public class Bullet extends Entity {
 	public static final Color COLOR = new Color(0xFF, 0x55, 0x00);
-	private float angle;
+	protected float angle;
 	private float speed = 3.0f;
 	private static int damageValue = 10;//default damage
 	
 	public Bullet(int x, int y, int damage) {
 		super(x, y);
-		try {
-			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.TILE_SIZE),
-														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		setAngle();
 		damageValue = damage;
 	}
 	
@@ -69,8 +64,13 @@ public class Bullet extends Entity {
 		return angle;
 	}
 	
-	public void setAngle(float angel){
-		angle = angel;//O sweet gabe(rial)
+	public void setAngle(){
+		try {
+			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.TILE_SIZE),
+														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

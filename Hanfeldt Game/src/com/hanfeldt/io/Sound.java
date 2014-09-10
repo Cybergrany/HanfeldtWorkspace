@@ -40,7 +40,7 @@ public class Sound {
 	}
 	
 	public static void playOggLoop(){
-		oggClip.loop();
+//		oggClip.loop();
 	}
 	
 	public static void pauseOggLoop(){

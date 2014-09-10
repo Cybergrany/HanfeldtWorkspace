@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.state.Story;
 import com.hanfeldt.io.Debug;
 

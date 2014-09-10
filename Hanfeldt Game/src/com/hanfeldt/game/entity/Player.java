@@ -20,6 +20,8 @@ public class Player extends EntityLiving {
 	private Weapon weaponEquipped = new Sword(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
+	private int stamina = 69;
+	private boolean tired = false;//Time when stamina can't be used during regen
 	private long score = 0;
 	private Listener listener;
 	private Main main;
@@ -59,8 +61,7 @@ public class Player extends EntityLiving {
 				
 				cycleTicks = 0;
 			}
-		}
-		
+		}	
 	}
 	
 	public void tick() {
@@ -70,7 +71,11 @@ public class Player extends EntityLiving {
 		isMovingRight = listener.dDown;
 
 		if(listener.wDown && !falling && velY == 0) {
+			if(stamina < 0)
+				setJumpHeight(1);
 			jump();
+			if(stamina > 5)
+			changestamina(-4);
 			Sound.playSound("Jump.wav");
 		}
 		
@@ -131,6 +136,32 @@ public class Player extends EntityLiving {
 			}
 		}
 		
+		//Bitta sprinting
+				if(listener.shiftDown && (listener.wDown || listener.dDown)){
+					if(!tired)
+					velXMax = 2f;
+					if(!tired && Main.timer(4)){
+						stamina--;
+					}
+					if(stamina <= - 10){
+						tired = true;
+						velXMax = 1f;
+					}
+				}else{
+					velXMax = 1f;
+					if(stamina < 69 && Main.timer(100)){
+						stamina++;
+						if(stamina > 10){
+							tired = false;
+						}
+					}
+				}
+				
+				//stamina recovers twice as fast when not moving
+				if(stamina < 69 && !isMovingLeft && !isMovingRight && Main.timer(50)){
+					stamina++;
+				}
+		
 	}
 	
 	public boolean collidedZombie(Zombie zombie) {
@@ -171,6 +202,18 @@ public class Player extends EntityLiving {
 	
 	public void changeScore(int c) {
 		score += c;
+	}
+	
+	public int getstamina(){
+		return stamina;
+	}
+	
+	public void changestamina(int s){
+		stamina += s;
+	}
+	
+	public void setstamina(int s){
+		stamina = s;
 	}
 	
 	public BufferedImage getWalkingImage() {

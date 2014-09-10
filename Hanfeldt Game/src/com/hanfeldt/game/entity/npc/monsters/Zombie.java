@@ -7,7 +7,8 @@ import com.hanfeldt.game.entity.npc.Npc;
 
 public class Zombie extends Npc {
 	private float speed = 0.25f;
-	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);//Same as player for testing
+//	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);
+	private static Sprite s = new Sprite(Main.spriteSheet, 6, 4, 1 , 2, 3);
 	
 	
 	public static int maxHealth = Values.zombie_max_health;
@@ -20,6 +21,7 @@ public class Zombie extends Npc {
 	
 	public void tick() {
 		super.tick();
+		tickWalking();
 		if(Main.timer(120)) {
 			facePlayer(speed);
 		}

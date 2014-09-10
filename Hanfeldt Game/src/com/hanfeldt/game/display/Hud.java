@@ -88,6 +88,20 @@ public class Hud {
 		
 		heartx = 19;
 		
+		//stamina bar
+		if (player.getstamina() < 20){
+			g.setColor(new Color(0xfff60a0a));
+		}else{
+			g.setColor(new Color(0xff10e415));
+		}
+		g.fillRect(23, Main.HEIGHT - 23, player.getstamina()  , 6);
+		
+		if(player.getstamina() <= 0){
+				g.fillRect(23, Main.HEIGHT - 23, 1, 6);
+		}
+		
+		g.setColor(defWhite);
+		
 		if(debug){
 			g.drawString("Debug Mode", 10, 10);
 			g.drawString("Fps: " + Integer.toString(Main.fps), 10, 20);
