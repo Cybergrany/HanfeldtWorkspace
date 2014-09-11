@@ -17,7 +17,7 @@ import com.hanfeldt.io.Sound;
 public class Sword extends TriggerWeapon {
 	private static final int range = 16;
 	private static final int damage = 50;
-	private static final Sprite idleSprite = new Sprite(Main.getSpritesheet(), 4, 3, 1, 1);
+	private static final Sprite idleSprite = new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 0, 1, 1);
 	
 	/**
 	 * Swashbuckling adventure awaits
@@ -65,7 +65,7 @@ public class Sword extends TriggerWeapon {
 	}
 	
 	public Sprite getNotTriggeredSprite() {
-		return new Sprite(Main.getSpritesheet().getImage(4, 3, 1, 1));
+		return new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 0, 1, 1);
 	}
 	
 }
