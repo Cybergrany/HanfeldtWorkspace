@@ -18,10 +18,16 @@ public class Zombie extends Npc {
 		super(s, maxHealth, x, y);
 		setVelXMax(speed);
 		setJumpHeight(2.3f);//Slightly higher than block so they can jump over them with ease
+		setPickupItemOnBounds(true);
 	}
 	
 	public void tick() {
 		super.tick();
+		try{
+		for(int i = 0; i < Main.getGame().getItems().size(); i++){
+		pickupItemOnBounds(Main.getGame().getItems().get(i));
+		}
+		}catch(Exception e){}
 		tickWalking();
 		if(Main.timer(120)) {
 			facePlayer(speed);

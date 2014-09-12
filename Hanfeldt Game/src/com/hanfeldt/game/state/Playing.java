@@ -10,7 +10,6 @@ import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -36,7 +35,11 @@ public abstract class Playing extends State {
 			main.getBullets().get(i).tick();
 		}
 		for(int i=0; i<main.getNpc().size(); i++) {
-			main.getNpc().get(i).tick();
+			Npc npc = main.getNpc().get(i);
+			npc.tick();
+			//Currently not 100% necessary
+//			Weapon npcWep = npc.getWeaponEquipped();
+//			if(npcWep != null) npcWep.tick();
 		}
 		for(int i = 0; i < main.getItems().size(); i++){
 			main.getItems().get(i).tick();
@@ -75,8 +78,8 @@ public abstract class Playing extends State {
 		//TODO: I'm thinking this is kind of inefficient... I've left it, because FPS seems good..
 		ArrayList<Npc> npc = Main.getGame().getNpc();
 		for(int i = 0; i < npc.size(); i++){
-			if(npc.get(i) instanceof NPCCharacter){
-				NPCCharacter npcChar = (NPCCharacter) npc.get(i);
+			if(npc.get(i) instanceof Npc){
+				Npc npcChar = (Npc) npc.get(i);
 				if(npcChar.getWeaponEquipped() != null){
 					if(npcChar.getWeaponEquipped() instanceof Sword) {
 						Sword tw = (Sword) (npcChar.getWeaponEquipped());
@@ -87,7 +90,7 @@ public abstract class Playing extends State {
 								camera.renderSprite(g, tw.getSprite(), npcChar.getX() +10, npcChar.getY() +Main.TILE_SIZE /2);
 							}
 						}else{
-							if(npcChar.getDirection()) {
+							if(!npcChar.getDirection()) {
 								//Keeping this cause the way they hold it looks kinda cool
 								camera.renderSprite(g, tw.getNotTriggeredSprite(), npcChar.getX() +5, npcChar.getY() +2);
 							}else{

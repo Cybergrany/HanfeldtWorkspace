@@ -6,7 +6,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.weapon.TriggerWeapon;
-import com.hanfeldt.game.weapon.Weapon;
 
 /**
  * Class for NPC characters, which will (when finished) contain code to allow NPC's to interact
@@ -18,8 +17,6 @@ import com.hanfeldt.game.weapon.Weapon;
  */
 public class NPCCharacter extends Npc{
 	
-	private Weapon weaponEquipped;
-
 	public  float speed = 0.35f;//Fuckin' nyooom
 	private boolean followingPlayer = false;
 	private int aimAccuracy = 100;
@@ -67,7 +64,7 @@ public class NPCCharacter extends Npc{
 							setAimY(npc.getY() - 2);
 //							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
 							if(weaponEquipped instanceof TriggerWeapon){
-								((TriggerWeapon) weaponEquipped).tryTrigger();
+//								((TriggerWeapon) weaponEquipped).tryTrigger();
 							}
 						}
 					}
@@ -79,7 +76,7 @@ public class NPCCharacter extends Npc{
 							setAimY(npc.getY() - 2);
 //							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
 							if(weaponEquipped instanceof TriggerWeapon){
-								((TriggerWeapon) weaponEquipped).tryTrigger();
+//								((TriggerWeapon) weaponEquipped).tryTrigger();
 							}
 						}
 					}
@@ -98,14 +95,6 @@ public class NPCCharacter extends Npc{
 	
 	public void setFollowingPlayer(boolean following){
 		followingPlayer = following;
-	}
-	
-	public Weapon getWeaponEquipped() {
-		return weaponEquipped;
-	}
-	
-	public void setWeaponEquipped(Weapon wep) {
-		weaponEquipped = wep;;
 	}
 
 }

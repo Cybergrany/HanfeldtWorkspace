@@ -1,11 +1,11 @@
 package com.hanfeldt.game.entity;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
-import com.sun.javafx.geom.Rectangle;
 
 public class EntityItem extends Entity{
 	
@@ -23,6 +23,10 @@ public class EntityItem extends Entity{
 	public void tick(){
 		super.tick();
 		checkTileCollisions(this);
+	}
+	
+	public void removeItem(EntityItem e){
+		Main.getGame().getItems().remove(e);
 	}
 	
 	public int getSizeX() {
@@ -50,7 +54,9 @@ public class EntityItem extends Entity{
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(sizeX, sizeY, getSizeX(), getSizeY());
+		Rectangle r = new Rectangle(sizeX, sizeY, getSizeX(), getSizeY());
+		r.setLocation(getX(), getY());
+		return r;
 	}
 	
 	public Sprite getReverseSprite() {
@@ -59,6 +65,18 @@ public class EntityItem extends Entity{
 		g.drawImage(sprite.getImage(), getSizeX(), 0, 0, getSizeY(), 0, 0, getSizeX(), getSizeY(), null);
 		g.dispose();
 		return new Sprite(image);
+	}
+	
+	public String getType(){
+		return "Item";
+	}
+	
+	public Object getLinkedItem(){
+		return this;
+	}
+	
+	public Object getLinkedItem(EntityLiving e){
+		return this;
 	}
 
 }
