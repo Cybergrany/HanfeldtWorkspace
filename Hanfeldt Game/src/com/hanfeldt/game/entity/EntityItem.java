@@ -1,5 +1,6 @@
 package com.hanfeldt.game.entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,8 @@ public class EntityItem extends Entity{
 	private int sizeX, sizeY;
 	protected  boolean isCollidingWithHorizTile = false;
 	
+	float friction = .93f;
+	
 	public EntityItem(Sprite s, int x, int y){
 		super(x, y);
 		sprite = s;
@@ -23,6 +26,10 @@ public class EntityItem extends Entity{
 	public void tick(){
 		super.tick();
 		checkTileCollisions(this);
+//		if(Main.timer(60)){
+//			System.out.println("\n\n");
+//			System.out.println(getTransparentBounds());
+//		}
 	}
 	
 	public void removeItem(EntityItem e){
@@ -57,6 +64,46 @@ public class EntityItem extends Entity{
 		Rectangle r = new Rectangle(sizeX, sizeY, getSizeX(), getSizeY());
 		r.setLocation(getX(), getY());
 		return r;
+	}
+	
+	public Rectangle getTransparentBounds(){
+		if(getSprite() != null){
+			BufferedImage image = getSprite().getImage();
+			int firstX = 0, firstY = 0, lastX = image.getWidth(), lastY = image.getHeight();
+			
+			for(int y = 0; y < image.getHeight(); y++){
+				for(int x = 0; x < image.getWidth(); x++){
+					Color c = new Color(image.getRGB(x, y), true);
+					if(c.getAlpha() != 0){
+						if(y < image.getHeight() / 2){
+							firstY = y;
+//							System.out.println("firstY set to: " + firstY);
+						}else if(y > image.getHeight() / 2){
+							lastY = y;
+//							System.out.println("lastY set to: " + lastY);
+						}
+						if(x < image.getWidth() / 2){
+							firstX = x;
+//							System.out.println("firstX set to: " + firstX);
+						}else if(x > image.getWidth() / 2){
+							lastX = x;
+//							System.out.println("lastX set to: " + lastX);
+						}
+					}
+				}
+			}
+			Rectangle r = new Rectangle(lastX, lastY);
+			return r;
+		}
+		return null;
+	}
+	
+	public float getFriction(){
+		return friction;
+	}
+	
+	public void setFriction(float f){
+		friction = f;
 	}
 	
 	public Sprite getReverseSprite() {

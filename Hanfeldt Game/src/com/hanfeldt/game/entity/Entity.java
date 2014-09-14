@@ -230,6 +230,14 @@ public class Entity {
 		setY(y *Main.TILE_SIZE);
 	}
 	
+	public void changeVelX(float change){
+		velX += change;
+	}
+	
+	public void changeVelY(float change){
+		velY += change;
+	}
+	
 	public void setVelX(float vx) {
 		velX = vx;
 	}

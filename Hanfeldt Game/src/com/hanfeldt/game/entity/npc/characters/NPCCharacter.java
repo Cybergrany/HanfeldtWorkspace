@@ -56,27 +56,29 @@ public class NPCCharacter extends Npc{
 			Npc npc = npc1.get(i);
 			if(!(npc instanceof NPCCharacter))
 			if(!npc.getEvents().isOutsideMap(npc)){
-				if(direction){//Facing left
+				if(!direction){//Facing right
 					if(closestXl < getX() - npc.getX() + getX() || closestXl == 0){
 						closestXl =  getX() - npc.getX();
 						if(closestXl > 0){
+//							System.out.println(closestXl);
 							setAimX(npc.getX());
 							setAimY(npc.getY() - 2);
 //							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
 							if(weaponEquipped instanceof TriggerWeapon){
-//								((TriggerWeapon) weaponEquipped).tryTrigger();
+								((TriggerWeapon) weaponEquipped).tryTrigger();
 							}
 						}
 					}
-				}else{//Facing right
+				}else{//Facing left
 					if(closestXr < npc.getX() - getX() || closestXr == 0){
 						closestXr =  getX() - npc.getX();
 						if(closestXr > 0){
+//							System.out.println(closestXr);
 							setAimX(npc.getX());
 							setAimY(npc.getY() - 2);
 //							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
 							if(weaponEquipped instanceof TriggerWeapon){
-//								((TriggerWeapon) weaponEquipped).tryTrigger();
+								((TriggerWeapon) weaponEquipped).tryTrigger();
 							}
 						}
 					}

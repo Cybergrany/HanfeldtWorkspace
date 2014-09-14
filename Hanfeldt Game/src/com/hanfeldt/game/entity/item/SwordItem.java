@@ -9,7 +9,7 @@ import com.hanfeldt.game.weapon.weapons.Sword;
 public class SwordItem extends EntityItem{
 	
 	public SwordItem(int x, int y) {
-		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 0, 1, 1), x, y);
+		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 3, 1, 1), x, y);
 	}
 	
 	public String getType(){

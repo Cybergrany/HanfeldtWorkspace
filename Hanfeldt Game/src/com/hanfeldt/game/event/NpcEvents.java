@@ -5,6 +5,8 @@ import java.util.Random;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.entity.Bullet;
+import com.hanfeldt.game.entity.item.ItemSpawner;
+import com.hanfeldt.game.entity.item.ZombieGore;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.io.Sound;
@@ -12,9 +14,11 @@ import com.hanfeldt.io.Sound;
 public class NpcEvents {
 
 	private Npc npc;
+	public ZombieGore zombieGore;
 
 	public NpcEvents(Npc npc) {
 		this.npc = npc;
+		zombieGore = new ZombieGore(0, 0);//Needs to be declared here, otherwise I'd have to change dozens of variables to static
 	}
 
 	public void tick() {
@@ -44,7 +48,7 @@ public class NpcEvents {
 			if (npc instanceof Zombie) {
 				Main.getGame().getPlayer().changeMoney(Values.money_from_zombie);
 				Main.getGame().getPlayer().changeScore(Values.score_from_zombie);
-				
+				ItemSpawner.spawnItem(zombieGore.randomGore(npc.getX(), npc.getY()));
 			}
 			killNpc(npc, id);
 		}

@@ -114,8 +114,6 @@ public class Player extends EntityLiving {
 		
 		//Moved fall damage to Entity.checkCollisions (in the "below" section)
 		
-		//A moment of silence for my jumping code. May it be buried eternally inside those commits
-		
 		super.tick();
 		
 		if(getX() >= (Main.getGame().getLevels().getSizeX() - 1) *Main.TILE_SIZE) {
