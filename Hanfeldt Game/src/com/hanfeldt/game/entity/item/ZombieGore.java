@@ -13,9 +13,9 @@ public class ZombieGore extends EntityItem{
 	int knockback = 30;
 	float knockspeed = 1.5f;
 	int origX;
-
+	
 	public ZombieGore(int x, int y) {//Default
-		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 3, 1, 1), x, y);
+		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 4, 1, 1), x, y);
 	}
 	
 	public ZombieGore(Sprite s, int x, int y) {
@@ -64,7 +64,7 @@ public class ZombieGore extends EntityItem{
 	
 	public  ZombieGore randomGore(int x, int y){
 		Sprite s = null;
-		switch(new Random().nextInt(6)){
+		switch(new Random().nextInt(7)){
 			case 0:
 				s = new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 3, 1, 1);
 				break;
@@ -84,12 +84,14 @@ public class ZombieGore extends EntityItem{
 				s = new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 6, 3, 1, 1);
 				break;
 			case 6:
-				s = new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 5, 3, 1, 1);
+				s = new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 7, 3, 1, 1);
 				break;
 		}
+		
 		if(new Random().nextBoolean()){
-			s = getReverseSprite();
+			s = getReverseSprite(s);
 		}
+		
 		return new ZombieGore(s, x, y);
 	}
 }

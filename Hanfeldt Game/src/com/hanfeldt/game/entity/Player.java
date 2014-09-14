@@ -89,6 +89,7 @@ public class Player extends EntityLiving {
 			if(velX < 0 && velX > -0.15f) {
 				velX = 0;
 			}
+			
 		}else{
 			if(isMovingLeft) {
 				if(velX >= 0) {

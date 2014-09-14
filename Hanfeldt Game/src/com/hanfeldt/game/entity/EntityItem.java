@@ -114,6 +114,14 @@ public class EntityItem extends Entity{
 		return new Sprite(image);
 	}
 	
+	public Sprite getReverseSprite(Sprite s) {
+		BufferedImage image = new BufferedImage(getSizeX(), getSizeY(), BufferedImage.TYPE_INT_ARGB);
+		Graphics g = image.getGraphics();
+		g.drawImage(s.getImage(), getSizeX(), 0, 0, getSizeY(), 0, 0, getSizeX(), getSizeY(), null);
+		g.dispose();
+		return new Sprite(image);
+	}
+	
 	public String getType(){
 		return "Item";
 	}

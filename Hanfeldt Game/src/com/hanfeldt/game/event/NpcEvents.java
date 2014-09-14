@@ -18,7 +18,7 @@ public class NpcEvents {
 
 	public NpcEvents(Npc npc) {
 		this.npc = npc;
-		zombieGore = new ZombieGore(0, 0);//Needs to be declared here, otherwise I'd have to change dozens of variables to static
+		zombieGore = new ZombieGore(0, 0);
 	}
 
 	public void tick() {
