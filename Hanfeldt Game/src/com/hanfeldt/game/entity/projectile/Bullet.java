@@ -1,16 +1,22 @@
-package com.hanfeldt.game.entity;
+package com.hanfeldt.game.entity.projectile;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.entity.SpriteEntity;
 
-public class Bullet extends Entity {
+public class Bullet extends SpriteEntity {
 	public static final Color COLOR = new Color(0xFF, 0x55, 0x00);
+	
+	public boolean hasSprite = false;
+	public boolean direction;
+	
 	protected float angle;
 	private float speed = 3.0f;
 	private static int damageValue = 10;//default damage
+
 	
 	public Bullet(int x, int y, int damage) {
 		super(x, y);
@@ -18,7 +24,18 @@ public class Bullet extends Entity {
 		damageValue = damage;
 	}
 	
+	public Bullet(Sprite s, int x, int y, int damage){
+		super(s, x, y);
+		damageValue = damage;
+		sprite = s;
+		hasSprite = true;
+		direction = Main.getGame().getPlayer().getDirection();//TODO: Temporary, need to change this to get direction of holding entity
+		sizeX = sprite.getTileWidth();
+		sizeY = sprite.getTileHeight();
+	}
+	
 	public void tick() {
+		//TODO: Maybe add checkTileCollisions() here
 		setVelX((float) Math.cos(angle*Math.PI/180) * speed);
 		setVelY((float) Math.sin(angle*Math.PI/180) * speed);
 		changeX(getVelX());
@@ -26,13 +43,18 @@ public class Bullet extends Entity {
 		destroyBulletAtBounds();//Lyk dis? --> sure
 	}
 	
+	@Deprecated
 	public void draw(Graphics g) {
-		g.setColor(COLOR);
-		int posX = getX() - Main.getGame().getPlayer().getX() + (Main.WIDTH /2) - (Main.TILE_SIZE /2);
-		g.drawLine(posX, getY(), posX, getY());
+		if(!hasSprite){
+			g.setColor(COLOR);
+			int posX = getX() - Main.getGame().getPlayer().getX() + (Main.WIDTH /2) - (Main.TILE_SIZE /2);
+			g.drawLine(posX, getY(), posX, getY());
+		}else{
+			sprite.draw(g, getX(), getY());
+		}
 	}
 	
-	private void destroyBulletAtBounds(){
+	public void destroyBulletAtBounds(){
 		if (getX() < getX() - (Main.WIDTH /2) ||
 			getX() > getX() + (Main.WIDTH /2) ||
 			getY() < 0 || getY() > Main.HEIGHT){
@@ -44,20 +66,16 @@ public class Bullet extends Entity {
 		Main.getGame().bullets.remove(this);
 	}
 	
-	public Rectangle getBounds(){
-		return new Rectangle(getX(), getY(), getSizeX(), getSizeY());
-	}
-	
-	public int getSizeX() {
-		return 1;
-	}
-	
-	public int getSizeY() {
-		return 1;
-	}
-	
 	public int getDamage(){
 		return damageValue;
+	}
+	
+	public float getSpeed(){
+		return speed;
+	}
+	
+	public void setSpeed(float speed){
+		this.speed = speed;
 	}
 	
 	public float getAngle(){
@@ -72,5 +90,4 @@ public class Bullet extends Entity {
 			e.printStackTrace();
 		}
 	}
-	
 }

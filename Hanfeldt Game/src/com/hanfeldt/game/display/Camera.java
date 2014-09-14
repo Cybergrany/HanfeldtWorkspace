@@ -5,11 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.tile.Tile;
 
 public class Camera {
@@ -79,6 +79,10 @@ public class Camera {
 			g.setColor(Bullet.COLOR);
 			g.fillRect(screenX, screenY, 1, 1);
 		}
+	}
+	
+	public void renderBullet(Graphics g, Bullet b, Sprite s){
+		renderSprite(g, s, b.getX(), b.getY());
 	}
 	
 	public void renderImage(Graphics g, BufferedImage image, int x, int y) {

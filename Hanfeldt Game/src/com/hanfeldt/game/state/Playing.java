@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
-import com.hanfeldt.game.entity.Bullet;
 import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.GoreSpawn;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -62,7 +62,15 @@ public abstract class Playing extends State {
 	
 	public void draw(Graphics g) {
 		for(Bullet bill /* Lel */ : main.getBullets()) {
-			camera.renderBullet(g, bill);
+			if(!bill.hasSprite){
+				camera.renderBullet(g, bill);
+			}else{
+				if(bill.direction){
+					camera.renderBullet(g, bill, bill.getSprite());
+				}else{
+					camera.renderBullet(g, bill, bill.getReverseSprite());
+				}
+			}
 		}
 		main.getHud().draw(g);
 		for(GoreSpawn go : main.getGore()) {

@@ -29,6 +29,7 @@ public class Values {
 	public static int bullet_damage_id = 4;
 	public static int bullet_damage_pistol = 40;
 	public static int bullet_damage_M16 = 20;//Half the damage seems legit
+	public static int bullet_damage_RPG = 100;//kaboom
 	
 	public static int money_from_zombie = 25;
 	public static int score_from_zombie = 100;

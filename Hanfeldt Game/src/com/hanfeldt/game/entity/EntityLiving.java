@@ -1,20 +1,15 @@
 package com.hanfeldt.game.entity;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 
-public class EntityLiving extends Entity {
+public class EntityLiving extends SpriteEntity {
 	public static final int ticksPerAnimChange = 4;
 	private BufferedImage walkingImage;
 	private int health;
 	private float jumpHeight;
-	private int sizeX, sizeY;
 	int jumpCount = 0;
-	protected Sprite sprite;
 	int cycleTicks = 0;
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
@@ -23,11 +18,8 @@ public class EntityLiving extends Entity {
 	int aimX, aimY;
 	
 	public EntityLiving(Sprite s, int h, int x, int y) {
-		super(x, y);
-		sprite = s;
+		super(s, x, y);
 		this.health = h;
-		sizeX = sprite.getTileWidth();
-		sizeY = sprite.getTileHeight();
 	}
 	
 	public void tick() {
@@ -43,27 +35,6 @@ public class EntityLiving extends Entity {
 	public float getJumpHeight() {
 		return jumpHeight;
 	}
-	public int getSizeX() {
-		return sizeX *Main.TILE_SIZE;
-	}
-	
-	public int getSizeY() {
-		return sizeY *Main.TILE_SIZE;
-	}
-	
-	public int getTileSizeX(){
-		return sizeX;
-	}
-	
-	public int getTileSizeY() {
-		return sizeY;
-	}
-	
-	public Rectangle getBounds() {
-		return new Rectangle(getX(), getY(), getSizeX(), getSizeY());
-	}
-	
-	
 	
 	public void tickWalking(){
 		walkingImage = sprite.getWalkingImage(!direction, currentCycle);
@@ -114,10 +85,6 @@ public class EntityLiving extends Entity {
 		return isCollidingWithHorizTile;
 	}
 	
-	public Sprite getSprite() {
-		return sprite;
-	}
-	
 	public int getAimX(){
 		return aimX;
 	}
@@ -132,14 +99,6 @@ public class EntityLiving extends Entity {
 	
 	public void setAimY(int aY){
 		aimY = aY;
-	}
-	
-	public Sprite getReverseSprite() {
-		BufferedImage image = new BufferedImage(getSizeX(), getSizeY(), BufferedImage.TYPE_INT_ARGB);
-		Graphics g = image.getGraphics();
-		g.drawImage(sprite.getImage(), getSizeX(), 0, 0, getSizeY(), 0, 0, getSizeX(), getSizeY(), null);
-		g.dispose();
-		return new Sprite(image);
 	}
 	
 	public BufferedImage getWalkingImage() {

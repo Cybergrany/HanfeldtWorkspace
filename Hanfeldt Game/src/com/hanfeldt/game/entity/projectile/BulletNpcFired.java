@@ -1,8 +1,9 @@
-package com.hanfeldt.game.entity;
+package com.hanfeldt.game.entity.projectile;
 
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.io.Debug;
 
 /**
@@ -28,7 +29,7 @@ public class BulletNpcFired extends Bullet{
 	}
 	
 	public void setAngle(){
-		
+		//Deliberately empty, to override setAngle() from Bullet.java. This stops mouse input from being used.
 	}
 	
 	public void draw(Graphics g) {
