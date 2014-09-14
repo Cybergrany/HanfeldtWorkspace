@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.SpriteEntity;
 
 public class Bullet extends SpriteEntity {
@@ -32,6 +33,7 @@ public class Bullet extends SpriteEntity {
 		direction = Main.getGame().getPlayer().getDirection();//TODO: Temporary, need to change this to get direction of holding entity
 		sizeX = sprite.getTileWidth();
 		sizeY = sprite.getTileHeight();
+		setAngle();
 	}
 	
 	public void tick() {
@@ -66,6 +68,14 @@ public class Bullet extends SpriteEntity {
 		Main.getGame().bullets.remove(this);
 	}
 	
+	public void onCollide(){
+		destroyBullet();
+	}
+	
+	public void onCollide(EntityLiving e){
+		destroyBullet();
+	}
+	
 	public int getDamage(){
 		return damageValue;
 	}
@@ -74,8 +84,12 @@ public class Bullet extends SpriteEntity {
 		return speed;
 	}
 	
-	public void setSpeed(float speed){
-		this.speed = speed;
+	public void setSpeed(float s){
+		speed = s;
+	}
+	
+	public void changeSpeed(float s){
+		speed += s;
 	}
 	
 	public float getAngle(){
@@ -89,5 +103,9 @@ public class Bullet extends SpriteEntity {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void changeAngle(int a){
+		angle += a;
 	}
 }

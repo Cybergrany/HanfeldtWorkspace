@@ -11,6 +11,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	private int ammoInClip;
 	private int totalAmmo;
 	private int ammoInFullClip;
+	private int reloadTime = 65;
 	private long reloadStarted;
 	private boolean reloadInProg, clipOutDone, clipInDone, reloadClickDone;
 	
@@ -22,12 +23,14 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 	 * @param ta Total ammo allocated to weapon.
 	 * @param aifc Ammo in a full clip
 	 * @param tt Amount of time before the trigger can be pressed again.
+	 * @param rt Time it takes to reload in Middle Earth time units. i.e: nobody knows how long this actually is.
 	 */
-	public AmmoWeapon(EntityLiving p, Sprite s, int aic, int ta, int aifc, int tt) {
+	public AmmoWeapon(EntityLiving p, Sprite s, int aic, int ta, int aifc, int tt, int rt) {
 		super(p, s, tt);
 		ammoInClip = aic;
 		totalAmmo = ta;
 		ammoInFullClip = aifc;
+		reloadTime = rt;
 	}
 	
 	public int getAmmoInClip() {
@@ -83,7 +86,7 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 				Sound.playSound("weapon/ClipIn.wav");
 				clipInDone = true;
 			}
-			if(!reloadClickDone && (totalTicks - reloadStarted) > 65) {
+			if(!reloadClickDone && (totalTicks - reloadStarted) > reloadTime) {
 				if(totalAmmo > 0) Sound.playSound("weapon/Reload.wav");
 				reloadClickDone = true;
 				reloadInProg = false;

@@ -16,7 +16,7 @@ public class RPGLauncher extends AmmoWeapon{
 	 * Kaboom
 	 */
 	public RPGLauncher(EntityLiving p){
-		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 4, 1, 1), 1, 3, 1, 40);
+		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 4, 1, 1), 1, 3, 1, 50, 120);
 		damage = Values.bullet_damage_RPG;
 	}
 	

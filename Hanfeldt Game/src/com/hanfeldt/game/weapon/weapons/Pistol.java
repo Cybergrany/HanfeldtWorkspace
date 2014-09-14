@@ -22,7 +22,7 @@ public class Pistol extends AmmoWeapon {
 	 * @param ta
 	 */
 	public Pistol(EntityLiving p) {
-		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 1, 1, 1), 8, 64, 8, 10);
+		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 1, 1, 1), 8, 64, 8, 10, 50);
 		damage = Values.bullet_damage_pistol;
 	}
 	

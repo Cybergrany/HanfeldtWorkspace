@@ -17,6 +17,7 @@ public class SpriteEntity extends Entity{
 	
 	public Sprite sprite;
 	public int sizeX, sizeY;
+	public boolean isCollidingWithHorizTile;
 	
 	/**
 	 * Needed for entities that do not have a sprite in some cases.

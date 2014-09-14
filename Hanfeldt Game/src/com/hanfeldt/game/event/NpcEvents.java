@@ -27,7 +27,7 @@ public class NpcEvents {
 				Bullet bullet = (Bullet) Main.getGame().bullets.get(i);
 				if (bulletCollided(npc, bullet)) {
 					bulletHit(npc, bullet);
-					bullet.destroyBullet();
+					bullet.onCollide(npc);
 				}
 			}
 		}

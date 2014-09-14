@@ -13,7 +13,6 @@ public class EntityLiving extends SpriteEntity {
 	int cycleTicks = 0;
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
-	protected boolean isCollidingWithHorizTile=false;
 	
 	int aimX, aimY;
 	
