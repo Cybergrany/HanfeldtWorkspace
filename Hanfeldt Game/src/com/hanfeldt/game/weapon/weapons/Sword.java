@@ -1,20 +1,14 @@
 package com.hanfeldt.game.weapon.weapons;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityLiving;
-import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.event.NpcEvents;
-import com.hanfeldt.game.weapon.TriggerWeapon;
-import com.hanfeldt.io.Sound;
+import com.hanfeldt.game.weapon.WeaponSwung;
 
-public class Sword extends TriggerWeapon {
+public class Sword extends WeaponSwung {
 	private static final int range = 16;
 	private static final int damage = 50;
 	private static final Sprite idleSprite = new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 0, 1, 1);
@@ -24,9 +18,11 @@ public class Sword extends TriggerWeapon {
 	 * @param p
 	 */
 	public Sword(EntityLiving p) {
-		super(p, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 0, 1, 1), 20);
+		super(p, idleSprite, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 0, 1, 1), range, damage, 20);
+		setSwingSound("Sword_Swing.wav");
 	}
 	
+	@Deprecated
 	public void draw(Graphics g) {//#Im14AndThisIsFunny <-- LELELEL /r/SubredditsAreHashtags
 		if(tickTriggered > 0) { // Penis out straight
 			if(!entity.getDirection()) {
@@ -41,31 +37,6 @@ public class Sword extends TriggerWeapon {
 				idleSprite.draw(g, (Main.WIDTH /2) - 3, entity.getY() +2, entity.getDirection());
 			}
 		}
-	}
-	
-	protected void trigger() {
-		ArrayList<Npc> npcs = Main.getGame().getNpc();
-		Rectangle hitBoxLeft = new Rectangle(entity.getX() - range, entity.getY(), range, range *2);
-		Rectangle hitBoxRight= new Rectangle(entity.getX() + range, entity.getY(), range, range *2);
-		for(int i=0; i<npcs.size(); i++) {
-			NpcEvents e = npcs.get(i).getNpcvents();
-			if(!entity.getDirection()) {
-				if(hitBoxLeft.intersects(npcs.get(i).getBounds())) {
-					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
-					Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y);
-				}
-			}else{
-				if(hitBoxRight.intersects(npcs.get(i).getBounds())) {
-					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
-					Main.getGame().addGore(hitBoxRight.x, hitBoxRight.y);
-				}
-			}
-		}
-		Sound.playSound("Sword_Swing.wav");
-	}
-	
-	public Sprite getNotTriggeredSprite() {
-		return new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 0, 1, 1);
 	}
 	
 }

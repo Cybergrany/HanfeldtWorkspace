@@ -31,17 +31,27 @@ public class Background {
 	public void draw(Graphics g){
 //		sky.draw(g);
 		for(int i = 0; i < layer.length; i++){
-			layer[i].draw(g, viewModifier(i), 0);
+			layer[i].draw(g, viewModifierX(i), 0);
 		}
 	}
 	
-	private double viewModifier(int i){
+	private double viewModifierX(int i){
 		if(i == 0){//Far items
 			return - Main.getGame().getPlayer().getX() / layerAmount;
 		}else if(i == layer.length - 1){//Close items
 			return - Main.getGame().getPlayer().getX();
 		}else {
 			return Main.getGame().getPlayer().getX() / (i -layerAmount);
+		}
+	}
+	
+	private double viewModifierY(int i){
+		if(i == 0){
+			return - Main.getGame().getPlayer().getY() / layerAmount;
+		}else if(i == layer.length - 1){
+			return - Main.getGame().getPlayer().getY();
+		}else{
+			return Main.getGame().getPlayer().getY() / (i - layerAmount);
 		}
 	}
 	

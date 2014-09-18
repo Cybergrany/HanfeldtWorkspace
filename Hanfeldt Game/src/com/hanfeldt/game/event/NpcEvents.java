@@ -9,6 +9,7 @@ import com.hanfeldt.game.entity.item.ZombieGore;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.entity.projectile.Bullet;
+import com.hanfeldt.game.entity.projectile.BulletLobbedExplosive;
 import com.hanfeldt.io.Sound;
 
 public class NpcEvents {
@@ -89,6 +90,8 @@ public class NpcEvents {
 	}
 
 	public void bulletHit(Npc npc, Bullet b) {
+		if(b instanceof BulletLobbedExplosive)
+			return;
 		Main.getGame().addGore(b.getX(), b.getY());
 		damageNpc(npc, b.getDamage(),
 				Values.zombie_damage_from_bullet_id);

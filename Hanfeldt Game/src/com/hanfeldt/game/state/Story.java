@@ -27,7 +27,6 @@ public class Story extends Playing {
 		level = 0;
 		Player p = main.getPlayer();
 //		p.setX(Main.WIDTH /2);
-		p.setY(Main.HEIGHT - Main.TILE_SIZE * (1 + p.getTileSizeY()));
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
 //		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));

@@ -45,6 +45,9 @@ public final class MenuScreenOptionAction {
 	public static final int setUsername = 11;
 	public static final int openHighScores = 12;
 	
+	public static final int changeScreenSizeUp = 13;
+	public static final int changeScreenSizeDown = 14;
+	
 	private static State lastState;//The last option screen displayed.
 	
 	/**
@@ -85,8 +88,14 @@ public final class MenuScreenOptionAction {
 			break;
 		case openHighScores:
 			openHighScores();
+			break;
+		case changeScreenSizeUp:
+			changeScreenSizeUp();
+			break;
+		case changeScreenSizeDown:
+			changeScreenSizeDown();
+			break;
 		}
-		
 	}
 	
 	/**
@@ -94,11 +103,11 @@ public final class MenuScreenOptionAction {
 	 * game state to {@link Arcade}
 	 */
 	public static void startArcade(){
-		Main.gameStarted = true;
-		Main.splashShowing = false;
-		Arcade arcade = new Arcade(Main.getGame());
-		Main.getGame().setState(arcade);
-		Main.getGame().setPlayingState(arcade);
+//		Main.gameStarted = true;
+//		Main.splashShowing = false;
+//		Arcade arcade = new Arcade(Main.getGame());
+//		Main.getGame().setState(arcade);
+//		Main.getGame().setPlayingState(arcade);
 	}
 	
 	public static void startStory(){
@@ -178,6 +187,14 @@ public final class MenuScreenOptionAction {
 		Client.sendScores();
 		setLastScreen(Main.getGame().getState());
 		Main.getGame().setState(new HighScoreDisplayandChangeState(Main.getGame()));
+	}
+	
+	public static void changeScreenSizeUp(){
+//		Main.SCALE++;
+	}
+	
+	public static void changeScreenSizeDown(){
+//		Main.SCALE--;
 	}
 	
 	private static void setLastScreen(State s){

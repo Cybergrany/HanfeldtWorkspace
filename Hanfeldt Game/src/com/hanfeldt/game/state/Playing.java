@@ -12,8 +12,7 @@ import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.Pistol;
-import com.hanfeldt.game.weapon.weapons.Sword;
+import com.hanfeldt.game.weapon.WeaponSwung;
 
 public abstract class Playing extends State {
 	
@@ -49,9 +48,9 @@ public abstract class Playing extends State {
 		Weapon wep = main.getPlayer().getWeaponEquipped();
 		if(wep != null) wep.tick();
 		if(main.getListener().mouseDown && wep instanceof TriggerWeapon) {
-			if((wep instanceof Pistol || wep instanceof Sword) && !main.getListener().mouseDownLastTick) {
+				if(!wep.isAutomatic() && !main.getListener().mouseDownLastTick){
 				((TriggerWeapon) wep).tryTrigger();
-			}else if(! (wep instanceof Pistol || wep instanceof Sword) ) {
+			}else if(wep.isAutomatic()){
 				((TriggerWeapon) wep).tryTrigger();
 			}
 		}
@@ -89,8 +88,8 @@ public abstract class Playing extends State {
 			if(npc.get(i) instanceof Npc){
 				Npc npcChar = (Npc) npc.get(i);
 				if(npcChar.getWeaponEquipped() != null){
-					if(npcChar.getWeaponEquipped() instanceof Sword) {
-						Sword tw = (Sword) (npcChar.getWeaponEquipped());
+					if(npcChar.getWeaponEquipped() instanceof WeaponSwung) {
+						WeaponSwung tw = (WeaponSwung) (npcChar.getWeaponEquipped());
 						if(tw.isTriggered()) {
 							if(npcChar.getDirection()) {
 								camera.renderSprite(g, npcChar.getWeaponEquipped().getReverseSprite(), npcChar.getX() - 10, npcChar.getY() +Main.TILE_SIZE /2);
@@ -118,8 +117,8 @@ public abstract class Playing extends State {
 		Player p = main.getPlayer();
 		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
 		if(main.getPlayer().getWeaponEquipped() != null) {
-			if(p.getWeaponEquipped() instanceof Sword) {
-				Sword tw = (Sword) (p.getWeaponEquipped());
+			if(p.getWeaponEquipped() instanceof WeaponSwung) {
+				WeaponSwung tw = (WeaponSwung) (p.getWeaponEquipped());
 				if(tw.isTriggered()) {
 					if(p.getDirection()) {
 						camera.renderSprite(g, tw.getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);

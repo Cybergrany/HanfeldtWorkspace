@@ -36,21 +36,21 @@ public class EntityItem extends SpriteEntity{
 	public Rectangle getTransparentBounds(){
 		if(getSprite() != null){
 			BufferedImage image = getSprite().getImage();
-			int firstX = 0, firstY = 0, lastX = image.getWidth(), lastY = image.getHeight();
+			int /**firstX = 0, firstY = 0,*/ lastX = image.getWidth(), lastY = image.getHeight();
 			
 			for(int y = 0; y < image.getHeight(); y++){
 				for(int x = 0; x < image.getWidth(); x++){
 					Color c = new Color(image.getRGB(x, y), true);
 					if(c.getAlpha() != 0){
 						if(y < image.getHeight() / 2){
-							firstY = y;
+//							firstY = y;
 //							System.out.println("firstY set to: " + firstY);
 						}else if(y > image.getHeight() / 2){
 							lastY = y;
 //							System.out.println("lastY set to: " + lastY);
 						}
 						if(x < image.getWidth() / 2){
-							firstX = x;
+//							firstX = x;
 //							System.out.println("firstX set to: " + firstX);
 						}else if(x > image.getWidth() / 2){
 							lastX = x;

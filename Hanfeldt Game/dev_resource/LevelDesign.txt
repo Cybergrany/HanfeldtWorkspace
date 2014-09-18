@@ -19,5 +19,5 @@ An index of 0 is furthest away (bg0.png looks like it's furthest away from the p
 
 0xffB200FF(Magneta) = RoadSurface
 0xffB20084(Dark Magneta) = RoadBase
-0xffFFFF8C(Bright Yellow) = NONE
+0xffFFFF8C(Bright Yellow) = Player Spawn
 0xff559F74(Puke Green) = CementCoreModern

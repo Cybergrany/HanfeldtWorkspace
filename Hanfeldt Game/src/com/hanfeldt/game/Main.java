@@ -28,12 +28,12 @@ import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
-//Git inside eclipse test lel
+
 public class Main implements Runnable {
 	public static final int WIDTH = 256, HEIGHT = 144;
 	public static final int TILE_SIZE = 16; //Only works properly with 16 for the moment
 	public static final int SPRITE_SIZE = 16;
-	public static final int SCALE = 3;
+	public static final  int SCALE = 3;
 	public static final int tilesX = WIDTH / TILE_SIZE, tilesY = HEIGHT / TILE_SIZE;
 	public static final float GRAVITY = 0.1f;
 	public static final float TERMINAL_VELOCITY = 5;
@@ -120,7 +120,8 @@ public class Main implements Runnable {
 //		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 
 		Sprite playerSprite = new Sprite(playerSheet, 0, 0, 1, 2, 3);
-		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);
+//		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);
+		player = new Player(playerSprite, 0, 0, listener, this);
 		
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
@@ -234,8 +235,8 @@ public class Main implements Runnable {
 	
 	public void respawnPlayer() {
 		player.alive = true;
-		player.setX(WIDTH / 2);
-		player.setY(HEIGHT - TILE_SIZE - player.getSizeY());
+		player.setX(getLevels().getPlayerSpawnPoint().x);
+		player.setY(getLevels().getPlayerSpawnPoint().y);
 		player.setHealth(100);
 	}
 	

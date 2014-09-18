@@ -2,6 +2,7 @@ package com.hanfeldt.game.level;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
@@ -17,7 +18,7 @@ public class Level {
 	
 	protected Player player;
 	public TileLinkedList<Tile> tiles;
-	
+	public Point playerSpawn = new Point(Main.WIDTH / 2, Main.HEIGHT - Main.TILE_SIZE - Main.getGame().getPlayer().getSizeY());//Default
 	
 	public static int level = 0;
 	protected int sizeX, sizeY;
@@ -115,6 +116,18 @@ public class Level {
 			}
 		}
 		return false;
+	}
+	
+	public Point getPlayerSpawnPoint(){
+		return playerSpawn;
+	}
+	
+	public void setPlayerSpawn(int x, int y){
+		playerSpawn.setLocation(x, y);
+	}
+	
+	public void setPlayerSpawn(Point p){
+		playerSpawn.setLocation(p);
 	}
 	
 }

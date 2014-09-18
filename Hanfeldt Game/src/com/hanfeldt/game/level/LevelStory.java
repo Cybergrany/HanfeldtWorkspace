@@ -35,12 +35,14 @@ public class LevelStory extends Level {
 		try {
 			temp = ImageIO.read(Main.class.getResource(path));
 		}catch(Exception e) {
+			System.err.println("Woah your map is missing! Enjoy your newly crashed game :)");
 			e.printStackTrace();
 		}finally{
 			levelImage = temp;
 		}
 		
-		sizeY = Main.HEIGHT /Main.SPRITE_SIZE;
+//		sizeY = Main.HEIGHT /Main.SPRITE_SIZE;
+		sizeY = levelImage.getHeight();
 		sizeX = levelImage.getWidth();
 		
 		tiles = new TileLinkedList<Tile>();
@@ -61,7 +63,8 @@ public class LevelStory extends Level {
 				case 0xff0000ff:
 					tiles.addTile(x, y, new ZombieSpawner(x, y));
 					for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
-						Spawner.spawnNpc(new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40));
+						Zombie zombie = new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40);
+						Spawner.spawnNpc(zombie);
 					}
 					break;
 				case 0xff00FF00:
@@ -89,7 +92,8 @@ public class LevelStory extends Level {
 					tiles.addTile(x, y, new RoadBase(x, y));
 					break;
 				case 0xffFFFF8C:
-					tiles.addTile(x, y, new RoadBase(x, y));//TODO Nothing here atm
+					setPlayerSpawn(Main.TILE_SIZE*x, Main.TILE_SIZE * y);
+					Main.getGame().getPlayer().setLocation(getPlayerSpawnPoint());
 					break;
 				case 0xff559F74:
 					tiles.addTile(x, y, new CementCoreModern(x, y));

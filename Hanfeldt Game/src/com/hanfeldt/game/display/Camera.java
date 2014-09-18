@@ -37,7 +37,7 @@ public class Camera {
 	
 	public void tick() {
 		x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
-		y = 0;
+		y = (int) ((player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -5)));
 		if(shakingTicks > 0) {
 			x += rand.nextInt(5) -2;
 			y += rand.nextInt(3) -1;

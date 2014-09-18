@@ -1,5 +1,7 @@
 package com.hanfeldt.game.entity;
 
+import java.awt.Point;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.tile.Tile;
 
@@ -117,6 +119,12 @@ public class Entity {
 		
 	}
 	
+	//java.awt.Point can be handier to use sometimes
+	public void setLocation(Point p){
+		this.x = p.x;
+		this.y = p.y;
+	}
+	
 	public void setX(float x) {
 		this.x = x;
 	}
@@ -195,7 +203,7 @@ public class Entity {
 	/**
 	 * Right = true, Left = false
 	 */
-	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete! // (Ronan) Oh right
+	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete! // (Ronan) Oh right//Hey Ronan
 		direction = dir;
 	}
 	

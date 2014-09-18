@@ -9,8 +9,7 @@ import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.RPGLauncher;
-import com.hanfeldt.game.weapon.weapons.Sword;
+import com.hanfeldt.game.weapon.weapons.BaseBat;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 
@@ -18,8 +17,8 @@ public class Player extends EntityLiving {
 	public static final int ticksPerAnimChange = 4;
 	private BufferedImage walkingImage;
 	private PlayerEvents events;
-//	private Weapon weaponEquipped = new Sword(this);
-	private Weapon weaponEquipped = new RPGLauncher(this);
+//	private Weapon weaponEquipped;
+	private Weapon weaponEquipped = new BaseBat(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private int stamina = 69;
