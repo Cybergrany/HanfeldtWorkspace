@@ -1,14 +1,17 @@
 package com.hanfeldt.game.display;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.EntityItem;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.particles.Gore;
+import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.tile.Tile;
 
@@ -78,6 +81,20 @@ public class Camera {
 			screenY <= Main.HEIGHT) {
 			g.setColor(Bullet.COLOR);
 			g.fillRect(screenX, screenY, 1, 1);
+		}
+	}
+	
+	public void renderGore(Graphics g, GoreSpawn gs){
+			for(Gore gore : gs.gore){
+				int screenX = gore.getX() - x;
+				int screenY = gore.getY() - y;
+				if(screenX + 1 >= 0 &&
+					screenX <= Main.WIDTH &&
+					screenY + 1 >= 0 &&
+					screenY <= Main.HEIGHT){
+					g.setColor(Color.RED);
+					g.fillRect(screenX, screenY, 1, 1);
+			}
 		}
 	}
 	

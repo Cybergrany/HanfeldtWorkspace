@@ -100,7 +100,6 @@ public class Bullet extends SpriteEntity {
 		try {
 			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - Main.HEIGHT / 2 - Main.TILE_SIZE,
 					Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) :Main.WIDTH /2)));
-			System.out.println(Main.mouseY - Main.HEIGHT / 2 - Main.TILE_SIZE);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

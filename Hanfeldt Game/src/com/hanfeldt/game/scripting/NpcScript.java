@@ -6,7 +6,6 @@ import java.io.IOException;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.state.Story;
-import com.hanfeldt.io.Debug;
 
 /**
  * Scripting NPC behavior
@@ -40,7 +39,7 @@ public class NpcScript {
 			}
 		}catch(IOException e) {
 			System.err.println("Dialogue file not found for level " + currentLevel);
-			Debug.printStackTraceDebug(e);
+//			Debug.printStackTraceDebug(e);
 		}catch(Exception e){
 //			Debug.printErrorDebug("Error while loading script.");
 //			Debug.printStackTraceDebug(e);

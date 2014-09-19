@@ -8,7 +8,7 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.game.weapon.weapons.BaseBat;
 import com.hanfeldt.io.Debug;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
@@ -17,15 +17,13 @@ public class Player extends EntityLiving {
 	public static final int ticksPerAnimChange = 4;
 	private BufferedImage walkingImage;
 	private PlayerEvents events;
-//	private Weapon weaponEquipped;
-	private Weapon weaponEquipped = new Pistol(this);
+	private Weapon weaponEquipped = new BaseBat(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private int stamina = 69;
 	private boolean tired = false;//Time when stamina can't be used during regen
 	private long score = 0;
 	private Listener listener;
-	private Main main;
 	
 	public boolean alive = true;
 	public boolean levelFinished;
@@ -37,7 +35,6 @@ public class Player extends EntityLiving {
 		events = new PlayerEvents(this);
 		levelFinished = false;
 		listener = l;
-		this.main = main;
 	}
 	
 	public void tickWalking() {

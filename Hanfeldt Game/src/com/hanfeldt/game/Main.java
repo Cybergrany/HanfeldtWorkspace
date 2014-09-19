@@ -14,7 +14,6 @@ import com.hanfeldt.game.display.Hud;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityItem;
-import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
@@ -294,8 +293,8 @@ public class Main implements Runnable {
 		state = playingState;
 	}
 	
-	public void addGore(int x, int y, EntityLiving e) {
-		gore.add(new GoreSpawn(x, y, e));
+	public void addGore(int x, int y) {
+		gore.add(new GoreSpawn(x, y));
 	}
 	
 	public ArrayList<GoreSpawn> getGore() {
@@ -332,5 +331,4 @@ public class Main implements Runnable {
 		}
 		return camera;
 	}
-	
 }

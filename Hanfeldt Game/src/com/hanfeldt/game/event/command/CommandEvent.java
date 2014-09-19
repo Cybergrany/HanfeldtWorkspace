@@ -1,5 +1,15 @@
 package com.hanfeldt.game.event.command;
 
+import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.EntityItem;
+import com.hanfeldt.game.entity.item.ItemSpawner;
+import com.hanfeldt.game.entity.item.SwordItem;
+import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
+import com.hanfeldt.game.weapon.weapons.M16;
+import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.io.Debug;
+
 
 public class CommandEvent {
 	
@@ -25,17 +35,72 @@ public class CommandEvent {
 		}
 		switch(command){
 			case "give":
-				ItemGiveEvent.checkGiveCommand(subcommand);
+				checkGiveCommand(subcommand);
 				break;
 			case "set":
-				SetCommandEvent.checkSetCommand(subcommand);
+				checkSetCommand(subcommand);
 				break;
 			case "spawn":
-				SpawnCommandEvent.checkSpawnCommand(subcommand);
+				checkSpawnCommand(subcommand);
+				break;
+			case "drop":
+				checkDropCommand(subcommand);
 				break;
 			default:
-				throw new CommandNotFoundException();
+				throw new CommandNotFoundException(subcommand);
 		}
 //		throw new CommandNotFoundException();
+	}
+
+	public static void checkGiveCommand(String command) throws CommandNotFoundException{
+		switch(command){
+			case "pistol":
+				Main.getGame().getPlayer().setWeaponEquipped(new Pistol(Main.getGame().getPlayer()));
+				Debug.printDebug("Pistol given to player.");
+				break;
+			case "m16":
+				Main.getGame().getPlayer().setWeaponEquipped(new M16(Main.getGame().getPlayer()));
+				Debug.printDebug("M16 given to player");
+				break;
+			default:
+					throw new CommandNotFoundException(command);
+		}
+	}
+
+	public static void checkSetCommand(String command) throws CommandNotFoundException{
+		switch(command){
+			case "npc_following":
+				for(int i = 0; i < Main.getGame().getNpc().size(); i++){
+					Npc npc = Main.getGame().getNpc().get(i);
+					if(npc instanceof NPCCharacter){
+						((NPCCharacter) npc).setFollowingPlayer(true);
+					}
+				}
+				break;
+			default:
+				throw new CommandNotFoundException(command);
+		}
+	}
+
+	public static void checkSpawnCommand(String command) throws CommandNotFoundException{
+		switch(command){
+			case "sword":
+				Debug.printDebug("Spawned Sword at: " + (Main.getGame().getPlayer().getX() + 5) + "\t" + Main.getGame().getPlayer().getY() );
+				ItemSpawner.spawnItem(new SwordItem(Main.getGame().getPlayer().getX() + 5, Main.getGame().getPlayer().getY()));
+				break;
+			default:
+				Main.getGame().getPlayer().setLocation(Main.getGame().getLevels().getPlayerSpawnPoint());
+		}
+	}
+	
+	public static void checkDropCommand(String command)throws CommandNotFoundException{
+		switch(command){
+			case "hand":
+				Debug.printDebug("Hand item dropped");
+				ItemSpawner.spawnItem(new EntityItem(Main.getGame().getPlayer().getWeaponEquipped().getSprite(), Main.getGame().getPlayer().getX(), Main.getGame().getPlayer().getY()));
+				break;
+				default:
+					throw new CommandNotFoundException(command);
+		}
 	}
 }

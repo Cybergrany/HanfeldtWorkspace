@@ -73,7 +73,8 @@ public abstract class Playing extends State {
 		}
 		main.getHud().draw(g);
 		for(GoreSpawn go : main.getGore()) {
-			go.render(g);
+//			go.render(g);
+			camera.renderGore(g, go);
 		}
 		for(Npc n :  main.getNpc()){
 			camera.renderEntityLiving(g,n);

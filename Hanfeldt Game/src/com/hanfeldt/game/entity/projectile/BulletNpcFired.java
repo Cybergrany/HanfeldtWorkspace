@@ -19,12 +19,12 @@ public class BulletNpcFired extends Bullet{
 		super(x, y, damage);
 		
 		try{
-			angle = (float) Math.toDegrees(Math.atan2(aimX - (el.getY() + Main.TILE_SIZE),
+			angle = (float) Math.toDegrees(Math.atan2(aimX - Main.HEIGHT / 2 - Main.TILE_SIZE,
 					aimY - (el.getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
 		}catch(Exception e){
 			Debug.printErrorDebug("Error setting bullet angle");
 		}
-		
+		System.out.println(angle);
 		ent = el;
 	}
 	

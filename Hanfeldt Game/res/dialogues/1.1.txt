@@ -1,9 +1,9 @@
 <You> You there! Have you seen my son?
 <Bill> No, but this will help you find him...
 *Bill hands you a pistol*
-dont/give pistol
-dont/set npc_following
-dont/spawn sword
+/drop hand
+/give pistol
+set npc_following
 <Bill> Here, I may as well follow you now as well,
 seeing as the dev coded that in.
 <You> Whoah, thank you!
