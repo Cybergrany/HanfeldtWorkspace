@@ -30,6 +30,10 @@ public class SpriteSheet {
 		return sheet.getSubimage(row * Main.SPRITE_SIZE, col * Main.SPRITE_SIZE, width * Main.SPRITE_SIZE, height * Main.SPRITE_SIZE);
 	}
 	
+	public BufferedImage getImage(){
+		return sheet.getSubimage(0, 0, sheet.getWidth(), sheet.getHeight());
+	}
+	
 	public static void initSheets(){
 		playerSheet = new SpriteSheet(basePath + "characters/player_standard.png");
 		monsterSheet = new SpriteSheet(basePath + "characters/monsters.png");

@@ -22,6 +22,12 @@ public class Sprite {
 		height = image.getHeight() /Main.TILE_SIZE;
 	}
 	
+	public Sprite(SpriteSheet sheet){
+		image = sheet.getImage();
+		width = image.getWidth();
+		height = image.getHeight();
+	}
+	
 	public Sprite(SpriteSheet sheet, int x, int y, int w, int h, int numWalkingAnims) {
 		image = sheet.getImage(x, y, w, h);
 		width = w;

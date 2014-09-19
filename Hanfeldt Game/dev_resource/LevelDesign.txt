@@ -6,6 +6,8 @@ An index of 0 is furthest away (bg0.png looks like it's furthest away from the p
 
 ---Blocks---
 
+0xff9a0000(Darkish Red) = UNUSED
+
 0xFF000000(Black) = Standard Block
 0xff0000ff(Blue) = Zombie Spawner
 0xff00FF00(Green) = Item Chest (Ammo) 

@@ -24,7 +24,7 @@ public class Dialogue {
 		String line;
 		while((line = br.readLine()) != null) {
 			if(line.startsWith("/")){
-				CommandEvent.checkCommand(line.replace("/", ""));
+//				CommandEvent.checkCommand(line.replace("/", ""));
 			}else{
 				lines.add(line);
 			}

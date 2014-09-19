@@ -1,9 +1,11 @@
 package com.hanfeldt.game.event.command;
 
+
 public class CommandEvent {
 	
 	public CommandEvent(){
-		
+		ConsoleHandler handler = new ConsoleHandler();
+		handler.start();
 	}
 	
 	/**
@@ -11,11 +13,16 @@ public class CommandEvent {
 	 * Please note that two word commands are only supported for the time being.
 	 * @param command
 	 */
-	public static void checkCommand(String command){
+	public static void checkCommand(String command) throws CommandNotFoundException{
 		command = command.toLowerCase();
 		String[] commandAr = command.split("\\s+");
-		command = commandAr[0];
-		String subcommand = commandAr[1];
+		String subcommand;
+		if(commandAr.length > 1){
+			command = commandAr[0];
+			subcommand = commandAr[1];
+		}else{
+			subcommand = commandAr[0];
+		}
 		switch(command){
 			case "give":
 				ItemGiveEvent.checkGiveCommand(subcommand);
@@ -25,6 +32,10 @@ public class CommandEvent {
 				break;
 			case "spawn":
 				SpawnCommandEvent.checkSpawnCommand(subcommand);
+				break;
+			default:
+				throw new CommandNotFoundException();
 		}
+//		throw new CommandNotFoundException();
 	}
 }

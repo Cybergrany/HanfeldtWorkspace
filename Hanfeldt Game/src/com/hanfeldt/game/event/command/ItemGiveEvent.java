@@ -11,7 +11,7 @@ public class ItemGiveEvent {
 		
 	}
 	
-	public static void checkGiveCommand(String command){
+	public static void checkGiveCommand(String command) throws CommandNotFoundException{
 		switch(command){
 			case "pistol":
 				Main.getGame().getPlayer().setWeaponEquipped(new Pistol(Main.getGame().getPlayer()));
@@ -21,6 +21,8 @@ public class ItemGiveEvent {
 				Main.getGame().getPlayer().setWeaponEquipped(new M16(Main.getGame().getPlayer()));
 				Debug.printDebug("M16 given to player");
 				break;
+			default:
+					throw new CommandNotFoundException();
 		}
 	}
 }

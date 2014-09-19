@@ -14,10 +14,12 @@ import com.hanfeldt.game.display.Hud;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityItem;
-import com.hanfeldt.game.entity.GoreSpawn;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
+import com.hanfeldt.game.event.command.CommandEvent;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.properties.PropertiesLoader;
@@ -130,6 +132,9 @@ public class Main implements Runnable {
 		
 		npc = new ArrayList<Npc>();
 		items = new ArrayList<EntityItem>();
+		
+		if(debugCheats)
+		new CommandEvent();
 		
 		// Start "GameLoop"
 		running = true;
@@ -289,8 +294,8 @@ public class Main implements Runnable {
 		state = playingState;
 	}
 	
-	public void addGore(int x, int y) {
-		gore.add(new GoreSpawn(x, y));
+	public void addGore(int x, int y, EntityLiving e) {
+		gore.add(new GoreSpawn(x, y, e));
 	}
 	
 	public ArrayList<GoreSpawn> getGore() {

@@ -7,9 +7,9 @@ import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.event.PlayerEvents;
-import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.BaseBat;
+import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.io.Debug;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 
@@ -18,7 +18,7 @@ public class Player extends EntityLiving {
 	private BufferedImage walkingImage;
 	private PlayerEvents events;
 //	private Weapon weaponEquipped;
-	private Weapon weaponEquipped = new BaseBat(this);
+	private Weapon weaponEquipped = new Pistol(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private int stamina = 69;
@@ -110,8 +110,9 @@ public class Player extends EntityLiving {
 			
 		}
 		
-		if(getY() > Main.HEIGHT && main.getState() instanceof Playing){
+		if(getY()  > Main.getGame().getLevels().getSizeY() * Main.TILE_SIZE){
 			events.damagePlayer(getHealth(), Values.fall_death_id);
+			Debug.printDebug("Player out of map");
 		}
 		
 		//Moved fall damage to Entity.checkCollisions (in the "below" section)

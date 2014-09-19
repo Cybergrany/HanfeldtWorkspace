@@ -11,6 +11,7 @@ public class LevelLoader {
 	public static int currentLevelBgAmount = 0;
 	public static int[] currentLevelNpcTrigger;
 	public static String[] currentLevelNpcAction;
+	public static boolean hasStaticBg;
 	
 	public LevelLoader(){
 		

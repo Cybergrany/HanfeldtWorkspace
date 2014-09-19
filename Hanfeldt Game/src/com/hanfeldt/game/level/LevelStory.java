@@ -98,6 +98,8 @@ public class LevelStory extends Level {
 				case 0xff559F74:
 					tiles.addTile(x, y, new CementCoreModern(x, y));
 					break;
+				case 0xff9a0000:
+//					TODO: UNUSED
 				default:
 					tiles.addTile(x, y, new Air(x, y));
 				}

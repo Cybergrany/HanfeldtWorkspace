@@ -22,7 +22,9 @@ public class PropertyConfig {
 	private static String filenameLevel = "level.conf";
 	
 	public static int level = 1; //The level to configure
-	public static int bgAmount = 4;//How many layers of backgrounds this level has
+	
+	public static int bgAmount = 4;//How many layers of dynamic parallax backgrounds this level has
+	public static boolean hasStaticBackground = true;//If level has static background. Will support multiple if needed
 	public static String[]  npcList  = new String[] {"Bill"};//List of NPC's in this Level
 	public static String[] npcLocation = new String[] {"500", Integer.toString(Main.HEIGHT - (Main.TILE_SIZE*4))};//Where the NPC's are
 	public static String[] npcXTrigger = new String[] {"400"};//Where the NPC is triggered
@@ -67,6 +69,7 @@ public class PropertyConfig {
 		System.out.println("Writing to properties file to " + levelPath);
 		
 		p.setProperty("bgAmount", Integer.toString(bgAmount));
+		p.setProperty("hasStaticBg", Boolean.toString(hasStaticBackground));
 		p.setProperty("npcList", Arrays.toString(npcList));
 		p.setProperty("npcLocation", Arrays.toString(npcLocation));
 		p.setProperty("npcXTrigger", Arrays.toString(npcXTrigger));

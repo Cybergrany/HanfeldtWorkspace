@@ -76,6 +76,10 @@ public class PropertiesLoader {
 		printDebug("Background Amount: " + p.getProperty("bgAmount"));
 		LevelLoader.currentLevelBgAmount = Integer.parseInt(p.getProperty("bgAmount"));
 		
+		//HasStaticBg
+		printDebug("Has Static Background: " + p.getProperty("hasStaticBg"));
+		LevelLoader.hasStaticBg = Boolean.parseBoolean(p.getProperty("hasStaticBg"));
+		
 		//Npc List
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
 		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");

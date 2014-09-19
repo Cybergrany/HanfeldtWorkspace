@@ -14,4 +14,8 @@ public class Air extends Tile {
 		return "Air";
 	}
 	
+	public boolean isVisible(){
+		return false;
+	}
+	
 }

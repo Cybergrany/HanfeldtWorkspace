@@ -59,7 +59,7 @@ public class Bullet extends SpriteEntity {
 	public void destroyBulletAtBounds(){
 		if (getX() < getX() - (Main.WIDTH /2) ||
 			getX() > getX() + (Main.WIDTH /2) ||
-			getY() < 0 || getY() > Main.HEIGHT){
+			getY() < -50 || getY() > Main.getGame().getLevels().getSizeY() * Main.TILE_SIZE){
 			destroyBullet();
 		}
 	}
@@ -98,8 +98,11 @@ public class Bullet extends SpriteEntity {
 	
 	public void setAngle(){
 		try {
+//			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.TILE_SIZE),
+//														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
 			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.TILE_SIZE),
-														Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
+					Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) :Main.WIDTH /2)));
+			System.out.println(Main.mouseY - (Main.getGame().getPlayer().getY() + Main.TILE_SIZE));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

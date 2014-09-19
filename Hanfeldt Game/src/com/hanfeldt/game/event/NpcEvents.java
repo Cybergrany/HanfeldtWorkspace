@@ -65,9 +65,13 @@ public class NpcEvents {
 	public void killNpc(Npc npc, int id) {
 		Main.getGame().getNpc().remove(npc);
 	}
+	
+	public void killNpc(Npc npc) {
+		Main.getGame().getNpc().remove(npc);
+	}
 
 	public boolean isOutsideMap(Npc npc) {
-		if (npc.getY() > Main.HEIGHT) {
+		if (npc.getY() > Main.getGame().getLevels().getSizeY() * Main.TILE_SIZE) {
 			return true;
 		}
 		return false;
@@ -92,7 +96,7 @@ public class NpcEvents {
 	public void bulletHit(Npc npc, Bullet b) {
 		if(b instanceof BulletLobbedExplosive)
 			return;
-		Main.getGame().addGore(b.getX(), b.getY());
+		Main.getGame().addGore(b.getX(), b.getY(), npc);
 		damageNpc(npc, b.getDamage(),
 				Values.zombie_damage_from_bullet_id);
 	}

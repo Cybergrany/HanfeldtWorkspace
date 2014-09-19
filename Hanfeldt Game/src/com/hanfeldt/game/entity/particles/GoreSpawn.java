@@ -1,10 +1,12 @@
-package com.hanfeldt.game.entity;
+package com.hanfeldt.game.entity.particles;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.EntityLiving;
 
 public class GoreSpawn extends Entity {
 	private long lastGoreSpawnTick = 0;
@@ -12,18 +14,20 @@ public class GoreSpawn extends Entity {
 	private Random rand;
 	private  int maxGore;
 	private int tickSpawnGoreDelay;
+	private EntityLiving entity;
 	
-	public GoreSpawn(int x, int y) {
+	public GoreSpawn(int x, int y, EntityLiving e) {
 		super(x, y);
 		rand = new Random();
 		gore = new ArrayList<Gore>();
 		maxGore = rand.nextInt(16) +3;
 		tickSpawnGoreDelay = rand.nextInt(3) +1;
+		entity = e;
 	}
 	
 	public void tick() {
 		if(totalTicks - lastGoreSpawnTick >= tickSpawnGoreDelay && gore.size() < maxGore) {
-			gore.add(new Gore(getX() + rand.nextInt(3) -1, getY() + rand.nextInt(3) -1));
+			gore.add(new Gore(getX() + rand.nextInt(3) -1, getY() + rand.nextInt(3) -1, entity));
 			lastGoreSpawnTick = totalTicks;
 		}
 		for(Gore g : gore) {

@@ -9,6 +9,7 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;
+import com.hanfeldt.io.Debug;
 import com.hanfeldt.io.Sound;
 
 public class WeaponSwung extends TriggerWeapon{
@@ -37,12 +38,16 @@ public class WeaponSwung extends TriggerWeapon{
 			if(!entity.getDirection()) {
 				if(hitBoxLeft.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
-					Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y);
+					try{//Try/catching because killing npc's causes an indexoutofboundsexception.TODO fix
+						Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y, npcs.get(i));
+					}catch(Exception exception){
+						Debug.printErrorDebug("Error while adding gore, see WeaponSwung.java:42");
+					}
 				}
 			}else{
 				if(hitBoxRight.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, Values.zombie_damage_from_sword_id);
-					Main.getGame().addGore(hitBoxRight.x, hitBoxRight.y);
+					Main.getGame().addGore(hitBoxRight.x, hitBoxRight.y, npcs.get(i));
 				}
 			}
 		}

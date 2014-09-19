@@ -54,6 +54,10 @@ public class Tile {
 		return false;
 	}
 	
+	public boolean isVisible(){
+		return true;
+	}
+	
 	public void onCollidedEntity(Entity e) {}
 	
 }

@@ -11,7 +11,7 @@ public class SetCommandEvent {
 		
 	}
 	
-	public static void checkSetCommand(String command){
+	public static void checkSetCommand(String command) throws CommandNotFoundException{
 		switch(command){
 			case "npc_following":
 				for(int i = 0; i < Main.getGame().getNpc().size(); i++){
@@ -21,6 +21,8 @@ public class SetCommandEvent {
 					}
 				}
 				break;
+			default:
+				throw new CommandNotFoundException();
 		}
 	}
 }

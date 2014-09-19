@@ -31,7 +31,7 @@ public class Sound {
 			     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(defaultSound);
 			     Clip clip = AudioSystem.getClip();
 			     clip.open(audioInputStream);
-			     clip.start();
+//			     clip.start();
 			}catch(Exception e) {
 				printErrorDebug("Failed to play sound! Stacktrace:");
 				printStackTraceDebug(e);

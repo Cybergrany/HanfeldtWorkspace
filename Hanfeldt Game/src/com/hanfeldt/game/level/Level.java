@@ -37,7 +37,7 @@ public class Level {
 		for(int i=0; i<tiles.getTileArraySize(); i++) {
 			for(int j=0; j<tiles.size(); j++) {
 				try{
-				if(tiles.getTile(j, i) != null)
+				if(tiles.getTile(j, i) != null && tiles.getTile(j, i).isVisible())
 				c.renderTile(g, tiles.getTile(j, i));
 				}catch(Exception e){}
 			}

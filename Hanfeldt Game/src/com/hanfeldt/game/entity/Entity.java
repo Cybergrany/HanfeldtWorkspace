@@ -8,10 +8,11 @@ import com.hanfeldt.game.tile.Tile;
 public class Entity {
 	protected long totalTicks = 0;
 	private float x, y;
-	float velX = 0f, velY = 0f;
+	protected float velX = 0f;
+	protected float velY = 0f;
 	float velXMax = 10f, velYMax = 3f;
 	protected boolean direction = true; //Right = true, Left = false
-	boolean falling = false;
+	protected boolean falling = false;
 	boolean isMovingLeft = false, isMovingRight = false;
 	
 	public Entity(int x, int y) {
