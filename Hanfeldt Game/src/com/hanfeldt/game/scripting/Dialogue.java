@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.event.command.CommandEvent;
+import com.hanfeldt.game.event.command.CommandNotFoundException;
+import com.hanfeldt.io.Debug;
 
 public class Dialogue {
 	private static BufferedImage dialogueBox;
@@ -24,7 +26,11 @@ public class Dialogue {
 		String line;
 		while((line = br.readLine()) != null) {
 			if(line.startsWith("/")){
-//				CommandEvent.checkCommand(line.replace("/", ""));
+				try {
+					CommandEvent.checkCommand(line.replace("/", ""));
+				} catch (CommandNotFoundException e) {
+					Debug.printStackTraceDebug(e);
+				}
 			}else{
 				lines.add(line);
 			}
