@@ -3,7 +3,6 @@ package com.hanfeldt.game.entity.particles;
 import java.util.Random;
 
 import com.hanfeldt.game.entity.Entity;
-import com.hanfeldt.game.entity.EntityLiving;
 
 public class Gore extends Entity {
 

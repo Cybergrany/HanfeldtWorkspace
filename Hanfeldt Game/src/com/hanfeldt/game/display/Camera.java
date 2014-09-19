@@ -94,7 +94,7 @@ public class Camera {
 					screenY <= Main.HEIGHT){
 					g.setColor(Color.RED);
 					g.fillRect(screenX, screenY, 1, 1);
-			}
+			}else{gs.removeGore();}
 		}
 	}
 	

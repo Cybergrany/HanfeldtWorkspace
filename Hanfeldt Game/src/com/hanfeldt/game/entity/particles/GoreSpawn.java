@@ -3,7 +3,6 @@ package com.hanfeldt.game.entity.particles;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Entity;
 
 public class GoreSpawn extends Entity {
@@ -30,9 +29,17 @@ public class GoreSpawn extends Entity {
 			g.tick();
 		}
 		if(gore.size() > maxGore) {
-			Main.getGame().removeGore(this);
+			removeGore();
 			return;
 		}
 		totalTicks++;
+	}
+	
+	/**
+	 * One does not simply access the arrayList in main
+	 * and remove elements while it is being iterated over.
+	 */
+	public void removeGore(){
+		gore.remove(this);
 	}
 }

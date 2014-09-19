@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import javax.swing.JFrame;
 
@@ -303,14 +304,6 @@ public class Main implements Runnable {
 	
 	public void createGoreList() {
 		gore = new ArrayList<GoreSpawn>();
-	}
-	
-	public void removeGore(GoreSpawn goreSpawn) {
-		for(int i=0; i<gore.size(); i++) {
-			if(goreSpawn.equals(gore.get(i))) {
-				gore.remove(i);
-			}
-		}
 	}
 	
 	public void setPlayingState(State state) {
