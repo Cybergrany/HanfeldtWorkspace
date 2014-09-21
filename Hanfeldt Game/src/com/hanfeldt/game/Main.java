@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 import javax.swing.JFrame;
 

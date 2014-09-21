@@ -42,6 +42,10 @@ public class Bullet extends SpriteEntity {
 		setVelY((float) Math.sin(angle*Math.PI/180) * speed);
 		changeX(getVelX());
 		changeY(getVelY());
+		checkTileCollisions();
+		if(isCollidingWithHorizTile){
+			destroyBullet();
+		}
 		destroyBulletAtBounds();//Lyk dis? --> sure
 	}
 	

@@ -24,7 +24,7 @@ public class BulletNpcFired extends Bullet{
 		}catch(Exception e){
 			Debug.printErrorDebug("Error setting bullet angle");
 		}
-		System.out.println(angle);
+//		System.out.println(angle);
 		ent = el;
 	}
 	

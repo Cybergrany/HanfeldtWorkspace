@@ -3,7 +3,10 @@ package com.hanfeldt.game.entity.particles;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.tile.Tile;
 
 public class GoreSpawn extends Entity {
 	private long lastGoreSpawnTick = 0;

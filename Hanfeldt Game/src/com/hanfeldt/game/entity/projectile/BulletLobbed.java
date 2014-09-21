@@ -41,7 +41,7 @@ public class BulletLobbed extends Bullet{
 		changeX(getVelX());
 		changeY(getVelY());
 		destroyBulletAtBounds();
-		checkTileCollisions(this);
+		checkTileCollisions();
 	}
 	
 	public float getWeight(){

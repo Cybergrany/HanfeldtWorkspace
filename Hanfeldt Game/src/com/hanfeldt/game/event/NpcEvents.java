@@ -49,6 +49,7 @@ public class NpcEvents {
 			if (npc instanceof Zombie) {
 				Main.getGame().getPlayer().changeMoney(Values.money_from_zombie);
 				Main.getGame().getPlayer().changeScore(Values.score_from_zombie);
+				if(!isOutsideMap(npc))
 				ItemSpawner.spawnItem(zombieGore.randomGore(npc.getX(), npc.getY()));
 			}
 			killNpc(npc, id);

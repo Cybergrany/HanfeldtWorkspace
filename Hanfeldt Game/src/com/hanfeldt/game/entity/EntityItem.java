@@ -18,7 +18,7 @@ public class EntityItem extends SpriteEntity{
 	
 	public void tick(){
 		super.tick();
-		checkTileCollisions(this);
+		checkTileCollisions();
 //		if(Main.timer(60)){
 //			System.out.println("\n\n");
 //			System.out.println(getTransparentBounds());

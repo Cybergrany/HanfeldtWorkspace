@@ -23,7 +23,7 @@ public class EntityLiving extends SpriteEntity {
 	
 	public void tick() {
 		super.tick();
-		checkTileCollisions(this);
+		checkTileCollisions();
 		cycleTicks++;
 	}
 	
@@ -55,9 +55,10 @@ public class EntityLiving extends SpriteEntity {
 	}
 	
 	public void jump(){
-		velY = -getJumpHeight();
-		falling = true;
-		
+		if(canJump){
+			velY = -getJumpHeight();
+			falling = true;
+		}
 	}
 	
 	public void setHealth(int health) {

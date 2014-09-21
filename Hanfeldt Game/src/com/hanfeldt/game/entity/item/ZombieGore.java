@@ -13,6 +13,7 @@ public class ZombieGore extends EntityItem{
 	int knockback = 30;
 	float knockspeed = 1.5f;
 	int origX;
+	int afterBleedAmount, AfterBleedTime, bleedIter = 0;
 	
 	public ZombieGore(int x, int y) {//Default
 		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 4, 1, 1), x, y);
@@ -24,6 +25,8 @@ public class ZombieGore extends EntityItem{
 		dir = Main.getGame().getPlayer().getDirection();
 		setFriction(getFriction() * (knockback / 10));
 		knockspeed = (knockback / 10) / 2;
+		afterBleedAmount = new Random().nextInt(4) + 1;
+		AfterBleedTime = 60;
 	}
 	
 	public ZombieGore(Sprite s, int x, int y, int knockback) {
@@ -33,6 +36,8 @@ public class ZombieGore extends EntityItem{
 		dir = Main.getGame().getPlayer().getDirection();
 		setFriction(getFriction() * (knockback / 10));
 		knockspeed = (knockback / 10) / 2;
+		afterBleedAmount = new Random().nextInt(4) + 1;
+		AfterBleedTime = 60;
 	}
 	
 	public void tick(){
@@ -59,6 +64,10 @@ public class ZombieGore extends EntityItem{
 			}else if(getVelX() < 0 || getVelX() > -0.15f) {
 				setVelX(0);
 			}
+		}
+		if(getVelX() == 0 && Main.timer(AfterBleedTime) && bleedIter <= afterBleedAmount){
+			Main.getGame().addGore(getX() + Main.TILE_SIZE / 2, getY() + Main.TILE_SIZE / 2);
+			bleedIter++;
 		}
 	}
 	
