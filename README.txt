@@ -1,3 +1,5 @@
+THIS README IS OUT OF DATE, UPDATE TO COME
+
   _    _              __     _     _ _   
  | |  | |            / _|   | |   | | |  
  | |__| | __ _ _ __ | |_ ___| | __| | |_ 
@@ -29,6 +31,8 @@ M to mute.
 R to reload.
 
 ==Changelog==
+
+THIS IS OUT OF DATE, UPDATE TO COME
 
 a0.1.3 (893870b568376897f24a657a6628e9921b30cf35)-
 -Added reloading (press 'R') with sounds
