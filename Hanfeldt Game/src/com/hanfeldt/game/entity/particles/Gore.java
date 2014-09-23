@@ -7,6 +7,8 @@ import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.tile.Tile;
 
 public class Gore extends Entity {
+	
+	private float yOff;
 
 	public Gore(int x, int y) {
 		super(x, y);
@@ -14,6 +16,7 @@ public class Gore extends Entity {
 		Random rand = new Random();
 		velX = rand.nextFloat() *2.5f * (rand.nextBoolean() ? 1 : -1);
 		velY = rand.nextFloat() *-1.5f;
+		yOff = rand.nextFloat();
 	}
 	
 	public void tick() {
@@ -33,8 +36,7 @@ public class Gore extends Entity {
 						falling = false;
 //						System.out.println("Stopped");
 						setVelX(0);
-						setTileY(Main.getGame().getLevels().getTile(getTileX(), getTileY() + 1).getTileY() - 2);
-						setY(getY() + Main.TILE_SIZE);
+						setY((Main.getGame().getLevels().getTile(getTileX(), getTileY()).getTileY() + (yOff) / 6/*Depth of blood on tile*/) * Main.TILE_SIZE);
 						break outerLoop;
 					}
 //					if(i == getSizeX() -1) {

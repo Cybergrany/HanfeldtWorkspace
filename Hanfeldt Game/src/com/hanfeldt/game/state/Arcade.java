@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.level.LevelArcade;
 
 public class Arcade extends Playing {
 	
@@ -25,7 +24,7 @@ public class Arcade extends Playing {
 	}
 	
 	public void draw(Graphics g) {
-		((LevelArcade) (Main.getGame().getLevels())).render(g, camera);
+//		((LevelArcade) (Main.getGame().getLevels())).render(g, camera);
 		super.draw(g);
 		g.dispose();
 	}

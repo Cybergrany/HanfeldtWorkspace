@@ -2,20 +2,29 @@ package com.hanfeldt.game.tile;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
-import com.hanfeldt.game.entity.Player;
 
 public class Tile {
 	private Sprite sprite;
 	private int x, y;
+	
+	public boolean isSolid = false, isVisible = false;
+	public String name;
 	
 	public Tile(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+	public Tile(int x, int y, int sx, int sy, int w, int h){
+		this.x = x;
+		this.y = y;
+		setSprite(new Sprite(SpriteSheet.getSheet(SpriteSheet.block), sx, sy, w, h));
+	}
+	
 	public boolean isSolid() {
-		return false;
+		return isSolid;
 	}
 	
 	public Sprite getSprite() {
@@ -42,20 +51,8 @@ public class Tile {
 		return y *Main.TILE_SIZE;
 	}
 	
-//	public boolean collidedEntityLiving(EntityLiving e){
-//		Rectangle r = new Rectangle(getX(), getY());
-//		if(e.getBounds().intersects(r)){
-//			return true;
-//		}
-//		return false;
-//	}
-	
-	public boolean collidedPlayer(Player p){
-		return false;
-	}
-	
 	public boolean isVisible(){
-		return true;
+		return isVisible;
 	}
 	
 	public void onCollidedEntity(Entity e) {}

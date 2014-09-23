@@ -37,11 +37,11 @@ public class Main implements Runnable {
 	public static final  int SCALE = 3;
 	public static final int tilesX = WIDTH / TILE_SIZE, tilesY = HEIGHT / TILE_SIZE;
 	public static final float GRAVITY = 0.1f;
-	public static final float TERMINAL_VELOCITY = 5;
+	public static final float TERMINAL_VELOCITY = 15;//Testing 15
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
 	public static int mouseX, mouseY;
-	public static boolean debugCheats = true;
+	public static boolean debugCheats = false;
 	public static SpriteSheet spriteSheet;
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public PropertiesLoader resourceManager;
@@ -54,6 +54,7 @@ public class Main implements Runnable {
 	
 	public ArrayList<Npc> npc;
 	public ArrayList<EntityItem> items;
+	public ArrayList<String[]> blocks;
 	
 	private static Main game;
 	private Player player;
@@ -139,6 +140,8 @@ public class Main implements Runnable {
 		running = true;
 		debug = false;
 		gameOver = false;
+		
+		PropertiesLoader.loadBlockIDs();
 	}
 
 	public void run() {
@@ -217,6 +220,15 @@ public class Main implements Runnable {
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public ArrayList<String[]>getBlockIDs()throws NullPointerException{
+		if(blocks != null){
+			return blocks;
+		}else{
+			System.err.println("Fatal error! Could not load block ID's!");
+			throw new NullPointerException();
+		}
 	}
 	
 	public long getTotalTicks() {

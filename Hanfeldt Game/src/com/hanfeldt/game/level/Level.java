@@ -1,6 +1,5 @@
 package com.hanfeldt.game.level;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -9,7 +8,6 @@ import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
-import com.hanfeldt.game.tile.ZombieSpawner;
 
 public class Level {
 	/*
@@ -107,16 +105,16 @@ public class Level {
 	 * @param y
 	 * @return
 	 */
-	public boolean spawnedFromSpawner(int x, int y){
-		if(tiles.getTile(x, y) instanceof ZombieSpawner){
-			for(int i = 0; i < Main.getGame().getNpc().size(); i++){
-				if(Main.getGame().getNpc().get(i).getSpawnLocation() == new Dimension(x, y)){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+//	public boolean spawnedFromSpawner(int x, int y){
+//		if(tiles.getTile(x, y) instanceof ZombieSpawner){
+//			for(int i = 0; i < Main.getGame().getNpc().size(); i++){
+//				if(Main.getGame().getNpc().get(i).getSpawnLocation() == new Dimension(x, y)){
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
 	
 	public Point getPlayerSpawnPoint(){
 		return playerSpawn;

@@ -46,7 +46,7 @@ public class Entity {
 		totalTicks++;
 	}
 	
-	//java.awt.Point can be handier to use sometimes
+	//java.awt.Point can be more convenient to use sometimes
 	public void setLocation(Point p){
 		this.x = p.x;
 		this.y = p.y;

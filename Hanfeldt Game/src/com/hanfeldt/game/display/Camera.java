@@ -44,6 +44,7 @@ public class Camera {
 //		if(followingPlayer){
 			x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
 			y = (int) ((player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10)));
+//			y = 0;
 //		}
 		if(shakingTicks > 0) {
 			x += rand.nextInt(5) -2;

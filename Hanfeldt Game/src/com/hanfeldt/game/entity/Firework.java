@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.level.LevelArcade;
 import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.io.Sound;
 
@@ -59,7 +58,7 @@ public class Firework extends Entity {
 				if(Main.getGame().getState() instanceof GameWon){
 					removeFirework(GameWon.fireworks);
 				}else{
-					removeFirework(LevelArcade.fireworks);
+//					removeFirework(LevelArcade.fireworks);
 				}
 			}
 		}

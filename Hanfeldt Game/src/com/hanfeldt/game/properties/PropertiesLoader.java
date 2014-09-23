@@ -11,8 +11,10 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Properties;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.npc.NpcList;
 import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.menu.screen.MenuScreenOptionAction;
@@ -27,7 +29,56 @@ public class PropertiesLoader {
 	
 	public PropertiesLoader(){
 
+	}
+	
+	public static void loadBlockIDs(){
+		Properties prop = new Properties();
+		InputStream input = null;
 		
+		try{
+			printDebug("Reading Level properties file...\n");
+			loadBlockID("/config/id/block.conf", input, prop);
+		}catch(IOException e){
+			printErrorDebug("Error while reading properties file.");
+			printStackTraceDebug(e);
+		} catch (URISyntaxException e) {
+			printStackTraceDebug(e);
+		}finally{
+			if(input != null){
+				try{
+					input.close();
+				}catch(IOException e){
+					printStackTraceDebug(e);
+				}
+			}
+		}
+	}
+	
+	public static void loadBlockID(String path, InputStream input, Properties p) throws IOException, URISyntaxException{
+		printDebug("Loading Block IDs");
+		URL resourceUrl = PropertyConfig.class.getResource(path);
+		if(resourceUrl == null){
+			printErrorDebug("Block ID file is missing! Either reconfigure it or reinstall the game!");
+		}
+		File file = new File(resourceUrl.toURI());
+		input = new FileInputStream(file);
+		
+		printDebug("Loading Block ID's from: " + path);
+		p.load(input);
+		
+		
+		
+		ArrayList<String[]> blockList = new ArrayList<String[]>();
+		Enumeration<Object> em = p.keys();
+		
+		while(em.hasMoreElements()){
+			  String str = (String)em.nextElement();
+			  String[] temp = p.getProperty(str).replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+			  blockList.add(temp);
+		  }
+		 
+		Main.getGame().blocks = blockList;
+		input.close();
 	}
 	
 	public static void loadProperties(){
