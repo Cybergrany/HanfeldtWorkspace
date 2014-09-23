@@ -9,11 +9,10 @@ import com.hanfeldt.game.display.SpriteSheet;
 public class Background {
 	public int layerAmount;//The amount of layers in use in this level. 
 	
-	private BackgroundSheet[] layer;
-	private Sprite[] staticLayer;
+	private BackgroundSheet[] layer, staticLayer;
 //	private Sky sky;
-	private int currentLevel;
-	private boolean sbg = false;//Static bg
+	private int currentLevel, sectorY;
+	private boolean sbg = false;//Static, non moving bg
 	
 	public Background(int level){
 //		sky = new Sky();
@@ -27,9 +26,11 @@ public class Background {
 		}
 		sbg = LevelLoader.hasStaticBg;
 		if(sbg){
-			staticLayer = new Sprite[1];
-			staticLayer[0] = new Sprite(new SpriteSheet(levelPath(currentLevel, 0, true)));
+			staticLayer = new BackgroundSheet[1];
+			staticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 0, true), Main.TILE_SIZE);
 		}
+		sectorY = layer[0].getImage().getHeight();
+		System.out.println(sectorY);
 	}
 	
 	public void tick(){
@@ -39,11 +40,11 @@ public class Background {
 	public void draw(Graphics g){
 //		sky.draw(g);
 		for(int i = 0; i < layer.length; i++){
-			layer[i].draw(g, viewModifierX(i), 0);
+			layer[i].draw(g, viewModifierX(i), viewModifierY(i - layerAmount));
 		}
 		if(sbg)
 		for(int i = 0; i < staticLayer.length; i++){
-			staticLayer[i].draw(g, -Main.getGame().getPlayer().getX(), - Main.getGame().getPlayer().getY());
+			staticLayer[i].drawEnlarged(g, -Main.getGame().getPlayer().getX(), - Main.getGame().getPlayer().getY());
 		}
 	}
 	
@@ -57,15 +58,20 @@ public class Background {
 		}
 	}
 	
-	@SuppressWarnings("unused")
+//	@SuppressWarnings("unused")
+//	private double viewModifierY(int i){
+//		if(i == 0){
+//			return - Main.getGame().getPlayer().getY() / layerAmount;
+//		}else if(i == layer.length - 1){
+//			return - Main.getGame().getPlayer().getY();
+//		}else{
+//			return Main.getGame().getPlayer().getY() / (i - layerAmount);
+//		}
+//	}
+	
 	private double viewModifierY(int i){
-		if(i == 0){
-			return - Main.getGame().getPlayer().getY() / layerAmount;
-		}else if(i == layer.length - 1){
-			return - Main.getGame().getPlayer().getY();
-		}else{
-			return Main.getGame().getPlayer().getY() / (i - layerAmount);
-		}
+		Main main = Main.getGame();
+		return 0;
 	}
 	
 	private String levelPath(int levelNumber, int layer, boolean staticBg){
@@ -74,9 +80,5 @@ public class Background {
 		}
 		return String.format("/images/maps/backgrounds/level%d/bg%d.png", levelNumber, layer);
 	}
-	
-//	private String levelPath(int levelNumber){
-//		return String.format("/images/maps/backgrounds/level%d/", levelNumber);
-//	}
 
 }

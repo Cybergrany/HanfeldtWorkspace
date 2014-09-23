@@ -72,8 +72,6 @@ public class Player extends EntityLiving {
 			if(stamina < 0)
 				setJumpHeight(1);
 			jump();
-			if(stamina > 5)
-			changestamina(-4);
 			Sound.playSound("Jump.wav");
 		}
 		

@@ -21,6 +21,8 @@ public class Camera {
 	private int shakingTicks;
 	private Random rand = new Random();
 	
+//	public boolean followingPlayer = true;
+	
 	public Camera(int x, int y, Player p) {
 		this.x = x;
 		this.y = y;
@@ -39,8 +41,10 @@ public class Camera {
 	}
 	
 	public void tick() {
-		x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
-		y = (int) ((player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -5)));
+//		if(followingPlayer){
+			x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
+			y = (int) ((player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10)));
+//		}
 		if(shakingTicks > 0) {
 			x += rand.nextInt(5) -2;
 			y += rand.nextInt(3) -1;
