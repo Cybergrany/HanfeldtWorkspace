@@ -2,24 +2,17 @@
 The size of the image is 16x the amount of pixels in map.png for that level
 Eg: W and H of a map that is 180 * 90 is 180 * 16 and 90 * 16
 
+NEWLY ADDED: Because bg's for large maps would get very big-
+Magnification/enlargement is now available, simply specify it when calling
+the backgroundSheet. Eg, instead of 16*x and 16*y, you can have the bg image at
+8*x and 8*y, then set enlargement to 2x (in theory)
+To get an idea of scale, use a grid of (16*8)x(9*8)y for the above example
+
+For maps; 9 pixels is one screen height
+In GIMP, setting up a 16*9 grid is handy for this
+
 An index of 0 is furthest away (bg0.png looks like it's furthest away from the player)
 
 ---Blocks---
 
-0xff9a0000(Darkish Red) = UNUSED
-
-0xFF000000(Black) = Standard Block
-0xff0000ff(Blue) = Zombie Spawner
-0xff00FF00(Green) = Item Chest (Ammo) 
-
-0xffFF0000(Red) = CementCore
-0xff9B0000(Dark Red) = CementBack
-0xff00008C(Dark Blue) = CementFloor
-0xff007700(Dark Green) = CementRoof
-
-0xffFFFF00(Yellow) = RoofLamp
-
-0xffB200FF(Magneta) = RoadSurface
-0xffB20084(Dark Magneta) = RoadBase
-0xffFFFF8C(Bright Yellow) = Player Spawn
-0xff559F74(Puke Green) = CementCoreModerns
+EDIT: SEE block.conf file for ID's etc

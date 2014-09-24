@@ -3,8 +3,6 @@ package com.hanfeldt.game.level;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.game.display.Sprite;
-import com.hanfeldt.game.display.SpriteSheet;
 
 public class Background {
 	public int layerAmount;//The amount of layers in use in this level. 
@@ -27,7 +25,7 @@ public class Background {
 		sbg = LevelLoader.hasStaticBg;
 		if(sbg){
 			staticLayer = new BackgroundSheet[1];
-			staticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 0, true), Main.TILE_SIZE);
+			staticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 0, true), 4);;
 		}
 		sectorY = layer[0].getImage().getHeight();
 		System.out.println(sectorY);
@@ -70,7 +68,7 @@ public class Background {
 //	}
 	
 	private double viewModifierY(int i){
-		Main main = Main.getGame();
+//		Main main = Main.getGame();
 		return 0;
 	}
 	

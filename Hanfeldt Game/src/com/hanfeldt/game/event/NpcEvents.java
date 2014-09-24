@@ -97,7 +97,7 @@ public class NpcEvents {
 	public void bulletHit(Npc npc, Bullet b) {
 		if(b instanceof BulletLobbedExplosive)
 			return;
-		Main.getGame().addGore(b.getX(), b.getY());
+		Main.getGame().addGore(b.getX(), b.getY(), b.direction);
 		damageNpc(npc, b.getDamage(),
 				Values.zombie_damage_from_bullet_id);
 	}

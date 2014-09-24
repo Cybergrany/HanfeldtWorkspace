@@ -3,10 +3,7 @@ package com.hanfeldt.game.entity.particles;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Entity;
-import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.tile.Tile;
 
 public class GoreSpawn extends Entity {
 	private long lastGoreSpawnTick = 0;
@@ -14,6 +11,7 @@ public class GoreSpawn extends Entity {
 	private Random rand;
 	private  int maxGore;
 	private int tickSpawnGoreDelay;
+	private boolean singleDir = false, direction;
 	
 	public GoreSpawn(int x, int y) {
 		super(x, y);
@@ -23,9 +21,23 @@ public class GoreSpawn extends Entity {
 		tickSpawnGoreDelay = rand.nextInt(3) +1;
 	}
 	
+	public GoreSpawn(int x, int y, boolean dir) {
+		super(x, y);
+		singleDir = true;//Signifies that gore will travel in one direction
+		rand = new Random();
+		gore = new ArrayList<Gore>();
+		maxGore = rand.nextInt(16) +3;
+		tickSpawnGoreDelay = rand.nextInt(3) +1;
+		direction = !dir;
+	}
+	
 	public void tick() {
 		if(totalTicks - lastGoreSpawnTick >= tickSpawnGoreDelay && gore.size() < maxGore) {
-			gore.add(new Gore(getX() + rand.nextInt(3) -1, getY() + rand.nextInt(3) -1));
+			if(singleDir){
+				gore.add(new Gore(getX() + rand.nextInt(3) -1, getY() + rand.nextInt(3) -1, direction));
+			}else{
+				gore.add(new Gore(getX() + rand.nextInt(3) -1, getY() + rand.nextInt(3) -1));
+			}
 			lastGoreSpawnTick = totalTicks;
 		}
 		for(Gore g : gore) {
