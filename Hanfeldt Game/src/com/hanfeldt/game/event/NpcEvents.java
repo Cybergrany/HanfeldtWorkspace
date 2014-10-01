@@ -14,6 +14,15 @@ import com.hanfeldt.io.Sound;
 
 public class NpcEvents {
 
+	public static final int fall_damage_id = 1;
+	public static final int fall_death_id = 3;
+	
+	public static final int zombie_damage_id = 2;
+	public static final int zombie_damage_from_bullet_id = 2;
+	public static final int zombie_damage_from_sword_id = 3;
+	public static final int zombie_damage_from_rpgGrenade_id = 5;
+	public static final int zombie_damage_to_player = 10;
+	
 	private Npc npc;
 	public ZombieGore zombieGore;
 
@@ -38,10 +47,10 @@ public class NpcEvents {
 	}
 
 	public void damageNpc(Npc npc, int damage, int id) {
-		if (id == Values.zombie_damage_from_bullet_id) {
+		if (id == zombie_damage_from_bullet_id) {
 			Sound.playSound("zombie_hit_from_gun.wav");
 		}
-		if (id == Values.zombie_damage_from_sword_id) {
+		if (id == zombie_damage_from_sword_id) {
 			Sound.playSound("zombie_hit_from_sword.wav");
 		}
 		npc.changeHealth(-damage);
@@ -99,7 +108,7 @@ public class NpcEvents {
 			return;
 		Main.getGame().addGore(b.getX(), b.getY(), b.direction);
 		damageNpc(npc, b.getDamage(),
-				Values.zombie_damage_from_bullet_id);
+				zombie_damage_from_bullet_id);
 	}
 
 	public void idle(Npc npc, float moveSpeed) {

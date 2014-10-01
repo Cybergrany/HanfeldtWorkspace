@@ -6,6 +6,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
+import com.hanfeldt.game.event.NpcEvents;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
@@ -30,7 +31,7 @@ public class Player extends EntityLiving {
 	
 	public Player(Sprite s, int x, int y, Listener l, Main main){
 		super(s, maxHealth, x, y);
-		velXMax = (Main.debugCheats ? 10f : 1f);
+		velXMax = (Main.debugCheats ? 10f : Values.player_max_speed);
 		setJumpHeight(2);
 		events = new PlayerEvents(this);
 		levelFinished = false;
@@ -106,7 +107,7 @@ public class Player extends EntityLiving {
 		}
 		
 		if(getY()  > Main.getGame().getLevels().getSizeY() * Main.TILE_SIZE){
-			events.damagePlayer(getHealth(), Values.fall_death_id);
+			events.damagePlayer(getHealth(), PlayerEvents.fall_death_id);
 			Debug.printDebug("Player out of map");
 		}
 		
@@ -127,7 +128,7 @@ public class Player extends EntityLiving {
 			if(Main.getGame().getNpc().get(i) instanceof Zombie) {
 				Zombie zombie = (Zombie) Main.getGame().getNpc().get(i);
 				if(collidedZombie(zombie)) {
-					events.damagePlayer(Values.zombie_damage_to_player, Values.zombie_damage_id, zombie);
+					events.damagePlayer(NpcEvents.zombie_damage_to_player, NpcEvents.zombie_damage_id, zombie);
 				}
 			}
 		}
@@ -136,17 +137,17 @@ public class Player extends EntityLiving {
 		if(!Main.debugCheats)
 		if(listener.shiftDown && (listener.wDown || listener.dDown)){
 			if(!tired)
-			velXMax = 2f;
+			velXMax = 2.5f;
 			if(!tired && Main.timer(4)){
 				stamina--;
 			}
 			if(stamina <= - 10){
 				tired = true;
-				velXMax = 1f;
+				velXMax = Values.player_max_speed;
 			}
 		}else{
-			velXMax = 1f;
-			if(stamina < 69 && Main.timer(100)){
+			velXMax = Values.player_max_speed;
+			if(stamina < 69 && Main.timer(55)){
 				stamina++;
 				if(stamina > 10){
 					tired = false;
@@ -155,7 +156,7 @@ public class Player extends EntityLiving {
 		}
 		
 		//stamina recovers twice as fast when not moving
-		if(stamina < 69 && !isMovingLeft && !isMovingRight && Main.timer(50)){
+		if(stamina < 69 && !isMovingLeft && !isMovingRight && Main.timer(27)){
 			stamina++;
 		}
 		

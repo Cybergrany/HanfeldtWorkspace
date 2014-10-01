@@ -43,6 +43,11 @@ public class Sprite {
 		g.drawImage(image, x, y, getWidth(), getHeight(), null);
 	}
 	
+	//TODO: Experimental, remove if not needed
+	public void draw(Graphics g, int x, int y, int enlargement) {
+		g.drawImage(image, x, y, getWidth() * enlargement / 100, getHeight() * enlargement / 100, null);
+	}
+	
 	public void draw(Graphics g, int x, int y, boolean direction) {
 		if(direction) {
 			g.drawImage(image, x, y, null);

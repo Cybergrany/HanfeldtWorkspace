@@ -5,7 +5,9 @@ import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.item.ItemSpawner;
 import com.hanfeldt.game.entity.item.SwordItem;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
+import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 import com.hanfeldt.io.Debug;
@@ -45,6 +47,9 @@ public class CommandEvent {
 				break;
 			case "drop":
 				checkDropCommand(subcommand);
+				break;
+			case "printFPS":
+				Main.printFPS = !Main.printFPS;
 				break;
 			default:
 				throw new CommandNotFoundException(subcommand);
@@ -88,6 +93,9 @@ public class CommandEvent {
 				Debug.printDebug("Spawned Sword at: " + (Main.getGame().getPlayer().getX() + 5) + "\t" + Main.getGame().getPlayer().getY() );
 				ItemSpawner.spawnItem(new SwordItem(Main.getGame().getPlayer().getX() + 5, Main.getGame().getPlayer().getY()));
 				break;
+			case "zombie":
+				Spawner.spawnNpc(new Zombie(Main.getGame().getPlayer().getX() + Main.TILE_SIZE * 3, Main.getGame().getPlayer().getY() - Main.TILE_SIZE * 2));
+				break;
 			default:
 				Main.getGame().getPlayer().setLocation(Main.getGame().getLevels().getPlayerSpawnPoint());
 		}
@@ -97,7 +105,9 @@ public class CommandEvent {
 		switch(command){
 			case "hand":
 				Debug.printDebug("Hand item dropped");
-				ItemSpawner.spawnItem(new EntityItem(Main.getGame().getPlayer().getWeaponEquipped().getSprite(), Main.getGame().getPlayer().getX(), Main.getGame().getPlayer().getY()));
+				EntityItem ei = new EntityItem(Main.getGame().getPlayer().getWeaponEquipped().getSprite(), Main.getGame().getPlayer().getX(), Main.getGame().getPlayer().getY());
+				ei.setLinkedItem(Main.getGame().getPlayer().getWeaponEquipped());//Added this so zombies can pick up any weapon
+				ItemSpawner.spawnItem(ei);
 				break;
 				default:
 					throw new CommandNotFoundException(command);

@@ -3,7 +3,7 @@
 *Bill hands you a pistol*
 /drop hand
 /give pistol
-set npc_following
+/set npc_following
 <Bill> Here, I may as well follow you now as well,
 seeing as the dev coded that in.
 <You> Whoah, thank you!

@@ -27,10 +27,6 @@ public class Level {
 	}
 	
 	public void render(Graphics g, Camera c) {
-		draw(g, c);
-	}
-	
-	public void draw(Graphics g, Camera c) {
 		bg.draw(g);
 		for(int i=0; i<tiles.getTileArraySize(); i++) {
 			for(int j=0; j<tiles.size(); j++) {
@@ -40,6 +36,10 @@ public class Level {
 				}catch(Exception e){}
 			}
 		}
+	}
+	
+	public void renderForeground(Graphics g){
+		
 	}
 	
 	public int getSizeX() {

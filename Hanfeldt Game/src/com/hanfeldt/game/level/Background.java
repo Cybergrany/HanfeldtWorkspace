@@ -7,10 +7,10 @@ import com.hanfeldt.game.Main;
 public class Background {
 	public int layerAmount;//The amount of layers in use in this level. 
 	
-	private BackgroundSheet[] layer, staticLayer;
+	private BackgroundSheet[] layer, staticLayer, foreStaticLayer;
 //	private Sky sky;
 	private int currentLevel, sectorY;
-	private boolean sbg = false;//Static, non moving bg
+	private boolean sbg = false, fore = false;//Static, non moving bg, and static foreground
 	
 	public Background(int level){
 //		sky = new Sky();
@@ -25,7 +25,8 @@ public class Background {
 		sbg = LevelLoader.hasStaticBg;
 		if(sbg){
 			staticLayer = new BackgroundSheet[1];
-			staticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 0, true), 4);;
+			staticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 0, true), 2);;
+			staticLayer[0].isStatic = true;
 		}
 		sectorY = layer[0].getImage().getHeight();
 		System.out.println(sectorY);
@@ -42,32 +43,25 @@ public class Background {
 		}
 		if(sbg)
 		for(int i = 0; i < staticLayer.length; i++){
-			staticLayer[i].drawEnlarged(g, -Main.getGame().getPlayer().getX(), - Main.getGame().getPlayer().getY());
+			staticLayer[i].drawEnlarged(g, -Main.getGame().getCamera().getX(), -Main.getGame().getCamera().getY());
 		}
 	}
 	
-	private double viewModifierX(int i){
+	public void draw(Graphics g, boolean foreGround){
+		
+	}
+	
+	public double viewModifierX(int i){
 		if(i == 0){//Far items
-			return - Main.getGame().getPlayer().getX() / layerAmount;
+			return - Main.getGame().getCamera().getX() / layerAmount;
 		}else if(i == layer.length - 1){//Close items
-			return - Main.getGame().getPlayer().getX();
+			return - Main.getGame().getCamera().getX();
 		}else {
-			return Main.getGame().getPlayer().getX() / (i -layerAmount);
+			return Main.getGame().getCamera().getX() / (i -layerAmount);
 		}
 	}
 	
-//	@SuppressWarnings("unused")
-//	private double viewModifierY(int i){
-//		if(i == 0){
-//			return - Main.getGame().getPlayer().getY() / layerAmount;
-//		}else if(i == layer.length - 1){
-//			return - Main.getGame().getPlayer().getY();
-//		}else{
-//			return Main.getGame().getPlayer().getY() / (i - layerAmount);
-//		}
-//	}
-	
-	private double viewModifierY(int i){
+	public double viewModifierY(int i){
 //		Main main = Main.getGame();
 		return 0;
 	}

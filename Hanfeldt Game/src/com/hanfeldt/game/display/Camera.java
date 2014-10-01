@@ -18,15 +18,14 @@ import com.hanfeldt.game.tile.Tile;
 public class Camera {
 	private int x, y;
 	private Player player;
-	private int shakingTicks;
+	private int shakingTicks, zoom;
 	private Random rand = new Random();
-	
-//	public boolean followingPlayer = true;
 	
 	public Camera(int x, int y, Player p) {
 		this.x = x;
 		this.y = y;
 		this.player = p;
+		zoom = 100;
 	}
 	
 	public void renderSprite(Graphics g, Sprite s, int xOff, int yOff) {
@@ -36,16 +35,26 @@ public class Camera {
 			screenX <= Main.WIDTH &&
 			screenY + s.getHeight() >= 0 &&
 			screenY <= Main.HEIGHT) {
-				s.draw(g, screenX, screenY);
+				s.draw(g, screenX, screenY, zoom);
+		}
+	}
+	
+	public void renderSprite(Graphics g, Sprite s, int xOff, int yOff, int enlargement) {
+		int screenX = xOff - x;
+		int screenY = yOff - y;
+		if(screenX + s.getWidth() >= 0 &&
+			screenX <= Main.WIDTH &&
+			screenY + s.getHeight() >= 0 &&
+			screenY <= Main.HEIGHT) {
+				s.draw(g, screenX, screenY, enlargement);
 		}
 	}
 	
 	public void tick() {
-//		if(followingPlayer){
-			x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
-			y = (int) ((player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10)));
-//			y = 0;
-//		}
+		
+		x = player.getX() - Main.WIDTH /2 + (Main.TILE_SIZE /2);
+		y = (int) ((player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10)));
+		
 		if(shakingTicks > 0) {
 			x += rand.nextInt(5) -2;
 			y += rand.nextInt(3) -1;
@@ -111,6 +120,10 @@ public class Camera {
 		renderSprite(g, new Sprite(image), x, y);
 	}
 	
+	public void renderImage(Graphics g, BufferedImage image, int x, int y, int enlargement) {
+		renderSprite(g, new Sprite(image), x, y, enlargement);
+	}
+	
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -142,12 +155,5 @@ public class Camera {
 	public void shake() {
 		addShakingTicks(rand.nextInt(10) +20);
 	}
-	
-	//TODO: A nice little semi-transparent rectangle that draws over your screen
-	//when you get injured
-//	public void drawBlood(Graphics g){
-//		g.setColor(new Color(255, 0 , 0, 66));
-//		g.drawRect(0, 0, Main.WIDTH, Main.HEIGHT);
-//	}
 	
 }

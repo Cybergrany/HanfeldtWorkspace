@@ -9,6 +9,7 @@ import com.hanfeldt.game.Main;
 
 public class BackgroundSheet {
 
+	public boolean isStatic = false;
 	private final BufferedImage sheet;
 	private int width, height, enlargement;
 	
@@ -53,6 +54,7 @@ public class BackgroundSheet {
 	
 	public void drawEnlarged(Graphics g, int x, int y){
 		g.drawImage(sheet, x, y, getWidth(), getHeight(), null);
+		Main.getGame().getCamera().renderImage(g, sheet, x, y, enlargement);
 	}
 	
 	public void draw(Graphics g, double x, double y){

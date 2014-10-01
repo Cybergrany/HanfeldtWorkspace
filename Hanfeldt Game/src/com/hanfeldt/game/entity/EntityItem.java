@@ -10,6 +10,8 @@ import com.hanfeldt.game.display.Sprite;
 public class EntityItem extends SpriteEntity{
 	protected  boolean isCollidingWithHorizTile = false;
 	
+	private Object linkedItem;//The entity (weapon for example) that this item reperesents
+	
 	float friction = .93f;
 	
 	public EntityItem(Sprite s, int x, int y){
@@ -33,6 +35,11 @@ public class EntityItem extends SpriteEntity{
 		return isCollidingWithHorizTile;
 	}
 	
+	/**
+	 * So that collision detection is no longer based on tile bounds, but dependant on transparent bounds
+	 * TODO: Finish
+	 * @return
+	 */
 	public Rectangle getTransparentBounds(){
 		if(getSprite() != null){
 			BufferedImage image = getSprite().getImage();
@@ -77,11 +84,19 @@ public class EntityItem extends SpriteEntity{
 		return "Item";
 	}
 	
+	public void setLinkedItem(Object o){
+		linkedItem = o;
+	}
+	
 	public Object getLinkedItem(){
+		if(linkedItem != null)
+			return linkedItem;
 		return this;
 	}
 	
 	public Object getLinkedItem(EntityLiving e){
+		if(linkedItem != null)
+			return linkedItem;
 		return this;
 	}
 
