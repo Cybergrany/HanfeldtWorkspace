@@ -23,7 +23,7 @@ public class Gore extends Entity {
 		super(x, y);
 		falling = true;
 		Random rand = new Random();
-		velX = rand.nextFloat() *2.5f * (dir ? 1 : -1);
+		velX = rand.nextFloat() *2.5f * (dir ? -1 : 1);
 		velY = rand.nextFloat() *-1.5f;
 		yOff = rand.nextFloat();
 	}

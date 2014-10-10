@@ -51,6 +51,9 @@ public class CommandEvent {
 			case "printFPS":
 				Main.printFPS = !Main.printFPS;
 				break;
+			case "zoom":
+				checkSetZoomCommand(subcommand);
+				break;
 			default:
 				throw new CommandNotFoundException(subcommand);
 		}
@@ -111,6 +114,15 @@ public class CommandEvent {
 				break;
 				default:
 					throw new CommandNotFoundException(command);
+		}
+	}
+	
+	public static void checkSetZoomCommand(String command) throws CommandNotFoundException{
+		try{
+			int z = Integer.parseInt(command);
+			Main.getGame().getCamera().setZoom(z);
+		}catch(Exception e){
+			throw new CommandNotFoundException();
 		}
 	}
 }

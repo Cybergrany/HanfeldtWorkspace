@@ -134,6 +134,10 @@ public class Entity {
 		direction = dir;
 	}
 	
+	/**
+	 * 
+	 * @return boolean direction: Right = true, Left = false
+	 */
 	public boolean getDirection() {
 		return direction;
 	}

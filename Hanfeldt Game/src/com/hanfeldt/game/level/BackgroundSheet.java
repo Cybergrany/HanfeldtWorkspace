@@ -53,12 +53,13 @@ public class BackgroundSheet {
 	}
 	
 	public void drawEnlarged(Graphics g, int x, int y){
-		g.drawImage(sheet, x, y, getWidth(), getHeight(), null);
-		Main.getGame().getCamera().renderImage(g, sheet, x, y, enlargement);
+//		g.drawImage(sheet, x, y, getWidth(), getHeight(), null);
+		Main.getGame().getCamera().renderImageNoOff(g, sheet, x, y, enlargement);
 	}
 	
 	public void draw(Graphics g, double x, double y){
-		g.drawImage(sheet, (int)x, (int)y, null);
+//		g.drawImage(sheet, (int)x, (int)y, null);
+		Main.getGame().getCamera().renderImageNoOff(g, sheet, (int)x, (int)y);
 	}
 	
 	public BufferedImage getImage(){

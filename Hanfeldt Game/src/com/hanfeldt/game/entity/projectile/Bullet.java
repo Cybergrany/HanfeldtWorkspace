@@ -23,6 +23,7 @@ public class Bullet extends SpriteEntity {
 		super(x, y);
 		setAngle();
 		damageValue = damage;
+		direction = Main.getGame().getPlayer().getDirection();//TODO: Temporary, need to change this to get direction of holding entity
 	}
 	
 	public Bullet(Sprite s, int x, int y, int damage){
