@@ -39,7 +39,7 @@ public class Main implements Runnable {
 	public static final float GRAVITY = 0.1f;
 	public static final float TERMINAL_VELOCITY = 15;//Testing 15
 	public static int fps;
-	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing;
+	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing, printFPS;
 	public static int mouseX, mouseY;
 	public static boolean debugCheats = false;
 	public static SpriteSheet spriteSheet;
@@ -87,7 +87,7 @@ public class Main implements Runnable {
 		listener = new Listener();
 		gamePanel.addKeyListener(listener);
 		gamePanel.addMouseListener(listener);
-		gamePanel.addMouseMotionListener(listener);;
+		gamePanel.addMouseMotionListener(listener);
 
 		initFrame();
 	}
@@ -135,7 +135,7 @@ public class Main implements Runnable {
 		
 		if(debugCheats)
 		new CommandEvent();
-		
+		printFPS = false;
 		// Start "GameLoop"
 		running = true;
 		debug = false;
@@ -155,7 +155,7 @@ public class Main implements Runnable {
 
 		while (running) {
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
-				if(debug) {
+				if(printFPS) {
 					System.out.printf("%d ticks, %d fps\n", ticks, frames);
 				}
 				fps = frames;
@@ -307,6 +307,10 @@ public class Main implements Runnable {
 	
 	public void addGore(int x, int y) {
 		gore.add(new GoreSpawn(x, y));
+	}
+	
+	public void addGore(int x, int y, boolean dir) {
+		gore.add(new GoreSpawn(x, y, dir));
 	}
 	
 	public ArrayList<GoreSpawn> getGore() {

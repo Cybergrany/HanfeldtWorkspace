@@ -15,16 +15,6 @@ public class Values {
 	 * TODO: Order all Id's correctly (It's a mess, I know.)
 	 */
 	
-	public static int fall_damage_id = 1;
-	public static int fall_death_id = 3;
-	
-	public static int zombie_damage_id = 2;
-	public static int zombie_damage_from_bullet_id = 2;
-	public static int zombie_damage_from_sword_id = 3;
-	public static int zombie_damage_from_rpgGrenade_id = 5;
-	public static int zombie_damage_to_player = 10;
-	public static int zombie_max_health = 75;
-	
 	public static int npc_out_of_map_id = 5;
 	
 	public static int bullet_damage_id = 4;
@@ -39,6 +29,9 @@ public class Values {
 	public static int bullets_per_crate = 16; // You can change this name if you wants
 	
 	public static int player_max_health = 100;
+	public static float player_max_speed = 1.8f;
+	
+	public static final int zombie_max_health = 75;
 	
 	public static int max_npc_default = 5;
 	public static int max_zombie = 3;

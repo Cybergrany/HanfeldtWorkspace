@@ -8,6 +8,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.event.NpcEvents;
 
 public class BulletLobbedExplosive extends BulletLobbed{
 	float explosiveDam, radius;
@@ -35,7 +36,7 @@ public class BulletLobbedExplosive extends BulletLobbed{
 			if(r.intersects(npc.getBounds())){
 //				System.out.println("Intersection found");
 //				System.out.println("xIntersection at " + npc.getX());
-				npc.getEvents().damageNpc(npc, damage, Values.zombie_damage_from_rpgGrenade_id);
+				npc.getEvents().damageNpc(npc, damage, NpcEvents.zombie_damage_from_rpgGrenade_id);
 			}
 		}
 //		destroyBullet();
