@@ -16,6 +16,7 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 	private boolean pausePressed, debugPressed;
 	public boolean aDown, dDown, wDown, escDown,
 	shiftDown, mouseDown, mouseDownLastTick,
+	rightMouseDown, rightMouseDownLastTick,
 	upArrowDown, downArrowDown, enterDown,
 	shopButtonDown, shopButtonDownLastTick,
 	spaceDown, spaceDownLastTick;
@@ -143,12 +144,22 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		mouseDown = true;
+		if(e.getButton() == MouseEvent.BUTTON1){
+			mouseDown = true;
+		}
+		if(e.getButton() == MouseEvent.BUTTON3){
+			rightMouseDown = true;
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		mouseDown = false;
+		if(e.getButton() == MouseEvent.BUTTON1){
+			mouseDown = false;
+		}
+		if(e.getButton()  == MouseEvent.BUTTON3){
+			rightMouseDown = false;
+		}
 	}
 
 	@Override

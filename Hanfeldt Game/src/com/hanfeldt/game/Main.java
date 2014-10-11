@@ -196,6 +196,7 @@ public class Main implements Runnable {
 		if(gamePanel.hasFocus()) {
 			state.tick();
 			listener.mouseDownLastTick = listener.mouseDown;
+			listener.rightMouseDown = listener.rightMouseDown;
 			listener.shopButtonDownLastTick = listener.shopButtonDown;
 			listener.spaceDownLastTick = listener.spaceDown;
 		}

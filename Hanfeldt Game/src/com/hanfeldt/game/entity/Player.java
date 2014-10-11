@@ -10,6 +10,7 @@ import com.hanfeldt.game.event.NpcEvents;
 import com.hanfeldt.game.event.PlayerEvents;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.game.weapon.weapons.SniperRifle;
 import com.hanfeldt.io.Debug;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
@@ -18,7 +19,7 @@ public class Player extends EntityLiving {
 	public static final int ticksPerAnimChange = 4;
 	private BufferedImage walkingImage;
 	private PlayerEvents events;
-	private Weapon weaponEquipped = new Pistol(this);
+	private Weapon weaponEquipped = new SniperRifle(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private int stamina = 69;

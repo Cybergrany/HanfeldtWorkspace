@@ -20,6 +20,7 @@ public class Values {
 	public static int bullet_damage_id = 4;
 	public static int bullet_damage_pistol = 40;
 	public static int bullet_damage_M16 = 20;//Half the damage seems legit
+	public static int bullet_damage_SniperRifle = 85;
 	public static int bullet_damage_RPG = 100;//kaboom
 	public static int bullet_explosive_damage_RPG = 100;
 	

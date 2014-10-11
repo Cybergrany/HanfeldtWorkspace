@@ -19,9 +19,9 @@ import com.hanfeldt.game.tile.Tile;
 public class Camera {
 	private int x, y;
 	private Player player;
-	private Entity entity;
+	private Entity entity, previousEntity;
 	private int shakingTicks, zoom, playerMoveWeightX = 50, playerPanToSpeed = 4;
-	private boolean scrolledleft = false, scrolledright = false, followingPlayer = true, followingEntity = false, dir;
+	private boolean scrolled = false, scrolledleft = false, scrolledright = false, followingEntity = false, dir;
 	private Random rand = new Random();
 	
 	public Camera(int x, int y, Player p) {
@@ -30,41 +30,39 @@ public class Camera {
 		this.player = p;
 		dir = player.isMovingRight();
 		zoom = 100;
+		setFollowingEntity(Main.getGame().getPlayer());
 	}
 	
 	public void tick() {
 		
-		//Follow player with dynamic movements
-		if(followingPlayer){
-			int px = player.getX() - (Main.WIDTH / 2) + (Main.TILE_SIZE/2);
-			if(player.isMovingRight()){//Moving right
+		//Follow player/entity with dynamic movements
+		if(followingEntity && entity != null){
+			int px = entity.getX() - (Main.WIDTH / 2) + (Main.TILE_SIZE/2);
+			if(entity.isMovingRight()){//Moving right
 				if(x < px + playerMoveWeightX && !scrolledleft){
-					//Bias camera to show action on right hand side of player sprite
-					changeX((int)player.getVelX() * playerPanToSpeed); 
+					//Bias camera to show action on right hand side of entity sprite
+					changeX((int)entity.getVelX() * playerPanToSpeed); 
 				}else{
 					scrolledleft = true;
 					x= px + playerMoveWeightX;
 				}
-			}else if(player.isMovingLeft()){
+			}else if(entity.isMovingLeft()){
 				if(x > px - playerMoveWeightX && !scrolledright){
-					//Bias camera to show action on left hand side of player sprite
-					changeX((int)player.getVelX() * playerPanToSpeed); 
+					//Bias camera to show action on left hand side of entity sprite
+					changeX((int)entity.getVelX() * playerPanToSpeed); 
 				}else{
 					scrolledright = true;
 					x= px - playerMoveWeightX;
 				}
 			}
 			
-			if(dir != player.isMovingRight() && (scrolledleft || scrolledright)){
+			if(dir != entity.isMovingRight() && (scrolledleft || scrolledright)){
 				scrolledleft = false;
 				scrolledright = false;
-				dir = player.isMovingRight();
+				dir = entity.isMovingRight();
 			}
 			
-			y = player.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10);
-	}else if(followingEntity && entity != null){//Simple entity-following, will make more dynamic if needed.
-		x = entity.getX() - Main.WIDTH / 2 + (Main.TILE_SIZE / 2);
-		y = entity.getY()  - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10);
+			y = entity.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10);
 	}
 		
 		if(shakingTicks > 0) {
@@ -216,14 +214,56 @@ public class Camera {
 	}
 	
 	/**
+	 * Scroll a certain distance along the x-axis
+	 * @param distance
+	 * @param speed
+	 */
+	public void scrollX(int start, int distance, int speed){
+		int dis = start + distance;
+		disableFollow();
+		if(dis > 0){
+			if(x < dis){
+				changeX(speed);
+			}else if(x > dis)
+				changeX(-speed);
+		}else{
+			if (x > 0)//Won't scroll lower than 0
+			changeX(-speed);
+		}
+	}
+	
+	//TODO
+	/**
+	 * Scrolls to an entity along the x-axis
+	 * @param e
+	 */
+	public void scrollXToEntity(Entity e, int speed){
+//		scrollX(x, x + (e.getX() - x), speed);
+	}
+	
+	/**
 	 * Follow the specified entity
 	 * @param e - the entity to follow.
 	 */
-	public void setFollowEntity(Entity e){
+	public void setFollowingEntity(Entity e){
+		previousEntity = entity;
 		entity = e;
-		if(followingPlayer)
-		followingPlayer = false;
+		scrollXToEntity(entity, 2);
 		followingEntity = true;
+	}
+	
+	/**
+	 * Follow human-controlled player
+	 */
+	public void setFollowingPlayer(){
+		setFollowingEntity(Main.getGame().getPlayer());
+	}
+	
+	/**
+	 * Stop Following entity
+	 */
+	public void disableFollow(){
+		followingEntity = false;
 	}
 	
 	public void addShakingTicks(int a) {
