@@ -20,7 +20,6 @@ public class NpcScript {
 	private static int currentDialogue = 0;
 	private static int[] dialogueTriggerX;
 	private static int currentLevel;
-//	private static String[] actions;
 	
 	public NpcScript(Main main, Player p){
 		this.main = main;
@@ -61,10 +60,9 @@ public class NpcScript {
 		}
 	}
 	
-	public static void setNpcTriggersAndActions(int[] triggers, String[] action){
+	public static void setNpcTriggersAndActions(int[] triggers){
 		dialogueTriggerX = new int[triggers.length];
 		dialogueTriggerX = triggers;
-//		actions = action;
 	}
 	
 //	public static Npc getCurrentTriggeredNpc(){

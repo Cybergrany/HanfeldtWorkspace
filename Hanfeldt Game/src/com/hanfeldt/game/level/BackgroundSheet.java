@@ -26,6 +26,7 @@ public class BackgroundSheet {
 		}
 	}
 	
+	
 	public BackgroundSheet(String path, int enlarge){
 		
 		BufferedImage temp = null;
@@ -35,7 +36,7 @@ public class BackgroundSheet {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.err.println("Failed to read " + path);
-		}finally{
+		}finally{		
 			sheet = temp;
 		}
 		

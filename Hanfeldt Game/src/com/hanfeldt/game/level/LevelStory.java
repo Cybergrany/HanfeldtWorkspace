@@ -12,6 +12,7 @@ import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
+import com.hanfeldt.io.Debug;
 
 public class LevelStory extends Level {
 	/*
@@ -97,6 +98,7 @@ public class LevelStory extends Level {
 				break;
 			case "playerSpawner":
 				setPlayerSpawn(Main.TILE_SIZE*x, Main.TILE_SIZE * y);
+				Debug.printDebug("Player spawn set to: " + Main.TILE_SIZE*x +  ", " + Main.TILE_SIZE * y);
 				Main.getGame().getPlayer().setLocation(getPlayerSpawnPoint());
 				break;
 			default:

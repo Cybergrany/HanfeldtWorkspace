@@ -3,6 +3,8 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import sun.java2d.pipe.DrawImage;
+
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
@@ -11,7 +13,7 @@ public abstract class Weapon {
 	protected Sprite sprite;
 	protected EntityLiving entity;
 	protected long totalTicks = 0;
-	public boolean automatic = true;
+	public boolean automatic = true, hasOverlay = false;
 	
 	public Weapon(EntityLiving e, Sprite s) {
 		entity = e;
@@ -27,6 +29,10 @@ public abstract class Weapon {
 	
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	public void drawOverlay(Graphics g){
+		return;
 	}
 	
 	public Sprite getReverseSprite() {

@@ -6,7 +6,6 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.level.LevelLoader;
-import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.scripting.NpcScript;
 import com.hanfeldt.io.Debug;
 
@@ -18,18 +17,13 @@ public class Story extends Playing {
 	
 	public Story(Main main, Camera c) {
 		super(main, c);
-
-		PropertiesLoader.loadProperties();
 		
 		//Load levels
 		LevelLoader.loadLevel(level);
 		
-		level = 0;
 		Player p = main.getPlayer();
-//		p.setX(Main.WIDTH /2);
 		p.setHealth(Player.maxHealth);
 		main.createGoreList();
-//		main.getNpc().add(new Bill(500, Main.HEIGHT - (Main.TILE_SIZE *4)));
 		script = new NpcScript(main, p);
 	}
 	
@@ -43,8 +37,9 @@ public class Story extends Playing {
 			}else{
 				Story.addLevel(level);
 				LevelLoader.loadLevel(level);
-				player.setX(0);
-				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
+				Main.getGame().respawnPlayer();
+//				player.setX(0);
+//				player.setY(Main.HEIGHT - Main.TILE_SIZE *2 - player.getSizeY());
 				player.levelFinished = false;
 			}
 		}

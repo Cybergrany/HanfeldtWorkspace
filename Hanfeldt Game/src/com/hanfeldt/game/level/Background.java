@@ -28,6 +28,15 @@ public class Background {
 			staticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 0, true), 2);;
 			staticLayer[0].isStatic = true;
 		}
+		
+		fore = LevelLoader.hasForeGround;
+		
+		if(fore){
+			foreStaticLayer = new BackgroundSheet[1];
+			foreStaticLayer[0] = new BackgroundSheet(levelPath(currentLevel, 1, true), 2);
+			foreStaticLayer[0].isStatic = true;
+		}
+		
 		sectorY = layer[0].getImage().getHeight();
 		System.out.println(sectorY);
 	}
@@ -47,9 +56,12 @@ public class Background {
 		}
 	}
 	
-	public void draw(Graphics g, boolean foreGround){
-		
-	}
+	public void drawFore(Graphics g){
+		if(foreStaticLayer!=null)
+		for(int i = 0; i < foreStaticLayer.length; i++){
+			foreStaticLayer[i].drawEnlarged(g, -Main.getGame().getCamera().getX(), -Main.getGame().getCamera().getY());
+		}
+	}	
 	
 	public double viewModifierX(int i){
 		if(i == 0){//Far items

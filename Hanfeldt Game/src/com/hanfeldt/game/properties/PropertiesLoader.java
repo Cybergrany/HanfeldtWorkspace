@@ -81,13 +81,13 @@ public class PropertiesLoader {
 		input.close();
 	}
 	
-	public static void loadProperties(){
+	public static void loadProperties(int level){
 		Properties prop = new Properties();
 		InputStream input = null;
 		
 		try{
 			printDebug("Reading Level properties file...\n");
-			loadLevelProperties(Story.getCurrentLevel() + 1, String.format("/config/levels/level%d/level.conf", Story.getCurrentLevel() + 1), input, prop);
+			loadLevelProperties(level, String.format("/config/levels/level%d/level.conf", Story.getCurrentLevel() + 1), input, prop);
 		}catch(IOException e){
 			printErrorDebug("Error while reading properties file.");
 			printStackTraceDebug(e);
@@ -131,6 +131,10 @@ public class PropertiesLoader {
 		printDebug("Has Static Background: " + p.getProperty("hasStaticBg"));
 		LevelLoader.hasStaticBg = Boolean.parseBoolean(p.getProperty("hasStaticBg"));
 		
+		//HasForeGround
+		printDebug("Has ForeGround: " + p.getProperty("hasForeG"));
+		LevelLoader.hasForeGround = Boolean.parseBoolean(p.getProperty("hasForeG"));
+		
 		//Npc List
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
 		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
@@ -150,10 +154,6 @@ public class PropertiesLoader {
 		for(int i = 0; i < temp1.length; i++){
 			LevelLoader.currentLevelNpcTrigger[i] = Integer.parseInt(temp1[i]);
 		}
-	
-		//NPC Actions
-		printDebug("NPCActions: " + p.getProperty("npcAction"));
-		LevelLoader.currentLevelNpcAction = p.getProperty("npcAction").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
 	
 		printDebug("\n--- Level Properties---\n");
 		

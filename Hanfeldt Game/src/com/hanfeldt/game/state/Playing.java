@@ -1,5 +1,6 @@
 package com.hanfeldt.game.state;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -71,7 +72,6 @@ public abstract class Playing extends State {
 				}
 			}
 		}
-		main.getHud().draw(g);
 		for(GoreSpawn go : main.getGore()) {
 //			go.render(g);
 			camera.renderGore(g, go);
@@ -140,7 +140,16 @@ public abstract class Playing extends State {
 					camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
 				}
 			}
+			if(p.getWeaponEquipped().hasOverlay){
+				p.getWeaponEquipped().drawOverlay(g);
+			}
 		}
+		
+		main.getLevels().renderForeground(g);
+		
+//		camera.drawRectBorder(g, 0, Main.WIDTH, 40, 110, Color.BLACK, true);
+
+		main.getHud().draw(g);
 	}
 	
 }

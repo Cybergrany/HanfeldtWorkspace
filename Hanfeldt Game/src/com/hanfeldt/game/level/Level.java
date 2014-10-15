@@ -39,7 +39,7 @@ public class Level {
 	}
 	
 	public void renderForeground(Graphics g){
-		
+		bg.drawFore(g);
 	}
 	
 	public int getSizeX() {

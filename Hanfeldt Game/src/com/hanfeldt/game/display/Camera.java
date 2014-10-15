@@ -21,7 +21,8 @@ public class Camera {
 	private Player player;
 	private Entity entity, previousEntity;
 	private int shakingTicks, zoom, playerMoveWeightX = 50, playerPanToSpeed = 4;
-	private boolean scrolled = false, scrolledleft = false, scrolledright = false, followingEntity = false, dir;
+	private boolean scrolled = false, scrolledleft = false, scrolledright = false, 
+									followingEntity = false, dir;
 	private Random rand = new Random();
 	
 	public Camera(int x, int y, Player p) {
@@ -179,6 +180,36 @@ public class Camera {
 	public void renderImageNoOff(Graphics g, BufferedImage image, int x, int y, int enlargement) {
 		Sprite s = new Sprite(image);
 		s.draw(g, x, y, enlargement * zoom);
+	}
+	
+	/**
+	 * Draws a rectangular border around the screen for a cinematic effect
+	 * @param g
+	 * @param x1
+	 * @param x2
+	 * @param y1
+	 * @param y2
+	 * @param c
+	 */
+	public void drawRectBorder(Graphics g, int x1, int x2, int y1, int y2, Color c, boolean dynamic){
+		g.setColor(c);
+		for(int dx = 0; dx < Main.WIDTH; dx++){
+			for(int dy = 0; dy < Main.HEIGHT; dy++){
+				if(dynamic){
+					if((dx > x1||dx <  x2) &&
+						(dy < y1 + (entity.getY() / Main.TILE_SIZE)
+								|| dy > y2 - (entity.getY() / Main.TILE_SIZE))){
+							g.drawLine(dx, dy, dx, dy);
+						}
+				}else{
+					if((dx > x1 ||dx < x2) &&
+						(dy < y1|| dy > y2)){
+							g.drawLine(dx, dy, dx, dy);
+					}
+				}
+			}
+		}
+		
 	}
 	
 	public void setX(int x) {
