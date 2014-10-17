@@ -14,8 +14,17 @@ import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.particles.Gore;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
+import com.hanfeldt.game.entity.projectile.GrenadeRPG;
 import com.hanfeldt.game.tile.Tile;
 
+/**
+ * Camera is the class which allows entities and other objects to be rendered to the game in relation to one single origin point.
+ * This is useful for instances when objects need to be aware of their location in relation to other objects of different type.
+ * The camera can easily be manipulated by moving, zooming and more. (To be implemented)
+ * @author David Ofeldt
+ * @author Ronan Hanley
+ *
+ */
 public class Camera {
 	private int x, y;
 	private Player player;
@@ -73,6 +82,20 @@ public class Camera {
 		}
 	}
 	
+	/**
+	 * Render a {@link Sprite} object on the level.
+	 * <p>
+	 * <b>Please note that if the Sprite is larger than
+	 * the window size, then it will not be rendered if
+	 * the leftmost corner of that sprite is off-window.
+	 * Use {@link #renderImageNoOff(Graphics, BufferedImage, int, int)} if you
+	 * wish to avoid this.</b>
+	 * @param g a {@link Graphics} object
+	 * @param s the {@link Sprite} object that is to be drawn
+	 * @param xOff x-coordinate of the sprite to be drawn
+	 * @param yOff y-coordinate of the sprite to be drawn
+	 * @see Sprite
+	 */
 	public void renderSprite(Graphics g, Sprite s, int xOff, int yOff) {
 		int screenX = xOff - x;
 		int screenY = yOff - y;
@@ -84,6 +107,20 @@ public class Camera {
 		}
 	}
 	
+	/**
+	 * Render an enlarged Sprite object on the screen
+	 * <p>
+	 * <b>Please note that if the Sprite is larger than
+	 * the window size, then it will not be rendered if
+	 * the leftmost corner of that sprite is off-window.
+	 * Use {@link #renderImageNoOff(Graphics, BufferedImage, int, int)} if you
+	 * wish to avoid this.</b>
+	 * @param g a {@link Graphics} object
+	 * @param s the {@link Sprite} object that is to be drawn
+	 * @param xOff x-coordinate of the sprite to be drawn
+	 * @param yOff y-coordinate of the sprite to be drawn
+	 * @param enlargement factor to enlarge Sprite object by.
+	 */
 	public void renderSprite(Graphics g, Sprite s, int xOff, int yOff, int enlargement) {
 		int screenX = xOff - x;
 		int screenY = yOff - y;
@@ -95,6 +132,12 @@ public class Camera {
 		}
 	}
 	
+	/**
+	 * Renders an {@link EntityItem}
+	 * @param g a graphics object.
+	 * @param e the item to be rendered
+	 * @see EntityItem
+	 */
 	public void renderEntityItem(Graphics g, EntityItem e){
 		if(e.getDirection()){
 			renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
@@ -103,6 +146,12 @@ public class Camera {
 		}
 	}
 	
+	/**
+	 * Renders an {@link EntityLiving}
+	 * @param g a graphics object
+	 * @param e the entity to be rendered
+	 * @see EntityLiving
+	 */
 	public void renderEntityLiving(Graphics g, EntityLiving e) {
 		if(e instanceof Npc && e.getSprite().getWalkingAnimsLength() > 1){
 			renderImage(g, e.getWalkingImage(), e.getX(), e.getY());
@@ -115,10 +164,23 @@ public class Camera {
 //		camera.renderImage(g, npc.get(i).getWalkingImage(), npc.get(i).getX(),  npc.get(i).getY());
 	}
 	
+	/**
+	 * Render a level tile
+	 * @param g a graphics object
+	 * @param t the tile to be rendered
+	 * @see Tile
+	 * @see Level
+	 */
 	public void renderTile(Graphics g, Tile t) {
 		renderSprite(g, t.getSprite(), t.getX(), t.getY());
 	}
 	
+	/**
+	 * Render a bullet
+	 * @param g a graphics object
+	 * @param b the bullet to be rendered
+	 * @see Bullet
+	 */
 	public void renderBullet(Graphics g, Bullet b) {
 		int screenX = b.getX() - x;
 		int screenY = b.getY() - y;
@@ -131,6 +193,13 @@ public class Camera {
 		}
 	}
 	
+	/**
+	 * Render a group of gore
+	 * @param g a graphics object
+	 * @param gs the {@link GoreSpawn} object to be rendered
+	 * @see Gore
+	 * @see GoreSpawn
+	 */
 	public void renderGore(Graphics g, GoreSpawn gs){
 			for(Gore gore : gs.gore){
 				int screenX = gore.getX() - x;
@@ -145,14 +214,56 @@ public class Camera {
 		}
 	}
 	
+	/**
+	 *Render a bullet which is represented by a sprite image.
+	 *For example; {@link GrenadeRPG}
+	 * @param g a graphics object
+	 * @param b the bullet
+	 * @param s the associated {@link Sprite}
+	 * @see Bullet
+	 * @see Sprite
+	 */
 	public void renderBullet(Graphics g, Bullet b, Sprite s){
 		renderSprite(g, s, b.getX(), b.getY());
 	}
 	
+	/**
+	 * Render an image (BufferedImage) to the level.
+	 * This is done by converting the image into a {@link Sprite}
+	 * <p>
+	 * <b>Please note that if the Sprite is larger than
+	 * the window size, then it will not be rendered if
+	 * the leftmost corner of that sprite is off-window.
+	 * Use {@link #renderImageNoOff(Graphics, BufferedImage, int, int)} if you
+	 * wish to avoid this.</b>
+	 * @param g a Graphics object
+	 * @param image the {@link BufferedImage} to be rendered
+	 * @param x x-coordinate of the image to be drawn
+	 * @param y y-coordinate of the image to be drawn
+	 * @see BufferedImage
+	 * @see Sprite
+	 */
 	public void renderImage(Graphics g, BufferedImage image, int x, int y) {
 		renderSprite(g, new Sprite(image), x, y);
 	}
 	
+	/**
+	 * Render an image (BufferedImage) to the level, with added enlargement
+	 * This is done by converting the image into a {@link Sprite}
+	 * <p>
+	 * <b>Please note that if the Sprite is larger than
+	 * the window size, then it will not be rendered if
+	 * the leftmost corner of that sprite is off-window.
+	 * Use {@link #renderImageNoOff(Graphics, BufferedImage, int, int)} if you
+	 * wish to avoid this.</b>
+	 * @param g a Graphics object
+	 * @param image the {@link BufferedImage} to be rendered
+	 * @param x x-coordinate of the image to be drawn
+	 * @param y y-coordinate of the image to be drawn
+	 * @param enlargement the amount of enlargement required
+	 * @see BufferedImage
+	 * @see Sprite
+	 */
 	public void renderImage(Graphics g, BufferedImage image, int x, int y, int enlargement) {
 		renderSprite(g, new Sprite(image), x, y, enlargement);
 	}
@@ -191,6 +302,7 @@ public class Camera {
 	 * @param y2
 	 * @param c
 	 */
+	//TODO: Implement
 	public void drawRectBorder(Graphics g, int x1, int x2, int y1, int y2, Color c, boolean dynamic){
 		g.setColor(c);
 		for(int dx = 0; dx < Main.WIDTH; dx++){
@@ -263,11 +375,11 @@ public class Camera {
 		}
 	}
 	
-	//TODO
 	/**
 	 * Scrolls to an entity along the x-axis
 	 * @param e
 	 */
+	//TODO:Finish
 	public void scrollXToEntity(Entity e, int speed){
 //		scrollX(x, x + (e.getX() - x), speed);
 	}
@@ -297,10 +409,17 @@ public class Camera {
 		followingEntity = false;
 	}
 	
+	/**
+	 * Add amount of ticks left before shaking stops
+	 * @param a
+	 */
 	public void addShakingTicks(int a) {
 		shakingTicks += a;
 	}
 	
+	/**
+	 * Shakes the camera to suggest injury/explosions
+	 */
 	public void shake() {
 		addShakingTicks(rand.nextInt(10) +20);
 	}

@@ -2,18 +2,14 @@ package com.hanfeldt.game;
 
 
 /**
- * Values.java - contains values that would be used often in the game,
- * such as bullet damage, zombie damage etc.
+ * Contains values that would be used and changed often in the game,
+ * such as damage, health and other attributes.
+ * This class provides one convenient place to change these values.
  * @author David Ofeldt
  *
  */
+//TODO: ID's are no longer needed here, move to relevant place
 public class Values {
-	
-	/*
-	 * Assume damage_id is damage to player, and that damage_taken_id is damage taken from other sources
-	 * Ensure all Id's are unique
-	 * TODO: Order all Id's correctly (It's a mess, I know.)
-	 */
 	
 	public static int npc_out_of_map_id = 5;
 	
