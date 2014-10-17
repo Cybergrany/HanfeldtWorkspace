@@ -16,20 +16,31 @@ import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.particles.Gore;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.event.command.CommandEvent;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelLoader;
+import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.state.Dead;
 import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
+import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.io.Listener;
 import com.hanfeldt.io.Sound;
 
+/**
+ * Main contains all the main components, methods and constants required for the game to work.
+ * 
+ * @author David Ofeldt
+ * @author Ronan Hanley
+ * @since 1.0
+ *
+ */
 public class Main implements Runnable {
 	public static final int WIDTH = 256, HEIGHT = 144;
 	public static final int TILE_SIZE = 16; //Only works properly with 16 for the moment
@@ -71,8 +82,8 @@ public class Main implements Runnable {
 	static final String name = "Hanfeldt Zombie Shooter";
 
 	public static void main(String[] args) {
-		System.setProperty("java.net.preferIPv4Stack", "true");
-		Sound.touch();
+		System.setProperty("java.net.preferIPv4Stack", "true");//Part of client-server relationship
+		Sound.touch();//Touch on sound class to prevent clipping and lag
 		game = new Main();
 		Thread gameThread = new Thread(game);
 		game.init();
@@ -91,7 +102,10 @@ public class Main implements Runnable {
 
 		initFrame();
 	}
-
+	
+	/**
+	 * Initialize the JFrame on which the game is drawn.
+	 */
 	private void initFrame() {
 		BorderLayout layout = new BorderLayout();
 		frame = new JFrame(name);
@@ -114,15 +128,16 @@ public class Main implements Runnable {
 
 		frame.setVisible(true);
 	}
-
+	
+	/**
+	 * Initialize the core components of the game, and start the game thread.
+	 */
 	public void init() {
 		LevelLoader.initLevel();
 		spriteSheet = new SpriteSheet("/images/spritesheet.png");
 		SpriteSheet playerSheet = SpriteSheet.getSheet(SpriteSheet.player);
-//		Sprite playerSprite = new Sprite(spriteSheet, 2, 1, 1, 2, 3);
 
 		Sprite playerSprite = new Sprite(playerSheet, 0, 0, 1, 2, 3);
-//		player = new Player(playerSprite, WIDTH / 2, HEIGHT - TILE_SIZE * (1 + playerSprite.getTileHeight()), listener, this);
 		player = new Player(playerSprite, 0, 0, listener, this);
 		
 		state = new MainMenuState(this);
@@ -143,7 +158,10 @@ public class Main implements Runnable {
 		
 		PropertiesLoader.loadBlockIDs();
 	}
-
+	
+	/**
+	 * Called while the main thread is running
+	 */
 	public void run() {
 		long nsPerTick = (long) 1000000000 / ticksPs;
 		long nsPerFrame = (long) 1000000000 / frameLimit;
@@ -156,6 +174,7 @@ public class Main implements Runnable {
 		while (running) {
 			if (System.currentTimeMillis() - lastTimer >= 1000) {
 				if(printFPS) {
+					//Print the current fps and tps if printFPS is true
 					System.out.printf("%d ticks, %d fps\n", ticks, frames);
 				}
 				fps = frames;
@@ -164,7 +183,7 @@ public class Main implements Runnable {
 			}
 
 			if (System.nanoTime() > lastTick + nsPerTick) {
-				tick();
+				tick();//Tick the game
 				ticks++;
 				totalTicks++;
 				if(totalTicks >= Long.MAX_VALUE) {
@@ -174,7 +193,7 @@ public class Main implements Runnable {
 			}
 
 			if (System.nanoTime() > lastFrame + nsPerFrame && !(System.nanoTime() > lastTick + nsPerTick)) {
-				render();
+				render();//Render the game
 				frames++;
 
 				lastFrame = lastFrame + nsPerFrame;
@@ -190,7 +209,10 @@ public class Main implements Runnable {
 			}
 		}
 	}
-
+	
+	/**
+	 * Ticks the game
+	 */
 	public void tick() {
 		hud.setHasFocus(gamePanel.hasFocus());
 		if(gamePanel.hasFocus()) {
@@ -201,13 +223,20 @@ public class Main implements Runnable {
 			listener.spaceDownLastTick = listener.spaceDown;
 		}
 	}
-
+	
+	/**
+	 * Draws all game objects on screen
+	 */
 	public void render() {
 		state.draw(screenImage.getGraphics());
 		gamePanel.render();
 	}
 	
-	//A very basic tick-based timer
+	/**
+	 * If called in a tick method or similar, will return true when specified time has elapsed.
+	 * @param ms time before true is returned.
+	 * @return<code> true</code> if specifed time elapses.
+	 */
 	public static boolean timer(int ms){
 		if(game.getTotalTicks() % ms == 0){
 			return true;
@@ -215,14 +244,35 @@ public class Main implements Runnable {
 		return false;
 	}
 	
+	/**
+	 * Provides link to important objects, constants and variables.
+	 * 
+	 * This is preferred to creating multiple instances of one object.
+	 * @return <code>game</code> an instance of the {@link Main} class
+	 * @see Main
+	 */
 	public static Main getGame() {
 		return game;
 	}
 	
+	/**
+	 * Allows access to the {@link Player} object and its attached variables
+	 * @return <code>player</code> the player object
+	 * @see Player
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 	
+	/**
+	 * An {@link ArrayList} of the current block ID's,
+	 * which the  game uses to match the color code in the map image with the appropriate block.
+	 * 
+	 * @return an ArrayList of block ID's, as parsed in by <code>loadBlockID</code> in {@link PropertiesLoader}
+	 * @throws NullPointerException if blocks are not loaded or not found
+	 * @see PropertiesLoader
+	 * @see LevelStory
+	 */
 	public ArrayList<String[]>getBlockIDs()throws NullPointerException{
 		if(blocks != null){
 			return blocks;
@@ -232,14 +282,26 @@ public class Main implements Runnable {
 		}
 	}
 	
+	/**
+	 * Elapsed ticks
+	 * @return <code>totalTicks</code> - amount of ticks elapsed.
+	 */
 	public long getTotalTicks() {
 		return totalTicks;
 	}
 	
+	/**
+	 * Amount of Lives player has
+	 * @return lives
+	 */
 	public int getLives() {
 		return lives;
 	}
 	
+	/**
+	 * Performed on player death.
+	 * Checks for remaining lives, and either displays life lost screen and respawns player, or sends player to death screen.
+	 */
 	public void playerDied() {
 		if(!debugCheats) {
 			lives--;
@@ -250,6 +312,10 @@ public class Main implements Runnable {
 		state = new Dead(this);
 	}
 	
+	/**
+	 * Respawns player to the spawn point as read from the level image file.
+	 * @see LevelStory
+	 */
 	public void respawnPlayer() {
 		player.alive = true;
 		player.setX(getLevels().getPlayerSpawnPoint().x);
@@ -257,10 +323,24 @@ public class Main implements Runnable {
 		player.setHealth(100);
 	}
 	
+	/**
+	 * Returns the current {@link SpriteSheet} in use.
+	 * No longer in use, as multiple SpriteSheets are now in use.
+	 * @return <code>spriteSheet</code>
+	 * @deprecated <b>Single SpriteSheet no longer in use</b> Use the appropriate SpriteSheet using <code>SpriteSheet.getSheet(SpriteSheet.sheetType)</code>
+	 * @see SpriteSheet
+	 */
 	public static SpriteSheet getSpritesheet() {
 		return spriteSheet;
 	}
 	
+	/**
+	 * Reload weapon equipped on Player.
+	 * @see AmmoWeapon
+	 * @see Player
+	 * @see Weapon
+	 */
+	// TODO: Not needed in main, move to {@link AmmoWeapon} or similiar.
 	public void reload() {
 		if(state != null && state instanceof Playing) {
 			if(player.getWeaponEquipped() != null && player.getWeaponEquipped() instanceof AmmoWeapon) {
@@ -270,70 +350,165 @@ public class Main implements Runnable {
 		}
 	}
 	
+	/**
+	 * Screen overlay showing data of interest to the player.
+	 * @return <code>hud</code> the overlay.
+	 * @see Hud
+	 */
 	public Hud getHud() {
 		return hud;
 	}
 	
+	/**
+	 * {@link Bullet} entities currently ingame
+	 * @return <code>bullets</code> an ArrayList of ingame bullets.
+	 * @see Bullet
+	 */
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
 	
+	/**
+	 * The listener that contains variables that indicate key events and similar.
+	 * @return <code>listener</code> the mouse and key listener of the game
+	 * @see Listener
+	 */
 	public Listener getListener() {
 		return listener;
 	}
 	
+	/**
+	 * The panel on which the game is drawn
+	 * @return a {@link GamePanel} object.
+	 * @see GamePanel
+	 */
 	public GamePanel getPanel() {
 		return gamePanel;
 	}
 	
+	/**
+	 * An {@link ArrayList} of all ingame NPC's
+	 * @return <code>npc</code> an arraylist of npc's currently populating the level
+	 * @see Npc
+	 */
 	public ArrayList<Npc> getNpc() {
 		return npc;
 	}
 	
+	/**
+	 * An {@link ArrayList} of all ingame items
+	 * @return <code>items</code> all items on current level
+	 * @see EntityItem
+	 */
 	public ArrayList<EntityItem> getItems(){
 		return items;
 	}
 	
+	/**
+	 * Set the current game {@link State}.
+	 * @param s a game State of any kind, from the com.hanfeldt.game.state package.
+	 * @see State
+	 * @see Playing
+	 */
 	public void setState(State s) {
 		state = s;
 	}
 	
+	/**
+	 * Current game {@link State}
+	 * @return the State the game finds itself in currently
+	 * @see State
+	 */
 	public State getState() {
 		return state;
 	}
 	
+	/**
+	 * Returns the game from any other state to a playing state.
+	 * Eg, taking the player from a menu to the game.
+	 * @see Playing
+	 */
 	public void returnToPlaying() {
 		state = playingState;
 	}
 	
+	/**
+	 * Add gore to the level.
+	 * @param x location on x-axis, with the top-left of level as the origin
+	 * @param y location on y-axis, with the top-left of level as the origin
+	 * @see Gore
+	 * @see GoreSpawn
+	 */
 	public void addGore(int x, int y) {
 		gore.add(new GoreSpawn(x, y));
 	}
 	
+	/**
+	 * Add gore to the level, taking into account "spurt" direction
+	 * @param x location on x-axis, with the top-left of level as the origin
+	 * @param y location on y-axis, with the top-left of level as the origin
+	 * @see Gore
+	 * @see GoreSpawn
+	 */
 	public void addGore(int x, int y, boolean dir) {
 		gore.add(new GoreSpawn(x, y, dir));
 	}
 	
+	/**
+	 * ArrayList of all gore currently in game
+	 * @return an arrayList of ingame gore.
+	 * @see Gore
+	 */
 	public ArrayList<GoreSpawn> getGore() {
 		return gore;
 	}
 	
+	/**
+	 * Create a new {@link ArrayList} to hold gore entities
+	 * @see Gore
+	 */
 	public void createGoreList() {
 		gore = new ArrayList<GoreSpawn>();
 	}
 	
+	/**
+	 * Set the current playing state to a certain state of playing type
+	 * @param state a {@link State} of {@link Playing} type
+	 * @see State
+	 * @see Playing
+	 * @see Dead
+	 * @see GameWon
+	 */
 	public void setPlayingState(State state) {
 		playingState = state;
 	}
 	
+	/**
+	 * Set {@link Level} which is currently being played.
+	 * @param l A new {@link Level} object
+	 * @see Level
+	 * @see LevelStory
+	 */
+	//TODO: Rename to account for not being an array any more(Singular)
 	public void setLevels(Level l) {
 		levels = l;
 	}
 	
+	/**
+	 * Level which is currently being played on.
+	 * @return The current level
+	 * @see Level
+	 */
+	//TODO: Rename to account for not being an array any more(Singular)
 	public Level getLevels() {
 		return levels;
 	}
 	
+	/**
+	 * Current {@link Camera} object, which is used to render Entities and other images within the game
+	 * @return the game's camera
+	 * @see Camera
+	 */
 	public Camera getCamera() {
 		if(camera == null) {
 			camera = new Camera(0, 0, getPlayer());
