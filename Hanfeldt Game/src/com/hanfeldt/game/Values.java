@@ -23,7 +23,7 @@ public class Values {
 	public static int money_from_zombie = 25;
 	public static int score_from_zombie = 100;
 	
-	public static int bullets_per_crate = 16; // You can change this name if you wants
+	public static int bullets_per_crate = 16;
 	
 	public static int player_max_health = 100;
 	public static float player_max_speed = 1.8f;

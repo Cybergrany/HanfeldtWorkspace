@@ -44,7 +44,6 @@ public class Camera {
 	}
 	
 	public void tick() {
-		
 		//Follow player/entity with dynamic movements
 		if(followingEntity && entity != null){
 			int px = entity.getX() - (Main.WIDTH / 2) + (Main.TILE_SIZE/2);
@@ -70,6 +69,12 @@ public class Camera {
 				scrolledleft = false;
 				scrolledright = false;
 				dir = entity.isMovingRight();
+			}
+			
+			// Stop the camera going offscreen
+			
+			if(x < 0) {
+				x = 0;
 			}
 			
 			y = entity.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10);

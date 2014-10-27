@@ -45,7 +45,7 @@ public class Main implements Runnable {
 	public static final int WIDTH = 256, HEIGHT = 144;
 	public static final int TILE_SIZE = 16; //Only works properly with 16 for the moment
 	public static final int SPRITE_SIZE = 16;
-	public static final  int SCALE = 3;
+	public static final int SCALE = 3;
 	public static final int tilesX = WIDTH / TILE_SIZE, tilesY = HEIGHT / TILE_SIZE;
 	public static final float GRAVITY = 0.1f;
 	public static final float TERMINAL_VELOCITY = 15;//Testing 15
