@@ -3,9 +3,9 @@ package com.hanfeldt.game.state.menus;
 import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.menu.MainMenuScreen;
 import com.hanfeldt.game.state.State;
-import com.hanfeldt.io.Sound;
 
 public class MainMenuState extends State{
 	private MainMenuScreen splash;

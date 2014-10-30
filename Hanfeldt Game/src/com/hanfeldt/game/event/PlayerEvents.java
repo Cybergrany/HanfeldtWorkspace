@@ -3,7 +3,7 @@ package com.hanfeldt.game.event;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.io.Sound;
+import com.hanfeldt.game.io.Sound;
 
 /**
  * Made this class so Player.java doesn't get too messy. I know entity.java covers a lot of this, but we'd need something

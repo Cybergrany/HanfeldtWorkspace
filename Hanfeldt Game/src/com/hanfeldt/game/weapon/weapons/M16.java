@@ -7,8 +7,8 @@ import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.projectile.Bullet;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.AmmoWeapon;
-import com.hanfeldt.io.Sound;
 
 public class M16 extends AmmoWeapon {
 	

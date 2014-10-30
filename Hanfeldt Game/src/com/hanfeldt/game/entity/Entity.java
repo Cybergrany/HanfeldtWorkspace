@@ -153,16 +153,16 @@ public class Entity {
 	/**
 	 * Returns the closest entity to this entity in Point form
 	 */
-//	public Point getClosestEntity(){
-//		
-//	}
+	public Point getClosestEntity(){
+		
+	}
 	//TODO: Finish these methods and use in BulletNPCFired to assit in aiming
 	/**
 	 * Returns the closest entity to a given x and y co-ord in Point form
 	 * @param x - The x co-ord of the entity being measured from
 	 * @return y - The y co-ord of the entity being measured from
 	 */
-//	public Point getClosestEntity(int x, int y){
+//	public static Point getClosestEntity(int x, int y){
 //		
 //	}
 	

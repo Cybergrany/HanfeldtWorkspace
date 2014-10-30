@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.event.command.CommandEvent;
 import com.hanfeldt.game.event.command.CommandNotFoundException;
-import com.hanfeldt.io.Debug;
+import com.hanfeldt.game.io.Debug;
 
 public class Dialogue {
 	private static BufferedImage dialogueBox;

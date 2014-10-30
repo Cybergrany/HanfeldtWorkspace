@@ -7,13 +7,13 @@ import java.awt.Rectangle;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.io.Listener;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
 import com.hanfeldt.game.weapon.weapons.Sword;
-import com.hanfeldt.io.Listener;
-import com.hanfeldt.io.Sound;
 
 public class Label {
 	private static Listener listener;

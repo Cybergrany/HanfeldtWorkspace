@@ -5,9 +5,9 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.scripting.NpcScript;
-import com.hanfeldt.io.Debug;
 
 public class Story extends Playing {
 	private static int level = 0;

@@ -10,7 +10,7 @@ import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.entity.projectile.BulletLobbedExplosive;
-import com.hanfeldt.io.Sound;
+import com.hanfeldt.game.io.Sound;
 
 public class NpcEvents {
 

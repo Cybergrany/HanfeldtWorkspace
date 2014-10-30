@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.EntityLiving;
-import com.hanfeldt.io.Debug;
+import com.hanfeldt.game.io.Debug;
 
 /**
  * A bullet fired by a non playe character.

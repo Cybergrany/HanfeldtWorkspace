@@ -8,8 +8,8 @@ import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.entity.projectile.BulletNpcFired;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.AmmoWeapon;
-import com.hanfeldt.io.Sound;
 
 public class Pistol extends AmmoWeapon {
 	private int damage;

@@ -8,8 +8,8 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;
-import com.hanfeldt.io.Debug;
-import com.hanfeldt.io.Sound;
+import com.hanfeldt.game.io.Debug;
+import com.hanfeldt.game.io.Sound;
 
 public class WeaponSwung extends TriggerWeapon{
 	public int range = 16;

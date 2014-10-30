@@ -10,9 +10,9 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
+import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
-import com.hanfeldt.io.Debug;
 
 public class LevelStory extends Level {
 	/*

@@ -8,9 +8,9 @@ import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
+import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
-import com.hanfeldt.io.Debug;
 
 
 public class CommandEvent {

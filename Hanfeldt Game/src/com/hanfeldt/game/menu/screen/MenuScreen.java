@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.hanfeldt.game.Main;
-import com.hanfeldt.io.Sound;
+import com.hanfeldt.game.io.Sound;
 
 public class MenuScreen {
 

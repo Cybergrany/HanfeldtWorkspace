@@ -3,6 +3,7 @@ package com.hanfeldt.game.menu.screen;
 import javax.swing.JOptionPane;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.menu.OptionScreen;
 import com.hanfeldt.game.scripting.Dialogue;
 import com.hanfeldt.game.server.Client;
@@ -13,7 +14,6 @@ import com.hanfeldt.game.state.menus.HighScoreDisplayandChangeState;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.state.menus.OptionMenuGraphicsState;
 import com.hanfeldt.game.state.menus.OptionMenuState;
-import com.hanfeldt.io.Sound;
 
 /**
  * Any code to be performed when an option is chosen can be found here.

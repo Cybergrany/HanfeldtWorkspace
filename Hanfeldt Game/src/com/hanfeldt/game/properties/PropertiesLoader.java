@@ -1,8 +1,8 @@
 package com.hanfeldt.game.properties;
 
-import static com.hanfeldt.io.Debug.printDebug;
-import static com.hanfeldt.io.Debug.printErrorDebug;
-import static com.hanfeldt.io.Debug.printStackTraceDebug;
+import static com.hanfeldt.game.io.Debug.printDebug;
+import static com.hanfeldt.game.io.Debug.printErrorDebug;
+import static com.hanfeldt.game.io.Debug.printStackTraceDebug;
 
 import java.io.File;
 import java.io.FileInputStream;

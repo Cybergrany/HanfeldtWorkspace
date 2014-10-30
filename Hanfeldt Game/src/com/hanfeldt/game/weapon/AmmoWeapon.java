@@ -5,7 +5,7 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.io.Sound;
+import com.hanfeldt.game.io.Sound;
 
 public abstract class AmmoWeapon extends TriggerWeapon {
 	private int ammoInClip;

@@ -13,6 +13,7 @@ import com.hanfeldt.game.display.GamePanel;
 import com.hanfeldt.game.display.Hud;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
+import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
@@ -20,18 +21,19 @@ import com.hanfeldt.game.entity.particles.Gore;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.event.command.CommandEvent;
+import com.hanfeldt.game.io.Listener;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.level.LevelStory;
 import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.state.Dead;
+import com.hanfeldt.game.state.GameWon;
 import com.hanfeldt.game.state.Playing;
 import com.hanfeldt.game.state.State;
 import com.hanfeldt.game.state.menus.MainMenuState;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.io.Listener;
-import com.hanfeldt.io.Sound;
 
 /**
  * Main contains all the main components, methods and constants required for the game to work.
@@ -515,4 +517,18 @@ public class Main implements Runnable {
 		}
 		return camera;
 	}
+	
+	/*
+	 * This method is unfinished
+	 */
+	
+	public Entity[] getAllEntites() {
+		Entity[] retEnts = new Entity[getNpc().size() + getBullets().size()];
+		
+		for(int i=0; i<getNpc().size(); i++) {
+			retEnts[i] = getNpc().get(i);
+		}
+		return retEnts;
+	}
+	
 }

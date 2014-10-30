@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.state.GameWon;
-import com.hanfeldt.io.Sound;
 
 public class Firework extends Entity {
 	private boolean shooting = true;
