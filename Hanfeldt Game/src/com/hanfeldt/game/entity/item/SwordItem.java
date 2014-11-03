@@ -15,6 +15,11 @@ import com.hanfeldt.game.weapon.weapons.Sword;
 @Deprecated
 public class SwordItem extends EntityItem{
 	
+	/**
+	 * This isn't really needed, {@link EntityItem}.setLinkedItem and {@link EntityItem}.getLinkedItem to spawn an item
+	 * @param x
+	 * @param y
+	 */
 	public SwordItem(int x, int y) {
 		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 3, 1, 1), x, y);
 	}

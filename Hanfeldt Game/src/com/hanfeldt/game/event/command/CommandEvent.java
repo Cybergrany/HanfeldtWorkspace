@@ -54,6 +54,15 @@ public class CommandEvent {
 			case "zoom":
 				checkSetZoomCommand(subcommand);
 				break;
+			case "cheats":
+				if(!Main.debugCheats){
+					System.out.println("cheats1");
+					Main.debugCheats = true;
+				}else{
+					System.out.println("cheats0");
+					Main.debugCheats = false;
+				}
+				break;
 			default:
 				throw new CommandNotFoundException(subcommand);
 		}

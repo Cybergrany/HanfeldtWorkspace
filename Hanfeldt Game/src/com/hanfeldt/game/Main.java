@@ -150,7 +150,6 @@ public class Main implements Runnable {
 		npc = new ArrayList<Npc>();
 		items = new ArrayList<EntityItem>();
 		
-		if(debugCheats)
 		new CommandEvent();
 		printFPS = false;
 		// Start "GameLoop"

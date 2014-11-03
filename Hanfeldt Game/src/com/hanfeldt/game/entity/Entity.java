@@ -130,7 +130,7 @@ public class Entity {
 	/**
 	 * Right = true, Left = false
 	 */
-	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete! // (Ronan) Oh right//Hey Ronan
+	public void setDirection(boolean dir) {//JavaDoc shows up in autocomplete! // (Ronan) Oh right//Hey Ronan//How you doin'?
 		direction = dir;
 	}
 	
@@ -153,9 +153,9 @@ public class Entity {
 	/**
 	 * Returns the closest entity to this entity in Point form
 	 */
-	public Point getClosestEntity(){
-		
-	}
+//	public Point getClosestEntity(){
+//		
+//	}
 	//TODO: Finish these methods and use in BulletNPCFired to assit in aiming
 	/**
 	 * Returns the closest entity to a given x and y co-ord in Point form
