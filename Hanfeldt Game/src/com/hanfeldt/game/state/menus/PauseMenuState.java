@@ -22,6 +22,7 @@ public class PauseMenuState extends State{
 	public void draw(Graphics g){
 		g.setColor(new Color(0, 0, 0, 90));
 		g.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
+		g.dispose();
 		pauseScreen.draw(g);
 	}
 }

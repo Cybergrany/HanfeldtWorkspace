@@ -1,0 +1,16 @@
+//It gets tedious finding this information every time I want to edit the level
+
+static: Yes, 1x fore and 1x back
+dynamic, parallax; Yes, x4
+
+Level Size = 128*36
+Upscaled Level size (ingame units) = 128*16, 36*16 = 2048 * 576
+
+Static bg size = 1024*288 (~10.5kb)
+Dyn bg size = na*na (~nullkb)//Dyn is uncomplete, using redundant bg file currently
+
+enlargement, as set in Background.java is x2 for fore and bg (static)
+
+GIMP Grid size -
+level image = (16,9)
+bg static, fore + bg = 16*8, 9*8 = (128,72)
