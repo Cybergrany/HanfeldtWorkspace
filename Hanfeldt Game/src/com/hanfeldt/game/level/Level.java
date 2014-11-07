@@ -6,6 +6,8 @@ import java.awt.Point;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.io.ResourceManager;
+import com.hanfeldt.game.state.Story;
 import com.hanfeldt.game.tile.Air;
 import com.hanfeldt.game.tile.Tile;
 
@@ -126,6 +128,16 @@ public class Level {
 	
 	public void setPlayerSpawn(Point p){
 		playerSpawn.setLocation(p);
+	}
+	
+	/**
+	 * Creates an index of the tile triggers in the level, which can then be used with config files to cause specific triggers to occur.
+	 */
+	public void addLevelTrigger(Tile t){
+		LevelLoader.currentLevelTileTrigger++;
+		if(Main.debug)
+		ResourceManager.appendToFile(t.name + ", " + t.getX() + ",  " + t.getY() ,
+																String.format("/config/levels/level%d/",  Story.getCurrentLevel() + 1), "triggerBlocks.txt");//NOTE THAT THIS IS NOT NEEDED ONCE THE DESIGN OF THE LEVEL IS FINISHED - this is simply here as a reference to level designers
 	}
 	
 }

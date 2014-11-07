@@ -60,7 +60,11 @@ public class NpcScript {
 		}
 	}
 	
-	public static void setNpcTriggersAndActions(int[] triggers){
+	/**
+	 * Set dialogue triggers that occur when a certain x co-ordinate is reached by the player
+	 * @param triggers an array of x co-ordinates
+	 */
+	public static void setHorizontalDialogueTriggers(int[] triggers){
 		dialogueTriggerX = new int[triggers.length];
 		dialogueTriggerX = triggers;
 	}

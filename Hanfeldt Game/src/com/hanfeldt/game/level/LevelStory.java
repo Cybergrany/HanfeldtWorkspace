@@ -84,7 +84,11 @@ public class LevelStory extends Level {
 		tile.isSolid = Boolean.parseBoolean(id[5]);
 		tile.isVisible = Boolean.parseBoolean(id[6]);
 		tile.name = id[7];
+		tile.isAction = Boolean.parseBoolean(id[8]);
+		tile.isParticle = Boolean.parseBoolean(id[9]);
+		tile.isTrigger = Boolean.parseBoolean(id[10]);
 		tileAction(tile.name, x, y);
+		checkTile(tile);
 		return tile;
 	}
 	
@@ -103,6 +107,18 @@ public class LevelStory extends Level {
 				break;
 			default:
 				return;
+		}
+	}
+	
+	private void checkTile(Tile tile){
+		if(tile.isAction){
+			
+		}
+		if(tile.isParticle){
+			
+		}
+		if(tile.isTrigger){
+			addLevelTrigger(tile);
 		}
 	}
 	

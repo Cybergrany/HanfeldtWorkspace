@@ -150,13 +150,17 @@ public class PropertiesLoader {
 		//NPC Triggers
 		printDebug("NPC Trigger: " + p.getProperty("npcXTrigger"));
 		String[] temp1 = p.getProperty("npcXTrigger").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
-		LevelLoader.currentLevelNpcTrigger = new int[temp1.length];
+		LevelLoader.currentLevelDialogueXTrigger = new int[temp1.length];
 		for(int i = 0; i < temp1.length; i++){
-			LevelLoader.currentLevelNpcTrigger[i] = Integer.parseInt(temp1[i]);
+			LevelLoader.currentLevelDialogueXTrigger[i] = Integer.parseInt(temp1[i]);
 		}
 	
 		printDebug("\n--- Level Properties---\n");
 		
 		input.close();
+	}
+	
+	public static void addTriggerBlock(String string, int level){
+		printDebug("Adding Trigger Block " + string);
 	}
 }

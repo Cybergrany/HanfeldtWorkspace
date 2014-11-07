@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * Used to create initial tile ID list
  * @author ofeldt
- *
+ *@deprecated edit the file manualy
  */
 public class TileIDCreator {
 	private static String filename = "block.conf";

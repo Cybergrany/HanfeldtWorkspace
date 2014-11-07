@@ -9,7 +9,8 @@ public class Tile {
 	private Sprite sprite;
 	private int x, y;
 	
-	public boolean isSolid = false, isVisible = false;
+	public boolean isSolid = false, isVisible = false, isAction = false,
+								  isParticle = false, isTrigger = false;
 	public String name;
 	
 	public Tile(int x, int y) {

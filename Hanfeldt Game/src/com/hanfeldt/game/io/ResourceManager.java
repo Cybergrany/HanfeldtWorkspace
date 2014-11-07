@@ -1,7 +1,13 @@
 package com.hanfeldt.game.io;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import com.hanfeldt.game.Main;
 
 public class ResourceManager {
 	
@@ -53,5 +59,27 @@ public class ResourceManager {
 			Debug.printStackTraceDebug(e);
 		}
 		return null;
+	}
+	
+	public static void appendToFile(String string,  String path, String fileName){
+		//Declare writer in try block to auto-close it
+		try(FileWriter fw = new FileWriter(Main.class.getResourceAsStream(path+fileName).toString(), true)){
+				Debug.printDebug("Modifying file:  " + path+fileName +  ", adding attribute " + string);
+				fw.append(string);
+		} catch (FileNotFoundException e) {
+			Debug.printErrorDebug("File " + fileName + " not found at " + path);
+		} catch (IOException e1) {
+			Debug.printStackTraceDebug(e1);
+		}
+	}
+	
+	public static void clearFile(String path, String fileName){
+		try {
+			PrintWriter pw = new PrintWriter(Main.class.getResourceAsStream(path+fileName).toString());
+			Debug.printDebug("Wiping file: "+ path+fileName);
+			pw.close();
+		} catch (IOException e) {
+			Debug.printStackTraceDebug(e);
+		}
 	}
 }
