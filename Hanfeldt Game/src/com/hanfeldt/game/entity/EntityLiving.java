@@ -3,9 +3,11 @@ package com.hanfeldt.game.entity;
 import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.weapon.Weapon;
 
 public class EntityLiving extends SpriteEntity {
 	public static final int ticksPerAnimChange = 4;
+	public Weapon weaponEquipped;
 	private BufferedImage walkingImage;
 	private int health;
 	private float jumpHeight;
@@ -107,6 +109,18 @@ public class EntityLiving extends SpriteEntity {
 		}else{
 			return walkingImage;
 		}
+	}
+	
+	public Weapon getWeaponEquipped() {
+		return weaponEquipped;
+	}
+	
+	/**
+	 * set the layer in which the entity is in.
+	 */
+	public void setLayer(int l){
+		layer = l;
+		weaponEquipped.layer = l;
 	}
 	
 }

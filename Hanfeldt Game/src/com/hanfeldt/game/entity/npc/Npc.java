@@ -20,7 +20,6 @@ public class Npc extends EntityLiving {
 	
 	int health = 0;
 	protected NpcEvents events;
-	public Weapon weaponEquipped;
 	private static Dimension spawnLocation;
 
 	private boolean pickupItemOnBounds = false;
@@ -80,10 +79,6 @@ public class Npc extends EntityLiving {
 				e.removeItem(e);
 			}
 		}
-	}
-	
-	public Weapon getWeaponEquipped() {
-		return weaponEquipped;
 	}
 	
 	public void setWeaponEquipped(Weapon wep) {

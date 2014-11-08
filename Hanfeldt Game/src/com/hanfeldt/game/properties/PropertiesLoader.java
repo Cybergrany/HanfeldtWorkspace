@@ -131,6 +131,10 @@ public class PropertiesLoader {
 		printDebug("Has Static Background: " + p.getProperty("hasStaticBg"));
 		LevelLoader.hasStaticBg = Boolean.parseBoolean(p.getProperty("hasStaticBg"));
 		
+		//StaticBgAmount
+		printDebug("Static Background Amount: " + p.getProperty("staticBgAmount"));
+		LevelLoader.staticBgAmount = Integer.parseInt(p.getProperty("staticBgAmount"));
+		
 		//HasForeGround
 		printDebug("Has ForeGround: " + p.getProperty("hasForeG"));
 		LevelLoader.hasForeGround = Boolean.parseBoolean(p.getProperty("hasForeG"));

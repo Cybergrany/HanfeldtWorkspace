@@ -2,9 +2,11 @@ package com.hanfeldt.game.level;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
+import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.io.ResourceManager;
 import com.hanfeldt.game.state.Story;
@@ -17,19 +19,19 @@ public class Level {
 	 */
 	
 	protected Player player;
-	public TileLinkedList<Tile> tiles;
+	public TileArrayList<Tile> tiles;
+	public ArrayList<Layer> layers;
 	public Point playerSpawn = new Point(Main.WIDTH / 2, Main.HEIGHT - Main.TILE_SIZE - Main.getGame().getPlayer().getSizeY());//Default
 	
 	public static int level = 0;
 	protected int sizeX, sizeY;
-	protected Background bg;
+	protected backgroundParallax bgp;
+	protected backgroundStatic[] bgs;
 	
-	public void tick(){
-		bg.tick();
-	}
+	private int layerAmount;
 	
 	public void render(Graphics g, Camera c) {
-		bg.draw(g);
+		bgp.draw(g);
 		for(int i=0; i<tiles.getTileArraySize(); i++) {
 			for(int j=0; j<tiles.size(); j++) {
 				try{
@@ -38,10 +40,6 @@ public class Level {
 				}catch(Exception e){}
 			}
 		}
-	}
-	
-	public void renderForeground(Graphics g){
-		bg.drawFore(g);
 	}
 	
 	public int getSizeX() {
@@ -57,19 +55,77 @@ public class Level {
 	}
 	
 	/**
-	 * Returns the linkedList of tiles
+	 * Returns the ArrayList of tiles
 	 * @return tiles
 	 */
-	public TileLinkedList<Tile> getTile(){
+	public TileArrayList<Tile> getTile(){
 		return tiles;
 	}
 	
+	/**
+	 * Add a tile to the game
+	 * @param x
+	 * @param y
+	 * @param t
+	 */
 	public void setTile(int x, int y, Tile t) {
 		tiles.addTile(x, y, t);
 	}
 	
-	public void setBg(int currentLevel){
-		bg = new Background(currentLevel);
+	/**
+	 * Initialize the background, and create the respective layers
+	 */
+	public void initBackgrounds(){
+		bgp = new backgroundParallax(level+1);
+		boolean hasStatic = LevelLoader.hasStaticBg;
+		if (hasStatic){
+			layerAmount = LevelLoader.staticBgAmount;
+			layers = new ArrayList<>();
+			bgs = new backgroundStatic[layerAmount];
+			for(int i = 0; i < bgs.length; i++){
+				bgs[i] = new backgroundStatic(level+1, i);
+			}
+		}else{
+			layerAmount = 0;
+		}
+	}
+	
+	/**
+	 * Add a background to the specified layer.
+	 * Please note that only one bg can be assigned per layer, and it is unreccomended to use parrallax backgrounds
+	 * This is only called from backgroundStatic, and the layer itself is created here
+	 */
+	public void addBgToLayer(backgroundStatic b){
+		layers.add(new Layer(b));
+	}
+	
+	/**
+	 * Move an entity to the above layer
+	 * @param e
+	 */
+	public void moveToLayerAbove(Entity e){
+		int current = e.getLayer();
+		if(current < layerAmount){
+			layers.get(current).removeEntity(e);
+			e.setLayer(current + 1); 
+			layers.get(current + 1).addEntity(e);
+		}else{
+			e.setLayer(current);
+		}
+	}
+	
+	/**
+	 * Move an entity to the below layer
+	 */
+	public void moveToLayerBelow(Entity e){
+		int current = e.getLayer();
+		if(current > 0 ){
+			layers.get(current).removeEntity(e);
+			e.setLayer(current-1);
+			layers.get(current - 1).addEntity(e);
+		}else{
+			e.setLayer(current);
+		}
 	}
 	
 	/**

@@ -20,7 +20,7 @@ public class Arcade extends Playing {
 	
 	public void tick() {
 		super.tick();
-		Main.getGame().getLevels().tick();
+//		Main.getGame().getLevels().tick();
 	}
 	
 	public void draw(Graphics g) {

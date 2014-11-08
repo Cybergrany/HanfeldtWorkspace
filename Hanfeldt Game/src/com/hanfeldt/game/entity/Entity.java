@@ -13,6 +13,7 @@ public class Entity {
 	protected boolean direction = true; //Right = true, Left = false
 	protected boolean falling = false;
 	boolean isMovingLeft = false, isMovingRight = false;
+	int layer = 0;
 	
 	public Entity(int x, int y) {
 		this.x = x;
@@ -148,6 +149,20 @@ public class Entity {
 	
 	public int getSizeY() {
 		return getY() *Main.TILE_SIZE;
+	}
+	
+	/**
+	 * set the layer in which the entity is in.
+	 */
+	public void setLayer(int l){
+		layer = l;
+	}
+	
+	/**
+	 * The layer in which the entity is in. 
+	 */
+	public int getLayer(){
+		return layer;
 	}
 	
 	/**

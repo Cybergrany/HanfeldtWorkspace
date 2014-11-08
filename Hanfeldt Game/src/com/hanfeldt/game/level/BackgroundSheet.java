@@ -15,7 +15,7 @@ public class BackgroundSheet {
 	
 	public BackgroundSheet(String path){
 		BufferedImage temp = null;
-		
+		System.out.println("Creating new Sheet: " + path);
 		try {
 			temp = ImageIO.read(Main.class.getResource(path));
 		}catch(Exception e) {

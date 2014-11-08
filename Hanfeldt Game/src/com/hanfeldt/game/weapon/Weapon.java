@@ -3,9 +3,8 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import sun.java2d.pipe.DrawImage;
-
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
 
@@ -14,9 +13,11 @@ public abstract class Weapon {
 	protected EntityLiving entity;
 	protected long totalTicks = 0;
 	public boolean automatic = true, hasOverlay = false;
+	public int layer = 0;
 	
 	public Weapon(EntityLiving e, Sprite s) {
 		entity = e;
+		layer = e.getLayer();
 		sprite = s;
 	}
 	
@@ -31,9 +32,38 @@ public abstract class Weapon {
 		return sprite;
 	}
 	
-	public void drawOverlay(Graphics g){
-		return;
+	public void draw(Graphics g, EntityLiving e, Camera c){
+		if(e.getWeaponEquipped() != null){
+			Weapon equipped = e.getWeaponEquipped();
+			if(equipped instanceof WeaponSwung){
+				WeaponSwung tw = (WeaponSwung) equipped;
+				if(tw.isTriggered()){
+					if(e.getDirection()){
+						c.renderSprite(g, tw.getSprite(), e.getX() +10, e.getY() +Main.TILE_SIZE /2);
+					}else{
+						c.renderSprite(g, e.getWeaponEquipped().getReverseSprite(), e.getX() - 10, e.getY() +Main.TILE_SIZE /2);
+					}
+				}else{
+					if(e.getDirection()) {
+						c.renderSprite(g, tw.getNotTriggeredSprite(), e.getX() +5, e.getY() +2);
+					}else{
+						c.renderSprite(g, tw.getNotTriggeredSprite(), e.getX() -5, e.getY() +2);
+					}
+				}
+			}else{
+				if(e.getDirection()){
+					c.renderSprite(g, e.getWeaponEquipped().getSprite(), e.getX() +10, e.getY() +Main.TILE_SIZE /2);
+				}else{
+					c.renderSprite(g, e.getWeaponEquipped().getReverseSprite(), e.getX() - 10, e.getY() +Main.TILE_SIZE /2);
+				}
+			}
+			if(e.getWeaponEquipped().hasOverlay){
+				e.getWeaponEquipped().drawOverlay(g);
+			}
+		}
 	}
+	
+	public void drawOverlay(Graphics g){}
 	
 	public Sprite getReverseSprite() {
 		BufferedImage reverseImage = new BufferedImage(Main.TILE_SIZE, Main.TILE_SIZE, BufferedImage.TYPE_INT_ARGB);

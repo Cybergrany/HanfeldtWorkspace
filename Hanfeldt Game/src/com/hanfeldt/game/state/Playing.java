@@ -10,6 +10,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
+import com.hanfeldt.game.level.Layer;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 import com.hanfeldt.game.weapon.WeaponSwung;
@@ -81,70 +82,13 @@ public abstract class Playing extends State {
 		for(EntityItem ei : main.getItems()){
 			camera.renderEntityItem(g, ei);
 		}
-		
-		//TODO: I'm thinking this is kind of inefficient... I've left it, because FPS seems good..
-		ArrayList<Npc> npc = Main.getGame().getNpc();
-		for(int i = 0; i < npc.size(); i++){
-			if(npc.get(i) instanceof Npc){
-				Npc npcChar = (Npc) npc.get(i);
-				if(npcChar.getWeaponEquipped() != null){
-					if(npcChar.getWeaponEquipped() instanceof WeaponSwung) {
-						WeaponSwung tw = (WeaponSwung) (npcChar.getWeaponEquipped());
-						if(tw.isTriggered()) {
-							if(npcChar.getDirection()) {
-								camera.renderSprite(g, npcChar.getWeaponEquipped().getReverseSprite(), npcChar.getX() - 10, npcChar.getY() +Main.TILE_SIZE /2);
-							}else{
-								camera.renderSprite(g, tw.getSprite(), npcChar.getX() +10, npcChar.getY() +Main.TILE_SIZE /2);
-							}
-						}else{
-							if(!npcChar.getDirection()) {
-								//Keeping this cause the way they hold it looks kinda cool
-								camera.renderSprite(g, tw.getNotTriggeredSprite(), npcChar.getX() +5, npcChar.getY() +2);
-							}else{
-								camera.renderSprite(g, tw.getNotTriggeredSprite(), npcChar.getX() -5, npcChar.getY() +2);
-							}
-						}
-					}else{
-						if(npcChar.getDirection()) {
-							camera.renderSprite(g, npcChar.getWeaponEquipped().getReverseSprite(), npcChar.getX() - 10, npcChar.getY() +Main.TILE_SIZE /2);
-						}else{
-							camera.renderSprite(g, npcChar.getWeaponEquipped().getSprite(), npcChar.getX() +10, npcChar.getY() +Main.TILE_SIZE /2);
-						}
-					}
-				}
-			}
-		}
+	
 		Player p = main.getPlayer();
-		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());
-		if(main.getPlayer().getWeaponEquipped() != null) {
-			if(p.getWeaponEquipped() instanceof WeaponSwung) {
-				WeaponSwung tw = (WeaponSwung) (p.getWeaponEquipped());
-				if(tw.isTriggered()) {
-					if(p.getDirection()) {
-						camera.renderSprite(g, tw.getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
-					}else{
-						camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
-					}
-				}else{
-					if(p.getDirection()) {
-						camera.renderSprite(g, tw.getNotTriggeredSprite(), p.getX() +5, p.getY() +2);
-					}else{
-						camera.renderSprite(g, tw.getNotTriggeredSprite(), p.getX() -5, p.getY() +2);
-					}
-				}
-			}else{
-				if(p.getDirection()) {
-					camera.renderSprite(g, p.getWeaponEquipped().getSprite(), p.getX() +10, p.getY() +Main.TILE_SIZE /2);
-				}else{
-					camera.renderSprite(g, p.getWeaponEquipped().getReverseSprite(), p.getX() - 10, p.getY() +Main.TILE_SIZE /2);
-				}
-			}
-			if(p.getWeaponEquipped().hasOverlay){
-				p.getWeaponEquipped().drawOverlay(g);
-			}
-		}
+		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());//Draw player
 		
-		main.getLevels().renderForeground(g);
+		for(Layer l : main.getLevels().layers){
+			l.getBackground().draw(g);
+		}
 		
 //		camera.drawRectBorder(g, 0, Main.WIDTH, 40, 110, Color.BLACK, true);
 

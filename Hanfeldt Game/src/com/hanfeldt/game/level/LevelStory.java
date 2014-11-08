@@ -38,7 +38,7 @@ public class LevelStory extends Level {
 		sizeY = levelImage.getHeight();
 		sizeX = levelImage.getWidth();
 		
-		tiles = new TileLinkedList<Tile>();
+		tiles = new TileArrayList<Tile>();
 		tiles.addTile(sizeX, sizeY, null);
 		blocks = Main.getGame().blocks;
 		

@@ -48,7 +48,7 @@ public class Story extends Playing {
 			lastLevel = level;
 		}
 		if(NpcScript.getDialogue() == null) {
-			main.getLevels().tick();
+//			main.getLevels().tick();
 			super.tick();
 		}
 		script.tick();

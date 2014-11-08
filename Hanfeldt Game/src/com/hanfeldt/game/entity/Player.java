@@ -12,14 +12,12 @@ import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.Listener;
 import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.Pistol;
-import com.hanfeldt.game.weapon.weapons.SniperRifle;
+import com.hanfeldt.game.weapon.weapons.Sword;
 
 public class Player extends EntityLiving {
 	public static final int ticksPerAnimChange = 4;
 	private BufferedImage walkingImage;
 	private PlayerEvents events;
-	private Weapon weaponEquipped = new SniperRifle(this);
 	public static int maxHealth = Values.player_max_health;
 	private int money = 100;
 	private int stamina = 69;
@@ -37,6 +35,8 @@ public class Player extends EntityLiving {
 		events = new PlayerEvents(this);
 		levelFinished = false;
 		listener = l;
+		weaponEquipped = new Sword(this);
+		setLayer(2);//TODO Read from config file
 	}
 	
 	public void tickWalking() {
@@ -169,10 +169,6 @@ public class Player extends EntityLiving {
 	
 	public PlayerEvents getEvents() {
 		return events;
-	}
-	
-	public Weapon getWeaponEquipped() {
-		return weaponEquipped;
 	}
 	
 	public void setWeaponEquipped(Weapon wep) {
