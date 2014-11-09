@@ -4,12 +4,12 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 
-public class backgroundParallax extends Background{
+public class BackgroundParallax extends Background{
 	private BackgroundSheet[] sheet;
 	
 	private int currentLevel, layerAmount;
 	
-	public backgroundParallax(int level){
+	public BackgroundParallax(int level){
 		currentLevel = level;
 		layerAmount = LevelLoader.currentLevelBgAmount;
 		

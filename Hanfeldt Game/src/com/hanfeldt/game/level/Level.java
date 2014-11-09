@@ -25,7 +25,7 @@ public class Level {
 	
 	public static int level = 0;
 	protected int sizeX, sizeY;
-	public backgroundParallax bgp;
+	public BackgroundParallax bgp;
 	protected backgroundStatic[] bgs;
 	
 	private int layerAmount;
@@ -75,7 +75,7 @@ public class Level {
 	 * Initialize the background, and create the respective layers
 	 */
 	public void initBackgrounds(){
-		bgp = new backgroundParallax(level+1);
+		bgp = new BackgroundParallax(level+1);
 		boolean hasStatic = LevelLoader.hasStaticBg;
 		if (hasStatic){
 			layerAmount = LevelLoader.staticBgAmount;
@@ -191,7 +191,7 @@ public class Level {
 	public void addLevelTrigger(Tile t){
 		LevelLoader.currentLevelTileTrigger++;
 		if(Main.debug)
-		ResourceManager.appendToFile(t.name + ", " + t.getX() + ",  " + t.getY() ,
+		ResourceManager.appendToFile(t.name + ", " + t.getX() + ", " + t.getY() ,
 																String.format("/config/levels/level%d/",  Story.getCurrentLevel() + 1), "triggerBlocks.txt");//NOTE THAT THIS IS NOT NEEDED ONCE THE DESIGN OF THE LEVEL IS FINISHED - this is simply here as a reference to level designers
 	}
 	

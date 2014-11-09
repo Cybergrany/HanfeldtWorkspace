@@ -4,8 +4,6 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
-import com.hanfeldt.game.entity.EntityItem;
-import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
@@ -75,15 +73,6 @@ public abstract class Playing extends State {
 //			go.render(g);
 			camera.renderGore(g, go);
 		}
-//		for(Npc n :  main.getNpc()){
-//			camera.renderEntityLiving(g,n);
-//		}
-		for(EntityItem ei : main.getItems()){
-			camera.renderEntityItem(g, ei);
-		}
-	
-		Player p = main.getPlayer();
-//		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());//Draw player
 		
 		for(Layer l : main.getLevels().layers){
 			l.draw(g, camera);

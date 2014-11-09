@@ -161,9 +161,9 @@ public class Camera {
 		if(e instanceof Npc && e.getSprite().getWalkingAnimsLength() > 1){
 			renderImage(g, e.getWalkingImage(), e.getX(), e.getY());
 		}else if(e.getDirection()) {
-				renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
+			renderSprite(g, e.getSprite(), e.getX(), e.getY());
 			}else{
-				renderSprite(g, e.getSprite(), e.getX(), e.getY());
+				renderSprite(g, e.getReverseSprite(), e.getX(), e.getY());
 			}
 
 //		camera.renderImage(g, npc.get(i).getWalkingImage(), npc.get(i).getX(),  npc.get(i).getY());
