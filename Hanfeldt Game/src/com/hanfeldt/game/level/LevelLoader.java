@@ -2,6 +2,8 @@ package com.hanfeldt.game.level;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.SpriteSheet;
+import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.NpcList;
 import com.hanfeldt.game.io.ResourceManager;
 import com.hanfeldt.game.properties.PropertiesLoader;
@@ -30,6 +32,10 @@ public class LevelLoader {
 			ResourceManager.clearFile(String.format("/config/levels/level%d/",  Story.getCurrentLevel() + 1), "triggerBlocks.txt");//Clear the trigger block file if it needs to be rebuilt
 		Main.getGame().setLevels(new LevelStory(String.format("/images/maps/levels/level%d.png", level + 1), Main.getGame().getPlayer()));
 		NpcList.loadCharacters();
-		Main.getGame().getLevels().initBackgrounds();;
+		Main.getGame().getLevels().initBackgrounds();
+		//Add all entities to relevant layer. This must be done as entities are declared before the level inits
+		for(Entity e : Main.getGame().getAllEntites()){
+			Main.getGame().getLevels().layers.get(e.getLayer()).addEntity(e);
+		}
 	}
 }

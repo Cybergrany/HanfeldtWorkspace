@@ -55,8 +55,8 @@ public class Story extends Playing {
 	}
 	
 	public void draw(Graphics g) {
-		main.getLevels().render(g, camera);
 		super.draw(g);
+		main.getLevels().render(g, camera);
 		//TODO: Call renderfore when done
 		script.draw(g);
 		g.dispose();

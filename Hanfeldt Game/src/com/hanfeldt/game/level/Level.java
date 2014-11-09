@@ -25,13 +25,12 @@ public class Level {
 	
 	public static int level = 0;
 	protected int sizeX, sizeY;
-	protected backgroundParallax bgp;
+	public backgroundParallax bgp;
 	protected backgroundStatic[] bgs;
 	
 	private int layerAmount;
 	
 	public void render(Graphics g, Camera c) {
-		bgp.draw(g);
 		for(int i=0; i<tiles.getTileArraySize(); i++) {
 			for(int j=0; j<tiles.size(); j++) {
 				try{

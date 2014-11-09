@@ -517,17 +517,19 @@ public class Main implements Runnable {
 		return camera;
 	}
 	
-	/*
-	 * This method is unfinished
+	/**
+	 * An {@link ArrayList} of all ingame {@link Entity} objects.
+	 * @return
+	 * @see Entity
 	 */
-	
-	public Entity[] getAllEntites() {
-		Entity[] retEnts = new Entity[getNpc().size() + getBullets().size()];
+	public ArrayList<Entity> getAllEntites() {
+		ArrayList<Entity> e = new ArrayList<>();
+		e.addAll(getBullets());
+		e.addAll(getNpc());
+		e.addAll(getItems());
+		e.add(getPlayer());
 		
-		for(int i=0; i<getNpc().size(); i++) {
-			retEnts[i] = getNpc().get(i);
-		}
-		return retEnts;
+		return e;
 	}
 	
 }

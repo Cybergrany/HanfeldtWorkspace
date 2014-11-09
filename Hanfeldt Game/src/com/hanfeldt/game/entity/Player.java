@@ -36,7 +36,7 @@ public class Player extends EntityLiving {
 		levelFinished = false;
 		listener = l;
 		weaponEquipped = new Sword(this);
-		setLayer(2);//TODO Read from config file
+		setLayer(0);//TODO Read from config file
 	}
 	
 	public void tickWalking() {

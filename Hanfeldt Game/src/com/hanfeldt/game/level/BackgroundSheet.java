@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.io.Debug;
 
 public class BackgroundSheet {
 
@@ -15,7 +16,7 @@ public class BackgroundSheet {
 	
 	public BackgroundSheet(String path){
 		BufferedImage temp = null;
-		System.out.println("Creating new Sheet: " + path);
+		Debug.printDebug("Creating new BackgroundSheet: " + path);
 		try {
 			temp = ImageIO.read(Main.class.getResource(path));
 		}catch(Exception e) {

@@ -1,8 +1,11 @@
 package com.hanfeldt.game.level;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.EntityLiving;
 
 public class Layer {
 	
@@ -12,6 +15,15 @@ public class Layer {
 	
 	public Layer(backgroundStatic b){
 		bg = b;
+		entities = new ArrayList<>();
+	}
+	
+	public void draw(Graphics g, Camera c){
+		for(Entity e : entities){
+			if(e instanceof EntityLiving)
+			c.renderEntityLiving(g,(EntityLiving) e);
+		}
+		bg.draw(g);
 	}
 	
 	public backgroundStatic getBackground(){

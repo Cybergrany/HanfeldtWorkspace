@@ -1,7 +1,6 @@
 package com.hanfeldt.game.state;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
@@ -13,7 +12,6 @@ import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.level.Layer;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.WeaponSwung;
 
 public abstract class Playing extends State {
 	
@@ -61,6 +59,7 @@ public abstract class Playing extends State {
 	}
 	
 	public void draw(Graphics g) {
+		main.getLevels().bgp.draw(g);
 		for(Bullet bill /* Lel */ : main.getBullets()) {
 			if(!bill.hasSprite){
 				camera.renderBullet(g, bill);
@@ -76,19 +75,26 @@ public abstract class Playing extends State {
 //			go.render(g);
 			camera.renderGore(g, go);
 		}
-		for(Npc n :  main.getNpc()){
-			camera.renderEntityLiving(g,n);
-		}
+//		for(Npc n :  main.getNpc()){
+//			camera.renderEntityLiving(g,n);
+//		}
 		for(EntityItem ei : main.getItems()){
 			camera.renderEntityItem(g, ei);
 		}
 	
 		Player p = main.getPlayer();
-		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());//Draw player
+//		camera.renderImage(g, p.getWalkingImage(), p.getX(), p.getY());//Draw player
 		
 		for(Layer l : main.getLevels().layers){
-			l.getBackground().draw(g);
+			l.draw(g, camera);
 		}
+//		for(Layer l : main.getLevels().layers){
+//			for(Entity e : l.getEntities()){
+//				if(e instanceof EntityLiving)
+//				camera.renderEntityLiving(g,(EntityLiving) e);
+//			}
+//			l.getBackground().draw(g);
+//		}
 		
 //		camera.drawRectBorder(g, 0, Main.WIDTH, 40, 110, Color.BLACK, true);
 
