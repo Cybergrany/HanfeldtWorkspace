@@ -106,7 +106,7 @@ public class CommandEvent {
 				ItemSpawner.spawnItem(new SwordItem(Main.getGame().getPlayer().getX() + 5, Main.getGame().getPlayer().getY()));
 				break;
 			case "zombie":
-				Spawner.spawnNpc(new Zombie(Main.getGame().getPlayer().getX() + Main.TILE_SIZE * 3, Main.getGame().getPlayer().getY() - Main.TILE_SIZE * 2));
+				Spawner.spawnNpc(new Zombie(Main.getGame().getPlayer().getX() + Main.TILE_SIZE * 3, Main.getGame().getPlayer().getY() - Main.TILE_SIZE * 2), 1);//TODO specify layer
 				break;
 			default:
 				Main.getGame().getPlayer().setLocation(Main.getGame().getLevels().getPlayerSpawnPoint());

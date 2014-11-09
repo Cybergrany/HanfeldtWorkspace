@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.io.ResourceManager;
 import com.hanfeldt.game.state.Story;
@@ -108,6 +109,9 @@ public class Level {
 			layers.get(current).removeEntity(e);
 			e.setLayer(current + 1); 
 			layers.get(current + 1).addEntity(e);
+			if(e instanceof EntityLiving && ((EntityLiving) e).getWeaponEquipped() != null){
+				((EntityLiving) e).getWeaponEquipped().layer = e.getLayer();
+			}
 		}else{
 			e.setLayer(current);
 		}
@@ -122,6 +126,9 @@ public class Level {
 			layers.get(current).removeEntity(e);
 			e.setLayer(current-1);
 			layers.get(current - 1).addEntity(e);
+			if(e instanceof EntityLiving && ((EntityLiving) e).getWeaponEquipped() != null){
+				((EntityLiving) e).getWeaponEquipped().layer = e.getLayer();
+			}
 		}else{
 			e.setLayer(current);
 		}

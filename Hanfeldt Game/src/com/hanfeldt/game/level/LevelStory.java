@@ -97,7 +97,7 @@ public class LevelStory extends Level {
 			case "ZombieSpawner":
 				for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
 					Zombie zombie = new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40);//Final tilesize used to be 40
-					Spawner.spawnNpc(zombie);
+					Spawner.spawnNpc(zombie, 1);//TODO placeholder layer
 				}
 				break;
 			case "playerSpawner":

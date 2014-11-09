@@ -13,7 +13,7 @@ public class Entity {
 	protected boolean direction = true; //Right = true, Left = false
 	protected boolean falling = false;
 	boolean isMovingLeft = false, isMovingRight = false;
-	int layer = 1;//Lower layer by default
+	int layer = 1;
 	
 	public Entity(int x, int y) {
 		this.x = x;

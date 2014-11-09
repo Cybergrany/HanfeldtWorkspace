@@ -123,6 +123,10 @@ public class PropertiesLoader {
 		p.load(input);
 		printDebug("---Level Properties---\n");
 		
+		//PlayerStarting layer
+		printDebug("Player Starting Layer: " + p.getProperty("startingLayer"));
+		Main.getGame().getPlayer().setLayer(Integer.parseInt(p.getProperty("startingLayer")));
+		
 		//Bg amount
 		printDebug("Background Amount: " + p.getProperty("bgAmount"));
 		LevelLoader.currentLevelBgAmount = Integer.parseInt(p.getProperty("bgAmount"));
@@ -142,6 +146,14 @@ public class PropertiesLoader {
 		//Npc List
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
 		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+		
+		//NpcLayer
+		printDebug("Layer of NPC's" + p.getProperty("npcLayer"));
+		String[] temp0 = p.getProperty("npcLayer").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+		NpcList.npcLayer = new int[temp0.length];
+		for(int i = 0; i < temp0.length; i++){
+			NpcList.npcLayer[i] = Integer.parseInt(temp0[i]);
+		}
 		
 		//Location of NPC's
 		printDebug("Location of NPC's: " + p.getProperty("npcLocation"));
