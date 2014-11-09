@@ -16,7 +16,7 @@ public class BulletNpcFired extends Bullet{
 	private EntityLiving ent;
 
 	public BulletNpcFired(int x, int y, int damage, int aimX, int aimY, EntityLiving el) {
-		super(x, y, damage);
+		super(x, y, damage, el.getLayer());
 		
 		try{
 			angle = (float) Math.toDegrees(Math.atan2(aimX - Main.HEIGHT / 2 - Main.TILE_SIZE,

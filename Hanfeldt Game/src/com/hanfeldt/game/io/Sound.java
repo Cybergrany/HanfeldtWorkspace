@@ -25,6 +25,12 @@ public class Sound {
 	
 	private static OggClip oggClip;
 	
+	//TODO: The default java soundsystem is incompatibe on many systems, especially linux
+	//As proof, simply enable the sound, run the game in linux, then enable debug - stack traces galore and no sound plays!
+	/**
+	 * @deprecated doesn't work well. Upgrade all sound files to ogg vorbis TODO
+	 * @param sound
+	 */
 	public static synchronized void playSound(final String sound){//For sound, call Sound.playSound("SoundName");
 		if(!Main.muted){
 			try {

@@ -58,17 +58,17 @@ public abstract class Playing extends State {
 	
 	public void draw(Graphics g) {
 		main.getLevels().bgp.draw(g);
-		for(Bullet bill /* Lel */ : main.getBullets()) {
-			if(!bill.hasSprite){
-				camera.renderBullet(g, bill);
-			}else{
-				if(bill.direction){
-					camera.renderBullet(g, bill, bill.getSprite());
-				}else{
-					camera.renderBullet(g, bill, bill.getReverseSprite());
-				}
-			}
-		}
+//		for(Bullet bill /* Lel */ : main.getBullets()) {
+//			if(!bill.hasSprite){
+//				camera.renderBullet(g, bill);
+//			}else{
+//				if(bill.direction){
+//					camera.renderBullet(g, bill, bill.getSprite());
+//				}else{
+//					camera.renderBullet(g, bill, bill.getReverseSprite());
+//				}
+//			}
+//		}
 		for(GoreSpawn go : main.getGore()) {
 //			go.render(g);
 			camera.renderGore(g, go);

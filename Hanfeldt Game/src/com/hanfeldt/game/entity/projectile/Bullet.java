@@ -19,15 +19,17 @@ public class Bullet extends SpriteEntity {
 	private static int damageValue = 10;//default damage
 
 	
-	public Bullet(int x, int y, int damage) {
+	public Bullet(int x, int y, int damage, int layer) {
 		super(x, y);
+		Main.getGame().getLevels().layers.get(layer).addBullet(this);
 		setAngle();
 		damageValue = damage;
 		direction = Main.getGame().getPlayer().getDirection();//TODO: Temporary, need to change this to get direction of holding entity
 	}
 	
-	public Bullet(Sprite s, int x, int y, int damage){
+	public Bullet(Sprite s, int x, int y, int damage, int layer){
 		super(s, x, y);
+		Main.getGame().getLevels().layers.get(layer).addBullet(this);
 		damageValue = damage;
 		sprite = s;
 		hasSprite = true;
@@ -70,7 +72,7 @@ public class Bullet extends SpriteEntity {
 	}
 	
 	public void destroyBullet(){
-		Main.getGame().bullets.remove(this);
+		Main.getGame().getLevels().layers.get(getLayer()).removeBullet(this);
 	}
 	
 	public void onCollide(){

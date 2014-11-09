@@ -32,18 +32,22 @@ public class Pistol extends AmmoWeapon {
 			if(!entity.getDirection()) {
 				// facing left
 				if(entity instanceof Player){
-					Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage));
+//					Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+					Main.getGame().getLayers().get(layer).addBullet(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
 				}else{
 //					System.out.println(entity.getAimX() + "\t" + entity.getAimY() + "\tDelete from Pistol.java");
-					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
+//					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
+					Main.getGame().getLayers().get(layer).addBullet(new BulletNpcFired(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
 				}
 			}else{
 				// facing right
 				if(entity instanceof Player){
-					Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage));
+//					Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+					Main.getGame().getLayers().get(layer).addBullet(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
 				}else{
 //					System.out.println(entity.getAimX() + "\t" + entity.getAimY());
-					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
+//					Main.getGame().bullets.add(new BulletNpcFired(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
+					Main.getGame().getLayers().get(layer).addBullet(new BulletNpcFired(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getAimX() + Main.TILE_SIZE, entity.getAimY() + Main.TILE_SIZE, entity));
 				}
 			}
 			Sound.playSound("weapon/pistol_shoot.wav");

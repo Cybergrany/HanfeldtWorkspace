@@ -23,6 +23,7 @@ import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.event.command.CommandEvent;
 import com.hanfeldt.game.io.Listener;
 import com.hanfeldt.game.io.Sound;
+import com.hanfeldt.game.level.Layer;
 import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.level.LevelStory;
@@ -56,7 +57,7 @@ public class Main implements Runnable {
 	public static int mouseX, mouseY;
 	public static boolean debugCheats = false;
 	public static SpriteSheet spriteSheet;
-	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+//	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public PropertiesLoader resourceManager;
 	public static String username = "user";
 	
@@ -366,6 +367,10 @@ public class Main implements Runnable {
 	 * @see Bullet
 	 */
 	public ArrayList<Bullet> getBullets() {
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		for(Layer l : getLevels().layers){
+			bullets.addAll(l.getBullets());
+		}
 		return bullets;
 	}
 	
@@ -503,6 +508,10 @@ public class Main implements Runnable {
 	//TODO: Rename to account for not being an array any more(Singular)
 	public Level getLevels() {
 		return levels;
+	}
+	
+	public ArrayList<Layer> getLayers(){
+		return levels.layers;
 	}
 	
 	/**

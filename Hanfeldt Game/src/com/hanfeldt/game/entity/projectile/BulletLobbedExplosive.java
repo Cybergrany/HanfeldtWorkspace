@@ -14,8 +14,8 @@ public class BulletLobbedExplosive extends BulletLobbed{
 	float explosiveDam, radius;
 	int damage;
 
-	public BulletLobbedExplosive(Sprite s, int x, int y, int damage, float exDamage) {
-		super(s, x, y, damage);
+	public BulletLobbedExplosive(Sprite s, int x, int y, int damage, float exDamage, int layer) {
+		super(s, x, y, damage, layer);
 		explosiveDam = exDamage;
 		radius = explosiveDam * .8f;
 		this.damage = damage;

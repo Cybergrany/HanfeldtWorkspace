@@ -109,7 +109,7 @@ public class Hud {
 			
 			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50); //Well Dayum, it can
 			
-			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.getGame().getNpc().toArray().length, Main.getGame().bullets.toArray().length), 10, 60);
+			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.getGame().getNpc().toArray().length, Main.getGame().getBullets().size()), 10, 60);
 			
 		}
 		

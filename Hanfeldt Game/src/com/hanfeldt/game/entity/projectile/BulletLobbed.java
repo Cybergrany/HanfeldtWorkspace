@@ -11,8 +11,8 @@ public class BulletLobbed extends Bullet{
 	float weight = .25f;//The lower the lighter the bullet, giving a larger arc
 	boolean arced = false;
 
-	public BulletLobbed(Sprite s, int x, int y, int damage) {
-		super(s, x, y, damage);
+	public BulletLobbed(Sprite s, int x, int y, int damage, int layer) {
+		super(s, x, y, damage, layer);
 		setSpeed(2.5f);
 	}
 	
