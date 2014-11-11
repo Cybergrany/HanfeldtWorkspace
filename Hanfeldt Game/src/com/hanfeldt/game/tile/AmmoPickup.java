@@ -18,7 +18,7 @@ public class AmmoPickup extends Tile{
 	}
 	
 	public void onCollidedEntity(Entity e) {
-		super.onCollidedEntity(e);
+//		super.onCollidedEntity(e);
 		if(hasAmmo && e instanceof Player) {
 			// This is temporary while I work out why tile.setTile() doesn't work... TODO fix that
 			Weapon wep = Main.getGame().getPlayer().getWeaponEquipped();

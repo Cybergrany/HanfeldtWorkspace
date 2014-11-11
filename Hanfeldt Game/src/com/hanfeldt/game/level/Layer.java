@@ -10,11 +10,11 @@ import com.hanfeldt.game.entity.projectile.Bullet;
 
 public class Layer {
 	
-	private backgroundStatic bg;
+	private BackgroundStatic bg;
 	private ArrayList<Entity> entities;
 	private ArrayList<Bullet> bullets;
 	
-	public Layer(backgroundStatic b){
+	public Layer(BackgroundStatic b){
 		bg = b;
 		entities = new ArrayList<Entity>();
 		bullets = new ArrayList<Bullet>();
@@ -24,6 +24,7 @@ public class Layer {
 		for(Entity e : entities){
 			if(e instanceof EntityLiving){
 			c.renderEntityLiving(g,(EntityLiving) e);
+			if(((EntityLiving) e).getWeaponEquipped() != null)
 			((EntityLiving) e).getWeaponEquipped().draw(g, (EntityLiving) e, c);
 			}
 		}
@@ -41,7 +42,7 @@ public class Layer {
 		bg.draw(g);
 	}
 	
-	public backgroundStatic getBackground(){
+	public BackgroundStatic getBackground(){
 		return bg;
 	}
 	

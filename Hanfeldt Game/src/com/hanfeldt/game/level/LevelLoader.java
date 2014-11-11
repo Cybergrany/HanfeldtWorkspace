@@ -12,7 +12,7 @@ import com.hanfeldt.game.state.Story;
 
 public class LevelLoader {
 	
-	public static int currentLevelBgAmount = 0, currentLevelTileTrigger = 0, staticBgAmount;
+	public static int currentLevelBgAmount = 0, currentLevelTileTrigger = 0, staticBgAmount, startingLayer;
 	public static int[] currentLevelDialogueXTrigger;
 	public static boolean hasStaticBg, hasForeGround;
 	
@@ -31,11 +31,12 @@ public class LevelLoader {
 		if(Main.debug)
 			ResourceManager.clearFile(String.format("/config/levels/level%d/",  Story.getCurrentLevel() + 1), "triggerBlocks.txt");//Clear the trigger block file if it needs to be rebuilt
 		Main.getGame().setLevels(new LevelStory(String.format("/images/maps/levels/level%d.png", level + 1), Main.getGame().getPlayer()));
-		NpcList.loadCharacters();
 		Main.getGame().getLevels().initBackgrounds();
+		NpcList.loadCharacters();
 		//Add all entities to relevant layer. This must be done as entities are declared before the level inits
 		for(Entity e : Main.getGame().getAllEntites()){
 			Main.getGame().getLevels().layers.get(e.getLayer()).addEntity(e);
 		}
+		Main.getGame().getPlayer().setLayer(startingLayer);
 	}
 }

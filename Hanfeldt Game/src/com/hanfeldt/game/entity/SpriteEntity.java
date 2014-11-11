@@ -115,7 +115,9 @@ public class SpriteEntity extends Entity{
 		outerLoop:
 			for(int i=0; i<getTileSizeX(); i++) {
 				Tile tileBelow = Main.getGame().getLevels().getTile(getTileX() +i, getTileY() + getTileSizeY());
-				tileBelow.onCollidedEntity(this);
+				Tile tileBeneath = Main.getGame().getLevels().getTile(getTileX() + i, getTileY() + (getTileSizeY() / 2 ));//TODO Not sure if /2 will work on entities of every size
+				tileBeneath.onPassedThroughEntity(this);
+				tileBelow.onCollidedEntityAbove(this);
 				boolean tileBelowSolid = tileBelow.isSolid();
 				boolean tileBelowRightSolid = Main.getGame().getLevels().getTile(getTileX() +i +1, getTileY() + getTileSizeY()).isSolid();
 				boolean tileBelowLeftSolid = Main.getGame().getLevels().getTile(getTileX() +i -1, getTileY() + getTileSizeY()).isSolid();

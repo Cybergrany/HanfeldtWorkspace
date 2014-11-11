@@ -20,7 +20,7 @@ public class Shop extends Tile{
 	public void onCollidedEntity(Entity e){
 		if(e instanceof Player){
 			Graphics g = Main.getGame().getPanel().getGraphics();
-			super.onCollidedEntity(e);
+//			super.onCollidedEntity(e);
 			Main.getGame().getPanel().getGraphics();
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Kai", Font.PLAIN, 10));

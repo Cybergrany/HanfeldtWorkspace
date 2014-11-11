@@ -4,12 +4,12 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 
-public class backgroundStatic extends Background{
+public class BackgroundStatic extends Background{
 	private BackgroundSheet sheet;
 	
 	private int currentLevel;
 	
-	public backgroundStatic(int level, int layer) {
+	public BackgroundStatic(int level, int layer) {
 		currentLevel = level;
 		Main.getGame().getLevels().addBgToLayer(this);
 		sheet = new BackgroundSheet(levelPath(currentLevel, layer, true), 2);

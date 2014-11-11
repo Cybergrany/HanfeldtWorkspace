@@ -27,9 +27,10 @@ public class Level {
 	public static int level = 0;
 	protected int sizeX, sizeY;
 	public BackgroundParallax bgp;
-	protected backgroundStatic[] bgs;
+	private TileActionManager actionManager;
+	protected BackgroundStatic[] bgs;
 	
-	private int layerAmount;
+	public int layerAmount;
 	
 	public void render(Graphics g, Camera c) {
 		for(int i=0; i<tiles.getTileArraySize(); i++) {
@@ -81,9 +82,9 @@ public class Level {
 		if (hasStatic){
 			layerAmount = LevelLoader.staticBgAmount;
 			layers = new ArrayList<>();
-			bgs = new backgroundStatic[layerAmount];
+			bgs = new BackgroundStatic[layerAmount];
 			for(int i = 0; i < bgs.length; i++){
-				bgs[i] = new backgroundStatic(level+1, i);
+				bgs[i] = new BackgroundStatic(level+1, i);
 			}
 		}else{
 			layerAmount = 0;
@@ -95,43 +96,8 @@ public class Level {
 	 * Please note that only one bg can be assigned per layer, and it is unreccomended to use parrallax backgrounds
 	 * This is only called from backgroundStatic, and the layer itself is created here
 	 */
-	public void addBgToLayer(backgroundStatic b){
+	public void addBgToLayer(BackgroundStatic b){
 		layers.add(new Layer(b));
-	}
-	
-	/**
-	 * Move an entity to the above layer
-	 * @param e
-	 */
-	public void moveToLayerAbove(Entity e){
-		int current = e.getLayer();
-		if(current < layerAmount){
-			layers.get(current).removeEntity(e);
-			e.setLayer(current + 1); 
-			layers.get(current + 1).addEntity(e);
-			if(e instanceof EntityLiving && ((EntityLiving) e).getWeaponEquipped() != null){
-				((EntityLiving) e).getWeaponEquipped().layer = e.getLayer();
-			}
-		}else{
-			e.setLayer(current);
-		}
-	}
-	
-	/**
-	 * Move an entity to the below layer
-	 */
-	public void moveToLayerBelow(Entity e){
-		int current = e.getLayer();
-		if(current > 0 ){
-			layers.get(current).removeEntity(e);
-			e.setLayer(current-1);
-			layers.get(current - 1).addEntity(e);
-			if(e instanceof EntityLiving && ((EntityLiving) e).getWeaponEquipped() != null){
-				((EntityLiving) e).getWeaponEquipped().layer = e.getLayer();
-			}
-		}else{
-			e.setLayer(current);
-		}
 	}
 	
 	/**
@@ -194,6 +160,7 @@ public class Level {
 	
 	/**
 	 * Creates an index of the tile triggers in the level, which can then be used with config files to cause specific triggers to occur.
+	 * TODO Enumerate action tiles instead of triggers
 	 */
 	public void addLevelTrigger(Tile t){
 		LevelLoader.currentLevelTileTrigger++;

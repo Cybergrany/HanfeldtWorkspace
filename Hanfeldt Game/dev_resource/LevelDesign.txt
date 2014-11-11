@@ -15,4 +15,7 @@ An index of 0 is furthest away (bg0.png looks like it's furthest away from the p
 
 ---Blocks---
 
+TRIGGERS: Have a set effect, can happen multiple times
+ACTION: Are defined in a config file, happen a specified amount of times
+
 EDIT: SEE block.conf file for ID's etc

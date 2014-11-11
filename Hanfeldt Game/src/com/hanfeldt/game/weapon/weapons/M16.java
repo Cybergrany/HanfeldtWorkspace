@@ -31,11 +31,11 @@ public class M16 extends AmmoWeapon {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
 			if(!entity.getDirection()) {
 				// facing left
-				Main.getGame().getLayers().get(layer).addBullet(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
 //				Main.getGame().bullets.add(new Bullet(entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
 			}else{
 				// facing right
-				Main.getGame().getLayers().get(layer).addBullet(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
 //				Main.getGame().bullets.add(new Bullet(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
 			}
 			Sound.playSound("weapon/pistol_shoot.wav");

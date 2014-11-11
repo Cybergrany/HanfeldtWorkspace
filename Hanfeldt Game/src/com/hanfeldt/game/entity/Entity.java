@@ -7,13 +7,13 @@ import com.hanfeldt.game.Main;
 public class Entity {
 	protected long totalTicks = 0;
 	private float x, y;
+	protected int layer = 1;
 	protected float velX = 0f;
 	protected float velY = 0f;
 	float velXMax = 10f, velYMax = 3f;
 	protected boolean direction = true; //Right = true, Left = false
 	protected boolean falling = false;
 	boolean isMovingLeft = false, isMovingRight = false;
-	int layer = 1;
 	
 	public Entity(int x, int y) {
 		this.x = x;
@@ -155,7 +155,35 @@ public class Entity {
 	 * set the layer in which the entity is in.
 	 */
 	public void setLayer(int l){
+		Main.getGame().getLayers().get(layer).removeEntity(this);
 		layer = l;
+		Main.getGame().getLayers().get(layer).addEntity(this);
+	}
+	
+	/**
+	 * Move up a layer
+	 */
+	public void moveToLayerAbove(){
+		int current = layer;
+		if(current < Main.getGame().getLevels().layerAmount){
+			Main.getGame().getLayers().get(current).removeEntity(this);
+			layer = current + 1;
+			Main.getGame().getLayers().get(layer).addEntity(this);
+		}else{
+			setLayer(current);
+		}
+	}
+	
+	/**
+	 * Move down a layer
+	 */
+	public void moveToLayerBelow(){
+		int current = layer;
+		if(current > 0){
+			Main.getGame().getLayers().get(current).removeEntity(this);
+			layer = current - 1;
+			Main.getGame().getLayers().get(layer).addEntity(this);
+		}
 	}
 	
 	/**

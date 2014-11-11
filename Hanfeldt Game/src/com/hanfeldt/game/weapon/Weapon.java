@@ -13,11 +13,9 @@ public abstract class Weapon {
 	protected EntityLiving entity;
 	protected long totalTicks = 0;
 	public boolean automatic = true, hasOverlay = false;
-	public int layer = 0;
 	
 	public Weapon(EntityLiving e, Sprite s) {
 		entity = e;
-		layer = e.getLayer();
 		sprite = s;
 	}
 	

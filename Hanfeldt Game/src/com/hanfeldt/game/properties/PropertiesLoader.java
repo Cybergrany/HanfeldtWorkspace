@@ -125,7 +125,7 @@ public class PropertiesLoader {
 		
 		//PlayerStarting layer
 		printDebug("Player Starting Layer: " + p.getProperty("startingLayer"));
-		Main.getGame().getPlayer().setLayer(Integer.parseInt(p.getProperty("startingLayer")));
+		LevelLoader.startingLayer = Integer.parseInt(p.getProperty("startingLayer"));
 		
 		//Bg amount
 		printDebug("Background Amount: " + p.getProperty("bgAmount"));
