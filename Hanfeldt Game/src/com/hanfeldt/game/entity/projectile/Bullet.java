@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
+import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.SpriteEntity;
+import com.hanfeldt.game.io.Debug;
 
 public class Bullet extends SpriteEntity {
 	public static final Color COLOR = new Color(0xFF, 0x55, 0x00);
@@ -15,25 +17,28 @@ public class Bullet extends SpriteEntity {
 	public boolean direction;
 	
 	protected float angle;
+	protected EntityLiving entity;
 	private float speed = 3.0f;
 	private static int damageValue = 10;//default damage
 
 	
-	public Bullet(int x, int y, int damage, int layer) {
+	public Bullet(EntityLiving e, int x, int y, int damage, int layer) {
 		super(x, y);
+		entity = e;
 		Main.getGame().getLevels().layers.get(layer).addBullet(this);
 		setAngle();
 		damageValue = damage;
-		direction = Main.getGame().getPlayer().getDirection();//TODO: Temporary, need to change this to get direction of holding entity
+		direction = entity.getDirection();
 	}
 	
-	public Bullet(Sprite s, int x, int y, int damage, int layer){
+	public Bullet(EntityLiving e, Sprite s, int x, int y, int damage, int layer){
 		super(s, x, y);
+		entity = e;
 		Main.getGame().getLevels().layers.get(layer).addBullet(this);
 		damageValue = damage;
 		sprite = s;
 		hasSprite = true;
-		direction = Main.getGame().getPlayer().getDirection();//TODO: Temporary, need to change this to get direction of holding entity
+		direction = entity.getDirection();
 		sizeX = sprite.getTileWidth();
 		sizeY = sprite.getTileHeight();
 		setAngle();
@@ -104,11 +109,20 @@ public class Bullet extends SpriteEntity {
 	}
 	
 	public void setAngle(){
-		try {
-			angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - Main.HEIGHT / 2 - Main.TILE_SIZE,
-					Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) :Main.WIDTH /2)));
-		}catch(Exception e) {
-			e.printStackTrace();
+		if(entity instanceof Player){
+			try {
+				angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - Main.HEIGHT / 2 - Main.TILE_SIZE,
+						Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) :Main.WIDTH /2)));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			try{
+				angle = (float) Math.toDegrees(Math.atan2(entity.getAimX() - Main.HEIGHT / 2 - Main.TILE_SIZE,
+						entity.getAimY() - (entity.getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) + 3:Main.WIDTH /2 -3)));
+			}catch(Exception e){
+				Debug.printErrorDebug("Error setting bullet angle");
+			}
 		}
 	}
 	

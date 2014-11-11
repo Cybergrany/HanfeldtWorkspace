@@ -12,6 +12,7 @@ import com.hanfeldt.game.entity.Player;
 
 public class Shop extends Tile{
 	
+	@Deprecated
 	public Shop(int x, int y){
 		super(x, y);
 		setSprite((new Sprite(SpriteSheet.getSheet(SpriteSheet.block), 1, 3, 2, 1)));

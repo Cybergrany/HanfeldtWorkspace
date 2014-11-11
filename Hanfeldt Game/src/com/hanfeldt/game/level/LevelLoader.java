@@ -3,7 +3,6 @@ package com.hanfeldt.game.level;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
-import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.NpcList;
 import com.hanfeldt.game.io.ResourceManager;
 import com.hanfeldt.game.properties.PropertiesLoader;

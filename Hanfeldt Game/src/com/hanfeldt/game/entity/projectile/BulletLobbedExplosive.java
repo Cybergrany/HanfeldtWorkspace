@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.event.NpcEvents;
 
@@ -14,8 +15,8 @@ public class BulletLobbedExplosive extends BulletLobbed{
 	float explosiveDam, radius;
 	int damage;
 
-	public BulletLobbedExplosive(Sprite s, int x, int y, int damage, float exDamage, int layer) {
-		super(s, x, y, damage, layer);
+	public BulletLobbedExplosive(EntityLiving e, Sprite s, int x, int y, int damage, float exDamage, int layer) {
+		super(e, s, x, y, damage, layer);
 		explosiveDam = exDamage;
 		radius = explosiveDam * .8f;
 		this.damage = damage;

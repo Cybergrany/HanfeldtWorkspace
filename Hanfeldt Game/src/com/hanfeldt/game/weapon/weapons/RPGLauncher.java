@@ -20,11 +20,9 @@ public class RPGLauncher extends AmmoWeapon{
 	public void trigger(){
 		if(super.getAmmoInClip() > 0){
 			if(!entity.getDirection()){
-				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new GrenadeRPG(entity.getX() - 5, entity.getY() + 8, entity.getLayer()));
-//				Main.getGame().bullets.add(new GrenadeRPG(entity.getX() - 5, entity.getY() + 8, entity.getLayer()));
+				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new GrenadeRPG(entity, entity.getX() - 5, entity.getY() + 8, entity.getLayer()));
 			}else{
-				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new GrenadeRPG(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + 8, entity.getLayer()));
-//				Main.getGame().bullets.add(new GrenadeRPG(entity.getX() + Main.TILE_SIZE + 5, entity.getY() + 8, entity.getLayer()));
+				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new GrenadeRPG(entity, entity.getX() + Main.TILE_SIZE + 5, entity.getY() + 8, entity.getLayer()));
 			}
 			//TODO Add trigger sound
 			super.trigger();

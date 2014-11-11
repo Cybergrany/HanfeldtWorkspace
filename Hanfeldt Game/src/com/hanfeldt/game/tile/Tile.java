@@ -2,6 +2,7 @@ package com.hanfeldt.game.tile;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.display.InfoPopUp;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
@@ -11,12 +12,14 @@ import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class Tile {
-	private Sprite sprite;
-	private int x, y;
 	
 	public boolean isSolid = false, isVisible = false, isAction = false,
 								  isParticle = false, isTrigger = false, triggered = false;
 	public String name;
+	
+	private InfoPopUp useTile;
+	private Sprite sprite;
+	private int x, y;
 	
 	public Tile(int x, int y) {
 		this.x = x;
@@ -67,7 +70,12 @@ public class Tile {
 	 */
 	public void onPassedThroughEntity(Entity e){
 		if(e instanceof EntityLiving && isTrigger){
-			checkTrigger((EntityLiving) e);
+			if(useTile != null){
+				checkTrigger((EntityLiving) e);
+			}else{
+				useTile = new InfoPopUp("Press e to use.", getTileX(), getTileY(), 40);
+				checkTrigger((EntityLiving) e);
+			}
 		}
 	}
 	
@@ -94,18 +102,20 @@ public class Tile {
 				break;
 			case "layerUp":
 				if(e instanceof Player && !triggered){
-//					e.setLayer(e.getLayer() + 1);
-					e.moveToLayerAbove();
-					Debug.printDebug("Player layer set to: " + e.getLayer());
-					triggered = true;
+					useTile.draw();
+					if(useTile.triggered){
+						e.moveToLayerAbove();
+						triggered = true;
+					}
 				}
 				break;
 			case "layerDown":
 				if(e instanceof Player && !triggered){
-//					e.setLayer(e.getLayer() - 1);
-					e.moveToLayerBelow();
-					Debug.printDebug("Player layer set to: " + e.getLayer());
-					triggered = true;
+					useTile.draw();
+					if(useTile.triggered){
+						e.moveToLayerBelow();
+						triggered = true;
+					}
 				}
 				break;
 		}

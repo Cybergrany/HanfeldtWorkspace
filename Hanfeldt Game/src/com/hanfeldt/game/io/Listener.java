@@ -14,7 +14,7 @@ import com.hanfeldt.game.state.menus.PauseMenuState;
 public class Listener implements MouseListener, KeyListener, MouseMotionListener {
 	
 	private boolean pausePressed, debugPressed;
-	public boolean aDown, dDown, wDown, escDown,
+	public boolean aDown, dDown, wDown, eDown, escDown,
 	shiftDown, mouseDown, mouseDownLastTick,
 	rightMouseDown, rightMouseDownLastTick,
 	upArrowDown, downArrowDown, enterDown,
@@ -37,6 +37,10 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			
 		case(KeyEvent.VK_W): //Going for W yolo
 			wDown = true;
+			break;
+			
+		case(KeyEvent.VK_E):
+			eDown=true;
 			break;
 			
 		case(KeyEvent.VK_UP):
@@ -108,6 +112,9 @@ public class Listener implements MouseListener, KeyListener, MouseMotionListener
 			break;
 		case(KeyEvent.VK_A):
 			aDown = false;
+			break;
+		case(KeyEvent.VK_E):
+			eDown = false;
 			break;
 		case(KeyEvent.VK_W):
 			wDown = false;

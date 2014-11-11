@@ -9,6 +9,7 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Weapon;
 
+@Deprecated
 public class AmmoPickup extends Tile{
 	private boolean hasAmmo = true;
 	
