@@ -57,6 +57,7 @@ public abstract class Playing extends State {
 	}
 	
 	public void draw(Graphics g) {
+		
 		main.getLevels().bgp.draw(g);
 		
 		for(GoreSpawn go : main.getGore()) {
@@ -66,10 +67,7 @@ public abstract class Playing extends State {
 		for(Layer l : main.getLevels().layers){
 			l.draw(g, camera);
 		}
-		
 //		camera.drawRectBorder(g, 0, Main.WIDTH, 40, 110, Color.BLACK, true);
-
-		main.getHud().draw(g);
 	}
 	
 }

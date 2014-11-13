@@ -3,6 +3,9 @@ package com.hanfeldt.game.display;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -21,6 +24,7 @@ public class Hud {
 	private boolean hasFocus = true;
 	public static Color defWhite = new Color(255 , 255, 255);
 	public static Color transDark = new Color(0, 0, 0, 80);
+	public  ArrayList<InfoPopUp> popUpList;
 	private Font font = new Font("Arial", Font.PLAIN, 9);
 	private ImageIcon focusNagger1, focusNagger2;
 	
@@ -37,6 +41,7 @@ public class Hud {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		popUpList = new ArrayList<>();
 	}
 	
 	public void tick(){
@@ -122,6 +127,13 @@ public class Hud {
 				g.drawImage(focusNagger1.getImage(), Main.WIDTH /4, Main.HEIGHT /3, null);
 			}else{
 				g.drawImage(focusNagger2.getImage(), Main.WIDTH /4, Main.HEIGHT /3, null);
+			}
+		}
+		
+		for(InfoPopUp i : popUpList){
+			if(i.showing){
+				g.drawString(i.message, i.en.getX() - Main.getGame().getCamera().getX()- i.message.length(), i.en.getY() - Main.getGame().getCamera().getY());
+				i.tick();
 			}
 		}
 	}

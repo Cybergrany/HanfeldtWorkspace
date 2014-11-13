@@ -74,7 +74,7 @@ public class Camera {
 			// Stop the camera going offscreen
 			
 			if(x < 0) {
-				x = 0;
+				x = 0;//Holy shit this code blew my mind
 			}
 			
 			y = entity.getY() - (Main.HEIGHT / 2 + (Main.TILE_SIZE/2) -10);
@@ -158,7 +158,7 @@ public class Camera {
 	 * @see EntityLiving
 	 */
 	public void renderEntityLiving(Graphics g, EntityLiving e) {
-		if(e instanceof Npc && e.getSprite().getWalkingAnimsLength() > 1){
+		if(e.getSprite().getWalkingAnimsLength() > 1){
 			renderImage(g, e.getWalkingImage(), e.getX(), e.getY());
 		}else if(e.getDirection()) {
 			renderSprite(g, e.getSprite(), e.getX(), e.getY());

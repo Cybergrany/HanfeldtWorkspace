@@ -73,7 +73,7 @@ public class Tile {
 			if(useTile != null){
 				checkTrigger((EntityLiving) e);
 			}else{
-				useTile = new InfoPopUp("Press e to use.", getTileX(), getTileY(), 40);
+				useTile = new InfoPopUp("Press e to use.", e);
 				checkTrigger((EntityLiving) e);
 			}
 		}
@@ -102,19 +102,21 @@ public class Tile {
 				break;
 			case "layerUp":
 				if(e instanceof Player && !triggered){
-					useTile.draw();
+					useTile.showing = true;
 					if(useTile.triggered){
 						e.moveToLayerAbove();
 						triggered = true;
+						useTile.showing = false;
 					}
 				}
 				break;
 			case "layerDown":
 				if(e instanceof Player && !triggered){
-					useTile.draw();
+					useTile.showing = true;
 					if(useTile.triggered){
 						e.moveToLayerBelow();
 						triggered = true;
+						useTile.showing = false;
 					}
 				}
 				break;

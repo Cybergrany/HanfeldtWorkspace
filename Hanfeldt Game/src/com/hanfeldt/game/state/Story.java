@@ -59,6 +59,7 @@ public class Story extends Playing {
 		main.getLevels().render(g, camera);
 		//TODO: Call renderfore when done
 		script.draw(g);
+		main.getHud().draw(g);
 		g.dispose();
 	}
 	
