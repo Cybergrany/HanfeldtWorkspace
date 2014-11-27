@@ -11,7 +11,6 @@ import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class Pistol extends AmmoWeapon {
-	private int damage;
 	
 	/**
 	 * Pew-Pew-Pew
@@ -28,13 +27,7 @@ public class Pistol extends AmmoWeapon {
 	
 	public void trigger() {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
-			if(!entity.getDirection()) {
-				// facing left
-				Main.getGame().getLayers().get(entity.getLayer()).addBullet(new Bullet(entity, entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
-			}else{
-				// facing right
-					Main.getGame().getLayers().get(entity.getLayer()).addBullet(new Bullet(entity, entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
-			}
+			super.addBullet();
 			Sound.playSound("weapon/pistol_shoot.wav");
 			super.trigger();
 		}else{

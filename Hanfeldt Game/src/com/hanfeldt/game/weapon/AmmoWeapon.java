@@ -5,9 +5,11 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.io.Sound;
 
 public abstract class AmmoWeapon extends TriggerWeapon {
+	public int damage;
 	private int ammoInClip;
 	private int totalAmmo;
 	private int ammoInFullClip;
@@ -73,6 +75,18 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		reloadInProg = true;
 		reloadStarted = totalTicks;
 		clipOutDone = clipInDone = reloadClickDone = false;
+	}
+	
+	public void addBullet(){
+		if(!entity.getDirection()) {
+			// facing left
+//			Main.getGame().getLayers().get(entity.getLayer()).addBullet(new Bullet(entity, entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+			Main.getGame().getEntityManager().addBullet(new Bullet(entity, entity.getX() - 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+		}else{
+			// facing right
+//			Main.getGame().getLayers().get(entity.getLayer()).addBullet(new Bullet(entity, entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+			Main.getGame().getEntityManager().addBullet(new Bullet(entity, entity.getX() + Main.TILE_SIZE + 5, entity.getY() + Main.TILE_SIZE -2, damage, entity.getLayer()));
+		}
 	}
 	
 	public void tick() {

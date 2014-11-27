@@ -3,9 +3,12 @@ package com.hanfeldt.game.level;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.EntityLiving;
+import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.projectile.Bullet;
 
 public class Layer {
@@ -26,6 +29,8 @@ public class Layer {
 			c.renderEntityLiving(g,(EntityLiving) e);
 			if(((EntityLiving) e).getWeaponEquipped() != null)
 			((EntityLiving) e).getWeaponEquipped().draw(g, (EntityLiving) e, c);
+			}else if(e instanceof EntityItem){
+				c.renderEntityItem(g, (EntityItem)e);
 			}
 		}
 		for(Bullet b : bullets){
@@ -52,10 +57,6 @@ public class Layer {
 	
 	public void removeBullet(Bullet b){
 		bullets.remove(b);
-	}
-	
-	public ArrayList<Bullet> getBullets(){
-		return bullets;
 	}
 	
 	public void addEntity(Entity e){

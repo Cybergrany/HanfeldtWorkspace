@@ -154,10 +154,16 @@ public class Entity {
 	/**
 	 * set the layer in which the entity is in.
 	 */
-	public void setLayer(int l){
-		Main.getGame().getLayers().get(layer).removeEntity(this);
-		layer = l;
-		Main.getGame().getLayers().get(layer).addEntity(this);
+	public void setLayer(int l, boolean moving){
+		if(moving){
+//			Main.getGame().getLayers().get(layer).removeEntity(this);
+//			Main.getGame().getLayers().get(l).addEntity(this);TODO See if this works
+			Main.getGame().getEntityManager().removeEntity(this);
+			layer = l;
+			Main.getGame().getEntityManager().addEntity(this);
+		}else{
+			layer = l;
+		}
 	}
 	
 	/**
@@ -166,11 +172,12 @@ public class Entity {
 	public void moveToLayerAbove(){
 		int current = layer;
 		if(current < Main.getGame().getLevels().layerAmount){
-			Main.getGame().getLayers().get(current).removeEntity(this);
+//			Main.getGame().getLayers().get(current).removeEntity(this);
+			Main.getGame().getEntityManager().removeEntity(this);
 			layer = current + 1;
-			Main.getGame().getLayers().get(layer).addEntity(this);
+			Main.getGame().getEntityManager().addEntity(this);
 		}else{
-			setLayer(current);
+			return;
 		}
 	}
 	
@@ -180,9 +187,12 @@ public class Entity {
 	public void moveToLayerBelow(){
 		int current = layer;
 		if(current > 0){
-			Main.getGame().getLayers().get(current).removeEntity(this);
+//			Main.getGame().getLayers().get(current).removeEntity(this);
+			Main.getGame().getEntityManager().removeEntity(this);
 			layer = current - 1;
-			Main.getGame().getLayers().get(layer).addEntity(this);
+			Main.getGame().getEntityManager().addEntity(this);
+		}else{
+			return;
 		}
 	}
 	
@@ -196,9 +206,13 @@ public class Entity {
 	/**
 	 * Returns the closest entity to this entity in Point form
 	 */
-//	public Point getClosestEntity(){
-//		
-//	}
+	public Point getClosestEntity(){
+		Point p = new Point();
+		
+		
+		
+		return p;
+	}
 	//TODO: Finish these methods and use in BulletNPCFired to assit in aiming
 	/**
 	 * Returns the closest entity to a given x and y co-ord in Point form

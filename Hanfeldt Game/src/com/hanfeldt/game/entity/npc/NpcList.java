@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.hanfeldt.game.entity.npc.characters.Bill;
 import com.hanfeldt.game.entity.npc.characters.Billy;
+import com.hanfeldt.game.entity.npc.monsters.Zombie;
 
 /**
  * 
@@ -14,16 +15,18 @@ public class NpcList {
 	
 	
 	public static String[] characterList;
-	public static String[] monsterList;//Unused
+	public static String[] monsterList;
 	public static int[]  npcLayer;
 	public static ArrayList<Integer> currentLevelNpcLocation;
 	
+	public ArrayList<Zombie> zombieCache;
+	
 	
 	public NpcList(){
-		
+		zombieCache = new ArrayList<Zombie>();
 	}
 	
-	public static void loadCharacters(){
+	public void loadCharacters(){
 		int currentCharacter = 0;//TODO declare outside method
 		for(int i = 0; i < characterList.length; i++){
 			switch(characterList[i]){
@@ -35,6 +38,12 @@ public class NpcList {
 				break;
 			}
 			currentCharacter+=2;
+		}
+	}
+	
+	public void loadMonsters(){
+		for(Zombie z : zombieCache){
+			Spawner.spawnNpc(z, 1);//TODO placeholder layer
 		}
 	}
 }

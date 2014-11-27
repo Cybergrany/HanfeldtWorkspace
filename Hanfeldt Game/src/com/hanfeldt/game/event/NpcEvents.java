@@ -33,23 +33,25 @@ public class NpcEvents {
 	}
 
 	public void tick() {
-		for(Layer l : Main.getGame().getLevels().layers){
-			for(Bullet b : l.getBullets()){
-				if(bulletCollided(npc, b)){
-					bulletHit(npc, b);
-					b.onCollide(npc);
+//		for(Layer l : Main.getGame().getLevels().layers){TODO: FINISH
+//			for(Bullet b : l.getBullets()){
+//			for(Bullet b: Main.getGame().getBullets()){
+//				if(bulletCollided(npc, b)){
+//					bulletHit(npc, b);
+//					b.onCollide(npc);
+//				}
+////				}
+////			}
+//		}
+		for (int i = 0; i < Main.getGame().getBullets().size(); i++) {
+			if (Main.getGame().getBullets().get(i) instanceof Bullet) {
+				Bullet bullet = (Bullet) Main.getGame().getBullets().get(i);
+				if (bulletCollided(npc, bullet)) {
+					bulletHit(npc, bullet);
+					bullet.onCollide(npc);
 				}
 			}
 		}
-//		for (int i = 0; i < Main.getGame().bullets.size(); i++) {
-//			if (Main.getGame().bullets.get(i) instanceof Bullet) {
-//				Bullet bullet = (Bullet) Main.getGame().bullets.get(i);
-//				if (bulletCollided(npc, bullet)) {
-//					bulletHit(npc, bullet);
-//					bullet.onCollide(npc);
-//				}
-//			}
-//		}
 		if (isOutsideMap(npc)) {
 			killNpc(npc, Values.npc_out_of_map_id);
 		}
@@ -72,8 +74,7 @@ public class NpcEvents {
 			}
 			killNpc(npc, id);
 		}
-		if (Main.getGame().getPlayer().getDirection())
-		{
+		if (Main.getGame().getPlayer().getDirection()){
 			npc.setVelX(6);
 		}else{
 			npc.setVelX(-6);
@@ -82,11 +83,15 @@ public class NpcEvents {
 	}
 
 	public void killNpc(Npc npc, int id) {
-		Main.getGame().getNpc().remove(npc);
+//		Main.getGame().getNpc().remove(npc);
+//		Main.getGame().getLayers().get(npc.getLayer()).removeEntity(npc);
+		Main.getGame().getEntityManager().removeNpc(npc);
 	}
 	
 	public void killNpc(Npc npc) {
-		Main.getGame().getNpc().remove(npc);
+//		Main.getGame().getNpc().remove(npc);
+//		Main.getGame().getLayers().get(npc.getLayer()).removeEntity(npc);
+		Main.getGame().getEntityManager().removeNpc(npc);
 	}
 
 	public boolean isOutsideMap(Npc npc) {

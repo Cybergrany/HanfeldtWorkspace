@@ -25,7 +25,8 @@ public class Bullet extends SpriteEntity {
 	public Bullet(EntityLiving e, int x, int y, int damage, int layer) {
 		super(x, y);
 		entity = e;
-		Main.getGame().getLevels().layers.get(layer).addBullet(this);
+//		Main.getGame().getLevels().layers.get(layer).addBullet(this);
+		Main.getGame().getEntityManager().addBullet(this);
 		setAngle();
 		damageValue = damage;
 		direction = entity.getDirection();
@@ -34,7 +35,8 @@ public class Bullet extends SpriteEntity {
 	public Bullet(EntityLiving e, Sprite s, int x, int y, int damage, int layer){
 		super(s, x, y);
 		entity = e;
-		Main.getGame().getLevels().layers.get(layer).addBullet(this);
+//		Main.getGame().getLevels().layers.get(layer).addBullet(this);
+		Main.getGame().getEntityManager().addBullet(this);
 		damageValue = damage;
 		sprite = s;
 		hasSprite = true;
@@ -77,7 +79,8 @@ public class Bullet extends SpriteEntity {
 	}
 	
 	public void destroyBullet(){
-		Main.getGame().getLevels().layers.get(getLayer()).removeBullet(this);
+//		Main.getGame().getLevels().layers.get(getLayer()).removeBullet(this);
+		Main.getGame().getEntityManager().removeBullet(this);
 	}
 	
 	public void onCollide(){

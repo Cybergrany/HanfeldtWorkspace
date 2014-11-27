@@ -10,6 +10,7 @@ public class ItemSpawner {
 	}
 	
 	public static void spawnItem(EntityItem item){
-		Main.getGame().getItems().add(item);
+//		Main.getGame().getItems().add(item);
+		Main.getGame().getEntityManager().addItems(item);
 	}
 }

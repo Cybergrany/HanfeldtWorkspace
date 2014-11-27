@@ -60,6 +60,14 @@ public class Tile {
 		return y *Main.TILE_SIZE;
 	}
 	
+	public InfoPopUp getUseTile(){
+		return useTile;
+	}
+	
+	public void setUseTile(InfoPopUp i){
+		useTile = i;
+	}
+	
 	public boolean isVisible(){
 		return isVisible;
 	}
@@ -70,12 +78,7 @@ public class Tile {
 	 */
 	public void onPassedThroughEntity(Entity e){
 		if(e instanceof EntityLiving && isTrigger){
-			if(useTile != null){
-				checkTrigger((EntityLiving) e);
-			}else{
-				useTile = new InfoPopUp("Press e to use.", e);
-				checkTrigger((EntityLiving) e);
-			}
+			checkTrigger((EntityLiving) e);
 		}
 	}
 	
@@ -101,23 +104,21 @@ public class Tile {
 				}
 				break;
 			case "layerUp":
-				if(e instanceof Player && !triggered){
-					useTile.showing = true;
-					if(useTile.triggered){
-						e.moveToLayerAbove();
-						triggered = true;
-						useTile.showing = false;
-					}
+				if(e instanceof Player){
+					useTile.shiftLayerConfirm(e, this, true, false);
 				}
 				break;
 			case "layerDown":
-				if(e instanceof Player && !triggered){
-					useTile.showing = true;
-					if(useTile.triggered){
-						e.moveToLayerBelow();
-						triggered = true;
-						useTile.showing = false;
-					}
+				if(e instanceof Player){
+					useTile.shiftLayerConfirm(e, this, false, false);
+				}
+				break;
+			case "layerToggle"://TODO make layerToggle block
+				if(e instanceof Player){
+					useTile.shiftLayerConfirm(e,  this, true, true);
+				}
+				if(Main.timer(20)){
+					triggered = false;
 				}
 				break;
 		}

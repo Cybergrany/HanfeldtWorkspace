@@ -3,6 +3,7 @@ package com.hanfeldt.game.entity.particles;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Entity;
 
 public class GoreSpawn extends Entity {

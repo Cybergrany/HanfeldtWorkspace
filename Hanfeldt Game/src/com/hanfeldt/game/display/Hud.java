@@ -132,7 +132,7 @@ public class Hud {
 		
 		for(InfoPopUp i : popUpList){
 			if(i.showing){
-				g.drawString(i.message, i.en.getX() - Main.getGame().getCamera().getX()- i.message.length(), i.en.getY() - Main.getGame().getCamera().getY());
+				g.drawString(i.message, player.getX() - Main.getGame().getCamera().getX()- i.message.length(), player.getY() - Main.getGame().getCamera().getY());
 				i.tick();
 			}
 		}

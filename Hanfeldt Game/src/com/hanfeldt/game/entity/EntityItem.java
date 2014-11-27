@@ -28,7 +28,8 @@ public class EntityItem extends SpriteEntity{
 	}
 	
 	public void removeItem(EntityItem e){
-		Main.getGame().getItems().remove(e);
+//		Main.getGame().getItems().remove(e);
+		Main.getGame().getEntityManager().removeItems(this);
 	}
 	
 	public boolean isCollidingWithHorizTile(){

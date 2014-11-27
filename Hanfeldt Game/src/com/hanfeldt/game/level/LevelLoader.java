@@ -31,11 +31,10 @@ public class LevelLoader {
 			ResourceManager.clearFile(String.format("/config/levels/level%d/",  Story.getCurrentLevel() + 1), "triggerBlocks.txt");//Clear the trigger block file if it needs to be rebuilt
 		Main.getGame().setLevels(new LevelStory(String.format("/images/maps/levels/level%d.png", level + 1), Main.getGame().getPlayer()));
 		Main.getGame().getLevels().initBackgrounds();
-		NpcList.loadCharacters();
+		Main.getGame().npcPreCache.loadMonsters();
+		Main.getGame().npcPreCache.loadCharacters();
 		//Add all entities to relevant layer. This must be done as entities are declared before the level inits
-		for(Entity e : Main.getGame().getAllEntites()){
-			Main.getGame().getLevels().layers.get(e.getLayer()).addEntity(e);
-		}
-		Main.getGame().getPlayer().setLayer(startingLayer);
+		
+		Main.getGame().getPlayer().setLayer(startingLayer, true);
 	}
 }

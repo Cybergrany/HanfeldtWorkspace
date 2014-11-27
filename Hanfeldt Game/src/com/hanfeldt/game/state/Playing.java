@@ -4,9 +4,9 @@ import java.awt.Graphics;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
+import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
-import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.level.Layer;
 import com.hanfeldt.game.weapon.TriggerWeapon;
 import com.hanfeldt.game.weapon.Weapon;
@@ -30,6 +30,7 @@ public abstract class Playing extends State {
 		for(int i=0; i<main.getBullets().size(); i++) {
 			main.getBullets().get(i).tick();
 		}
+		
 		for(int i=0; i<main.getNpc().size(); i++) {
 			Npc npc = main.getNpc().get(i);
 			npc.tick();
@@ -37,6 +38,7 @@ public abstract class Playing extends State {
 //			Weapon npcWep = npc.getWeaponEquipped();
 //			if(npcWep != null) npcWep.tick();
 		}
+		
 		for(int i = 0; i < main.getItems().size(); i++){
 			main.getItems().get(i).tick();
 		}
@@ -60,12 +62,12 @@ public abstract class Playing extends State {
 		
 		main.getLevels().bgp.draw(g);
 		
-		for(GoreSpawn go : main.getGore()) {
-			camera.renderGore(g, go);
-		}
-		
 		for(Layer l : main.getLevels().layers){
 			l.draw(g, camera);
+		}
+		
+		for(GoreSpawn go : main.getGore()) {
+			camera.renderGore(g, go);
 		}
 //		camera.drawRectBorder(g, 0, Main.WIDTH, 40, 110, Color.BLACK, true);
 	}

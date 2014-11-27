@@ -111,8 +111,9 @@ public class Level {
 				setTile(x, y, new Air(x, y));
 			}
 		}
-		for(int i = 0; i < Main.getGame().npc.toArray().length; i++){
-			Main.getGame().npc.remove(i);
+		for(int i = 0; i < Main.getGame().getNpc().toArray().length; i++){
+//			Main.getGame().getNpc().remove(i);
+//			Main.getGame().getEntityManager().removeNpc(i);TODO Fix
 		}
 	}
 	

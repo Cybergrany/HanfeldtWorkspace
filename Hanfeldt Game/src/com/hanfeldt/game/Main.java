@@ -15,8 +15,10 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.EntityItem;
+import com.hanfeldt.game.entity.EntityManager;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Npc;
+import com.hanfeldt.game.entity.npc.NpcList;
 import com.hanfeldt.game.entity.particles.Gore;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
@@ -59,6 +61,8 @@ public class Main implements Runnable {
 	public static SpriteSheet spriteSheet;
 //	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public PropertiesLoader resourceManager;
+	public EntityManager entityManager;
+	public NpcList npcPreCache;
 	public static String username = "user";
 	
 	private int lives = 3;
@@ -66,8 +70,8 @@ public class Main implements Runnable {
 	private int frameLimit = 90;
 	private long totalTicks = 0;
 	
-	public ArrayList<Npc> npc;
-	public ArrayList<EntityItem> items;
+//	public ArrayList<Npc> npc;
+//	public ArrayList<EntityItem> items;
 	public ArrayList<String[]> blocks;
 	
 	private static Main game;
@@ -148,8 +152,8 @@ public class Main implements Runnable {
 		resourceManager = new PropertiesLoader();
 		hud = new Hud(player);
 		
-		npc = new ArrayList<Npc>();
-		items = new ArrayList<EntityItem>();
+		npcPreCache = new NpcList();
+		entityManager = new EntityManager(this);
 		
 		new CommandEvent();
 		printFPS = false;
@@ -362,19 +366,6 @@ public class Main implements Runnable {
 	}
 	
 	/**
-	 * {@link Bullet} entities currently ingame
-	 * @return <code>bullets</code> an ArrayList of ingame bullets.
-	 * @see Bullet
-	 */
-	public ArrayList<Bullet> getBullets() {
-		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-		for(Layer l : getLevels().layers){
-			bullets.addAll(l.getBullets());
-		}
-		return bullets;
-	}
-	
-	/**
 	 * The listener that contains variables that indicate key events and similar.
 	 * @return <code>listener</code> the mouse and key listener of the game
 	 * @see Listener
@@ -396,9 +387,10 @@ public class Main implements Runnable {
 	 * An {@link ArrayList} of all ingame NPC's
 	 * @return <code>npc</code> an arraylist of npc's currently populating the level
 	 * @see Npc
+	 * 
 	 */
 	public ArrayList<Npc> getNpc() {
-		return npc;
+		return entityManager.getNpcs();
 	}
 	
 	/**
@@ -407,7 +399,30 @@ public class Main implements Runnable {
 	 * @see EntityItem
 	 */
 	public ArrayList<EntityItem> getItems(){
-		return items;
+		return entityManager.getItems();
+	}
+	
+	/**
+	 * {@link Bullet} entities currently ingame
+	 * TODO Can't iterate over much with this in use. Optimise
+	 * @return <code>bullets</code> an ArrayList of ingame bullets.
+	 * @see Bullet
+	 */
+	public ArrayList<Bullet> getBullets() {
+		return entityManager.getBullets();
+	}
+	
+	/**
+	 * An {@link ArrayList} of all ingame {@link Entity} objects.
+	 * @return
+	 * @see Entity
+	 */
+	public ArrayList<Entity> getAllEntites() {
+		ArrayList<Entity> e = new ArrayList<>();
+		e.addAll(entityManager.getEntities());
+		e.add(getPlayer());
+		
+		return e;
 	}
 	
 	/**
@@ -527,18 +542,12 @@ public class Main implements Runnable {
 	}
 	
 	/**
-	 * An {@link ArrayList} of all ingame {@link Entity} objects.
-	 * @return
-	 * @see Entity
+	 * Returns the {@link EntityManager}, which contains {@link ArrayList}s of all in-
+	 * game {@link Entity} objects
+	 * @return  the current {@link EntityManager} object
 	 */
-	public ArrayList<Entity> getAllEntites() {
-		ArrayList<Entity> e = new ArrayList<>();
-		e.addAll(getBullets());
-		e.addAll(getNpc());
-		e.addAll(getItems());
-		e.add(getPlayer());
-		
-		return e;
+	public EntityManager getEntityManager(){
+		return entityManager;
 	}
 	
 }

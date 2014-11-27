@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.InfoPopUp;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
@@ -41,7 +42,6 @@ public class LevelStory extends Level {
 		tiles = new TileArrayList<Tile>();
 		tiles.addTile(sizeX, sizeY, null);
 		blocks = Main.getGame().blocks;
-		
 		generateLevel();
 		player = p;
 	}
@@ -97,7 +97,7 @@ public class LevelStory extends Level {
 			case "ZombieSpawner":
 				for(int i2 = 0; i2 < Zombie.getMaxNpc(); i2++) {
 					Zombie zombie = new Zombie(Main.TILE_SIZE *x + (i2*30), Main.TILE_SIZE * y - 40);//Final tilesize used to be 40
-					Spawner.spawnNpc(zombie, 1);//TODO placeholder layer
+					Main.getGame().npcPreCache.zombieCache.add(zombie);
 				}
 				break;
 			case "playerSpawner":
@@ -119,6 +119,17 @@ public class LevelStory extends Level {
 		}
 		if(tile.isTrigger){
 			addLevelTrigger(tile);
+			if(tile.getUseTile() == null)
+			switch(tile.name){
+				case "layerUp":
+					tile.setUseTile(new InfoPopUp("Press e to go up."));
+					break;
+				case "layerDown":
+					tile.setUseTile(new InfoPopUp("Press e to go down"));
+					break;
+				default:
+					tile.setUseTile(new InfoPopUp("Press e to use."));
+			}
 		}
 	}
 	
