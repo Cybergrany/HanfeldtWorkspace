@@ -94,14 +94,14 @@ public class Hud {
 		heartx = 19;
 		
 		//stamina bar
-		if (player.getstamina() < 20){
+		if (player.getStamina() < 20){
 			g.setColor(new Color(0xfff60a0a));
 		}else{
 			g.setColor(new Color(0xff10e415));
 		}
-		g.fillRect(23, Main.HEIGHT - 23, player.getstamina()  , 6);
+		g.fillRect(23, Main.HEIGHT - 23, player.getStamina()  , 6);
 		
-		if(player.getstamina() <= 0){
+		if(player.getStamina() <= 0){
 				g.fillRect(23, Main.HEIGHT - 23, 1, 6);
 		}
 		

@@ -38,7 +38,7 @@ public class PlayerEvents{
 			return;
 		}
 		player.changeHealth(-damage);
-		player.changestamina(-(damage / 10)); 
+		player.changeStamina(-(damage / 10)); 
 		playerDamage(id);
 	}
 	
@@ -52,7 +52,7 @@ public class PlayerEvents{
 		if(Main.getGame().getTotalTicks() >= lastTickHurt + hurtTime) {
 			lastTickHurt = Main.getGame().getTotalTicks();
 			player.changeHealth(-damage);
-			player.changestamina(-(damage / 2)); 
+			player.changeStamina(-(damage / 2)); 
 			if(player.getX() > npc.getX()) {
 				player.setVelX(6);
 			}else{

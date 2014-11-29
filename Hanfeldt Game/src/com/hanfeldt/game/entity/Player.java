@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.event.NpcEvents;
@@ -65,7 +66,7 @@ public class Player extends EntityLiving {
 	
 	public void tick() {
 		tickWalking();
-		direction = Main.mouseX > Main.WIDTH /2;
+		direction = Main.mouseX > getX() - Main.getGame().getCamera().getX();
 		isMovingLeft = listener.aDown;
 		isMovingRight = listener.dDown;
 
@@ -198,15 +199,15 @@ public class Player extends EntityLiving {
 		score += c;
 	}
 	
-	public int getstamina(){
+	public int getStamina(){
 		return stamina;
 	}
 	
-	public void changestamina(int s){
+	public void changeStamina(int s){
 		stamina += s;
 	}
 	
-	public void setstamina(int s){
+	public void setStamina(int s){
 		stamina = s;
 	}
 	
