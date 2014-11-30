@@ -1,6 +1,7 @@
 package com.hanfeldt.game.entity;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
 
@@ -207,11 +208,29 @@ public class Entity {
 	 * Returns the closest entity to this entity in Point form
 	 */
 	public Point getClosestEntity(){
-		Point p = new Point();
+		ArrayList<Entity> allEnts = Main.getGame().getEntityManager().getEntities();
 		
+		double shortestDist = Integer.MAX_VALUE;
+		int shortestDistIndex = 0;
 		
+		for(int i=0; i<allEnts.size(); i++) {
+			Entity compareTo = allEnts.get(i);
+			if(this == compareTo) {
+				continue;
+			}
+			int distX = Math.abs(compareTo.getX() - getX());
+			int distY = Math.abs(compareTo.getY() - getY());
+			
+			double distance = Math.sqrt(distX * distX + distY * distY);
+			
+			if(distance < shortestDist) {
+				shortestDist = distance;
+				shortestDistIndex = i;
+			}
+		}
 		
-		return p;
+		Entity closestEntity = allEnts.get(shortestDistIndex);
+		return new Point(closestEntity.getX() + (closestEntity.getSizeX() /2), closestEntity.getY() + (closestEntity.getSizeY() /2));
 	}
 	//TODO: Finish these methods and use in BulletNPCFired to assit in aiming
 	/**

@@ -45,7 +45,7 @@ public class Client {
 			
 			server.close();
 		}catch(Exception e) {
-			System.out.println("Highscore server unavailable! Or server is down. Or ports are open. Who cares, it's down ok? I'm just a lonely client, trying to do my think, and some stupid developer forgets to put the damn server up. How pathetic is that? And while he's writing this he's not even sure if this error message will even appear if the server IS down. What a stupid developer. I, however, have many smarts. I have like, 2349 smarts. How many smarts do you have, HUH? YEAH, I knew I had more. Anyway, better get back to client stuff...");
+			System.out.println("Unable to connect to server!");
 			hsServerAvailable = false;
 		}
 	}

@@ -40,7 +40,7 @@ public class MenuScreen {
 			}
 		}
 		if(selectionChanged){
-			Sound.playSound("option_select.wav");
+			Sound.playSound("option_select.ogg");
 			selectionChanged = false;
 		}
 		
@@ -95,13 +95,13 @@ public class MenuScreen {
 		options[optionSelected].setSelected(false);
 		optionSelected = option;
 		options[optionSelected].setSelected(true);
-		Sound.playSound("option_select.wav");
+		Sound.playSound("option_select.ogg");
 	}
 	
 	public void setOptionChosen(int option){
 		optionChosen = options[arrayPos].getId();
 		optionAction(optionChosen);
-		Sound.playSound("option_chosen.wav");
+		Sound.playSound("option_chosen.ogg");
 	}
 	
 	public void setMouseInUse(boolean inUse){

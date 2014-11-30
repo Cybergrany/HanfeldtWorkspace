@@ -43,7 +43,7 @@ public class Firework extends Entity {
 		}else{
 			if(!exploded) {
 				//Explosion code. I know my commenting isn't very consistent, but some is better than none! :P
-				Sound.playSound("FireworkBoom.wav");
+				Sound.playSound("FireworkBoom.ogg");
 				int particlesSize = rand.nextInt(8) +16;
 				int lastShootIndex = points.size() -1;
 				for(int i=0; i<particlesSize; i++) {

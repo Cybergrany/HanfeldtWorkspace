@@ -59,10 +59,10 @@ public class NpcEvents {
 
 	public void damageNpc(Npc npc, int damage, int id) {
 		if (id == zombie_damage_from_bullet_id) {
-			Sound.playSound("zombie_hit_from_gun.wav");
+			Sound.playSound("zombie_hit_from_gun.ogg");
 		}
 		if (id == zombie_damage_from_sword_id) {
-			Sound.playSound("zombie_hit_from_sword.wav");
+			Sound.playSound("zombie_hit_from_sword.ogg");
 		}
 		npc.changeHealth(-damage);
 		if (npc.getHealth() <= 0) {

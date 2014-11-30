@@ -69,10 +69,10 @@ public class PlayerEvents{
 	
 	public void playerDamage(int id){
 		if(id == NpcEvents.fall_damage_id) {
-			Sound.playSound("FallDamage.wav");
+			Sound.playSound("FallDamage.ogg");
 		}
 		if(id == NpcEvents.zombie_damage_id) {
-			Sound.playSound("Hit.wav");
+			Sound.playSound("Hit.ogg");
 		}
 		if(player.alive && player.getHealth() <= 0) {
 			Main.getGame().playerDied();
@@ -83,10 +83,10 @@ public class PlayerEvents{
 	public void playerDeath(int id){
 		//TODO: Different death id's, for example zombie bite, fall damage; so different animations and sounds can be called
 		if(id == NpcEvents.fall_death_id){//Falling out of map
-			Sound.playSound("FallDeath.wav");
+			Sound.playSound("FallDeath.ogg");
 		}
 		if(id == NpcEvents.zombie_damage_id){
-			Sound.playSound("death_from_zombie.wav");
+			Sound.playSound("death_from_zombie.ogg");
 		}
 	}
 	

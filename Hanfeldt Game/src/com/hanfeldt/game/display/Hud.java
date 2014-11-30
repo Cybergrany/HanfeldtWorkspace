@@ -3,8 +3,7 @@ package com.hanfeldt.game.display;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -116,12 +115,20 @@ public class Hud {
 			
 			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.getGame().getNpc().toArray().length, Main.getGame().getBullets().size()), 10, 60);
 			
+			//A red cross wherever the game thinks the mouse is. Remove if you think.
 			g.setColor(Color.RED);
 			g.drawLine(Main.mouseX -1, Main.mouseY -1, Main.mouseX +1, Main.mouseY +1);
 			g.drawLine(Main.mouseX +1, Main.mouseY -1, Main.mouseX -1, Main.mouseY +1);
 			
-			g.dispose();
+			//A blue cross for closest entity to player (I know, I'm silly)
+			g.setColor(Color.BLUE);
+			Point p = player.getClosestEntity();
+			Camera cam = Main.getGame().getCamera();
+			p.setLocation(p.getX() - cam.getX(), p.getY() - cam.getY());
+			g.drawLine(p.x -1, p.y -1, p.x +1, p.y +1);
+			g.drawLine(p.x +1, p.y -1, p.x -1, p.y +1);
 			
+			g.dispose();
 		}
 		
 		if(muted){

@@ -28,10 +28,10 @@ public class Pistol extends AmmoWeapon {
 	public void trigger() {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
 			super.addBullet();
-			Sound.playSound("weapon/pistol_shoot.wav");
+			Sound.playSound("weapon/pistol_shoot.ogg");
 			super.trigger();
 		}else{
-			Sound.playSound("weapon/pistol_empty.wav");
+			Sound.playSound("weapon/pistol_empty.ogg");
 		}
 	}	
 }

@@ -1,17 +1,15 @@
 package com.hanfeldt.game.io;
 
-import java.io.IOException;
-import java.net.URL;
+import static com.hanfeldt.game.io.Debug.printErrorDebug;
+import static com.hanfeldt.game.io.Debug.printStackTraceDebug;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
 
 import org.newdawn.easyogg.OggClip;
 
 import com.hanfeldt.game.Main;
-
-import static com.hanfeldt.game.io.Debug.*;
 
 /**
  * Sound! Now you can hear yourself mine!
@@ -28,17 +26,14 @@ public class Sound {
 	//TODO: The default java soundsystem is incompatibe on many systems, especially linux
 	//As proof, simply enable the sound, run the game in linux, then enable debug - stack traces galore and no sound plays!
 	/**
-	 * @deprecated doesn't work well. Upgrade all sound files to ogg vorbis TODO
+	 * TODO Finish converting all sounds to ogg
 	 * @param sound
 	 */
 	public static synchronized void playSound(final String sound){//For sound, call Sound.playSound("SoundName");
 		if(!Main.muted){
 			try {
-				 URL defaultSound = Sound.class.getResource("/sounds/" + sound);
-			     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(defaultSound);
-			     Clip clip = AudioSystem.getClip();
-			     clip.open(audioInputStream);
-//			     clip.start();
+				OggClip clip = new OggClip(Sound.class.getResourceAsStream("/sounds/" + sound));
+			    clip.play();
 			}catch(Exception e) {
 				printErrorDebug("Failed to play sound! Stacktrace:");
 				printStackTraceDebug(e);

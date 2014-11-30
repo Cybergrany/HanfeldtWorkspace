@@ -93,15 +93,15 @@ public abstract class AmmoWeapon extends TriggerWeapon {
 		super.tick();
 		if(reloadInProg) {
 			if(!clipOutDone) {
-				Sound.playSound("weapon/ClipOut.wav");
+				Sound.playSound("weapon/ClipOut.ogg");
 				clipOutDone = true;
 			}
 			if(!clipInDone && (totalTicks - reloadStarted) > 30) {
-				Sound.playSound("weapon/ClipIn.wav");
+				Sound.playSound("weapon/ClipIn.ogg");
 				clipInDone = true;
 			}
 			if(!reloadClickDone && (totalTicks - reloadStarted) > reloadTime) {
-				if(totalAmmo > 0) Sound.playSound("weapon/Reload.wav");
+				if(totalAmmo > 0) Sound.playSound("weapon/Reload.ogg");
 				reloadClickDone = true;
 				reloadInProg = false;
 				

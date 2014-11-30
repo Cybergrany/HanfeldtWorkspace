@@ -15,7 +15,7 @@ public class WeaponSwung extends TriggerWeapon{
 	public int range = 16;
 	public int damage = 50;
 	public Sprite idleSprite;
-	private String sound = "Sword_Swing.wav";//Default
+	private String sound = "Sword_Swing.ogg";//Default
 	
 	/**
 	 * Swoosh

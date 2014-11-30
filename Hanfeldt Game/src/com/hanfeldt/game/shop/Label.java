@@ -53,18 +53,18 @@ public class Label {
 						player.setWeaponEquipped(new Pistol(player));
 					}
 					player.changeMoney(-cost);
-					Sound.playSound("wep_bought.wav");
+					Sound.playSound("wep_bought.ogg");
 				}else{
-					Sound.playSound("not_enough_money.wav");
+					Sound.playSound("not_enough_money.ogg");
 				}
 				break;
 			case "sword":
 				if(player.getMoney() >= cost) {
 					player.setWeaponEquipped(new Sword(player));
 					player.changeMoney(-cost);
-					Sound.playSound("wep_bought.wav");
+					Sound.playSound("wep_bought.ogg");
 				}else{
-					Sound.playSound("not_enough_money.wav");
+					Sound.playSound("not_enough_money.ogg");
 				}
 				break;
 			case "m16":
@@ -75,9 +75,9 @@ public class Label {
 						player.setWeaponEquipped(new M16(player));
 					}
 					player.changeMoney(-cost);
-					Sound.playSound("wep_bought.wav");
+					Sound.playSound("wep_bought.ogg");
 				}else{
-					Sound.playSound("not_enough_money.wav");
+					Sound.playSound("not_enough_money.ogg");
 				}
 				break;
 			default:

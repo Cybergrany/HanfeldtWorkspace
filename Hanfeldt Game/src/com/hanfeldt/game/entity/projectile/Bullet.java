@@ -119,7 +119,6 @@ public class Bullet extends SpriteEntity {
 				Camera cam = Main.getGame().getCamera();
 				Point bulletOnScreen = new Point(getX() - cam.getX(), getY() - cam.getY());
 				angle =  Math.atan2(Main.mouseY - bulletOnScreen.getY(), Main.mouseX - bulletOnScreen.getX());
-				System.out.println(angle);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

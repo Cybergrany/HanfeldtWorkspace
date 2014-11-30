@@ -74,7 +74,7 @@ public class Player extends EntityLiving {
 			if(stamina < 0)
 				setJumpHeight(1);
 			jump();
-			Sound.playSound("Jump.wav");
+			Sound.playSound("Jump.ogg");
 		}
 		
 		// Walk acceleration/slide is below
@@ -160,7 +160,6 @@ public class Player extends EntityLiving {
 		if(stamina < 69 && !isMovingLeft && !isMovingRight && Main.timer(27)){
 			stamina++;
 		}
-		
 	}
 	
 	public boolean collidedZombie(Zombie zombie) {
