@@ -116,6 +116,12 @@ public class Hud {
 			
 			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.getGame().getNpc().toArray().length, Main.getGame().getBullets().size()), 10, 60);
 			
+			g.setColor(Color.RED);
+			g.drawLine(Main.mouseX -1, Main.mouseY -1, Main.mouseX +1, Main.mouseY +1);
+			g.drawLine(Main.mouseX +1, Main.mouseY -1, Main.mouseX -1, Main.mouseY +1);
+			
+			g.dispose();
+			
 		}
 		
 		if(muted){

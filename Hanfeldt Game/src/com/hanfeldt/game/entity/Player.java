@@ -172,7 +172,7 @@ public class Player extends EntityLiving {
 	}
 	
 	public void setWeaponEquipped(Weapon wep) {
-		weaponEquipped = wep;;
+		weaponEquipped = wep;
 	}
 	
 	public int getMoney() {

@@ -2,8 +2,10 @@ package com.hanfeldt.game.entity.projectile;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
@@ -16,7 +18,7 @@ public class Bullet extends SpriteEntity {
 	public boolean hasSprite = false;
 	public boolean direction;
 	
-	protected float angle;
+	protected double angle;
 	protected EntityLiving entity;
 	private float speed = 3.0f;
 	private static int damageValue = 10;//default damage
@@ -48,8 +50,8 @@ public class Bullet extends SpriteEntity {
 	
 	public void tick() {
 		//TODO: Maybe add checkTileCollisions() here
-		setVelX((float) Math.cos(angle*Math.PI/180) * speed);
-		setVelY((float) Math.sin(angle*Math.PI/180) * speed);
+		setVelX((float) Math.cos(angle) * speed);
+		setVelY((float) Math.sin(angle) * speed);
 		changeX(getVelX());
 		changeY(getVelY());
 		checkTileCollisions();
@@ -107,15 +109,17 @@ public class Bullet extends SpriteEntity {
 		speed += s;
 	}
 	
-	public float getAngle(){
+	public double getAngle(){
 		return angle;
 	}
 	
 	public void setAngle(){
 		if(entity instanceof Player){
 			try {
-				angle = (float) Math.toDegrees(Math.atan2(Main.mouseY - Main.HEIGHT / 2 - Main.TILE_SIZE,
-						Main.mouseX - (Main.getGame().getPlayer().getDirection() ? Main.WIDTH /2 + (Main.TILE_SIZE /2) :Main.WIDTH /2)));
+				Camera cam = Main.getGame().getCamera();
+				Point bulletOnScreen = new Point(getX() - cam.getX(), getY() - cam.getY());
+				angle =  Math.atan2(Main.mouseY - bulletOnScreen.getY(), Main.mouseX - bulletOnScreen.getX());
+				System.out.println(angle);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
