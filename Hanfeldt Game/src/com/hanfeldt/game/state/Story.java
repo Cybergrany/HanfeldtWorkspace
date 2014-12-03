@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.level.LevelLoader;
 import com.hanfeldt.game.scripting.NpcScript;
@@ -58,6 +59,10 @@ public class Story extends Playing {
 		super.draw(g);
 		main.getLevels().render(g, camera);
 		//TODO: Call renderfore when done
+		
+		for(GoreSpawn go : main.getGore()) {
+			camera.renderGore(g, go);
+		}
 		script.draw(g);
 		main.getHud().draw(g);
 		g.dispose();

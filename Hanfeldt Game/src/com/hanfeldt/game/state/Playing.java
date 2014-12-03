@@ -65,10 +65,6 @@ public abstract class Playing extends State {
 		for(Layer l : main.getLevels().layers){
 			l.draw(g, camera);
 		}
-		
-		for(GoreSpawn go : main.getGore()) {
-			camera.renderGore(g, go);
-		}
 //		camera.drawRectBorder(g, 0, Main.WIDTH, 40, 110, Color.BLACK, true);
 	}
 	
