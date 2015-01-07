@@ -12,8 +12,6 @@ import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class M16 extends AmmoWeapon {
 	
-	private int damage;
-	
 	/**
 	 * She weighs 150 kilograms and fires $200 custom-tooled cartridges at 10,000 rounds per minute.
 	 * It cost $400,000 to fire this weapon...for 12 seconds.

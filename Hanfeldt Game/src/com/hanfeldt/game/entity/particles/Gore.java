@@ -10,7 +10,7 @@ public class Gore extends Entity {
 	
 	private float yOff;
 
-	public Gore(int x, int y) {
+	public Gore(int x, int y, int layer) {
 		super(x, y);
 		falling = true;
 		Random rand = new Random();
@@ -19,7 +19,7 @@ public class Gore extends Entity {
 		yOff = rand.nextFloat();
 	}
 	
-	public Gore(int x, int y, boolean dir){
+	public Gore(int x, int y, boolean dir, int layer){
 		super(x, y);
 		falling = true;
 		Random rand = new Random();

@@ -38,7 +38,7 @@ public class WeaponSwung extends TriggerWeapon{
 				if(hitBoxLeft.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, NpcEvents.zombie_damage_from_sword_id);
 					try{//Try/catching because killing npc's causes an indexoutofboundsexception.TODO fix
-						Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y);
+						Main.getGame().addGore(hitBoxLeft.x, hitBoxLeft.y, npcs.get(i).getLayer());
 					}catch(Exception exception){
 						Debug.printErrorDebug("Error while adding gore, see WeaponSwung.java:42");
 					}
@@ -46,7 +46,7 @@ public class WeaponSwung extends TriggerWeapon{
 			}else{
 				if(hitBoxRight.intersects(npcs.get(i).getBounds())) {
 					e.damageNpc(npcs.get(i), damage, NpcEvents.zombie_damage_from_sword_id);
-					Main.getGame().addGore(hitBoxRight.x, hitBoxRight.y);
+					Main.getGame().addGore(hitBoxRight.x, hitBoxRight.y, npcs.get(i).getLayer());
 				}
 			}
 		}

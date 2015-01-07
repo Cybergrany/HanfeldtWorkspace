@@ -66,7 +66,7 @@ public class ZombieGore extends EntityItem{
 			}
 		}
 		if(getVelX() == 0 && Main.timer(AfterBleedTime) && bleedIter <= afterBleedAmount){
-			Main.getGame().addGore(getX() + Main.TILE_SIZE / 2, getY() + Main.TILE_SIZE / 2);
+			Main.getGame().addGore(getX() + Main.TILE_SIZE / 2, getY() + Main.TILE_SIZE / 2, getLayer());
 			bleedIter++;
 		}
 	}

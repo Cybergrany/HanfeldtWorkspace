@@ -28,6 +28,7 @@ public class Bullet extends SpriteEntity {
 		super(x, y);
 		entity = e;
 //		Main.getGame().getLevels().layers.get(layer).addBullet(this);
+		this.layer = layer;
 		Main.getGame().getEntityManager().addBullet(this);
 		setAngle();
 		damageValue = damage;
@@ -38,6 +39,7 @@ public class Bullet extends SpriteEntity {
 		super(s, x, y);
 		entity = e;
 //		Main.getGame().getLevels().layers.get(layer).addBullet(this);
+		this.layer = layer;
 		Main.getGame().getEntityManager().addBullet(this);
 		damageValue = damage;
 		sprite = s;

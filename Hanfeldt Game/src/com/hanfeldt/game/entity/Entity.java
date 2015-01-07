@@ -14,6 +14,7 @@ public class Entity {
 	float velXMax = 10f, velYMax = 3f;
 	protected boolean direction = true; //Right = true, Left = false
 	protected boolean falling = false;
+	protected boolean isLayerChecking = true;
 	boolean isMovingLeft = false, isMovingRight = false;
 	
 	public Entity(int x, int y) {
@@ -204,8 +205,13 @@ public class Entity {
 		return layer;
 	}
 	
+	public void setLayerChecking(boolean tof){
+		isLayerChecking = tof;
+	}
+	
 	/**
 	 * Returns the closest entity to this entity in Point form
+	 * TODO Finnish
 	 */
 	public Point getClosestEntity(){
 		ArrayList<Entity> allEnts = Main.getGame().getEntityManager().getEntities();

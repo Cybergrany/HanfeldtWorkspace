@@ -1,3 +1,5 @@
+HERE ARE SOME EXAMPLE COMMANDS, BEING USED IN A DIALOGUE FILE
+
 <You> You there! Have you seen my son?
 <Bill> No, but this will help you find him...
 *Bill hands you a pistol*

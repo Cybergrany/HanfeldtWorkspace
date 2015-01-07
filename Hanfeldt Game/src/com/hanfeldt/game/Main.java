@@ -388,6 +388,7 @@ public class Main implements Runnable {
 	 * @return <code>npc</code> an arraylist of npc's currently populating the level
 	 * @see Npc
 	 * 
+	 * @deprecated - use getEntityManager.getNpcs
 	 */
 	public ArrayList<Npc> getNpc() {
 		return entityManager.getNpcs();
@@ -397,6 +398,8 @@ public class Main implements Runnable {
 	 * An {@link ArrayList} of all ingame items
 	 * @return <code>items</code> all items on current level
 	 * @see EntityItem
+	 * 
+	 * @deprecated - use getEntityManager.getItems
 	 */
 	public ArrayList<EntityItem> getItems(){
 		return entityManager.getItems();
@@ -407,6 +410,8 @@ public class Main implements Runnable {
 	 * TODO Can't iterate over much with this in use. Optimise
 	 * @return <code>bullets</code> an ArrayList of ingame bullets.
 	 * @see Bullet
+	 * 
+	 * @deprecated - use getEntityManager.getBullets
 	 */
 	public ArrayList<Bullet> getBullets() {
 		return entityManager.getBullets();
@@ -414,6 +419,7 @@ public class Main implements Runnable {
 	
 	/**
 	 * An {@link ArrayList} of all ingame {@link Entity} objects.
+	 * Use entityManager.getEntities if you don't need the player entity
 	 * @return
 	 * @see Entity
 	 */
@@ -460,8 +466,8 @@ public class Main implements Runnable {
 	 * @see Gore
 	 * @see GoreSpawn
 	 */
-	public void addGore(int x, int y) {
-		gore.add(new GoreSpawn(x, y));
+	public void addGore(int x, int y, int layer) {
+		gore.add(new GoreSpawn(x, y, layer));
 	}
 	
 	/**
@@ -471,8 +477,8 @@ public class Main implements Runnable {
 	 * @see Gore
 	 * @see GoreSpawn
 	 */
-	public void addGore(int x, int y, boolean dir) {
-		gore.add(new GoreSpawn(x, y, dir));
+	public void addGore(int x, int y, boolean di, int layer) {
+		gore.add(new GoreSpawn(x, y, layer));
 	}
 	
 	/**

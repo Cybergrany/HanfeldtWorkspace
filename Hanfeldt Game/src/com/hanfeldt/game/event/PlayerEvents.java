@@ -61,7 +61,7 @@ public class PlayerEvents{
 			Main.getGame().getCamera().shake();
 			//TODO: Add blood dim to screen
 //			Main.getGame().getCamera().drawBlood();
-			Main.getGame().addGore(player.getX(), player.getY());
+			Main.getGame().addGore(player.getX(), player.getY(), player.getLayer());
 			player.setVelY(-1);
 			playerDamage(id);
 		}

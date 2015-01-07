@@ -57,7 +57,7 @@ public class Story extends Playing {
 	
 	public void draw(Graphics g) {
 		super.draw(g);
-		main.getLevels().render(g, camera);
+//		main.getLevels().render(g, camera);TODO Temp moved to playing due to issue with gore
 		//TODO: Call renderfore when done
 		
 		for(GoreSpawn go : main.getGore()) {
