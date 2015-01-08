@@ -14,7 +14,14 @@ public class ResourceManager {
 	public ResourceManager(){
 		
 	}
-	
+	/**
+	 * Nothing here is currently being used... But I wrote it and it looks pretty
+	 * Also it may come in handy later
+	 * @param classObject
+	 * @param methodName
+	 * @param params
+	 * @param args
+	 */
 	public static void callMethodFromString(Object classObject, String methodName, Class<?> params, String... args){
 		Method method = null;
 		

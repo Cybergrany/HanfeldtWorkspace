@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
-import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.event.NpcEvents;
 import com.hanfeldt.game.weapon.Weapon;
@@ -21,8 +20,6 @@ public class Npc extends EntityLiving {
 	int health = 0;
 	protected NpcEvents events;
 	private static Dimension spawnLocation;
-
-	private boolean pickupItemOnBounds = false;
 	
 	public Npc(Sprite s,int h, int x, int y){
 		super(s, h, x, y);
@@ -62,23 +59,6 @@ public class Npc extends EntityLiving {
 	
 	public NpcEvents getEvents(){
 		return events;
-	}
-	
-	public boolean getPickupItemOnBounds(){
-		return pickupItemOnBounds;
-	}
-	
-	public void setPickupItemOnBounds(boolean pickup){
-		pickupItemOnBounds = pickup;
-	}
-	
-	public void pickupItemOnBounds(EntityItem e){
-		if(getBounds().intersects(e.getBounds()) && pickupItemOnBounds){
-			if(e.getLinkedItem(this) instanceof Weapon){
-				setWeaponEquipped((Weapon) e.getLinkedItem(this)); 
-				e.removeItem(e);
-			}
-		}
 	}
 	
 	public void setWeaponEquipped(Weapon wep) {

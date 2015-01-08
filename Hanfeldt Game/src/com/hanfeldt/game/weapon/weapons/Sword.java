@@ -39,4 +39,8 @@ public class Sword extends WeaponSwung {
 		}
 	}
 	
+	public String name(){
+		return "sword";
+	}
+	
 }

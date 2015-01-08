@@ -11,7 +11,7 @@ import com.hanfeldt.game.event.NpcEvents;
 import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.Sound;
 
-public class WeaponSwung extends TriggerWeapon{
+public abstract class WeaponSwung extends TriggerWeapon{
 	public int range = 16;
 	public int damage = 50;
 	public Sprite idleSprite;

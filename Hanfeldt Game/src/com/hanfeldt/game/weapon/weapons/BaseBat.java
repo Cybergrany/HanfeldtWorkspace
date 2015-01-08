@@ -19,4 +19,8 @@ public class BaseBat extends WeaponSwung{
 		super(e, idleSprite, new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 5, 1 , 1), range, damage, 25);
 		//TODO add swing sound
 	}
+	
+	public String name(){
+		return "BaseBat";
+	}
 }

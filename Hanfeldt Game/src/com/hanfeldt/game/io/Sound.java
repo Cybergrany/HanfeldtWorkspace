@@ -33,7 +33,7 @@ public class Sound {
 		if(!Main.muted){
 			try {
 				OggClip clip = new OggClip(Sound.class.getResourceAsStream("/sounds/" + sound));
-			    clip.play();
+//			    clip.play();
 			}catch(Exception e) {
 				printErrorDebug("Failed to play sound! Stacktrace:");
 				printStackTraceDebug(e);
@@ -42,7 +42,7 @@ public class Sound {
 	}
 	
 	public static void playOggLoop(){
-//		oggClip.loop();
+//		oggClip.loop();//TODO disabled because the music gets annoying when launched repeatedly 
 	}
 	
 	public static void pauseOggLoop(){

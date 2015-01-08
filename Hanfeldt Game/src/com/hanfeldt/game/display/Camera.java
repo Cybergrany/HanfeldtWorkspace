@@ -10,11 +10,11 @@ import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.particles.Gore;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.entity.projectile.GrenadeRPG;
+import com.hanfeldt.game.level.Level;
 import com.hanfeldt.game.tile.Tile;
 
 /**
@@ -29,7 +29,7 @@ public class Camera {
 	private int x, y;
 	private Player player;
 	private Entity entity, previousEntity;
-	private int shakingTicks, zoom, playerMoveWeightX = 50, playerPanToSpeed = 4;
+	private int shakingTicks, shakeX = 5, shakeY = 3, zoom, playerMoveWeightX = 50, playerPanToSpeed = 4;
 	private boolean scrolled = false, scrolledleft = false, scrolledright = false, 
 									followingEntity = false, dir;
 	private Random rand = new Random();
@@ -81,8 +81,8 @@ public class Camera {
 	}
 		
 		if(shakingTicks > 0) {
-			x += rand.nextInt(5) -2;
-			y += rand.nextInt(3) -1;
+			x += rand.nextInt(shakeX) -2;
+			y += rand.nextInt(shakeY) -1;
 			shakingTicks--;
 		}
 	}
@@ -427,6 +427,14 @@ public class Camera {
 	 */
 	public void shake() {
 		addShakingTicks(rand.nextInt(10) +20);
+	}
+	
+	/**
+	 * Shakes the camera, with a defined duration
+	 * @param duration
+	 */
+	public void shake(int duration){
+		addShakingTicks(duration);
 	}
 	
 }

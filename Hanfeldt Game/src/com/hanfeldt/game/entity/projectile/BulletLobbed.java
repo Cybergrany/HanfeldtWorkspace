@@ -19,7 +19,6 @@ public class BulletLobbed extends Bullet{
 	
 	public void tick(){
 //		System.out.println(angle);
-		
 		if(angle < 0 && angle >= -180){
 			if(!arced){
 				setVelX((float)Math.cos(angle*Math.PI/180) * getSpeed());

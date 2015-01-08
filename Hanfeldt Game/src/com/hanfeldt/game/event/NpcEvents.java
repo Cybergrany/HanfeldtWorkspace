@@ -43,9 +43,9 @@ public class NpcEvents {
 ////				}
 ////			}
 //		}
-		for (int i = 0; i < Main.getGame().getBullets().size(); i++) {
-			if (Main.getGame().getBullets().get(i) instanceof Bullet) {
-				Bullet bullet = (Bullet) Main.getGame().getBullets().get(i);
+		for (int i = 0; i < Main.getGame().getEntityManager().getBullets().size(); i++) {
+			if (Main.getGame().getEntityManager().getBullets().get(i) instanceof Bullet) {
+				Bullet bullet = (Bullet) Main.getGame().getEntityManager().getBullets().get(i);
 				if (bulletCollided(npc, bullet)) {
 					bulletHit(npc, bullet);
 					bullet.onCollide(npc);
@@ -111,7 +111,7 @@ public class NpcEvents {
 	}
 
 	public boolean bulletCollided(Npc npc, Bullet bullet) {
-		if (npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(),
+		if (npc.getLayer() == bullet.getLayer() && npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(),
 				bullet.getX(), bullet.getY()))
 			return true;
 		return false;

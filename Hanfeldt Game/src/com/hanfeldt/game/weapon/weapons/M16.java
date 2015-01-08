@@ -15,7 +15,8 @@ public class M16 extends AmmoWeapon {
 	/**
 	 * She weighs 150 kilograms and fires $200 custom-tooled cartridges at 10,000 rounds per minute.
 	 * It cost $400,000 to fire this weapon...for 12 seconds.
-	 * From {@link http://en.wikiquote.org/wiki/Team_Fortress_2#Meet_the_Heavy}
+	 * {@link http://en.wikiquote.org/wiki/Team_Fortress_2#Meet_the_Heavy}
+	 * 
 	 * 
 	 * @param p A {@link Player} entity.
 	 */
@@ -28,11 +29,16 @@ public class M16 extends AmmoWeapon {
 	public void trigger() {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
 			super.addBullet();
+			Main.getGame().getCamera().shake(8);
 			Sound.playSound("weapon/pistol_shoot.ogg");
 			super.trigger();
 		}else{
 			Sound.playSound("weapon/pistol_empty.ogg");
 		}
+	}
+	
+	public String name(){
+		return "M16";
 	}
 	
 }

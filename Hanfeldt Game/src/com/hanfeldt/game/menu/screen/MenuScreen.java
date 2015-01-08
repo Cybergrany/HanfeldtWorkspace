@@ -40,7 +40,7 @@ public class MenuScreen {
 			}
 		}
 		if(selectionChanged){
-			Sound.playSound("option_select.ogg");
+			Sound.playSound("option_select.ogg");//TODO no sound in linux
 			selectionChanged = false;
 		}
 		

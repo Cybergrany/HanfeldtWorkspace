@@ -2,6 +2,7 @@ package com.hanfeldt.game.entity;
 
 import java.awt.image.BufferedImage;
 
+import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.weapon.Weapon;
 
@@ -16,6 +17,8 @@ public class EntityLiving extends SpriteEntity {
 	int currentCycle = 0;
 	boolean cycleGoingUp = true;
 	
+	private boolean pickupItemOnBounds = false;
+	
 	int aimX, aimY;
 	
 	public EntityLiving(Sprite s, int h, int x, int y) {
@@ -26,6 +29,11 @@ public class EntityLiving extends SpriteEntity {
 	public void tick() {
 		super.tick();
 		checkTileCollisions();
+		try{//TODO optimise. currently checking all items for every entityliving
+			for(int i = 0; i < Main.getGame().getItems().size(); i++){
+				pickupItemOnBounds(Main.getGame().getItems().get(i));
+			}
+		}catch(Exception e){}
 		cycleTicks++;
 	}
 	
@@ -113,6 +121,23 @@ public class EntityLiving extends SpriteEntity {
 	
 	public Weapon getWeaponEquipped() {
 		return weaponEquipped;
+	}
+	
+	public boolean getPickupItemOnBounds(){
+		return pickupItemOnBounds;
+	}
+	
+	public void setPickupItemOnBounds(boolean pickup){
+		pickupItemOnBounds = pickup;
+	}
+	
+	public void pickupItemOnBounds(EntityItem e){
+		if(getBounds().intersects(e.getBounds()) && pickupItemOnBounds){
+			if(e.getLinkedItem(this) instanceof Weapon){
+				weaponEquipped = (Weapon) e.getLinkedItem(this); 
+				e.removeItem(e);
+			}
+		}
 	}
 	
 }

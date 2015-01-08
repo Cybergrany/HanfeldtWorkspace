@@ -1,7 +1,9 @@
 package com.hanfeldt.game;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import com.hanfeldt.game.entity.particles.Gore;
 import com.hanfeldt.game.entity.particles.GoreSpawn;
 import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.event.command.CommandEvent;
+import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.Listener;
 import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.level.Layer;
@@ -57,8 +60,9 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing, printFPS;
 	public static int mouseX, mouseY;
-	public static boolean debugCheats = false;
+	public static boolean debugCheats = false;//Preferably use command 'cheats' instead of setting here
 	public static SpriteSheet spriteSheet;
+	
 //	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public PropertiesLoader resourceManager;
 	public EntityManager entityManager;
@@ -75,6 +79,7 @@ public class Main implements Runnable {
 	public ArrayList<String[]> blocks;
 	
 	private static Main game;
+	private Robot robot;
 	private Player player;
 	private Level levels;
 	private JFrame frame;
@@ -150,6 +155,14 @@ public class Main implements Runnable {
 		state = new MainMenuState(this);
 		gamePanel.requestFocus();
 		resourceManager = new PropertiesLoader();
+		
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			System.err.println("Error creating Robot. Stacktrace in debug.");
+			Debug.printErrorDebug(e.getStackTrace());
+		}
+		
 		hud = new Hud(player);
 		
 		npcPreCache = new NpcList();
@@ -478,7 +491,7 @@ public class Main implements Runnable {
 	 * @see GoreSpawn
 	 */
 	public void addGore(int x, int y, boolean di, int layer) {
-		gore.add(new GoreSpawn(x, y, layer));
+		gore.add(new GoreSpawn(x, y, di, layer));
 	}
 	
 	/**
@@ -554,6 +567,16 @@ public class Main implements Runnable {
 	 */
 	public EntityManager getEntityManager(){
 		return entityManager;
+	}
+	
+	/**
+	 * Returns the game's {@link Robot} object, which can be used for setting the cursor position
+	 * @return robot - the game's robot object.
+	 * @see Robot
+	 * TODO Not currently in use
+	 */
+	public Robot getRobot(){
+		return robot;
 	}
 	
 }

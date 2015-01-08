@@ -32,5 +32,9 @@ public class RPGLauncher extends AmmoWeapon{
 			//TODO add empty clip sound
 		}
 	}
+	
+	public String name(){
+		return "Rpg";
+	}
 
 }

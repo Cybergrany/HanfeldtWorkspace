@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Robot;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -14,9 +15,10 @@ import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class Hud {
-	public static boolean debug = false, muted = false;
+	public static boolean debug = false, muted = false, wepSelect = false;
 	private static int hearts, bullets;
 	private static int heartx = 0;
+	private int switcherRad = 40;
 	private Sprite heart, character, deadCharacter, pistol /*,ammo*/;
 	private Player player;
 	
@@ -26,6 +28,8 @@ public class Hud {
 	public  ArrayList<InfoPopUp> popUpList;
 	private Font font = new Font("Arial", Font.PLAIN, 9);
 	private ImageIcon focusNagger1, focusNagger2;
+	
+	private WeaponSwitcher wSwitcher;
 	
 	public Hud(Player player){
 		heart = new Sprite(SpriteSheet.getSheet(SpriteSheet.misc), 0, 0, 1, 1);
@@ -41,6 +45,7 @@ public class Hud {
 			e.printStackTrace();
 		}
 		popUpList = new ArrayList<>();
+		wSwitcher = new WeaponSwitcher(new Point(0, 0), switcherRad);
 	}
 	
 	public void tick(){
@@ -49,6 +54,14 @@ public class Hud {
 			bullets = ((AmmoWeapon) player.getWeaponEquipped()).getAmmoInClip();
 		}else{
 			bullets = 0;
+		}
+		//Weapon select
+		if(Main.getGame().getListener().qDown){
+			if(!wepSelect){
+				wSwitcher.position.setLocation(new Point(Main.mouseX, Main.mouseY));
+				wepSelect = true;
+			}
+			wSwitcher.tick();
 		}
 	}
 	
@@ -92,6 +105,10 @@ public class Hud {
 		
 		heartx = 19;
 		
+		//Weapon select
+		if(wepSelect)
+			wSwitcher.render(g);
+		
 		//stamina bar
 		if (player.getStamina() < 20){
 			g.setColor(new Color(0xfff60a0a));
@@ -120,7 +137,7 @@ public class Hud {
 			g.drawLine(Main.mouseX -1, Main.mouseY -1, Main.mouseX +1, Main.mouseY +1);
 			g.drawLine(Main.mouseX +1, Main.mouseY -1, Main.mouseX -1, Main.mouseY +1);
 			
-			//A blue cross for closest entity to player (I know, I'm silly)
+			//A blue cross for closest entity to player (I know, I'm silly)TODO temp
 			g.setColor(Color.BLUE);
 			Point p = player.getClosestEntity();
 			Camera cam = Main.getGame().getCamera();

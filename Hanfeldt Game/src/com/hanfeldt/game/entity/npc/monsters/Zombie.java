@@ -23,11 +23,6 @@ public class Zombie extends Npc {
 	
 	public void tick() {
 		super.tick();
-		try{
-		for(int i = 0; i < Main.getGame().getItems().size(); i++){
-		pickupItemOnBounds(Main.getGame().getItems().get(i));
-		}
-		}catch(Exception e){}
 		tickWalking();
 		if(Main.timer(120)) {
 			facePlayer(speed);

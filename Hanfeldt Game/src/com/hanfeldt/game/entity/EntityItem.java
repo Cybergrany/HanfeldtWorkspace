@@ -81,10 +81,6 @@ public class EntityItem extends SpriteEntity{
 		friction = f;
 	}
 	
-	public String getType(){
-		return "Item";
-	}
-	
 	public void setLinkedItem(Object o){
 		linkedItem = o;
 	}

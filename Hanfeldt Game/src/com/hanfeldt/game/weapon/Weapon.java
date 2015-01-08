@@ -79,4 +79,6 @@ public abstract class Weapon {
 		automatic = auto;
 	}
 	
+	public abstract String name();
+	
 }

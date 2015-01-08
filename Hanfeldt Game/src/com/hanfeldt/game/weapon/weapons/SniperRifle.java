@@ -67,5 +67,9 @@ public class SniperRifle extends AmmoWeapon{
 			
 		}
 	}
+	
+	public String name(){
+		return "Rifle";
+	}
 
 }

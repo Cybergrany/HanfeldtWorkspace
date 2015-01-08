@@ -24,11 +24,15 @@ public class SwordItem extends EntityItem{
 		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 0, 3, 1, 1), x, y);
 	}
 	
-	public String getType(){
-		return "Weapon";
-	}
-	
 	public Object getLinkedItem(EntityLiving e){
 		return(new Sword(e));
+	}
+
+	public String getName() {
+		return "Sword";
+	}
+	
+	public String getType(){
+		return "Weapon";
 	}
 }

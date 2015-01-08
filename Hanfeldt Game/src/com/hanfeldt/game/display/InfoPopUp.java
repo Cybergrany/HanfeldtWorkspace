@@ -43,7 +43,7 @@ public class InfoPopUp {
 				}else{
 					e.moveToLayerBelow();
 				}
-			}else if (toggle && Main.getGame().getLevels().layerAmount == 2){
+			}else if (toggle && Main.getGame().getLevels().layerAmount == 2){//TODO Should automatically get layer amount. This is temp, as switch seems to bug out otherwise
 				int currentLayer = e.getLayer();
 				if(currentLayer == 1){
 					e.moveToLayerBelow();

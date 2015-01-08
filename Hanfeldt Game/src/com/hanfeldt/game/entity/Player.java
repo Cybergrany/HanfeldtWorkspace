@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
-import com.hanfeldt.game.display.Camera;
+import com.hanfeldt.game.display.Inventory;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.event.NpcEvents;
@@ -13,7 +13,7 @@ import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.Listener;
 import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.M16;
+import com.hanfeldt.game.weapon.weapons.RPGLauncher;
 
 public class Player extends EntityLiving {
 	public static final int ticksPerAnimChange = 4;
@@ -26,6 +26,8 @@ public class Player extends EntityLiving {
 	private long score = 0;
 	private Listener listener;
 	
+	public Inventory inventory;
+	
 	public boolean alive = true;
 	public boolean levelFinished;
 	
@@ -36,7 +38,8 @@ public class Player extends EntityLiving {
 		events = new PlayerEvents(this);
 		levelFinished = false;
 		listener = l;
-		weaponEquipped = new M16(this);
+		weaponEquipped = new RPGLauncher(this);
+		setPickupItemOnBounds(true);
 	}
 	
 	public void tickWalking() {
@@ -163,7 +166,10 @@ public class Player extends EntityLiving {
 	}
 	
 	public boolean collidedZombie(Zombie zombie) {
+		if(zombie.getLayer() == getLayer())
 		return getBounds().intersects(zombie.getBounds());
+		
+		return false;
 	}
 	
 	public PlayerEvents getEvents() {
@@ -216,6 +222,11 @@ public class Player extends EntityLiving {
 		}else{
 			return walkingImage;
 		}
+	}
+	
+	public void pickupItemOnBounds(EntityItem e){
+		super.pickupItemOnBounds(e);
+		inventory.addItem(e);
 	}
 	
 }

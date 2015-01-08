@@ -6,7 +6,6 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
-import com.hanfeldt.game.entity.projectile.Bullet;
 import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
@@ -28,10 +27,15 @@ public class Pistol extends AmmoWeapon {
 	public void trigger() {
 		if(super.getAmmoInClip() > 0){//Trigger only with bullets in clip
 			super.addBullet();
+			Main.getGame().getCamera().shake(6);
 			Sound.playSound("weapon/pistol_shoot.ogg");
 			super.trigger();
 		}else{
 			Sound.playSound("weapon/pistol_empty.ogg");
 		}
 	}	
+	
+	public String name(){
+		return "Pistol";
+	}
 }
