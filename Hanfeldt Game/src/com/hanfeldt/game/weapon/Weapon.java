@@ -6,11 +6,13 @@ import java.awt.image.BufferedImage;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Camera;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.EntityLiving;
 
 public abstract class Weapon {
 	protected Sprite sprite;
 	protected EntityLiving entity;
+	protected EntityItem linkedItem;
 	protected long totalTicks = 0;
 	public boolean automatic = true, hasOverlay = false;
 	
@@ -80,5 +82,9 @@ public abstract class Weapon {
 	}
 	
 	public abstract String name();
+	
+	public EntityItem getLinkedItem(){
+		return new EntityItem(sprite, entity.getX(), entity.getY(), this);
+	}
 	
 }

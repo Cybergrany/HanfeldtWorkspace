@@ -59,6 +59,7 @@ public class Hud {
 		if(Main.getGame().getListener().qDown){
 			if(!wepSelect){
 				wSwitcher.position.setLocation(new Point(Main.mouseX, Main.mouseY));
+				wSwitcher.wepSprites = player.inventory.weaponSprites;
 				wepSelect = true;
 			}
 			wSwitcher.tick();

@@ -14,8 +14,9 @@ public class EntityItem extends SpriteEntity{
 	
 	float friction = .93f;
 	
-	public EntityItem(Sprite s, int x, int y){
+	public EntityItem(Sprite s, int x, int y, Object linked){
 		super(s, x, y);
+		linkedItem = linked;
 	}
 	
 	public void tick(){

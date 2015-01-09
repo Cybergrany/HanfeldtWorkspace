@@ -2,15 +2,19 @@ package com.hanfeldt.game.display;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
 
 public class WeaponSwitcher {
 	
 	public Point position;
+	public ArrayList<InventorySprite> wepSprites;
 
 	private int radius;
-	
+	private int spacing = 35;
+	private float rotation;
+	 
 	public WeaponSwitcher(int x, int y, int radius){
 		position = new Point(x, y);
 		this.radius = radius;
@@ -23,10 +27,10 @@ public class WeaponSwitcher {
 	
 	public void tick(){
 		double angle = Math.toDegrees(Math.acos(Math.abs(position.x - Main.mouseX) / position.distance(new Point(Main.mouseX, Main.mouseY))));//Pytagoras you sound man
-
+		int size = wepSprites.size();
 		if(Math.pow((position.x - Main.mouseX), 2) + Math.pow((position.y - Main.mouseY), 2) >= Math.pow((radius / 4) * 1, 2)){//Check if outside inner quarter
 			//outside
-			System.out.println(angle);
+//			System.out.println(angle);
 			if(Main.mouseY > position.y){//lower half of circle
 				if(position.x < Main.mouseX){//top right
 					
@@ -54,5 +58,10 @@ public class WeaponSwitcher {
 	
 	public void render(Graphics g){
 		g.drawOval(position.x - radius/2, position.y - radius/2, radius, radius);
+//		rotation = ((float)(wepSprites.size() / 360) * 100);
+		rotation = (((float)5 / 360) * 100);
+		for(int i = 0; i < wepSprites.size(); i++){
+			System.out.println(rotation);
+		}
 	}
 }

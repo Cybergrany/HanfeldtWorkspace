@@ -15,7 +15,7 @@ public class GrenadeRPG extends BulletLobbedExplosive{
 		super.tick();
 		if(isCollidingWithHorizTile){
 			detonate();
-			System.out.println("Collided");
+			System.out.println("Collided(GrenadeRPG.jav");
 		}
 	}
 	

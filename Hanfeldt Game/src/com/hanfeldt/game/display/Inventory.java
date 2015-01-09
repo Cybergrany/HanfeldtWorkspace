@@ -10,7 +10,7 @@ public class Inventory {
 	public ArrayList<InventorySprite> weaponSprites;
 	
 	public Inventory(){
-		
+		weaponSprites = new ArrayList<InventorySprite>();
 	}
 	
 	public void addItem(EntityItem item){

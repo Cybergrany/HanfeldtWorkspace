@@ -16,11 +16,11 @@ public class ZombieGore extends EntityItem{
 	int afterBleedAmount, AfterBleedTime, bleedIter = 0;
 	
 	public ZombieGore(int x, int y) {//Default
-		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 4, 1, 1), x, y);
+		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.item), 1, 4, 1, 1), x, y, null);
 	}
 	
 	public ZombieGore(Sprite s, int x, int y) {
-		super(s, x, y);
+		super(s, x, y, null);
 		origX = x;
 		dir = Main.getGame().getPlayer().getDirection();
 		setFriction(getFriction() * (knockback / 10));
@@ -30,7 +30,7 @@ public class ZombieGore extends EntityItem{
 	}
 	
 	public ZombieGore(Sprite s, int x, int y, int knockback) {
-		super(s, x, y);
+		super(s, x, y, null);
 		origX = x;
 		this.knockback = knockback;
 		dir = Main.getGame().getPlayer().getDirection();

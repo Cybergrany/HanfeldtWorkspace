@@ -4,6 +4,7 @@ import com.hanfeldt.game.Main;
 import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
+import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.entity.projectile.Bullet;

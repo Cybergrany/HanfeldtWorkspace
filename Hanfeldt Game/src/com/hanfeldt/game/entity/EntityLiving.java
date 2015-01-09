@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.entity.item.ItemSpawner;
 import com.hanfeldt.game.weapon.Weapon;
 
 public class EntityLiving extends SpriteEntity {
@@ -138,6 +139,10 @@ public class EntityLiving extends SpriteEntity {
 				e.removeItem(e);
 			}
 		}
+	}
+	
+	public void dropCurrentHandItem(){
+		ItemSpawner.spawnItem(new EntityItem(getWeaponEquipped().getSprite(), getX(), getY(), getWeaponEquipped()));
 	}
 	
 }

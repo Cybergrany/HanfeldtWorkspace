@@ -3,7 +3,6 @@ package com.hanfeldt.game.event.command;
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.EntityItem;
 import com.hanfeldt.game.entity.item.ItemSpawner;
-import com.hanfeldt.game.entity.item.SwordItem;
 import com.hanfeldt.game.entity.npc.Npc;
 import com.hanfeldt.game.entity.npc.Spawner;
 import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
@@ -103,7 +102,7 @@ public class CommandEvent {
 		switch(command){
 			case "sword":
 				Debug.printDebug("Spawned Sword at: " + (Main.getGame().getPlayer().getX() + 5) + "\t" + Main.getGame().getPlayer().getY() );
-				ItemSpawner.spawnItem(new SwordItem(Main.getGame().getPlayer().getX() + 5, Main.getGame().getPlayer().getY()));
+//				ItemSpawner.spawnItem(new EntityItem(, x, y));TODO
 				break;
 			case "zombie":
 				Spawner.spawnNpc(new Zombie(Main.getGame().getPlayer().getX() + Main.TILE_SIZE * 3, Main.getGame().getPlayer().getY() - Main.TILE_SIZE * 2), 1);//TODO specify layer
@@ -117,9 +116,7 @@ public class CommandEvent {
 		switch(command){
 			case "hand":
 				Debug.printDebug("Hand item dropped");
-				EntityItem ei = new EntityItem(Main.getGame().getPlayer().getWeaponEquipped().getSprite(), Main.getGame().getPlayer().getX(), Main.getGame().getPlayer().getY());
-				ei.setLinkedItem(Main.getGame().getPlayer().getWeaponEquipped());//Added this so zombies can pick up any weapon
-				ItemSpawner.spawnItem(ei);
+				Main.getGame().getPlayer().dropCurrentHandItem();
 				break;
 				default:
 					throw new CommandNotFoundException(command);
