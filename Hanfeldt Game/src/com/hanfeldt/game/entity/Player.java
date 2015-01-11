@@ -40,6 +40,7 @@ public class Player extends EntityLiving {
 		listener = l;
 		inventory = new Inventory();
 		weaponEquipped = new Pistol(this);
+		for(int i = 0; i < 9; i++)
 		inventory.addItem(weaponEquipped.getLinkedItem());
 		setPickupItemOnBounds(true);
 	}

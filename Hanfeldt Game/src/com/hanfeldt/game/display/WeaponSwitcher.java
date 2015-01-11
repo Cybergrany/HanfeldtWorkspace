@@ -10,10 +10,10 @@ public class WeaponSwitcher {
 	
 	public Point position;
 	public ArrayList<InventorySprite> wepSprites;
+	public CircleHelper circle;
 
 	private int radius;
-	private int spacing = 35;
-	private float rotation;
+	private int spacing = 30;
 	 
 	public WeaponSwitcher(int x, int y, int radius){
 		position = new Point(x, y);
@@ -26,42 +26,28 @@ public class WeaponSwitcher {
 	}
 	
 	public void tick(){
-		double angle = Math.toDegrees(Math.acos(Math.abs(position.x - Main.mouseX) / position.distance(new Point(Main.mouseX, Main.mouseY))));//Pytagoras you sound man
-		int size = wepSprites.size();
-		if(Math.pow((position.x - Main.mouseX), 2) + Math.pow((position.y - Main.mouseY), 2) >= Math.pow((radius / 4) * 1, 2)){//Check if outside inner quarter
-			//outside
-//			System.out.println(angle);
-			if(Main.mouseY > position.y){//lower half of circle
-				if(position.x < Main.mouseX){//top right
-					
-				}else{//top left
-					
-				}
-			}else{//Upper half
-				if(position.x < Main.mouseX){//lower right
-					
-				}else{//lower left
-					
-				}
-			}
-		}else{
-			//cursor within inner quarter
-		}
-		
-		if(Math.pow((position.x - Main.mouseX), 2) + Math.pow((position.y - Main.mouseY), 2) >= Math.pow(radius / 2, 2)){//Check if outside circle
-		//TODO add clipping on outer bounds of wheel (Main.getRobot)
+		for(int i = 1; i< wepSprites.size()+1;i++){
 			
-		}else{//cursor is within circle
-			//TODO add above if statement here if confinement to circle is required
 		}
 	}
 	
 	public void render(Graphics g){
-		g.drawOval(position.x - radius/2, position.y - radius/2, radius, radius);
-//		rotation = ((float)(wepSprites.size() / 360) * 100);
-		rotation = (((float)5 / 360) * 100);
-		for(int i = 0; i < wepSprites.size(); i++){
-			System.out.println(rotation);
+		for(int i = 1; i < wepSprites.size()+1; i++){
+			wepSprites.get(i-1).draw(g, circle.getPoint(i*spacing).x, circle.getPoint(i*spacing).y, InventorySprite.MEDIUM);
+			
+			if(circle.withinSector(Main.mouseX, Main.mouseY, 
+						(int)circle.getAngle(circle.getPoint(i*spacing-spacing/2).x, circle.getPoint(i*spacing-spacing/2).y), 
+						(int)circle.getAngle(circle.getPoint(i*spacing+spacing/2).x, circle.getPoint(i*spacing+spacing/2).y))){
+				g.drawOval(Main.mouseX-5, Main.mouseY-5, 10, 10);
+				g.drawLine(Main.mouseX, Main.mouseY, position.x, position.y);
+			}
+		}
+
+		g.drawOval(position.x - radius, position.y - radius, radius*2, radius*2);
+		if(Main.debug){
+			g.drawOval(position.x - radius, position.y - radius, radius*2, radius*2);
+			g.drawLine(circle.getPoint(40).x, circle.getPoint(40).y, position.x, position.y);
+			g.drawString(Double.toString(circle.getAngle(Main.mouseX, Main.mouseY)), Main.mouseX, Main.mouseY);
 		}
 	}
 }

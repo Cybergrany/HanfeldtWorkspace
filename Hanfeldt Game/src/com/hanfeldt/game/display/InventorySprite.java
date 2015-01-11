@@ -22,7 +22,9 @@ public class InventorySprite extends Sprite{
 	}
 	
 	public void draw(Graphics g, int x, int y, int size){
-		g.drawImage(getImage(), x, y, getWidth() * size / 100, getHeight() * size / 100, null);
+		g.drawImage(getImage(), x - getWidth()/2, y - getWidth()/2, getWidth() * size / 10, getHeight() * size / 10, null);
+//		g.drawLine(x, y, x+2, y+2);
+//		g.drawImage(getImage(), x, y, getWidth() , getHeight() , null);
 	}
 	
 	public String getName(){

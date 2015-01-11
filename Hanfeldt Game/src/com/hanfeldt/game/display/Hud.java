@@ -59,6 +59,7 @@ public class Hud {
 		if(Main.getGame().getListener().qDown){
 			if(!wepSelect){
 				wSwitcher.position.setLocation(new Point(Main.mouseX, Main.mouseY));
+				wSwitcher.circle = new CircleHelper(wSwitcher.position.x, wSwitcher.position.y, switcherRad);
 				wSwitcher.wepSprites = player.inventory.weaponSprites;
 				wepSelect = true;
 			}
@@ -131,7 +132,7 @@ public class Hud {
 			
 			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50); //Well Dayum, it can
 			
-			g.drawString(String.format("Entities: NPC: %d Bullets: %d", Main.getGame().getNpc().toArray().length, Main.getGame().getBullets().size()), 10, 60);
+			g.drawString(String.format("Entities: %d NPC: %d Bullets: %d", Main.getGame().entityManager.getEntities().toArray().length, Main.getGame().getNpc().toArray().length, Main.getGame().getBullets().size()), 10, 60);
 			
 			//A red cross wherever the game thinks the mouse is. Remove if you think.
 			g.setColor(Color.RED);
