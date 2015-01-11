@@ -2,6 +2,7 @@ package com.hanfeldt.game.display;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
@@ -26,27 +27,29 @@ public class WeaponSwitcher {
 	}
 	
 	public void tick(){
-		for(int i = 1; i< wepSprites.size()+1;i++){
-			
-		}
+		
 	}
 	
 	public void render(Graphics g){
 		for(int i = 1; i < wepSprites.size()+1; i++){
-			wepSprites.get(i-1).draw(g, circle.getPoint(i*spacing).x, circle.getPoint(i*spacing).y, InventorySprite.MEDIUM);
+			InventorySprite is = wepSprites.get(i-1);
+			int x = circle.getPoint(i*spacing).x;
+			int y =  circle.getPoint(i*spacing).y;
+			int w =is.getWidth();
+			int h = is.getHeight();
 			
-			if(circle.withinSector(Main.mouseX, Main.mouseY, 
-						(int)circle.getAngle(circle.getPoint(i*spacing-spacing/2).x, circle.getPoint(i*spacing-spacing/2).y), 
-						(int)circle.getAngle(circle.getPoint(i*spacing+spacing/2).x, circle.getPoint(i*spacing+spacing/2).y))){
-				g.drawOval(Main.mouseX-5, Main.mouseY-5, 10, 10);
-				g.drawLine(Main.mouseX, Main.mouseY, position.x, position.y);
+			is.draw(g, x, y, InventorySprite.MEDIUM);
+			
+			if(new Rectangle(x-w/2, y-h/2, w, h).intersects(Main.mouseX, Main.mouseY, 1, 1)){
+				if(Main.getGame().getListener().mouseDownLastTick){
+					System.out.println(is.getName());
+				}
 			}
 		}
 
-		g.drawOval(position.x - radius, position.y - radius, radius*2, radius*2);
 		if(Main.debug){
 			g.drawOval(position.x - radius, position.y - radius, radius*2, radius*2);
-			g.drawLine(circle.getPoint(40).x, circle.getPoint(40).y, position.x, position.y);
+			g.drawLine(position.x, position.y, Main.mouseX, Main.mouseY);
 			g.drawString(Double.toString(circle.getAngle(Main.mouseX, Main.mouseY)), Main.mouseX, Main.mouseY);
 		}
 	}

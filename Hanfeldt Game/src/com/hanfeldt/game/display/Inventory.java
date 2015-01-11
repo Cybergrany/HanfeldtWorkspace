@@ -15,7 +15,7 @@ public class Inventory {
 	
 	public void addItem(EntityItem item){
 		if(item.getLinkedItem() instanceof Weapon){
-			weaponSprites.add(new InventorySprite(item.sprite, ((Weapon)item.getLinkedItem()).name()));
+			weaponSprites.add(new InventorySprite(item.sprite, ((Weapon)item.getLinkedItem()).name(), item.getLinkedItem()));
 		}
 	}
 	
