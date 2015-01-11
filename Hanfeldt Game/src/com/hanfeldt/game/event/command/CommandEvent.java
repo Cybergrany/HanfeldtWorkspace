@@ -10,6 +10,7 @@ import com.hanfeldt.game.entity.npc.monsters.Zombie;
 import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.weapon.weapons.M16;
 import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.game.weapon.weapons.Sword;
 
 
 public class CommandEvent {
@@ -99,16 +100,20 @@ public class CommandEvent {
 	}
 
 	public static void checkSpawnCommand(String command) throws CommandNotFoundException{
+		int x = Main.getGame().getPlayer().getX() + 15;
+		int y = Main.getGame().getPlayer().getY() - 5;
 		switch(command){
 			case "sword":
-				Debug.printDebug("Spawned Sword at: " + (Main.getGame().getPlayer().getX() + 5) + "\t" + Main.getGame().getPlayer().getY() );
-//				ItemSpawner.spawnItem(new EntityItem(, x, y));TODO
+				Debug.printDebug("Spawned Sword at: " + x + 5 + "\t" +y );
+				ItemSpawner.spawnItem(new EntityItem(new Sword(Main.getGame().getPlayer()), x, y));
 				break;
 			case "zombie":
 				Spawner.spawnNpc(new Zombie(Main.getGame().getPlayer().getX() + Main.TILE_SIZE * 3, Main.getGame().getPlayer().getY() - Main.TILE_SIZE * 2), 1);//TODO specify layer
 				break;
 			default:
 				Main.getGame().getPlayer().setLocation(Main.getGame().getLevels().getPlayerSpawnPoint());
+				Debug.printDebug("Respawned Player");
+				break;
 		}
 	}
 	

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
+import com.hanfeldt.game.weapon.Weapon;
 
 public class EntityItem extends SpriteEntity{
 	protected  boolean isCollidingWithHorizTile = false;
@@ -17,6 +18,11 @@ public class EntityItem extends SpriteEntity{
 	public EntityItem(Sprite s, int x, int y, Object linked){
 		super(s, x, y);
 		linkedItem = linked;
+	}
+	
+	public EntityItem(Weapon wep, int x, int y){
+		super(wep.getSprite(), x, y);
+		linkedItem = wep;
 	}
 	
 	public void tick(){

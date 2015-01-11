@@ -6,6 +6,7 @@ public class InventorySprite extends Sprite{
 	
 	private String name;
 	private Object linkedItem;
+	private int size;
 	
 	public static final int SMALL = 10;
 	public static final int MEDIUM = 20;
@@ -25,9 +26,14 @@ public class InventorySprite extends Sprite{
 	}
 	
 	public void draw(Graphics g, int x, int y, int size){
+		this.size=size;//TODO inefficient
 		g.drawImage(getImage(), x - getWidth()/2, y - getWidth()/2, getWidth() * size / 10, getHeight() * size / 10, null);
 //		g.drawLine(x, y, x+2, y+2);
 //		g.drawImage(getImage(), x, y, getWidth() , getHeight() , null);
+	}
+	
+	public int getSize(){
+		return size;
 	}
 	
 	public Object getLinkedItem(){

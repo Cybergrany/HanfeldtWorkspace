@@ -13,7 +13,7 @@ import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.Listener;
 import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.Weapon;
-import com.hanfeldt.game.weapon.weapons.Pistol;
+import com.hanfeldt.game.weapon.weapons.BaseBat;
 
 public class Player extends EntityLiving {
 	public static final int ticksPerAnimChange = 4;
@@ -39,9 +39,8 @@ public class Player extends EntityLiving {
 		levelFinished = false;
 		listener = l;
 		inventory = new Inventory();
-		weaponEquipped = new Pistol(this);
-		for(int i = 0; i < 9; i++)
-		inventory.addItem(weaponEquipped.getLinkedItem());
+		weaponEquipped = new BaseBat(this);
+		inventory.addItem(getWeaponEquipped().getLinkedItem());
 		setPickupItemOnBounds(true);
 	}
 	

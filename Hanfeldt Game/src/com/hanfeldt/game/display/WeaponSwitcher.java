@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.io.Debug;
+import com.hanfeldt.game.weapon.Weapon;
 
 public class WeaponSwitcher {
 	
@@ -40,9 +42,13 @@ public class WeaponSwitcher {
 			
 			is.draw(g, x, y, InventorySprite.MEDIUM);
 			
-			if(new Rectangle(x-w/2, y-h/2, w, h).intersects(Main.mouseX, Main.mouseY, 1, 1)){
-				if(Main.getGame().getListener().mouseDownLastTick){
-					System.out.println(is.getName());
+			if(new Rectangle(x-w/2, y-h/2, w * is.getSize() /10, h * is.getSize() / 10).intersects(Main.mouseX, Main.mouseY, 1, 1)){
+				if(Main.getGame().getListener().mouseDown && !Main.getGame().getListener().mouseDownLastTick){
+					if(is.getLinkedItem() instanceof Weapon){
+						Main.getGame().getPlayer().setWeaponEquipped((Weapon)is.getLinkedItem());
+						if(Main.debug)
+							Debug.printDebug("Weapon switched to: " + is.getName());
+					}
 				}
 			}
 		}
