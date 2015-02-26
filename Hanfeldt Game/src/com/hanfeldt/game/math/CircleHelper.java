@@ -1,4 +1,4 @@
-package com.hanfeldt.game.display;
+package com.hanfeldt.game.math;
 
 import java.awt.Point;
 

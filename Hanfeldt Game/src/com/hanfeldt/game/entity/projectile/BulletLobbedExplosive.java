@@ -42,12 +42,12 @@ public class BulletLobbedExplosive extends BulletLobbed{
 		}
 //		destroyBullet();
 //		Rectangle r = new Rectangle(size, size);
-	    BufferedImage image = new BufferedImage(r.width, r.height, BufferedImage.TYPE_BYTE_BINARY);
-	    for(int i = 0; i < r.width; i++){
-	    	for(int j = 0; j < r.height; j++){
-	    	    image.setRGB(i, j, Color.white.getRGB());
-	    	}
-	    }
+//	    BufferedImage image = new BufferedImage(r.width, r.height, BufferedImage.TYPE_BYTE_BINARY);
+//	    for(int i = 0; i < r.width; i++){
+//	    	for(int j = 0; j < r.height; j++){
+//	    	    image.setRGB(i, j, Color.white.getRGB());
+//	    	}
+//	    }
 		sprite = new Sprite(image);
 		destroyBullet();
 	}

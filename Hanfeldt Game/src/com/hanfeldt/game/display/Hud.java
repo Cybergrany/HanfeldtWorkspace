@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.math.CircleHelper;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
 public class Hud {
