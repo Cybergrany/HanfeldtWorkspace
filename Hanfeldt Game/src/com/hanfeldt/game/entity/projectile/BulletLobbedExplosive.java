@@ -48,7 +48,7 @@ public class BulletLobbedExplosive extends BulletLobbed{
 //	    	    image.setRGB(i, j, Color.white.getRGB());
 //	    	}
 //	    }
-		sprite = new Sprite(image);
+//		sprite = new Sprite(image);
 		destroyBullet();
 	}
 	
