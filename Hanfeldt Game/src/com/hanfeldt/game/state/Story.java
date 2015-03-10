@@ -30,6 +30,7 @@ public class Story extends Playing {
 	
 	public void tick() {
 		Player player = main.getPlayer();
+		//TODO constantly checking boolean? NOT EFFICIENT 
 		if(player.levelFinished){
 			if(level +1 >= 2) {
 				Debug.printErrorDebug("Add levelamount chack to Story.java, line 51");

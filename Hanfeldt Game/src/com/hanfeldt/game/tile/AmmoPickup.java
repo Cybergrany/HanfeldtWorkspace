@@ -5,9 +5,11 @@ import com.hanfeldt.game.Values;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.Entity;
+import com.hanfeldt.game.entity.EntityLiving;
 import com.hanfeldt.game.entity.Player;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.game.weapon.weapons.Pistol;
 
 @Deprecated
 public class AmmoPickup extends Tile{
@@ -22,6 +24,7 @@ public class AmmoPickup extends Tile{
 //		super.onCollidedEntity(e);
 		if(hasAmmo && e instanceof Player) {
 			// This is temporary while I work out why tile.setTile() doesn't work... TODO fix that
+//			((Player)e).setWeaponEquipped(new Pistol((EntityLiving)e));
 			Weapon wep = Main.getGame().getPlayer().getWeaponEquipped();
 			if(wep instanceof AmmoWeapon) {
 				AmmoWeapon ammoWep = (AmmoWeapon) wep;

@@ -13,6 +13,7 @@ import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.Listener;
 import com.hanfeldt.game.io.Sound;
 import com.hanfeldt.game.weapon.Weapon;
+import com.hanfeldt.game.weapon.weapons.Hands;
 import com.hanfeldt.game.weapon.weapons.RPGLauncher;
 
 public class Player extends EntityLiving {
@@ -39,7 +40,7 @@ public class Player extends EntityLiving {
 		levelFinished = false;
 		listener = l;
 		inventory = new Inventory();
-		weaponEquipped = new RPGLauncher(this);
+		weaponEquipped = new Hands(this);
 		inventory.addItem(getWeaponEquipped().getLinkedItem());
 		setPickupItemOnBounds(true);
 	}
@@ -121,6 +122,7 @@ public class Player extends EntityLiving {
 		
 		super.tick();
 		
+		//Level switch on out of right-hand bounds. TODO use block instead
 		if(getX() >= (Main.getGame().getLevels().getSizeX() - 1) *Main.TILE_SIZE) {
 			setX((Main.getGame().getLevels().getSizeX() - 1) *Main.TILE_SIZE);
 			levelFinished = true;
@@ -180,6 +182,7 @@ public class Player extends EntityLiving {
 	
 	public void setWeaponEquipped(Weapon wep) {
 		weaponEquipped = wep;
+		inventory.addItem(wep.getLinkedItem());
 	}
 	
 	public int getMoney() {

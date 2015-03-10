@@ -28,6 +28,7 @@ public class Level {
 	protected int sizeX, sizeY;
 	public BackgroundParallax bgp;
 	private TileActionManager actionManager;
+	private LayerMap layerMap;
 	protected BackgroundStatic[] bgs;
 	
 	public int layerAmount;
