@@ -131,16 +131,16 @@ public class Hud {
 			g.drawString("Fps: " + Integer.toString(Main.fps), 10, 20);
 			g.drawString("CHARACTER ENTITIY:", 10, 40);
 			
-			g.drawString(String.format("X: %d Y: %d", player.getX(), player.getY()), 10, 50); //Well Dayum, it can
+			g.drawString(String.format("X: %d Y: %d Layer: %d", player.getX(), player.getY(), player.getLayer()), 10, 50); //Well Dayum, it can
 			
 			g.drawString(String.format("Entities: %d NPC: %d Bullets: %d", Main.getGame().entityManager.getEntities().toArray().length, Main.getGame().getNpc().toArray().length, Main.getGame().getBullets().size()), 10, 60);
 			
-			//A red cross wherever the game thinks the mouse is. Remove if you think.
+			//A red cross wherever the game thinks the mouse is.
 			g.setColor(Color.RED);
 			g.drawLine(Main.mouseX -1, Main.mouseY -1, Main.mouseX +1, Main.mouseY +1);
 			g.drawLine(Main.mouseX +1, Main.mouseY -1, Main.mouseX -1, Main.mouseY +1);
 			
-			//A blue cross for closest entity to player (I know, I'm silly)TODO temp
+			//A blue cross for closest entity to player.
 			g.setColor(Color.BLUE);
 			Point p = player.getClosestEntity();
 			Camera cam = Main.getGame().getCamera();

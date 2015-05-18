@@ -1,0 +1,2 @@
+Contains GIMP project files of levels, including layers, level images and level maps
+

@@ -1,2 +1,3 @@
 Ughh.. What's going on???
 What's that sound?
+/set npc_following

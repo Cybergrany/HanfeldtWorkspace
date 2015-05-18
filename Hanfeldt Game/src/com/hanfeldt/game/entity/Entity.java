@@ -14,7 +14,6 @@ public class Entity {
 	float velXMax = 10f, velYMax = 3f;
 	protected boolean direction = true; //Right = true, Left = false
 	protected boolean falling = false;
-	protected boolean isLayerChecking = true;
 	boolean isMovingLeft = false, isMovingRight = false;
 	
 	public Entity(int x, int y) {
@@ -47,6 +46,10 @@ public class Entity {
 		isMovingLeft = velX < 0;
 		isMovingRight = velX > 0;
 		totalTicks++;
+		
+		if(!isLayerChecking()){
+			setLayer(0, true);
+		}
 	}
 	
 	//java.awt.Point can be more convenient to use sometimes
@@ -155,6 +158,8 @@ public class Entity {
 	
 	/**
 	 * set the layer in which the entity is in.
+	 * @param l
+	 * @param moving - whether the entity is moving from another layer or being created
 	 */
 	public void setLayer(int l, boolean moving){
 		if(moving){
@@ -205,10 +210,6 @@ public class Entity {
 		return layer;
 	}
 	
-	public void setLayerChecking(boolean tof){
-		isLayerChecking = tof;
-	}
-	
 	/**
 	 * Returns the closest entity to this entity in Point form
 	 * TODO Finnish
@@ -238,14 +239,12 @@ public class Entity {
 		Entity closestEntity = allEnts.get(shortestDistIndex);
 		return new Point(closestEntity.getX() + (closestEntity.getSizeX() /2), closestEntity.getY() + (closestEntity.getSizeY() /2));
 	}
-	//TODO: Finish these methods and use in BulletNPCFired to assit in aiming
-	/**
-	 * Returns the closest entity to a given x and y co-ord in Point form
-	 * @param x - The x co-ord of the entity being measured from
-	 * @return y - The y co-ord of the entity being measured from
-	 */
-//	public static Point getClosestEntity(int x, int y){
-//		
-//	}
+	
+	public boolean isLayerChecking(){
+		if(Main.getGame().getLevels().getDefaultLayer(getTileX(), getTileY()) == -1){
+			return false;
+		}
+		return true;
+	}
 	
 }

@@ -77,7 +77,8 @@ public class Bullet extends SpriteEntity {
 	public void destroyBulletAtBounds(){
 		if (getX() < getX() - (Main.WIDTH /2) ||
 			getX() > getX() + (Main.WIDTH /2) ||
-			getY() < -50 || getY() > Main.getGame().getLevels().getSizeY() * Main.TILE_SIZE){
+			getY() < getY() - (Main.HEIGHT/2) ||
+			getY() > getY() + (Main.WIDTH/2)){
 			destroyBullet();
 		}
 	}

@@ -2,8 +2,7 @@ package com.hanfeldt.game.level;
 
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.SpriteSheet;
-import com.hanfeldt.game.entity.Entity;
-import com.hanfeldt.game.entity.npc.NpcList;
+import com.hanfeldt.game.io.Debug;
 import com.hanfeldt.game.io.ResourceManager;
 import com.hanfeldt.game.properties.PropertiesLoader;
 import com.hanfeldt.game.scripting.NpcScript;
@@ -20,6 +19,7 @@ public class LevelLoader {
 	}
 	
 	public static void initLevel(){
+		Debug.printDebug("Initialising Level (LevelLoader.java");
 		SpriteSheet.initSheets();
 	}
 	

@@ -111,10 +111,24 @@ public class NpcEvents {
 	}
 
 	public boolean bulletCollided(Npc npc, Bullet bullet) {
-		if (npc.getLayer() == bullet.getLayer() && npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(),
-				bullet.getX(), bullet.getY()))
+		if(npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(), bullet.getX(), bullet.getY())){
+			if(npc.isLayerChecking()){
+				if(npc.getLayer() == bullet.getLayer()){
+					return true;
+				} else{
+					return false;
+				}
+			}
 			return true;
+		}
 		return false;
+		
+//		if(npc.isLayerChecking()){
+//			if (npc.getLayer() == bullet.getLayer() && npc.getBounds().intersectsLine(bullet.getX(), bullet.getY(),
+//				bullet.getX(), bullet.getY()))
+//			return true;
+//		}
+//		return false;
 	}
 
 	public void bulletHit(Npc npc, Bullet b) {

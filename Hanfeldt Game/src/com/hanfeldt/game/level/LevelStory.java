@@ -43,11 +43,12 @@ public class LevelStory extends Level {
 		tiles = new TileArrayList<Tile>();
 		tiles.addTile(sizeX, sizeY, null);
 		blocks = Main.getGame().blocks;
+		layerMap = new LayerMap(String.format("/images/maps/layerMaps/%d.png", level + 1));//TODO add error check (throws)
 		generateLevel();
 		player = p;
 	}
 	
-	public void generateLevel(){
+	private void generateLevel(){
 		ArrayList<String> colors = getUsedColorCodes();
 		for(int y=0; y<sizeY; y++) {
 			for(int x=0; x<sizeX; x++) {
@@ -133,5 +134,4 @@ public class LevelStory extends Level {
 			}
 		}
 	}
-	
 }

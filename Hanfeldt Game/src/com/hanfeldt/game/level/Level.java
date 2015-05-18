@@ -27,8 +27,8 @@ public class Level {
 	public static int level = 0;
 	protected int sizeX, sizeY;
 	public BackgroundParallax bgp;
+	public LayerMap layerMap;//TODO nullpointerexception can happen here, yano?
 	private TileActionManager actionManager;
-	private LayerMap layerMap;
 	protected BackgroundStatic[] bgs;
 	
 	public int layerAmount;
@@ -169,6 +169,16 @@ public class Level {
 		if(Main.debug)
 		ResourceManager.appendToFile(t.name + ", " + t.getX() + ", " + t.getY() ,
 																String.format("/config/levels/level%d/",  Story.getCurrentLevel() + 1), "triggerBlocks.txt");//NOTE THAT THIS IS NOT NEEDED ONCE THE DESIGN OF THE LEVEL IS FINISHED - this is simply here as a reference to level designers
+	}
+	
+	public int getDefaultLayer(int x, int y){
+		try{
+			return layerMap.getDefaultLayer(x, y);
+		}catch(Exception e){
+			System.err.println("Unable to get default layer. Possibly due to unitialised layerMap object in Level.java");
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 }
