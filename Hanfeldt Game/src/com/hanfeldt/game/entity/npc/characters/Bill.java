@@ -9,7 +9,7 @@ import com.hanfeldt.game.weapon.weapons.Pistol;
  * @author ofeldt
  *
  */
-public class Bill extends NPCCharacter {
+public class Bill extends NPCCharacter{
 
 	public Bill(int x, int y) {
 		super(new Sprite(SpriteSheet.getSheet(SpriteSheet.character), 0, 0, 1, 2, 3), 100, x, y);

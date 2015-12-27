@@ -146,6 +146,7 @@ public class PropertiesLoader {
 		//Npc List
 		printDebug("List of NPC's: " + p.getProperty("npcList"));
 		NpcList.characterList =  p.getProperty("npcList").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "").split(",");
+		printDebug("Amount of NPC ID's assigned: " + NpcList.characterList.length);
 		
 		//NpcLayer
 		printDebug("Layer of NPC's" + p.getProperty("npcLayer"));

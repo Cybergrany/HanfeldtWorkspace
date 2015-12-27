@@ -4,14 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Robot;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import com.hanfeldt.game.Main;
+import com.hanfeldt.game.entity.Entity;
 import com.hanfeldt.game.entity.Player;
+import com.hanfeldt.game.entity.npc.characters.NPCCharacter;
 import com.hanfeldt.game.math.CircleHelper;
 import com.hanfeldt.game.weapon.AmmoWeapon;
 
@@ -147,6 +148,17 @@ public class Hud {
 			p.setLocation(p.getX() - cam.getX(), p.getY() - cam.getY());
 			g.drawLine(p.x -1, p.y -1, p.x +1, p.y +1);
 			g.drawLine(p.x +1, p.y -1, p.x -1, p.y +1);
+			
+			//TODO temp, crosshair for entity closest to npc
+			for(Entity npc: Main.getGame().getEntityManager().getEntities()){
+				if(npc instanceof NPCCharacter){
+					g.setColor(Color.WHITE);
+					Point np = npc.getClosestEntity();
+					np.setLocation(np.getX() - cam.getX(), np.getY() - cam.getY());
+					g.drawLine(np.x -1, np.y -1, np.x +1, np.y +1);
+					g.drawLine(np.x +1, np.y -1, np.x -1, np.y +1);
+				}
+			}
 			
 			g.dispose();
 		}

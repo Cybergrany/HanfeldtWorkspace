@@ -60,7 +60,7 @@ public class Main implements Runnable {
 	public static int fps;
 	public static boolean running, debug, muted, gameOver, gameStarted, splashShowing, printFPS;
 	public static int mouseX, mouseY;
-	public static boolean debugCheats = true;//Preferably use command 'cheats' instead of setting here
+	public static boolean debugCheats = false;//Preferably use command 'cheats' instead of setting here
 	public static SpriteSheet spriteSheet;
 	
 //	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();

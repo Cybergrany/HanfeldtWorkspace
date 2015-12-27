@@ -9,7 +9,7 @@ import com.hanfeldt.game.entity.projectile.Bullet;
 /**
  * This class ensures that all entites are moved around concurrently
  * The alternative to this would be iterating over every layer multiple times inside
- * tick methods, so I setteled on using two seperate {@link ArrayList}s. Not sure if 
+ * tick methods, so I settled on using two seperate {@link ArrayList}s. Not sure if 
  * this is the most efficient way of doing this.... 
  * @author ofeldt
  *

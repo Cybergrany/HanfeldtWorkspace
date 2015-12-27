@@ -6,7 +6,7 @@ import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.display.SpriteSheet;
 import com.hanfeldt.game.entity.npc.Npc;
 
-public class Zombie extends Npc {
+public class Zombie extends Npc{
 	private float speed = 0.25f;
 //	private static Sprite s = new Sprite(Main.spriteSheet, 2, 3, 1, 2);
 	private static Sprite s = new Sprite(SpriteSheet.getSheet(SpriteSheet.monster), 0, 0, 1 , 2, 3);

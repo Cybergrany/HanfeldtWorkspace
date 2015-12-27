@@ -1,11 +1,8 @@
 package com.hanfeldt.game.entity.npc.characters;
 
-import java.util.ArrayList;
-
 import com.hanfeldt.game.Main;
 import com.hanfeldt.game.display.Sprite;
 import com.hanfeldt.game.entity.npc.Npc;
-import com.hanfeldt.game.weapon.TriggerWeapon;
 
 /**
  * Class for NPC characters, which will (when finished) contain code to allow NPC's to interact
@@ -19,7 +16,8 @@ public class NPCCharacter extends Npc{
 	
 	public  float speed = 0.35f;//Fuckin' nyooom
 	private boolean followingPlayer = false;
-	private int aimAccuracy = 100;
+	private int aimAccuracy = 100;	
+	private int aimX, aimY;
 
 	public NPCCharacter(Sprite s, int h, int x, int y) {
 		super(s, h, x, y);
@@ -35,7 +33,7 @@ public class NPCCharacter extends Npc{
 	}
 	
 	public void followPlayer(){
-		if(Main.timer(60)){
+		if(Main.timer(30)){
 			if(isCollidingWithHorizTile() && !getFalling()){
 				jump();
 				isCollidingWithHorizTile = false;
@@ -50,41 +48,11 @@ public class NPCCharacter extends Npc{
 	 * Aims at baddies
 	 */
 	public void aim(){
-		ArrayList<Npc> npc1 = Main.getGame().getNpc();
-		int closestXl = 0, closestXr = 0;
-		for(int i = 0; i < npc1.size(); i++){
-			Npc npc = npc1.get(i);
-			if(!(npc instanceof NPCCharacter))
-			if(!npc.getEvents().isOutsideMap(npc)){
-				if(!direction){//Facing right
-					if(closestXl < getX() - npc.getX() + getX() || closestXl == 0){
-						closestXl =  getX() - npc.getX();
-						if(closestXl > 0){
-//							System.out.println(closestXl);
-							setAimX(npc.getX());
-							setAimY(npc.getY() - 2);
-//							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
-							if(weaponEquipped instanceof TriggerWeapon){
-								((TriggerWeapon) weaponEquipped).tryTrigger();
-							}
-						}
-					}
-				}else{//Facing left
-					if(closestXr < npc.getX() - getX() || closestXr == 0){
-						closestXr =  getX() - npc.getX();
-						if(closestXr > 0){
-//							System.out.println(closestXr);
-							setAimX(npc.getX());
-							setAimY(npc.getY() - 2);
-//							setAimY(npc.getY() - 5 + (100 - aimAccuracy));
-							if(weaponEquipped instanceof TriggerWeapon){
-								((TriggerWeapon) weaponEquipped).tryTrigger();
-							}
-						}
-					}
-				}
-			}
-		}
+		getClosestEnemy();
+//		if(getClosestEntity() instanceof Monster){
+//			aimX = (int) getClosestEntity().getX();
+//			aimY = (int) getClosestEntity().getY();
+//		}
 	}
 	
 	public void setAimAccuracy(int acc){

@@ -14,7 +14,7 @@ import com.hanfeldt.game.entity.npc.monsters.Zombie;
 public class NpcList {
 	
 	
-	public static String[] characterList;
+	public static String[] characterList;/**ID's are in the order the NPC's are loaded in**/
 	public static String[] monsterList;
 	public static int[]  npcLayer;
 	public static ArrayList<Integer> currentLevelNpcLocation;
